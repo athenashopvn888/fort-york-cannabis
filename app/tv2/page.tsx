@@ -7,8 +7,10 @@ type Item = {
   sku: string;
   name: string;
   category?: string;
+  type?: string;
   thc?: string;
   cbd?: string;
+  mg?: string;
   price?: string;
   image: string;
 };
@@ -20,12 +22,12 @@ type CategoryBoard = {
 };
 
 const BOARDS: CategoryBoard[] = [
-  { label: "Pre-Rolls", subtitle: "Ready-to-go preview picks", categories: ["PREROLLS", "ADD ONS"] },
-  { label: "Vapes", subtitle: "Cartridges and disposables", categories: ["VAPES"] },
+  { label: "Pre-Rolls", subtitle: "Ready-to-go rolls", categories: ["PREROLLS"] },
+  { label: "Vapes", subtitle: "Pens and disposables", categories: ["VAPE PENS", "VAPE DISPOSABLE", "THC VAPE", "VAPES"] },
   { label: "Edibles", subtitle: "Gummies, chocolates, drinks", categories: ["EDIBLES"] },
-  { label: "Concentrates", subtitle: "Diamonds, hash, resin", categories: ["CONCENTRATES"] },
-  { label: "Cigarettes", subtitle: "Accessory preview shelf", categories: ["CIGARETTES"] },
-  { label: "Magic + More", subtitle: "Specialty and accessories", categories: ["MAGIC", "ACCESSORIES", "ADD ONS"] },
+  { label: "Concentrates", subtitle: "Hash, resin, diamonds", categories: ["CONCENTRATES"] },
+  { label: "Accessories", subtitle: "Add-ons and essentials", categories: ["ADD ONS", "ACCESSORIES"] },
+  { label: "More", subtitle: "Cigarettes and specialty", categories: ["CIGARETTES", "MAGIC", "MAGIC & OTHERS"] },
 ];
 
 function rotateList<T>(items: T[], offset: number, limit: number) {
@@ -62,8 +64,9 @@ export default function FortYorkTv2Page() {
 
   const grouped = useMemo(() => {
     return BOARDS.map((board, index) => {
-      const products = items.filter((item) => board.categories.includes(item.category || ""));
-      return { ...board, products: rotateList(products, tick + index, 4) };
+      const keys = new Set(board.categories.map((category) => category.toUpperCase()));
+      const products = items.filter((item) => keys.has((item.category || "").toUpperCase()));
+      return { ...board, products: rotateList(products, tick + index, 5), count: products.length };
     });
   }, [items, tick]);
 
@@ -71,12 +74,12 @@ export default function FortYorkTv2Page() {
     <main className={styles.screen}>
       <header className={styles.header}>
         <div>
-          <span>Fort York preview board</span>
-          <h1>Menu categories</h1>
+          <span>Secondary Menu Board</span>
+          <h1>Fort York Menu</h1>
         </div>
         <aside>
           <strong>FORT YORK CANNABIS</strong>
-          <p>38 Fort York Blvd / 437-872-8446 / 11AM-2AM</p>
+          <p>38 FORT YORK BLVD / 437-872-8446 / OPEN 11AM-2AM</p>
         </aside>
       </header>
 
@@ -88,7 +91,7 @@ export default function FortYorkTv2Page() {
                 <span>{board.subtitle}</span>
                 <h2>{board.label}</h2>
               </div>
-              <strong>{board.products.length || 0} preview items</strong>
+              <strong>{board.count} items</strong>
             </div>
             <div className={styles.itemGrid}>
               {board.products.map((item) => (
@@ -97,9 +100,9 @@ export default function FortYorkTv2Page() {
                   <div>
                     <span>{item.category}</span>
                     <h3>{item.name}</h3>
-                    <p>{[item.thc ? `THC ${item.thc}` : "", item.cbd ? `CBD ${item.cbd}` : ""].filter(Boolean).join(" / ")}</p>
+                    <p>{[item.thc ? `THC ${item.thc}` : "", item.mg].filter(Boolean).join(" / ")}</p>
                   </div>
-                  <b>{item.price || "Price pending"}</b>
+                  <b>{item.price || "PRICE IN STORE"}</b>
                 </div>
               ))}
             </div>
@@ -108,9 +111,9 @@ export default function FortYorkTv2Page() {
       </section>
 
       <footer className={styles.footer}>
-        <strong>Local preview only</strong>
-        <span>Final Fort York inventory, ordering, and menu integration require owner approval.</span>
-        <small>Loaded {loadedAt || "--"}</small>
+        <strong>Browse Menu</strong>
+        <span>Flower on TV1 / Pre-rolls / Vapes / Edibles / Concentrates / Accessories</span>
+        <small>Updated {loadedAt || "--"}</small>
       </footer>
     </main>
   );

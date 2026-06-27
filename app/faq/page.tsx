@@ -6,7 +6,7 @@ import styles from "./faq.module.css";
 export const metadata: Metadata = {
   title: "FAQ | FORT YORK CANNABIS",
   description:
-    "Frequently asked questions for FORT YORK CANNABIS in Toronto. Phone is 437-872-8446, preview hours are 11AM-2AM, and final delivery/launch details are pending.",
+    "Frequently asked questions for FORT YORK CANNABIS in Toronto. Phone is 437-872-8446, hours are 11AM-2AM, with pickup and delivery details posted when available.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/faq",
   },
@@ -24,7 +24,7 @@ const FAQ_CATEGORIES = [
   {
     title: "Store Details",
     faqs: [
-      { q: "What are the store hours?", a: "Preview hours are 11AM-2AM. Open-now wording still requires live launch verification." },
+      { q: "What are the store hours?", a: "Open 11AM-2AM daily." },
       { q: "What is the phone number?", a: "Phone is 437-872-8446." },
       { q: "Is delivery or pickup available?", a: "Pickup and delivery details are coming soon." },
       { q: "Is license information available?", a: "License information is coming soon and will be added once ready." },
@@ -34,7 +34,7 @@ const FAQ_CATEGORIES = [
     title: "Menu",
     faqs: [
       { q: "Is the menu live?", a: "No. Inventory, pricing, brands, and categories will be added once details are ready." },
-      { q: "Which categories will the menu include?", a: "Preview stock is loaded for flower, pre-rolls, edibles, vapes, concentrates, and accessories while final Fort York inventory is prepared." },
+      { q: "Which categories will the menu include?", a: "The menu includes flower, pre-rolls, edibles, vapes, concentrates, and accessories." },
     ],
   },
 ];
@@ -67,7 +67,7 @@ export default function FAQPage() {
           <div className={styles.introPanel}>
             <span className={styles.microLabel}>Customer questions</span>
             <h1 className={styles.pageTitle}>Frequently Asked Questions</h1>
-            <p className={styles.pageSubtitle}>Fort York Cannabis store details are listed below. Phone is 437-872-8446 and preview hours are 11AM-2AM. Delivery, pickup, and license details still need approval.</p>
+            <p className={styles.pageSubtitle}>Fort York Cannabis store details are listed below. Phone is 437-872-8446 and hours are 11AM-2AM. Pickup and delivery details will be posted when available.</p>
           </div>
           <div className={styles.visualPanel}>
             <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.visualImage} />

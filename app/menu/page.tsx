@@ -11,9 +11,9 @@ import {
 import styles from "./menu.module.css";
 
 export const metadata: Metadata = {
-  title: "Preview Menu | FORT YORK CANNABIS",
+  title: "Menu | FORT YORK CANNABIS",
   description:
-    "FORT YORK CANNABIS menu categories are prepared for the network menu source. Final products, prices, and ordering details are pending owner/backend confirmation.",
+    "Browse the FORT YORK CANNABIS menu for flower, pre-rolls, vapes, edibles, concentrates, and accessories at 38 Fort York Blvd in Toronto.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/menu",
   },
@@ -26,8 +26,8 @@ export default function MenuPage() {
 
       <section className={styles.hero}>
         <div className={styles.container}>
-          <span className={styles.microLabel}>Menu architecture ready</span>
-          <h1 className={styles.title}>Fort York Menu</h1>
+          <span className={styles.microLabel}>Fort York Cannabis Menu</span>
+          <h1 className={styles.title}>Browse Menu</h1>
           <p className={styles.lede}>{MENU_STATUS_NOTICE}</p>
           <div className={styles.statusGrid}>
             <div className={styles.statusCard}>
@@ -35,11 +35,11 @@ export default function MenuPage() {
               <strong>{MENU_SOURCE_STATE.label}</strong>
             </div>
             <div className={styles.statusCard}>
-              <span>Store code</span>
-              <strong>{MENU_SOURCE_STATE.storeCode}</strong>
+              <span>Hours</span>
+              <strong>11AM-2AM</strong>
             </div>
             <div className={styles.statusCard}>
-              <span>Confirmed items</span>
+              <span>Menu items</span>
               <strong>{MENU_SOURCE_STATE.productCount}</strong>
             </div>
           </div>
@@ -49,10 +49,10 @@ export default function MenuPage() {
       <section className={styles.categorySection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <span className={styles.microLabel}>Browse categories</span>
-            <h2 className={styles.sectionTitle}>Prepared Category Routes</h2>
+            <span className={styles.microLabel}>Explore Categories</span>
+            <h2 className={styles.sectionTitle}>Shop By Category</h2>
             <p className={styles.sectionCopy}>
-              These category pages use the same local generated-data pattern as the existing network stores, but Fort York does not display final product claims until the real source is connected.
+              Choose a category to view products, images, THC details, tiers, and prices where available.
             </p>
           </div>
 
@@ -65,27 +65,11 @@ export default function MenuPage() {
                   <div className={styles.categoryCopy}>
                     <strong>{category.name}</strong>
                     <span>{category.detail}</span>
-                    <em>{count > 0 ? `${count} preview products` : "Preview stock pending"}</em>
+                    <em>{count} items</em>
                   </div>
                 </Link>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.requirementsSection}>
-        <div className={styles.container}>
-          <div className={styles.requirementsPanel}>
-            <div>
-              <span className={styles.microLabel}>Before launch menu</span>
-              <h2 className={styles.sectionTitle}>Needed To Turn On Real Menu</h2>
-            </div>
-            <ul className={styles.requirementsList}>
-              {MENU_SOURCE_STATE.requiredInputs.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>

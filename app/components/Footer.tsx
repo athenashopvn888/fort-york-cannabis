@@ -9,7 +9,7 @@ export default function Footer() {
           <div className={styles.col}>
             <div className={styles.brand}>FORT YORK CANNABIS</div>
             <p className={styles.desc}>
-              Cannabis store at 38 Fort York Blvd in Toronto. Phone is 437-872-8446 and preview hours are 11AM-2AM. Pickup, delivery, and license details need owner approval.
+              Cannabis store at 38 Fort York Blvd in Toronto. Phone is 437-872-8446. Open 11AM-2AM. Pickup and delivery details will be posted when available.
             </p>
             <div className={styles.buttons}>
               <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.btnPrimary}>
@@ -41,7 +41,7 @@ export default function Footer() {
             <nav className={styles.links}>
               <Link href="/">Home</Link>
               <Link href="/weed-dispensary-toronto/">Toronto Store Page</Link>
-              <Link href="/#menu-preview">Preview Menu</Link>
+              <Link href="/#menu-preview">Menu</Link>
               <Link href="/info/fort-york-cannabis-store">Fort York Cannabis Store</Link>
               <Link href="/info/cityplace-cannabis-dispensary">CityPlace Cannabis Dispensary</Link>
               <Link href="/info/downtown-toronto-weed-dispensary">Downtown Toronto Weed Store</Link>

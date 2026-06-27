@@ -15,14 +15,14 @@ export default function DeliveryContent() {
         <div className={styles.formSection}>
           <h2 className={styles.formTitle}>Ordering Details Coming Soon</h2>
           <p className={styles.formDesc}>
-            Pickup and delivery details will be added once they are ready. Confirmed ordering information will be published after owner approval.
+            Pickup and delivery details will be added once they are ready.
           </p>
         </div>
         <div className={styles.infoGrid}>
           <div className={styles.infoCard}>
             <span className={styles.infoIcon}>1</span>
             <h3 className={styles.infoTitle}>Pickup Status</h3>
-            <p className={styles.infoDesc}>Pickup rules, payment options, and timing are coming soon.</p>
+            <p className={styles.infoDesc}>Pickup rules and timing will be posted when available.</p>
           </div>
           <div className={styles.infoCard}>
             <span className={styles.infoIcon}>2</span>

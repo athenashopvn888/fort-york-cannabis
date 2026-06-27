@@ -42,7 +42,7 @@ export const gbpLocation = {
   nearbyAreas: ["Fort York", "CityPlace", "Waterfront", "King West", "Rogers Centre", "Entertainment District"],
   license: pendingLabel,
   openingDate: pendingLabel,
-  menuStatus: "Preview stock loaded for owner review; final Fort York inventory pending.",
+  menuStatus: "Menu active for local browsing.",
   primaryKeyword: "cannabis store near Fort York",
   secondaryKeywords: [
     "weed dispensary Fort York",
@@ -55,19 +55,19 @@ export const gbpLocation = {
   metaDescription:
     "FORT YORK CANNABIS is a cannabis store at 38 Fort York Blvd in Toronto, serving Fort York, CityPlace, the waterfront, King West, and nearby downtown Toronto customers.",
   introVariant:
-    "FORT YORK CANNABIS is preparing a cannabis store experience at 38 Fort York Blvd in downtown Toronto, serving adults 19+ near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Preview hours are 11AM-2AM and phone is 437-872-8446.",
+    "FORT YORK CANNABIS is preparing a cannabis store experience at 38 Fort York Blvd in downtown Toronto, serving adults 19+ near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Open 11AM-2AM. Phone is 437-872-8446.",
   complianceNote:
-    "Cannabis products are for adults 19+ only. Final licensing, menu, pickup, delivery, and opening details require owner confirmation before publication.",
+    "Cannabis products are for adults 19+ only. Pickup and delivery details will be posted when available.",
   localProofPoints: [
     "Located at 38 Fort York Blvd in downtown Toronto.",
     "Serves Fort York, CityPlace, the waterfront, King West, Rogers Centre, and the Entertainment District.",
-    "Preview phone and hours are available for owner review.",
+    "Phone is 437-872-8446 and hours are 11AM-2AM.",
   ],
   ownerInputNeeded: [
     "Final license details",
     "Opening date",
-    "Pickup, delivery, and menu connection approval",
-    "Final inventory, pricing, brands, and availability",
+    "Pickup and delivery details",
+    "Menu updates and product availability",
   ],
 } as const;
 

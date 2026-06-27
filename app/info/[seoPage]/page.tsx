@@ -81,15 +81,15 @@ export default async function SeoLandingPage({
           ))}
 
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>Menu Categories Coming Soon</h2>
+            <h2 className={styles.sectionTitle}>Menu Categories</h2>
             <p className={styles.sectionBody}>
-              Menu categories are ready for the network menu source. Exact products, pricing, brands, pickup, and delivery details remain pending owner/backend confirmation.
+              Browse Fort York menu categories for flower, pre-rolls, vapes, edibles, concentrates, and accessories. Pickup and delivery details will be posted when available.
             </p>
             <div className={styles.categoryGrid}>
               {MENU_CATEGORIES.map((category) => (
                 <Link key={category.slug} href={`/items/${category.slug}`} className={styles.categoryCard}>
                   <span className={styles.categoryLabel}>{category.name}</span>
-                  <span className={styles.categoryStatus}>Coming soon</span>
+                  <span className={styles.categoryStatus}>View menu</span>
                 </Link>
               ))}
             </div>

@@ -6,7 +6,7 @@ import styles from "./contact.module.css";
 export const metadata: Metadata = {
   title: "Contact FORT YORK CANNABIS | 38 Fort York Blvd, Toronto",
   description:
-    "Contact page for FORT YORK CANNABIS at 38 Fort York Blvd in Toronto. Phone is 437-872-8446. Preview hours are 11AM-2AM.",
+    "Contact page for FORT YORK CANNABIS at 38 Fort York Blvd in Toronto. Phone is 437-872-8446. Hours are 11AM-2AM.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/contact",
   },
@@ -21,7 +21,7 @@ export default function ContactPage() {
           <div className={styles.heroCopy}>
             <span className={styles.microLabel}>Contact and location</span>
             <h1>FORT YORK CANNABIS</h1>
-            <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-872-8446 and preview hours are 11AM-2AM. Pickup, delivery, and license information still need owner approval.</p>
+            <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-872-8446. Open 11AM-2AM. Pickup and delivery details will be posted when available.</p>
           </div>
           <img src="/brand/contact-location-banner.webp" alt="Contact FORT YORK CANNABIS" className={styles.heroImage} />
         </div>

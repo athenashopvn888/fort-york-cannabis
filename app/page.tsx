@@ -7,14 +7,14 @@ import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE, MENU_SOURCE_STATE } from 
 const ACTIONS = [
   { label: "Address", note: "38 Fort York Blvd", href: "/contact" },
   { label: "Directions", note: "Open Google Maps", href: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9", external: true },
-  { label: "Menu", note: "Preview stock loaded", href: "/menu" },
-  { label: "Hours", note: "11AM-2AM", href: "/contact" },
+  { label: "Menu", note: "Browse Menu", href: "/menu" },
+  { label: "Hours", note: "Open 11AM-2AM", href: "/contact" },
 ];
 
 const LOCAL_FEATURES = [
   { label: "Fort York", body: "A local cannabis store page centered on Fort York Boulevard and nearby downtown routes." },
   { label: "CityPlace", body: "Helpful store information for adults 19+ around CityPlace, the waterfront, and condo-area foot traffic." },
-  { label: "Downtown Toronto", body: "Simple directions, clean local context, and a menu area ready for confirmed inventory." },
+  { label: "Downtown Toronto", body: "Simple directions, clean local context, and quick access to the Fort York menu." },
 ];
 
 const LOCAL_FAQS = [
@@ -24,11 +24,11 @@ const LOCAL_FAQS = [
   },
   {
     q: "What are the store hours?",
-    a: "11AM-2AM. This site does not use open-now, late-night, or 24-hour wording until hours are confirmed.",
+    a: "Open 11AM-2AM daily.",
   },
   {
     q: "Is the menu live?",
-    a: "Preview menu is loaded with temporary stock for owner review while final Fort York inventory is prepared.",
+    a: "Yes. Browse flower, pre-rolls, vapes, edibles, concentrates, and accessories from the menu.",
   },
   {
     q: "Which neighbourhoods does the store serve?",
@@ -51,7 +51,7 @@ export default function HomePage() {
           <p className={styles.localLine}>38 Fort York Blvd, Toronto</p>
           <div className={styles.heroActions}>
             <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.heroActionPrimary}>Get Directions</a>
-            <Link href="/menu" className={styles.heroActionSecondary}>View Menu Status</Link>
+            <Link href="/menu" className={styles.heroActionSecondary}>Browse Menu</Link>
           </div>
         </div>
       </section>
@@ -79,12 +79,12 @@ export default function HomePage() {
       <section className={styles.menuPreviewSection} id="menu-preview" aria-labelledby="menu-preview-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <span className={styles.microLabel}>Preview menu</span>
-            <h2 id="menu-preview-title" className={styles.sectionTitle}>Preview Menu Categories</h2>
+            <span className={styles.microLabel}>Menu</span>
+            <h2 id="menu-preview-title" className={styles.sectionTitle}>Explore Categories</h2>
             <p className={styles.sectionSubtitle}>{MENU_PREVIEW_NOTICE}</p>
-            <p className={styles.menuSourcePill}>{MENU_SOURCE_STATE.label} - {MENU_SOURCE_STATE.storeCode}</p>
+            <p className={styles.menuSourcePill}>Open 11AM-2AM - {MENU_SOURCE_STATE.productCount} menu items</p>
           </div>
-          <div className={styles.menuToolbar} aria-label="Menu preview categories">
+          <div className={styles.menuToolbar} aria-label="Menu categories">
             {MENU_PREVIEW_CATEGORIES.map((category) => (
               <span key={category.name}>{category.name}</span>
             ))}
@@ -96,7 +96,7 @@ export default function HomePage() {
                 <div className={styles.menuCategoryCopy}>
                   <strong>{category.name}</strong>
                   <span>{category.detail}</span>
-                  <em>Open category</em>
+                  <em>{category.count} items</em>
                 </div>
               </Link>
             ))}
@@ -124,7 +124,7 @@ export default function HomePage() {
             </div>
             <div className={styles.storeCard}>
               <h3 className={styles.storeCardTitle}>Store Details</h3>
-              <p className={styles.storeCardText}>Phone 437-872-8446 and preview hours 11AM-2AM are ready for owner review. License, pickup, delivery, and final Fort York stock still need approval.</p>
+              <p className={styles.storeCardText}>Phone 437-872-8446. Open 11AM-2AM at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
             </div>
           </div>
         </div>
@@ -158,9 +158,9 @@ export default function HomePage() {
           <div className={styles.visitPanel}>
             <div>
               <span className={styles.microLabel}>Plan your visit</span>
-              <h2 className={styles.sectionTitle}>Directions Ready. Menu Preview Ready.</h2>
+              <h2 className={styles.sectionTitle}>Directions Ready. Menu Ready.</h2>
               <p className={styles.sectionSubtitle}>
-                Use the map link for directions to 38 Fort York Blvd. Phone is 437-872-8446, preview hours are 11AM-2AM, and final pickup/delivery details still need owner approval.
+                Use the map link for directions to 38 Fort York Blvd. Phone is 437-872-8446. Open 11AM-2AM. Pickup and delivery details will be posted when available.
               </p>
             </div>
             <div className={styles.visitActions}>

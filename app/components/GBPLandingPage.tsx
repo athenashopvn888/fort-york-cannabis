@@ -6,7 +6,7 @@ import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE, MENU_SOURCE_STATE } from 
 const trustItems = [
   { label: "Address", value: "38 Fort York Blvd" },
   { label: "Area", value: "Fort York / CityPlace" },
-  { label: "Menu", value: "Preview stock loaded" },
+  { label: "Menu", value: "Browse Menu" },
 ];
 
 export function GBPLandingPage() {
@@ -83,7 +83,7 @@ export function GBPLandingPage() {
               Get Directions
             </a>
             <Link href="/menu" className={`${styles.btn} ${styles.btnSecondary}`}>
-              View Menu Status
+              Browse Menu
             </Link>
           </div>
         </div>
@@ -99,7 +99,7 @@ export function GBPLandingPage() {
         <div>
           <span className={styles.microLabel}>Store information</span>
           <h2 className={styles.h2}>Fort York Cannabis Store</h2>
-          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-872-8446 and preview hours 11AM-2AM are ready for owner review. Pickup, delivery, license details, and final menu approval are pending.</p>
+          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-872-8446. Open 11AM-2AM at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
         </div>
         <div className={styles.trustGrid}>
           {trustItems.map((item) => (
@@ -131,10 +131,10 @@ export function GBPLandingPage() {
       </section>
 
       <section className={styles.section} id="menu-preview">
-        <h2 className={styles.h2}>Preview Menu</h2>
+        <h2 className={styles.h2}>Menu</h2>
         <p className={styles.infoText}>{MENU_PREVIEW_NOTICE}</p>
-        <p className={styles.menuStatusLine}>{MENU_SOURCE_STATE.label} - {MENU_SOURCE_STATE.storeCode}</p>
-        <div className={styles.previewRail} aria-label="Menu preview categories">
+        <p className={styles.menuStatusLine}>Open 11AM-2AM - {MENU_SOURCE_STATE.productCount} menu items</p>
+        <div className={styles.previewRail} aria-label="Menu categories">
           {MENU_PREVIEW_CATEGORIES.map((category) => (
             <span key={category.name}>{category.name}</span>
           ))}
@@ -146,6 +146,7 @@ export function GBPLandingPage() {
               <div className={styles.productCopy}>
                 <strong>{category.name}</strong>
                 <span>{category.detail}</span>
+                <em>{category.count} items</em>
               </div>
             </Link>
           ))}
@@ -192,11 +193,11 @@ export function GBPLandingPage() {
           </div>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Are store hours available?</h3>
-            <p className={styles.faqAnswer}>11AM-2AM. This page does not use live-hours, open-now, or extended-hours wording until hours are confirmed.</p>
+            <p className={styles.faqAnswer}>Open 11AM-2AM daily.</p>
           </div>
           <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>Is the menu live?</h3>
-            <p className={styles.faqAnswer}>Preview stock is loaded for owner review while final Fort York inventory is prepared.</p>
+            <h3 className={styles.faqQuestion}>Can I browse the menu?</h3>
+            <p className={styles.faqAnswer}>Yes. Browse flower, pre-rolls, vapes, edibles, concentrates, and accessories from the menu.</p>
           </div>
         </div>
       </section>

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./tv.module.css";
 
-type PricePoint = { regular?: number; sale?: number };
+type PricePoint = { regular?: number; sale?: number | null };
 type Flower = {
   sku: string;
   name: string;
@@ -12,41 +12,30 @@ type Flower = {
   tier?: string;
   thc?: string;
   image: string;
-  price1g?: PricePoint;
-  price3g?: PricePoint;
-  price5g?: PricePoint;
-  price14g?: PricePoint;
-  price28g?: PricePoint;
-};
-
-type Item = {
-  sku: string;
-  name: string;
-  category?: string;
-  thc?: string;
-  price?: string;
-  image: string;
+  price3g?: PricePoint | null;
+  price5g?: PricePoint | null;
+  price14g?: PricePoint | null;
+  price28g?: PricePoint | null;
 };
 
 const TIERS = ["EXOTIC", "PREMIUM", "AAA+", "AA", "BUDGET"];
 const STORE = {
   name: "FORT YORK CANNABIS",
-  address: "38 Fort York Blvd",
-  city: "Toronto",
+  address: "38 FORT YORK BLVD",
   phone: "437-872-8446",
   hours: "11AM-2AM",
 };
 
-function bestPrice(product: Flower) {
-  const points = [product.price1g, product.price3g, product.price5g, product.price14g, product.price28g]
+function displayPrice(product: Flower) {
+  const points = [product.price3g, product.price5g, product.price14g, product.price28g]
     .flatMap((price) => (price ? [price.sale ?? price.regular] : []))
     .filter((value): value is number => typeof value === "number");
-  return points.length ? `from $${Math.min(...points)}` : "price pending";
+  return points.length ? `FROM $${Math.min(...points)}` : "PRICE IN STORE";
 }
 
 function groupByTier(flowers: Flower[]) {
   return flowers.reduce<Record<string, Flower[]>>((groups, flower) => {
-    const tier = flower.tier || "PREVIEW";
+    const tier = (flower.tier || "BUDGET").toUpperCase();
     groups[tier] = groups[tier] || [];
     groups[tier].push(flower);
     return groups;
@@ -60,7 +49,6 @@ function rotateList<T>(items: T[], offset: number, limit: number) {
 
 export default function FortYorkTvPage() {
   const [flowers, setFlowers] = useState<Flower[]>([]);
-  const [items, setItems] = useState<Item[]>([]);
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
 
@@ -68,11 +56,10 @@ export default function FortYorkTvPage() {
     let active = true;
 
     async function load() {
-      const [flowerRes, itemRes] = await Promise.all([fetch("/api/tv-data?type=flowers"), fetch("/api/tv-data?type=items")]);
-      const [flowerData, itemData] = await Promise.all([flowerRes.json(), itemRes.json()]);
+      const flowerRes = await fetch("/api/tv-data?type=flowers");
+      const flowerData = await flowerRes.json();
       if (!active) return;
       setFlowers(flowerData);
-      setItems(itemData);
       setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
     }
 
@@ -88,45 +75,46 @@ export default function FortYorkTvPage() {
   }, []);
 
   const grouped = useMemo(() => groupByTier(flowers), [flowers]);
-  const featured = rotateList(flowers, tick, 5);
-  const addOns = items.filter((item) => ["PREROLLS", "ADD ONS", "VAPES", "EDIBLES"].includes(item.category || "")).slice(0, 8);
 
   return (
     <main className={styles.screen}>
       <header className={styles.header}>
         <div>
-          <span className={styles.eyebrow}>Preview menu board</span>
+          <span className={styles.eyebrow}>Flower Menu Board</span>
           <h1>{STORE.name}</h1>
         </div>
         <div className={styles.storeMeta}>
           <strong>{STORE.address}</strong>
-          <span>{STORE.city}</span>
           <span>{STORE.phone}</span>
-          <span>{STORE.hours}</span>
+          <span>OPEN {STORE.hours}</span>
         </div>
       </header>
 
-      <section className={styles.heroPanel}>
-        <div>
-          <span className={styles.kicker}>Flower tiers</span>
-          <h2>Toronto waterfront preview stock</h2>
-          <p>Temporary stock for owner review. Final Fort York inventory and ordering require approval.</p>
-        </div>
-        <div className={styles.featureStrip}>
-          {featured.map((flower) => (
-            <article key={flower.sku}>
-              <img src={flower.image} alt={flower.name} />
-              <span>{flower.tier}</span>
-              <strong>{flower.name}</strong>
-              <small>{flower.thc ? `THC ${flower.thc}` : flower.type}</small>
+      <section className={styles.heroPanel} aria-label="Featured flower by tier">
+        {TIERS.map((tier, index) => {
+          const products = grouped[tier] || [];
+          const product = products.length ? products[(tick + index) % products.length] : undefined;
+          return (
+            <article className={styles.featureCard} key={tier}>
+              <span>{tier}</span>
+              {product ? (
+                <>
+                  <img src={product.image} alt={product.name} />
+                  <strong>{product.name}</strong>
+                  <small>{[product.type, product.thc ? `THC ${product.thc}` : ""].filter(Boolean).join(" / ")}</small>
+                  <b>{displayPrice(product)}</b>
+                </>
+              ) : (
+                <strong>More strains soon</strong>
+              )}
             </article>
-          ))}
-        </div>
+          );
+        })}
       </section>
 
       <section className={styles.tierGrid}>
         {TIERS.map((tier, index) => {
-          const tierProducts = rotateList(grouped[tier] || [], tick + index, 6);
+          const tierProducts = rotateList(grouped[tier] || [], tick + index, 7);
           return (
             <article className={styles.tierCard} key={tier}>
               <div className={styles.tierHead}>
@@ -141,7 +129,7 @@ export default function FortYorkTvPage() {
                       <strong>{flower.name}</strong>
                       <span>{[flower.type, flower.thc ? `THC ${flower.thc}` : ""].filter(Boolean).join(" / ")}</span>
                     </div>
-                    <b>{bestPrice(flower)}</b>
+                    <b>{displayPrice(flower)}</b>
                   </div>
                 ))}
               </div>
@@ -151,11 +139,8 @@ export default function FortYorkTvPage() {
       </section>
 
       <footer className={styles.footerRail}>
-        <div>
-          <strong>Also previewing</strong>
-          <span>{addOns.map((item) => item.name).join("  /  ")}</span>
-        </div>
-        <small>Loaded {loadedAt || "--"} / local preview only</small>
+        <strong>FLOWER / PRE-ROLLS / VAPES / EDIBLES / CONCENTRATES / ACCESSORIES</strong>
+        <small>Updated {loadedAt || "--"}</small>
       </footer>
     </main>
   );

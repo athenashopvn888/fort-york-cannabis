@@ -13,7 +13,7 @@ export const SEO_PAGES: SeoPage[] = [
   {
     slug: "fort-york-cannabis-store",
     title: "Fort York Cannabis Store | FORT YORK CANNABIS",
-    metaDescription: "FORT YORK CANNABIS is a cannabis store at 38 Fort York Blvd in Toronto near Fort York, CityPlace, and the waterfront. Phone is 437-872-8446 and preview hours are 11AM-2AM.",
+    metaDescription: "FORT YORK CANNABIS is a cannabis store at 38 Fort York Blvd in Toronto near Fort York, CityPlace, and the waterfront. Phone is 437-872-8446 and hours are 11AM-2AM.",
     h1: "Fort York Cannabis Store",
     heroTagline: "Local cannabis store information for Fort York and CityPlace",
     banner: "/brand/local-area-waterfront.webp",
@@ -24,7 +24,7 @@ export const SEO_PAGES: SeoPage[] = [
       },
       {
         heading: "Store Details Coming Soon",
-        body: "Store name, domain, address, Google Maps link, Toronto city label, and local landing route are ready. Phone 437-872-8446 and preview hours 11AM-2AM are ready for owner review. Final menu, launch date, delivery, pickup, and license wording still need approval.",
+        body: "Store name, domain, address, Google Maps link, Toronto city label, and local landing route are ready. Phone is 437-872-8446 and hours are 11AM-2AM. Pickup, delivery, and license details will be posted when available.",
       },
     ],
     faqs: [
@@ -35,7 +35,7 @@ export const SEO_PAGES: SeoPage[] = [
   {
     slug: "cityplace-cannabis-dispensary",
     title: "CityPlace Cannabis Dispensary | FORT YORK CANNABIS",
-    metaDescription: "FORT YORK CANNABIS is a cannabis store near CityPlace and Fort York in downtown Toronto. Preview menu and hours 11AM-2AM are ready for owner review.",
+    metaDescription: "FORT YORK CANNABIS is a cannabis store near CityPlace and Fort York in downtown Toronto. Menu and hours 11AM-2AM are available for Fort York customers.",
     h1: "CityPlace Cannabis Dispensary",
     heroTagline: "A downtown Toronto cannabis store page for CityPlace residents",
     banner: "/brand/hero-home-desktop.webp",
@@ -46,7 +46,7 @@ export const SEO_PAGES: SeoPage[] = [
       },
       {
         heading: "Menu And Service Details Coming Soon",
-        body: "The site supports a polished menu experience, and temporary preview stock is loaded. Final Fort York inventory, pricing, brands, delivery, and pickup still need approval.",
+        body: "The site supports a polished menu experience, and the menu is available for browsing. Pickup and delivery details will be posted when available.",
       },
     ],
     faqs: [
@@ -57,7 +57,7 @@ export const SEO_PAGES: SeoPage[] = [
   {
     slug: "downtown-toronto-weed-dispensary",
     title: "Downtown Toronto Weed Dispensary | FORT YORK CANNABIS",
-    metaDescription: "FORT YORK CANNABIS is a downtown Toronto cannabis store for 38 Fort York Blvd. Phone is 437-872-8446, preview hours are 11AM-2AM, and final menu approval is pending.",
+    metaDescription: "FORT YORK CANNABIS is a downtown Toronto cannabis store for 38 Fort York Blvd. Phone is 437-872-8446, hours are 11AM-2AM, and final menu approval is pending.",
     h1: "Downtown Toronto Weed Dispensary",
     heroTagline: "Fort York, CityPlace, waterfront, and King West cannabis store information",
     banner: "/brand/faq-info-banner.webp",
@@ -73,7 +73,7 @@ export const SEO_PAGES: SeoPage[] = [
     ],
     faqs: [
       { q: "Can this page use live-hours wording?", a: "No. Live-hours wording requires verified hours." },
-      { q: "Can this page list products?", a: "Only broad categories are shown. Preview stock is loaded while exact Fort York inventory is pending." },
+      { q: "Can this page list products?", a: "Only broad categories are shown. Menu is loaded while exact Fort York inventory is pending." },
     ],
   },
 ];
