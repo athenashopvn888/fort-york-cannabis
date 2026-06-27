@@ -574,7 +574,7 @@
 
 .visualSection,
 .ctaPreviewSection,
-.signageSection {
+.visitSection {
   padding: 82px 0;
   background: #eef7f8;
   color: var(--ink);
@@ -585,19 +585,19 @@
   color: #ffffff;
 }
 
-.signageSection {
+.visitSection {
   background: linear-gradient(180deg, #eef7f8, #dceced);
 }
 
 .visualGrid,
-.signageGrid {
+.visitGrid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: 28px;
   align-items: center;
 }
 
-.signageGrid {
+.visitGrid {
   grid-template-columns: 0.82fr 1.18fr;
 }
 
@@ -686,7 +686,7 @@
 @media (max-width: 900px) {
   .actionStrip,
   .visualGrid,
-  .signageGrid,
+  .visitGrid,
   .ctaPreview {
     grid-template-columns: 1fr;
   }
@@ -709,7 +709,7 @@
 
   .visualSection,
   .ctaPreviewSection,
-  .signageSection {
+  .visitSection {
     padding: 56px 0;
   }
 }

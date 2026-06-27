@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -6,8 +6,8 @@ import styles from "./Navbar.module.css";
 
 const ALL_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/weed-dispensary-toronto/", label: "Toronto Landing" },
-  { href: "/#menu-status", label: "Menu Status" },
+  { href: "/weed-dispensary-toronto/", label: "Toronto Store" },
+  { href: "/#menu-status", label: "Menu Coming Soon" },
   { href: "/info/fort-york-cannabis-store", label: "Fort York" },
   { href: "/info/cityplace-cannabis-dispensary", label: "CityPlace" },
   { href: "/contact", label: "Contact" },
@@ -33,7 +33,7 @@ export default function Navbar() {
           </span>
         </Link>
         <div className={styles.topBarRight}>
-          <span className={styles.open}>Hours PENDING_OWNER_INPUT</span>
+          <span className={styles.open}>Hours pending confirmation</span>
         </div>
       </div>
 

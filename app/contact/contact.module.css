@@ -133,7 +133,7 @@
 
 .heroGrid,
 .mapSection,
-.storefrontPanel {
+.customerPanel {
   width: min(100% - 32px, 1120px);
   margin: 0 auto;
   display: grid;
@@ -148,7 +148,7 @@
 
 .heroImage,
 .mapImage,
-.storefrontImage {
+.customerImage {
   display: block;
   width: 100%;
   height: auto;
@@ -158,25 +158,25 @@
 }
 
 .mapSection,
-.storefrontPanel {
+.customerPanel {
   grid-template-columns: 0.8fr 1.2fr;
   margin-top: 24px;
   padding: 24px;
 }
 
-.storefrontPanel {
+.customerPanel {
   grid-template-columns: 1.2fr 0.8fr;
 }
 
 .mapCopy,
-.storefrontCopy {
+.customerCopy {
   padding: 10px;
 }
 
 @media (max-width: 820px) {
   .heroGrid,
   .mapSection,
-  .storefrontPanel {
+  .customerPanel {
     grid-template-columns: 1fr;
   }
 }

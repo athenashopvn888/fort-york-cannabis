@@ -38,7 +38,7 @@ export default function NotFound() {
             lineHeight: 1.6,
           }}
         >
-          This page is not part of the Fort York Cannabis local scaffold. Confirmed store facts remain on the homepage, contact page, and Toronto landing page.
+          This page is not part of the Fort York Cannabis local website. Confirmed store facts remain on the homepage, contact page, and Toronto landing page.
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
           <Link

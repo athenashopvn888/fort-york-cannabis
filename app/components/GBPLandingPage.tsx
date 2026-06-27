@@ -1,6 +1,6 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import styles from "./GBPLandingPage.module.css";
-import { gbpLocation, isKnown } from "../lib/gbp-location";
+import { gbpLocation, isKnown, pendingLabel } from "../lib/gbp-location";
 
 const categoryLinks: Record<string, string> = {
   Flower: "/#menu-status",
@@ -14,7 +14,7 @@ const categoryLinks: Record<string, string> = {
 const trustItems = [
   { label: "Address", value: "38 Fort York Blvd" },
   { label: "Area", value: "Fort York / CityPlace" },
-  { label: "Facts", value: "Pending facts stay gated" },
+  { label: "Menu", value: "Coming soon" },
 ];
 
 export function GBPLandingPage() {
@@ -82,16 +82,16 @@ export function GBPLandingPage() {
 
       <header className={styles.hero}>
         <div className={styles.heroText}>
-          <span className={styles.microLabel}>GBP landing preview</span>
+          <span className={styles.microLabel}>Toronto cannabis store</span>
           <h1 className={styles.h1}>{gbpLocation.storeName} - Weed Dispensary in {gbpLocation.city}</h1>
           <p className={styles.heroTagline}>Serving Fort York, CityPlace, the waterfront, and downtown Toronto</p>
         </div>
-        <img src="/banners/fort_york_gbp_landing_hero.webp" alt="Fort York Cannabis local landing page visual" className={styles.heroImage} />
+        <img src="/banners/fort_york_gbp_landing_hero.webp" alt="Fort York Cannabis local landing page" className={styles.heroImage} />
       </header>
 
       <div className={styles.btnRow}>
         <Link href={gbpLocation.menuUrl} className={`${styles.btn} ${styles.btnPrimary}`}>
-          Menu Status
+          Menu Coming Soon
         </Link>
         <a href={gbpLocation.directionsUrl} className={`${styles.btn} ${styles.btnSecondary}`} target="_blank" rel="noopener noreferrer">
           Get Directions
@@ -100,9 +100,9 @@ export function GBPLandingPage() {
 
       <section className={styles.launchPanel}>
         <div>
-          <span className={styles.microLabel}>Launch-safe conversion path</span>
-          <h2 className={styles.h2}>Ready for GBP Review, Not Ready for GBP Publishing Yet</h2>
-          <p className={styles.infoText}>This page now looks like a complete local landing concept, but phone, hours, menu, delivery, pickup, license wording, and final approval remain PENDING_OWNER_INPUT.</p>
+          <span className={styles.microLabel}>Store information</span>
+          <h2 className={styles.h2}>Fort York Cannabis Store</h2>
+          <p className={styles.infoText}>FORT YORK CANNABIS is planned for 38 Fort York Blvd in downtown Toronto. Phone, hours, menu, pickup, delivery, and license information are pending owner confirmation.</p>
         </div>
         <div className={styles.trustGrid}>
           {trustItems.map((item) => (
@@ -115,14 +115,14 @@ export function GBPLandingPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.h2}>Local Cannabis Store Near Fort York</h2>
+        <h2 className={styles.h2}>Cannabis Store Near Fort York</h2>
         <p className={styles.introText}>{gbpLocation.introVariant}</p>
       </section>
 
       <section className={styles.mediaSection}>
-        <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area map concept" className={styles.mediaImage} />
+        <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area map" className={styles.mediaImage} />
         <div className={styles.mediaCopy}>
-          <span className={styles.microLabel}>Local area trust</span>
+          <span className={styles.microLabel}>Local area</span>
           <h2 className={styles.h2}>{gbpLocation.sectionTitle}</h2>
           <p className={styles.infoText}>{gbpLocation.neighborhoodDescription} {gbpLocation.transitNote}</p>
           <div className={styles.areaList}>
@@ -134,9 +134,9 @@ export function GBPLandingPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.h2}>Cannabis Product Categories</h2>
+        <h2 className={styles.h2}>Menu Coming Soon</h2>
         <p className={styles.infoText}>
-          FORT YORK CANNABIS is prepared for a full product menu structure, but exact inventory, pricing, brands, and availability are PENDING_OWNER_INPUT.
+          FORT YORK CANNABIS is prepared for a full product menu structure, but exact inventory, pricing, brands, and availability are pending owner confirmation.
         </p>
         <div className={styles.productGrid}>
           {gbpLocation.products.map((p) => {
@@ -164,7 +164,7 @@ export function GBPLandingPage() {
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Phone</span>
-              <span>{gbpLocation.phone}</span>
+              <span>{pendingLabel}</span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Website</span>
@@ -172,9 +172,7 @@ export function GBPLandingPage() {
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Store Hours</span>
-              {gbpLocation.hours.map((line) => (
-                <span key={line} style={{ fontSize: "0.95rem" }}>{line}</span>
-              ))}
+              <span style={{ fontSize: "0.95rem" }}>{pendingLabel}</span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Google Maps</span>
@@ -182,17 +180,17 @@ export function GBPLandingPage() {
             </div>
           </div>
           <div className={styles.mapWrapper}>
-            <img src="/banners/fort_york_storefront_preview.webp" alt="Fort York Cannabis storefront concept" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="/banners/fort_york_local_banner.webp" alt="Fort York and CityPlace cannabis store local area" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
         </div>
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.h2}>Future Customer Actions</h2>
+        <h2 className={styles.h2}>Call / Directions / Menu</h2>
         <p className={styles.infoText}>
-          The page has visual areas for directions, menu, visit, and future call actions. Phone and menu remain blocked until the owner confirms them.
+          Directions are available now. Phone number, full menu, pickup, and delivery details will be published after owner confirmation.
         </p>
-        <img src="/banners/fort_york_cta_panel.webp" alt="Fort York Cannabis future customer action panel" className={styles.fullImage} />
+        <img src="/banners/fort_york_cta_panel.webp" alt="Fort York Cannabis customer actions" className={styles.fullImage} />
       </section>
 
       <section className={styles.section}>
@@ -203,12 +201,12 @@ export function GBPLandingPage() {
             <p className={styles.faqAnswer}>{gbpLocation.storeName} is planned for {gbpLocation.address}.</p>
           </div>
           <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>Can this page mention live-hours or unverified hours claims?</h3>
-            <p className={styles.faqAnswer}>No. Hours are PENDING_OWNER_INPUT, so this page avoids live-hours, late-night, and unverified extended-hours claims.</p>
+            <h3 className={styles.faqQuestion}>Are store hours confirmed?</h3>
+            <p className={styles.faqAnswer}>No. Hours are pending owner confirmation, so this page avoids live-hours and unverified extended-hours claims.</p>
           </div>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Is the menu live?</h3>
-            <p className={styles.faqAnswer}>No. Menu, brands, pricing, inventory, delivery, and pickup details are PENDING_OWNER_INPUT.</p>
+            <p className={styles.faqAnswer}>No. Menu, brands, pricing, inventory, delivery, and pickup details are pending owner confirmation.</p>
           </div>
         </div>
       </section>

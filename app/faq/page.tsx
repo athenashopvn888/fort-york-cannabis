@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import styles from "./faq.module.css";
@@ -6,7 +6,7 @@ import styles from "./faq.module.css";
 export const metadata: Metadata = {
   title: "FAQ | FORT YORK CANNABIS",
   description:
-    "Frequently asked questions for FORT YORK CANNABIS in Toronto. Unknown phone, hours, menu, delivery, and launch details are marked pending owner input.",
+    "Frequently asked questions for FORT YORK CANNABIS in Toronto. Phone, hours, menu, delivery, and launch details are pending owner confirmation.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/faq",
   },
@@ -17,24 +17,24 @@ const FAQ_CATEGORIES = [
     title: "Location",
     faqs: [
       { q: "Where is FORT YORK CANNABIS located?", a: "The confirmed address is 38 Fort York Blvd, Toronto, ON M5V 3Z3, Canada." },
-      { q: "Which area does the site focus on?", a: "The local focus is Fort York, CityPlace, Downtown Toronto, the waterfront, King West, and nearby entertainment-district traffic." },
-      { q: "Is there a Google Maps link?", a: "Yes. The provided Google Maps link is https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9." },
+      { q: "Which area does the store serve?", a: "The local focus is Fort York, CityPlace, Downtown Toronto, the waterfront, King West, and nearby entertainment-district traffic." },
+      { q: "Is there a Google Maps link?", a: "Yes. Use the map link on the contact page for directions." },
     ],
   },
   {
-    title: "Pending Store Facts",
+    title: "Store Details Pending Confirmation",
     faqs: [
-      { q: "What are the store hours?", a: "PENDING_OWNER_INPUT. This site does not claim live-hours, late-night, or unverified extended-hours service." },
-      { q: "What is the phone number?", a: "PENDING_OWNER_INPUT. No phone number is published until confirmed." },
-      { q: "Is delivery available?", a: "PENDING_OWNER_INPUT. This site does not claim delivery or pickup until approved." },
-      { q: "Is the store licensed?", a: "License or authorization wording is PENDING_OWNER_INPUT and must be verified before publication." },
+      { q: "What are the store hours?", a: "Hours are pending owner confirmation. This site does not claim live-hours, late-night, or unverified extended-hours service." },
+      { q: "What is the phone number?", a: "Phone is pending owner confirmation. No public phone number is published until confirmed." },
+      { q: "Is delivery or pickup available?", a: "Pickup and delivery details are pending owner confirmation." },
+      { q: "Is license information available?", a: "License information is pending owner confirmation and must be verified before publication." },
     ],
   },
   {
     title: "Menu",
     faqs: [
-      { q: "Is the menu live?", a: "No. Inventory, pricing, brands, and categories are prepared as a design structure only until the owner provides confirmed menu data." },
-      { q: "What product categories are planned?", a: "The local scaffold supports flower, pre-rolls, edibles, vapes, concentrates, and accessories, but exact availability is PENDING_OWNER_INPUT." },
+      { q: "Is the menu live?", a: "No. Inventory, pricing, brands, and categories will be published after owner confirmation." },
+      { q: "What product categories are planned?", a: "The site is prepared for flower, pre-rolls, edibles, vapes, concentrates, and accessories, but exact availability is pending owner confirmation." },
     ],
   },
 ];
@@ -65,16 +65,16 @@ export default function FAQPage() {
         </section>
         <div className={styles.content}>
           <div className={styles.introPanel}>
-            <span className={styles.microLabel}>Launch-safe answers</span>
+            <span className={styles.microLabel}>Customer questions</span>
             <h1 className={styles.pageTitle}>Frequently Asked Questions</h1>
-            <p className={styles.pageSubtitle}>Known Fort York Cannabis launch facts only. Unknowns stay marked as PENDING_OWNER_INPUT.</p>
+            <p className={styles.pageSubtitle}>Known Fort York Cannabis store details are listed below. Phone, hours, menu, delivery, pickup, and license information remain pending owner confirmation.</p>
           </div>
           <div className={styles.visualPanel}>
-            <img src="/banners/fort_york_signage_preview.webp" alt="Fort York Cannabis signage and compliance preview" className={styles.visualImage} />
+            <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.visualImage} />
             <div>
-              <span className={styles.microLabel}>Trust and compliance</span>
-              <h2 className={styles.categoryTitle}>Preview Rules</h2>
-              <p className={styles.pageSubtitle}>No fake hours, no fake phone number, no fake menu, no fake reviews, and no unsupported opening or license claims are used in this local preview.</p>
+              <span className={styles.microLabel}>Store information</span>
+              <h2 className={styles.categoryTitle}>Fort York / CityPlace / Downtown Toronto</h2>
+              <p className={styles.pageSubtitle}>FORT YORK CANNABIS is planned for adults 19+ at 38 Fort York Blvd in Toronto, with customer details published only after confirmation.</p>
             </div>
           </div>
           {FAQ_CATEGORIES.map((cat) => (
