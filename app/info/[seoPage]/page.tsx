@@ -70,7 +70,7 @@ export default async function SeoLandingPage({
 
       <section className={styles.previewSection}>
         <div className={styles.previewGrid}>
-          <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.previewImage} />
+          <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.previewImage} />
           <div className={styles.previewCopy}>
             <span className={styles.microLabel}>Downtown Toronto local guide</span>
             <h2 className={styles.sectionTitle}>Fort York and CityPlace Context</h2>

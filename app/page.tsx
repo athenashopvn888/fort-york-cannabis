@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -126,7 +126,7 @@ export default function HomePage() {
       <section className={styles.localSection}>
         <div className={styles.container}>
           <div className={styles.localGrid}>
-            <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.localImage} />
+            <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.localImage} />
             <div className={styles.localCopy}>
               <span className={styles.microLabel}>Fort York / CityPlace / Waterfront</span>
               <h2 className={styles.sectionTitle}>Built Around Downtown Toronto Movement</h2>

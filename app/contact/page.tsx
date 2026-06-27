@@ -23,7 +23,7 @@ export default function ContactPage() {
             <h1>FORT YORK CANNABIS</h1>
             <p>Visit us at 38 Fort York Blvd in Toronto. Phone, hours, menu, pickup, delivery, and license information are coming soon.</p>
           </div>
-          <img src="/banners/fort_york_contact_banner.webp" alt="Contact FORT YORK CANNABIS" className={styles.heroImage} />
+          <img src="/brand/contact-location-banner.webp" alt="Contact FORT YORK CANNABIS" className={styles.heroImage} />
         </div>
       </section>
       <section className={styles.infoSection}>
@@ -52,10 +52,10 @@ export default function ContactPage() {
               <p className={styles.infoText}>FORT YORK CANNABIS is located for Fort York, CityPlace, waterfront Toronto, and nearby downtown routes.</p>
               <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.openBadge}>Open Google Maps</a>
             </div>
-            <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace local area" className={styles.mapImage} />
+            <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace local area" className={styles.mapImage} />
           </div>
           <div className={styles.customerPanel}>
-            <img src="/banners/fort_york_cta_panel.webp" alt="FORT YORK CANNABIS customer actions" className={styles.customerImage} />
+            <img src="/brand/visit-cta-banner.webp" alt="FORT YORK CANNABIS customer actions" className={styles.customerImage} />
             <div className={styles.customerCopy}>
               <span className={styles.microLabel}>Store information</span>
               <h2 className={styles.infoTitle}>Call / Directions / Menu</h2>

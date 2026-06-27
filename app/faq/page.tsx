@@ -61,7 +61,7 @@ export default function FAQPage() {
       <main className={styles.main}>
         <Navbar />
         <section className={styles.bannerSection}>
-          <img src="/banners/fort_york_faq_banner.webp" alt="FORT YORK CANNABIS FAQ" className={styles.bannerImage} />
+          <img src="/brand/faq-info-banner.webp" alt="FORT YORK CANNABIS FAQ" className={styles.bannerImage} />
         </section>
         <div className={styles.content}>
           <div className={styles.introPanel}>
@@ -70,7 +70,7 @@ export default function FAQPage() {
             <p className={styles.pageSubtitle}>Fort York Cannabis store details are listed below. Phone, hours, menu, delivery, pickup, and license information are coming soon.</p>
           </div>
           <div className={styles.visualPanel}>
-            <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.visualImage} />
+            <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.visualImage} />
             <div>
               <span className={styles.microLabel}>Store information</span>
               <h2 className={styles.categoryTitle}>Fort York / CityPlace / Downtown Toronto</h2>

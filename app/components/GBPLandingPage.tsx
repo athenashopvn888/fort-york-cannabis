@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import styles from "./GBPLandingPage.module.css";
 import { gbpLocation, isKnown } from "../lib/gbp-location";
 import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE } from "../lib/menu-preview";
@@ -88,7 +88,10 @@ export function GBPLandingPage() {
           </div>
         </div>
         <div className={styles.heroMedia}>
-          <img src="/banners/fort_york_gbp_landing_hero.webp" alt="Fort York Cannabis near CityPlace and downtown Toronto" className={styles.heroImage} />
+          <picture className={styles.heroPicture}>
+            <source media="(max-width: 760px)" srcSet="/brand/hero-gbp-landing-mobile.webp" />
+            <img src="/brand/hero-gbp-landing-desktop.webp" alt="Fort York Cannabis near CityPlace and downtown Toronto" className={styles.heroImage} />
+          </picture>
         </div>
       </header>
 
@@ -114,7 +117,7 @@ export function GBPLandingPage() {
       </section>
 
       <section className={styles.mediaSection}>
-        <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area map" className={styles.mediaImage} />
+        <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area map" className={styles.mediaImage} />
         <div className={styles.mediaCopy}>
           <span className={styles.microLabel}>Local area</span>
           <h2 className={styles.h2}>{gbpLocation.sectionTitle}</h2>
@@ -167,7 +170,7 @@ export function GBPLandingPage() {
             </div>
           </div>
           <div className={styles.mapWrapper}>
-            <img src="/banners/fort_york_local_banner.webp" alt="Fort York and CityPlace cannabis store local area" className={styles.mapImage} />
+            <img src="/brand/local-area-waterfront.webp" alt="Fort York and CityPlace cannabis store local area" className={styles.mapImage} />
           </div>
         </div>
       </section>

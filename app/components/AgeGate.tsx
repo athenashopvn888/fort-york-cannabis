@@ -47,7 +47,7 @@ export default function AgeGate() {
           <div className={styles.promptState}>
             <div className={styles.logoWrap}>
               <img
-                src="/brand/fort-york-logo.png"
+                src="/brand/fort-york-logo.svg"
                 alt="FORT YORK CANNABIS"
                 className={styles.logo}
               />

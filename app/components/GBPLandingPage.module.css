@@ -1,4 +1,4 @@
-﻿.container {
+.container {
   max-width: 1120px;
   margin: 0 auto;
   padding: 44px 20px 72px;
@@ -108,6 +108,7 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
+.heroPicture,
 .heroImage {
   display: block;
   width: 100%;

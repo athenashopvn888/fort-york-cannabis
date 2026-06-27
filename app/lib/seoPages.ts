@@ -16,7 +16,7 @@ export const SEO_PAGES: SeoPage[] = [
     metaDescription: "FORT YORK CANNABIS is a cannabis store at 38 Fort York Blvd in Toronto near Fort York, CityPlace, and the waterfront. Hours and phone are coming soon.",
     h1: "Fort York Cannabis Store",
     heroTagline: "Local cannabis store information for Fort York and CityPlace",
-    banner: "/banners/fort_york_local_banner.webp",
+    banner: "/brand/local-area-waterfront.webp",
     sections: [
       {
         heading: "Cannabis Store Near Fort York",
@@ -38,7 +38,7 @@ export const SEO_PAGES: SeoPage[] = [
     metaDescription: "FORT YORK CANNABIS is a cannabis store near CityPlace and Fort York in downtown Toronto. Menu and hours are coming soon.",
     h1: "CityPlace Cannabis Dispensary",
     heroTagline: "A downtown Toronto cannabis store page for CityPlace residents",
-    banner: "/banners/fort_york_hero_banner.webp",
+    banner: "/brand/hero-home-desktop.webp",
     sections: [
       {
         heading: "Serving CityPlace And Downtown Toronto",
@@ -60,7 +60,7 @@ export const SEO_PAGES: SeoPage[] = [
     metaDescription: "FORT YORK CANNABIS is a downtown Toronto cannabis store for 38 Fort York Blvd. Phone, hours, and menu are coming soon.",
     h1: "Downtown Toronto Weed Dispensary",
     heroTagline: "Fort York, CityPlace, waterfront, and King West cannabis store information",
-    banner: "/banners/fort_york_welcome_banner.webp",
+    banner: "/brand/faq-info-banner.webp",
     sections: [
       {
         heading: "Downtown Toronto Cannabis Store",

@@ -1,4 +1,4 @@
-﻿.main {
+.main {
   position: relative;
   z-index: 1;
   background: #071222;
@@ -29,7 +29,7 @@
 }
 
 .heroBg {
-  background-image: url("/banners/fort_york_hero_banner.webp");
+  background-image: url("/brand/hero-home-desktop.webp");
   background-size: cover;
   background-position: center;
   filter: saturate(0.95) contrast(1.03);
@@ -487,5 +487,11 @@
 
   .actionCard {
     min-height: 72px;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroBg {
+    background-image: url("/brand/hero-home-mobile.webp");
   }
 }
