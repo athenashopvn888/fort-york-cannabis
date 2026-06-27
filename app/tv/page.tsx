@@ -7,18 +7,23 @@ import {
   FLOWER_TIER_ORDER,
   STORE_INFO,
   allFlowers,
+  allItems,
+  formatItemPrice,
   formatPricePoint,
   formatType,
   getFlowerEffects,
   getFlowerPriceRows,
+  getItemCategoryLabel,
   getProductImage,
   getTierDetail,
   isTopBundleTier,
   normalizeTier,
   type FlowerProduct,
+  type ItemProduct,
 } from "../lib/products";
 
 const MAX_ROWS = 5;
+const ADD_ON_CATEGORIES = new Set(["ADD ONS", "PREROLLS", "PRE-ROLLS", "PRE ROLLS"]);
 
 function groupByTier(flowers: FlowerProduct[]) {
   return flowers.reduce<Record<string, FlowerProduct[]>>((groups, flower) => {
@@ -36,6 +41,31 @@ function rotateList<T>(items: T[], offset: number, limit: number) {
 
 function unitLabel(unitPrice: number) {
   return `$${unitPrice} / G`;
+}
+
+function formatPotency(value?: string) {
+  const text = String(value || "").trim();
+  const numeric = Number(text);
+
+  if (!text) return "";
+  if (text.includes("%")) return text;
+  if (Number.isFinite(numeric) && numeric > 0 && numeric <= 1) return `${Math.round(numeric * 100)}%`;
+  return text;
+}
+
+function getOzFlowers(flowers: FlowerProduct[]) {
+  const seen = new Set<string>();
+
+  return flowers.filter((flower) => {
+    if (!flower.price28g || seen.has(flower.sku)) return false;
+    seen.add(flower.sku);
+    return true;
+  });
+}
+
+function getAddOnItems(items: ItemProduct[]) {
+  const addOns = items.filter((item) => ADD_ON_CATEGORIES.has(item.category.toUpperCase()));
+  return addOns.length ? addOns : items;
 }
 
 function PriceCell({ product, compact = false }: { product: FlowerProduct; compact?: boolean }) {
@@ -59,7 +89,17 @@ function TypeTag({ type }: { type: string }) {
   return <span className={`${styles.typeTag} ${styles[key] || ""}`}>{formatType(type)}</span>;
 }
 
-function TierMenuCard({ tier, products, tick }: { tier: string; products: FlowerProduct[]; tick: number }) {
+function TierMenuCard({
+  tier,
+  products,
+  tick,
+  className = "",
+}: {
+  tier: string;
+  products: FlowerProduct[];
+  tick: number;
+  className?: string;
+}) {
   const detail = getTierDetail(tier);
   const featured = products.length ? products[tick % products.length] : undefined;
   const visible = rotateList(products, tick, MAX_ROWS);
@@ -68,7 +108,7 @@ function TierMenuCard({ tier, products, tick }: { tier: string; products: Flower
   const effects = featured ? getFlowerEffects(featured) : [];
 
   return (
-    <article className={styles.tierCard} style={{ "--tier-color": detail.accent } as CSSProperties}>
+    <article className={`${styles.tierCard} ${className}`} style={{ "--tier-color": detail.accent } as CSSProperties}>
       <header className={styles.tierHead}>
         <div className={styles.tierTitle}>
           <span>Flower Tier</span>
@@ -161,8 +201,127 @@ function TierMenuCard({ tier, products, tick }: { tier: string; products: Flower
   );
 }
 
+function OzMenuCard({ flowers, tick }: { flowers: FlowerProduct[]; tick: number }) {
+  const featured = flowers.length ? flowers[tick % flowers.length] : undefined;
+  const visible = rotateList(flowers, tick, 5);
+  const effects = featured ? getFlowerEffects(featured) : [];
+
+  return (
+    <article className={`${styles.tierCard} ${styles.ozCard}`} style={{ "--tier-color": "#b01664" } as CSSProperties}>
+      <header className={styles.tierHead}>
+        <div className={styles.tierTitle}>
+          <span>Ounce Deals</span>
+          <h2>OZ</h2>
+        </div>
+        <div className={styles.unitBadge}>
+          <strong>$40 up</strong>
+          <small>{flowers.length} options</small>
+        </div>
+      </header>
+
+      <section className={styles.ozStrip} aria-label="Ounce pricing">
+        <div>
+          <span>Budget Shreds</span>
+          <strong>$40 / OZ</strong>
+        </div>
+        <div>
+          <span>More OZ Options</span>
+          <strong>Ask Staff</strong>
+        </div>
+      </section>
+
+      {featured ? (
+        <div className={styles.specialBody}>
+          <section className={styles.ozFeature}>
+            <div className={styles.ozImageFrame}>
+              <img src={getProductImage(featured)} alt={featured.name} />
+              {featured.thc ? <span className={styles.thcBadge}>THC {featured.thc}</span> : null}
+            </div>
+            <div className={styles.ozCopy}>
+              <TypeTag type={featured.type} />
+              <h3>{featured.name}</h3>
+              <p>{effects.join(" / ")}</p>
+              <strong>{featured.price28g ? formatPricePoint(featured.price28g) : "Ask"}</strong>
+            </div>
+          </section>
+
+          <section className={styles.ozRows} aria-label="Ounce options">
+            {visible.map((flower) => (
+              <div key={flower.sku} className={styles.ozRow}>
+                <div>
+                  <strong>{flower.name}</strong>
+                  <span>
+                    {formatType(flower.type)} {flower.thc ? `THC ${flower.thc}` : ""}
+                  </span>
+                </div>
+                <b>{flower.price28g ? formatPricePoint(flower.price28g) : "Ask"}</b>
+              </div>
+            ))}
+          </section>
+        </div>
+      ) : (
+        <div className={styles.emptyBoard}>Call for current ounce menu</div>
+      )}
+    </article>
+  );
+}
+
+function AddOnsCard({ items, tick }: { items: ItemProduct[]; tick: number }) {
+  const featured = items.length ? items[tick % items.length] : undefined;
+  const visible = rotateList(items, tick + 1, 9);
+
+  return (
+    <aside className={styles.addOnsCard} aria-label="Add ons menu">
+      <header className={styles.addOnsHead}>
+        <span>Add Ons</span>
+        <strong>Quick Picks</strong>
+      </header>
+
+      {featured ? (
+        <section className={styles.addOnFeature}>
+          <div className={styles.addOnImageFrame}>
+            <img src={getProductImage(featured)} alt={featured.name} />
+            {featured.isSale ? <span className={styles.saleBadge}>Sale</span> : null}
+          </div>
+          <div>
+            <small>{getItemCategoryLabel(featured.category)}</small>
+            <h2>{featured.name}</h2>
+            <p>
+              {formatType(featured.type)} {formatPotency(featured.thc) ? `THC ${formatPotency(featured.thc)}` : ""}
+            </p>
+            <strong>{formatItemPrice(featured.price) || "Ask"}</strong>
+          </div>
+        </section>
+      ) : null}
+
+      <div className={styles.addOnRows}>
+        <div className={styles.addOnRowsHead}>
+          <span>Item</span>
+          <span>Price</span>
+        </div>
+        {visible.map((item) => {
+          const potency = formatPotency(item.thc);
+          return (
+            <div key={`${item.sku}-${item.slug}`} className={styles.addOnRow}>
+              <img src={getProductImage(item)} alt="" />
+              <div>
+                <strong>{item.name}</strong>
+                <span>
+                  {getItemCategoryLabel(item.category)}{potency ? ` / THC ${potency}` : ""}
+                </span>
+              </div>
+              <b>{formatItemPrice(item.price) || "Ask"}</b>
+            </div>
+          );
+        })}
+      </div>
+    </aside>
+  );
+}
+
 export default function FortYorkTvPage() {
   const [flowers, setFlowers] = useState<FlowerProduct[]>(allFlowers);
+  const [items, setItems] = useState<ItemProduct[]>(allItems);
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
 
@@ -171,11 +330,17 @@ export default function FortYorkTvPage() {
 
     async function load() {
       try {
-        const flowerRes = await fetch("/api/tv-data?type=flowers");
-        const flowerData = await flowerRes.json();
+        const [flowerRes, itemRes] = await Promise.all([
+          fetch("/api/tv-data?type=flowers"),
+          fetch("/api/tv-data?type=items"),
+        ]);
+        const [flowerData, itemData] = await Promise.all([flowerRes.json(), itemRes.json()]);
         if (!active) return;
         if (Array.isArray(flowerData) && flowerData.length > 0) {
           setFlowers(flowerData);
+        }
+        if (Array.isArray(itemData) && itemData.length > 0) {
+          setItems(itemData);
         }
         setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
       } catch {
@@ -195,6 +360,8 @@ export default function FortYorkTvPage() {
   }, []);
 
   const grouped = useMemo(() => groupByTier(flowers), [flowers]);
+  const ozFlowers = useMemo(() => getOzFlowers(flowers), [flowers]);
+  const addOnItems = useMemo(() => getAddOnItems(items), [items]);
 
   return (
     <main className={styles.screen}>
@@ -235,15 +402,19 @@ export default function FortYorkTvPage() {
           })}
         </nav>
 
-        <section className={styles.stage} aria-label="Fort York flower tiers">
-          {FLOWER_TIER_ORDER.map((tier, index) => (
-            <TierMenuCard key={tier} tier={tier} products={grouped[tier] || []} tick={tick + index} />
-          ))}
+        <section className={styles.stage} aria-label="Fort York flower tiers and specials">
+          <TierMenuCard tier="EXOTIC" products={grouped.EXOTIC || []} tick={tick} className={styles.cardExotic} />
+          <TierMenuCard tier="PREMIUM" products={grouped.PREMIUM || []} tick={tick + 1} className={styles.cardPremium} />
+          <TierMenuCard tier="AAA+" products={grouped["AAA+"] || []} tick={tick + 2} className={styles.cardAaa} />
+          <TierMenuCard tier="AA" products={grouped.AA || []} tick={tick + 3} className={styles.cardAa} />
+          <TierMenuCard tier="BUDGET" products={grouped.BUDGET || []} tick={tick + 4} className={styles.cardBudget} />
+          <OzMenuCard flowers={ozFlowers} tick={tick + 5} />
+          <AddOnsCard items={addOnItems} tick={tick + 6} />
         </section>
 
         <footer className={styles.footerRail}>
           <strong>Top tiers show total grams: 3g Total and 6g Total</strong>
-          <span>Flower / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories</span>
+          <span>Flower / OZ / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories</span>
           <small>Updated {loadedAt || "--"}</small>
         </footer>
       </div>

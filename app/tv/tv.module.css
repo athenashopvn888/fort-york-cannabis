@@ -151,8 +151,11 @@
 .stage {
   display: grid;
   gap: 14px;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  grid-template-rows: minmax(0, 1fr) minmax(0, 0.9fr);
+  grid-template-areas:
+    "exotic premium aaa addons"
+    "aa budget oz addons";
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(210px, 0.44fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 0.92fr);
   min-height: 0;
 }
 
@@ -168,12 +171,28 @@
   overflow: hidden;
 }
 
-.tierCard:nth-child(-n + 3) {
-  grid-column: span 2;
+.cardExotic {
+  grid-area: exotic;
 }
 
-.tierCard:nth-child(n + 4) {
-  grid-column: span 3;
+.cardPremium {
+  grid-area: premium;
+}
+
+.cardAaa {
+  grid-area: aaa;
+}
+
+.cardAa {
+  grid-area: aa;
+}
+
+.cardBudget {
+  grid-area: budget;
+}
+
+.ozCard {
+  grid-area: oz;
 }
 
 .tierHead {
@@ -188,7 +207,7 @@
 }
 
 .tierTitle span {
-  color: rgba(255, 250, 242, 0.78);
+  color: rgba(255, 250, 242, 0.8);
   display: block;
   font-size: 11px;
   font-weight: 1000;
@@ -206,7 +225,7 @@
   background: rgba(0, 0, 0, 0.26);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  min-width: 118px;
+  min-width: 112px;
   padding: 7px 10px;
   text-align: right;
 }
@@ -214,13 +233,14 @@
 .unitBadge strong {
   color: #f2c679;
   display: block;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 1000;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .unitBadge small {
-  color: rgba(255, 250, 242, 0.84);
+  color: rgba(255, 250, 242, 0.86);
   display: block;
   font-size: 11px;
   font-weight: 1000;
@@ -290,7 +310,7 @@
   display: grid;
   flex: 1;
   gap: 10px;
-  grid-template-columns: minmax(170px, 0.88fr) minmax(0, 1.12fr);
+  grid-template-columns: minmax(150px, 0.82fr) minmax(0, 1.18fr);
   min-height: 0;
   padding: 10px;
 }
@@ -313,14 +333,14 @@
   border: 1px solid rgba(3, 28, 34, 0.12);
   border-radius: 8px;
   display: flex;
-  height: 136px;
+  height: 126px;
   justify-content: center;
   overflow: hidden;
   position: relative;
 }
 
 .imageFrame img {
-  height: 120px;
+  height: 112px;
   max-width: 92%;
   object-fit: contain;
 }
@@ -368,11 +388,12 @@
   border-radius: 999px;
   color: #0b756d;
   display: inline-flex;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 1000;
   line-height: 1;
   padding: 5px 8px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .indica {
@@ -393,7 +414,7 @@
 .featureCopy h3 {
   color: #061a1f;
   display: -webkit-box;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 1000;
   line-height: 1.02;
   margin: 8px 0 6px;
@@ -405,10 +426,10 @@
 
 .effectLine,
 .skuLine {
-  color: rgba(8, 35, 42, 0.68);
-  font-size: 13px;
+  color: rgba(8, 35, 42, 0.72);
+  font-size: 12px;
   font-weight: 900;
-  line-height: 1.25;
+  line-height: 1.22;
   margin: 0 0 6px;
   text-transform: uppercase;
 }
@@ -461,7 +482,7 @@
   display: grid;
   font-size: 12px;
   font-weight: 1000;
-  grid-template-columns: minmax(0, 1fr) 142px;
+  grid-template-columns: minmax(0, 1fr) 132px;
   min-height: 30px;
   padding: 8px 10px;
   text-transform: uppercase;
@@ -485,9 +506,9 @@
   border-radius: 8px;
   display: grid;
   gap: 8px;
-  grid-template-columns: minmax(0, 1fr) 142px;
-  min-height: 44px;
-  padding: 7px 8px;
+  grid-template-columns: minmax(0, 1fr) 132px;
+  min-height: 42px;
+  padding: 6px 8px;
 }
 
 .rowMain {
@@ -497,7 +518,7 @@
 .rowName {
   color: #061a1f;
   display: block;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 1000;
   line-height: 1.05;
   overflow: hidden;
@@ -576,6 +597,339 @@
   display: none;
 }
 
+.ozStrip {
+  background: #fff1f6;
+  border-bottom: 1px solid rgba(3, 28, 34, 0.12);
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 8px;
+}
+
+.ozStrip div {
+  background: #061a1f;
+  border-left: 5px solid #b01664;
+  border-radius: 8px;
+  padding: 8px 10px;
+  text-transform: uppercase;
+}
+
+.ozStrip span {
+  color: #f2c679;
+  display: block;
+  font-size: 12px;
+  font-weight: 1000;
+}
+
+.ozStrip strong {
+  color: #ffffff;
+  display: block;
+  font-size: 20px;
+  font-weight: 1000;
+  line-height: 1.05;
+  margin-top: 3px;
+}
+
+.specialBody {
+  display: grid;
+  flex: 1;
+  gap: 10px;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+  padding: 10px;
+}
+
+.ozFeature {
+  align-items: center;
+  background: linear-gradient(135deg, #fff7fb, #f7fbf8);
+  border: 1px solid rgba(176, 22, 100, 0.16);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 132px minmax(0, 1fr);
+  min-height: 124px;
+  padding: 10px;
+}
+
+.ozImageFrame {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(3, 28, 34, 0.12);
+  border-radius: 8px;
+  display: flex;
+  height: 104px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.ozImageFrame img {
+  height: 92px;
+  max-width: 92%;
+  object-fit: contain;
+}
+
+.ozCopy {
+  min-width: 0;
+}
+
+.ozCopy h3 {
+  color: #061a1f;
+  display: -webkit-box;
+  font-size: 20px;
+  font-weight: 1000;
+  line-height: 1.03;
+  margin: 8px 0 5px;
+  overflow: hidden;
+  text-transform: uppercase;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ozCopy p {
+  color: rgba(8, 35, 42, 0.72);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.ozCopy strong {
+  color: #b01664;
+  display: block;
+  font-size: 30px;
+  font-weight: 1000;
+  line-height: 0.95;
+}
+
+.ozRows {
+  display: grid;
+  gap: 6px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ozRow {
+  align-items: center;
+  background: #f7fbf8;
+  border: 1px solid rgba(7, 53, 61, 0.1);
+  border-left: 4px solid #b01664;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 42px;
+  padding: 7px 9px;
+}
+
+.ozRow strong {
+  color: #061a1f;
+  display: block;
+  font-size: 14px;
+  font-weight: 1000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ozRow span {
+  color: rgba(8, 35, 42, 0.66);
+  display: block;
+  font-size: 10px;
+  font-weight: 1000;
+  margin-top: 2px;
+  overflow: hidden;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ozRow b {
+  color: #b01664;
+  font-size: 17px;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.addOnsCard {
+  background: #ffffff;
+  border: 1px solid rgba(3, 28, 34, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 26px 62px rgba(0, 0, 0, 0.32), 0 2px 0 rgba(255, 255, 255, 0.9) inset;
+  color: #08232a;
+  display: grid;
+  grid-area: addons;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.addOnsHead {
+  background: linear-gradient(100deg, #0a8f4b, #062b33 86%);
+  color: #ffffff;
+  min-height: 58px;
+  padding: 10px 12px;
+  text-transform: uppercase;
+}
+
+.addOnsHead span {
+  color: rgba(255, 250, 242, 0.8);
+  display: block;
+  font-size: 11px;
+  font-weight: 1000;
+}
+
+.addOnsHead strong {
+  color: #ffffff;
+  display: block;
+  font-size: 26px;
+  font-weight: 1000;
+  line-height: 0.98;
+  margin-top: 3px;
+}
+
+.addOnFeature {
+  background: linear-gradient(180deg, #eafff1, #ffffff);
+  border-bottom: 1px solid rgba(3, 28, 34, 0.12);
+  display: grid;
+  gap: 8px;
+  grid-template-rows: auto minmax(0, auto);
+  padding: 10px;
+}
+
+.addOnImageFrame {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(3, 28, 34, 0.12);
+  border-radius: 8px;
+  display: flex;
+  height: 158px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.addOnImageFrame img {
+  height: 148px;
+  max-width: 96%;
+  object-fit: contain;
+}
+
+.addOnFeature small {
+  color: #0b756d;
+  display: block;
+  font-size: 11px;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.addOnFeature h2 {
+  color: #061a1f;
+  display: -webkit-box;
+  font-size: 18px;
+  font-weight: 1000;
+  line-height: 1.04;
+  margin: 5px 0 4px;
+  overflow: hidden;
+  text-transform: uppercase;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.addOnFeature p {
+  color: rgba(8, 35, 42, 0.68);
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 0 0 5px;
+  text-transform: uppercase;
+}
+
+.addOnFeature strong {
+  color: #0a8f4b;
+  display: block;
+  font-size: 26px;
+  font-weight: 1000;
+  line-height: 1;
+}
+
+.addOnRows {
+  display: grid;
+  gap: 5px;
+  grid-auto-rows: min-content;
+  min-height: 0;
+  overflow: hidden;
+  padding: 8px;
+}
+
+.addOnRowsHead {
+  background: #061a1f;
+  border-radius: 7px;
+  color: #fffaf2;
+  display: grid;
+  font-size: 11px;
+  font-weight: 1000;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 28px;
+  padding: 8px;
+  text-transform: uppercase;
+}
+
+.addOnRowsHead span:last-child {
+  text-align: right;
+}
+
+.addOnRow {
+  align-items: center;
+  background: #f7fbf8;
+  border: 1px solid rgba(7, 53, 61, 0.1);
+  border-radius: 7px;
+  display: grid;
+  gap: 7px;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  min-height: 52px;
+  padding: 6px;
+}
+
+.addOnRow img {
+  background: #ffffff;
+  border-radius: 5px;
+  height: 38px;
+  object-fit: contain;
+  width: 38px;
+}
+
+.addOnRow strong {
+  color: #061a1f;
+  display: block;
+  font-size: 11px;
+  font-weight: 1000;
+  line-height: 1.05;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.addOnRow span {
+  color: #0b756d;
+  display: block;
+  font-size: 9px;
+  font-weight: 1000;
+  margin-top: 3px;
+  overflow: hidden;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.addOnRow b {
+  color: #0a8f4b;
+  font-size: 13px;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
 .emptyBoard {
   align-items: center;
   color: #0b756d;
@@ -636,7 +990,6 @@
   .header,
   .storeMeta,
   .tierRibbon,
-  .stage,
   .footerRail {
     grid-template-columns: 1fr;
   }
@@ -653,14 +1006,20 @@
   }
 
   .stage {
+    grid-template-areas:
+      "exotic"
+      "premium"
+      "aaa"
+      "aa"
+      "budget"
+      "oz"
+      "addons";
+    grid-template-columns: 1fr;
     grid-template-rows: none;
   }
 
-  .tierCard:nth-child(n) {
-    grid-column: auto;
-  }
-
-  .cardBody {
+  .cardBody,
+  .ozFeature {
     grid-template-columns: 1fr;
   }
 
