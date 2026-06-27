@@ -13,11 +13,12 @@ import {
   getFlowerPriceRows,
   getProductImage,
   getTierDetail,
+  isTopBundleTier,
   normalizeTier,
   type FlowerProduct,
 } from "../lib/products";
 
-const MAX_ROWS = 8;
+const MAX_ROWS = 5;
 
 function groupByTier(flowers: FlowerProduct[]) {
   return flowers.reduce<Record<string, FlowerProduct[]>>((groups, flower) => {
@@ -33,8 +34,13 @@ function rotateList<T>(items: T[], offset: number, limit: number) {
   return Array.from({ length: Math.min(limit, items.length) }, (_, index) => items[(offset + index) % items.length]);
 }
 
+function unitLabel(unitPrice: number) {
+  return `$${unitPrice} / G`;
+}
+
 function PriceCell({ product, compact = false }: { product: FlowerProduct; compact?: boolean }) {
-  const rows = getFlowerPriceRows(product, "tv").slice(0, compact ? 2 : 4);
+  const rows = getFlowerPriceRows(product, "tv").slice(0, compact ? 2 : 3);
+
   return (
     <div className={compact ? styles.priceStackCompact : styles.priceStack}>
       {rows.map((row) => (
@@ -49,75 +55,108 @@ function PriceCell({ product, compact = false }: { product: FlowerProduct; compa
 }
 
 function TypeTag({ type }: { type: string }) {
-  return <span className={`${styles.typeTag} ${styles[type] || ""}`}>{formatType(type)}</span>;
+  const key = (type || "").toLowerCase();
+  return <span className={`${styles.typeTag} ${styles[key] || ""}`}>{formatType(type)}</span>;
 }
 
-function FeatureCard({ tier, products, tick }: { tier: string; products: FlowerProduct[]; tick: number }) {
+function TierMenuCard({ tier, products, tick }: { tier: string; products: FlowerProduct[]; tick: number }) {
   const detail = getTierDetail(tier);
-  const product = products.length ? products[tick % products.length] : undefined;
-
-  return (
-    <article className={styles.featureCard} style={{ "--tier-color": detail.accent } as CSSProperties}>
-      <div className={styles.featureTier}>
-        <div>
-          <span>{detail.name}</span>
-          <em>${detail.unitPrice} / G</em>
-        </div>
-        <strong>{products.length} strains</strong>
-      </div>
-      {product ? (
-        <>
-          <div className={styles.featureImageWrap}>
-            <img src={getProductImage(product)} alt={product.name} />
-            {product.isSale ? <span className={styles.saleBadge}>Sale</span> : null}
-            {product.isHot ? <span className={styles.hotBadge}>Top Pick</span> : null}
-            {product.thc ? <span className={styles.thcBadge}>{product.thc}</span> : null}
-          </div>
-          <div className={styles.featureCopy}>
-            <TypeTag type={product.type} />
-            <h2>{product.name}</h2>
-            <p>{getFlowerEffects(product).join(" / ")}</p>
-            <small>SKU {product.sku}</small>
-            <PriceCell product={product} />
-          </div>
-        </>
-      ) : (
-        <div className={styles.emptyBoard}>Call for current {detail.name} menu</div>
-      )}
-    </article>
-  );
-}
-
-function TierBoard({ tier, products, tick }: { tier: string; products: FlowerProduct[]; tick: number }) {
-  const detail = getTierDetail(tier);
+  const featured = products.length ? products[tick % products.length] : undefined;
   const visible = rotateList(products, tick, MAX_ROWS);
+  const isBundleTier = isTopBundleTier(tier);
+  const featuredRows = featured ? getFlowerPriceRows(featured, "tv").slice(0, 3) : [];
+  const effects = featured ? getFlowerEffects(featured) : [];
 
   return (
     <article className={styles.tierCard} style={{ "--tier-color": detail.accent } as CSSProperties}>
-      <div className={styles.tierHead}>
-        <div>
-          <span>{detail.name}</span>
-          <em>${detail.unitPrice} / G</em>
-          <small>{detail.description}</small>
+      <header className={styles.tierHead}>
+        <div className={styles.tierTitle}>
+          <span>Flower Tier</span>
+          <h2>{detail.name}</h2>
         </div>
-        <strong>{products.length} strains</strong>
-      </div>
-      <div className={styles.productRows}>
-        {visible.map((flower) => (
-          <div className={styles.productRow} key={flower.sku}>
-            <img src={getProductImage(flower)} alt="" />
-            <div className={styles.rowMain}>
-              <strong>{flower.name}</strong>
-              <span>
-                <TypeTag type={flower.type} />
-                {flower.thc ? <b>THC {flower.thc}</b> : null}
-                {flower.isSale ? <em>Sale</em> : null}
-              </span>
-            </div>
-            <PriceCell product={flower} compact />
+        <div className={styles.unitBadge}>
+          <strong>{unitLabel(detail.unitPrice)}</strong>
+          <small>{products.length} strains</small>
+        </div>
+      </header>
+
+      {isBundleTier ? (
+        <section className={styles.dealStrip} aria-label={`${detail.name} bundle pricing`}>
+          <div className={styles.dealCell}>
+            <span>{detail.deal3g || "Buy 2g Get 1g Free"}</span>
+            <strong>3g Total ${detail.unitPrice * 2}</strong>
           </div>
-        ))}
-      </div>
+          <div className={styles.dealCell}>
+            <span>{detail.deal6g || "Buy 3g Get 3g Free"}</span>
+            <strong>6g Total ${detail.unitPrice * 3}</strong>
+          </div>
+        </section>
+      ) : (
+        <section className={styles.valueStrip} aria-label={`${detail.name} value pricing`}>
+          <div className={styles.valueCell}>
+            <span>Unit Price</span>
+            <strong>{unitLabel(detail.unitPrice)}</strong>
+          </div>
+          {featuredRows.slice(0, 2).map((row) => (
+            <div className={styles.valueCell} key={row.field}>
+              <span>{row.shortLabel}</span>
+              <strong>{formatPricePoint(row.price)}</strong>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {featured ? (
+        <div className={styles.cardBody}>
+          <section className={styles.featurePane}>
+            <div className={styles.imageFrame}>
+              <img src={getProductImage(featured)} alt={featured.name} />
+              {featured.isSale ? <span className={styles.saleBadge}>Sale</span> : null}
+              {featured.isHot ? <span className={styles.hotBadge}>Top Pick</span> : null}
+              {featured.thc ? <span className={styles.thcBadge}>THC {featured.thc}</span> : null}
+            </div>
+            <div className={styles.featureCopy}>
+              <TypeTag type={featured.type} />
+              <h3>{featured.name}</h3>
+              <p className={styles.effectLine}>{effects.join(" / ")}</p>
+              <small className={styles.skuLine}>SKU {featured.sku}</small>
+              <div className={styles.featurePrices}>
+                {featuredRows.map((row) => (
+                  <div key={row.field} className={styles.featurePrice}>
+                    <span>{row.shortLabel}</span>
+                    <strong>{formatPricePoint(row.price)}</strong>
+                    {row.promo ? <em>{row.promo}</em> : null}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className={styles.tablePane} aria-label={`${detail.name} strains`}>
+            <div className={styles.rowsHead}>
+              <span>Strain</span>
+              <span>Price</span>
+            </div>
+            <div className={styles.productRows}>
+              {visible.map((flower) => (
+                <div className={styles.productRow} key={flower.sku}>
+                  <div className={styles.rowMain}>
+                    <strong className={styles.rowName}>{flower.name}</strong>
+                    <span className={styles.rowMeta}>
+                      <TypeTag type={flower.type} />
+                      {flower.thc ? <b>THC {flower.thc}</b> : null}
+                      {flower.isSale ? <em>Sale</em> : null}
+                    </span>
+                  </div>
+                  <PriceCell product={flower} compact />
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      ) : (
+        <div className={styles.emptyBoard}>Call for current {detail.name} menu</div>
+      )}
     </article>
   );
 }
@@ -159,47 +198,55 @@ export default function FortYorkTvPage() {
 
   return (
     <main className={styles.screen}>
-      <header className={styles.header}>
-        <div>
-          <span className={styles.eyebrow}>Flower Menu Board</span>
-          <h1>{STORE_INFO.name}</h1>
-        </div>
-        <div className={styles.storeMeta}>
-          <strong>{STORE_INFO.shortAddress}</strong>
-          <span>{STORE_INFO.phone}</span>
-          <span>Open {STORE_INFO.hours}</span>
-        </div>
-      </header>
-
-      <section className={styles.dealRail} aria-label="Flower bundle pricing">
-        {FLOWER_TIER_ORDER.slice(0, 3).map((tier) => {
-          const detail = getTierDetail(tier);
-          return (
-            <div className={styles.dealRailCard} key={tier} style={{ "--tier-color": detail.accent } as CSSProperties}>
-              <strong>{detail.name} = ${detail.unitPrice} / G</strong>
-              <span>{detail.deal3g} = 3g Total <b>${detail.unitPrice * 2}</b></span>
-              <span>{detail.deal6g} = 6g Total <b>${detail.unitPrice * 3}</b></span>
+      <div className={styles.canvas}>
+        <header className={styles.header}>
+          <div className={styles.brandLockup}>
+            <img src="/brand/fort-york-icon.svg" alt="" />
+            <div>
+              <span className={styles.eyebrow}>Flower Menu Board</span>
+              <h1>{STORE_INFO.name}</h1>
             </div>
-          );
-        })}
-      </section>
+          </div>
+          <div className={styles.storeMeta}>
+            <div>
+              <span>Location</span>
+              <strong>{STORE_INFO.shortAddress}</strong>
+            </div>
+            <div>
+              <span>Call</span>
+              <strong>{STORE_INFO.phone}</strong>
+            </div>
+            <div>
+              <span>Open</span>
+              <strong>{STORE_INFO.hours}</strong>
+            </div>
+          </div>
+        </header>
 
-      <section className={styles.heroPanel} aria-label="Featured flower by tier">
-        {FLOWER_TIER_ORDER.map((tier, index) => (
-          <FeatureCard key={tier} tier={tier} products={grouped[tier] || []} tick={tick + index} />
-        ))}
-      </section>
+        <nav className={styles.tierRibbon} aria-label="Flower tier pricing">
+          {FLOWER_TIER_ORDER.map((tier) => {
+            const detail = getTierDetail(tier);
+            return (
+              <span key={tier} style={{ "--tier-color": detail.accent } as CSSProperties}>
+                <b>{detail.name}</b>
+                <small>{unitLabel(detail.unitPrice)}</small>
+              </span>
+            );
+          })}
+        </nav>
 
-      <section className={styles.tierGrid}>
-        {FLOWER_TIER_ORDER.map((tier, index) => (
-          <TierBoard key={tier} tier={tier} products={grouped[tier] || []} tick={tick + index} />
-        ))}
-      </section>
+        <section className={styles.stage} aria-label="Fort York flower tiers">
+          {FLOWER_TIER_ORDER.map((tier, index) => (
+            <TierMenuCard key={tier} tier={tier} products={grouped[tier] || []} tick={tick + index} />
+          ))}
+        </section>
 
-      <footer className={styles.footerRail}>
-        <strong>Flower / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories</strong>
-        <small>Updated {loadedAt || "--"}</small>
-      </footer>
+        <footer className={styles.footerRail}>
+          <strong>Top tiers show total grams: 3g Total and 6g Total</strong>
+          <span>Flower / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories</span>
+          <small>Updated {loadedAt || "--"}</small>
+        </footer>
+      </div>
     </main>
   );
 }
