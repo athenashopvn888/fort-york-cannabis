@@ -1,25 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./AgeGate.module.css";
 
+function shouldShowAgeGate() {
+  if (typeof window === "undefined") return false;
+
+  const path = window.location.pathname;
+  if (path === "/tv" || path === "/tv2" || path.startsWith("/tv/") || path.startsWith("/tv2/")) {
+    return false;
+  }
+
+  return localStorage.getItem("fyc_age_verified") !== "true";
+}
+
 export default function AgeGate() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(shouldShowAgeGate);
   const [underage, setUnderage] = useState(false);
-
-  useEffect(() => {
-    // Skip age verification for TV menu retail displays
-    const path = window.location.pathname;
-    if (path === "/tv" || path === "/tv2" || path.startsWith("/tv/") || path.startsWith("/tv2/")) {
-      return;
-    }
-
-    // Check local storage for previous verification
-    const verified = localStorage.getItem("fyc_age_verified");
-    if (verified !== "true") {
-      setShow(true);
-    }
-  }, []);
 
   const handleVerify = () => {
     localStorage.setItem("fyc_age_verified", "true");
@@ -37,7 +34,7 @@ export default function AgeGate() {
       <div className={styles.modal}>
         {underage ? (
           <div className={styles.underageState}>
-            <span className={styles.warningIcon}>⚠️</span>
+            <span className={styles.warningIcon}>!</span>
             <h2 className={styles.title}>Access Denied</h2>
             <p className={styles.text}>
               You must be 19 years of age or older to enter this website.

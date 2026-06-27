@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════
-   FORT YORK CANNABIS — HOMEPAGE PREMIUM STYLES
+   FORT YORK CANNABIS - HOMEPAGE PREMIUM STYLES
    Bento Mosaic Layout, Star Fields & Neon Dark Vibes
    ══════════════════════════════════════════════════════════════ */
 
@@ -749,7 +749,7 @@
 }
 
 .faqQuestion::after {
-  content: '→';
+  content: '>';
   font-size: 18px;
   color: #a855f7;
   transition: transform 0.25s ease;

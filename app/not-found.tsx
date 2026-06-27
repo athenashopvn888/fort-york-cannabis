@@ -17,7 +17,7 @@ export default function NotFound() {
           textAlign: "center",
         }}
       >
-        <span style={{ fontSize: 64, marginBottom: 16 }}>🔥</span>
+        <span style={{ fontSize: 48, fontWeight: 900, marginBottom: 16 }}>FYC</span>
         <h1
           style={{
             fontFamily: "var(--font-display)",
@@ -33,13 +33,12 @@ export default function NotFound() {
           style={{
             fontSize: 16,
             color: "var(--text-secondary)",
-            maxWidth: 400,
+            maxWidth: 460,
             margin: "0 0 32px",
             lineHeight: 1.6,
           }}
         >
-          This page doesn&apos;t exist — but our shelves are fully stocked.
-          Browse 200+ strains at York&apos;s most fire dispensary.
+          This page is not part of the Fort York Cannabis local scaffold. Confirmed store facts remain on the homepage, contact page, and Toronto landing page.
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
           <Link
@@ -54,10 +53,10 @@ export default function NotFound() {
               fontWeight: 800,
             }}
           >
-            Browse Menu
+            Home
           </Link>
           <Link
-            href="/contact"
+            href="/weed-dispensary-toronto/"
             style={{
               padding: "14px 28px",
               background: "transparent",
@@ -69,7 +68,7 @@ export default function NotFound() {
               fontWeight: 700,
             }}
           >
-            Visit Us
+            Toronto Landing
           </Link>
         </div>
       </div>

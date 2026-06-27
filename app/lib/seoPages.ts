@@ -77,3 +77,6 @@ export const SEO_PAGES: SeoPage[] = [
     ],
   },
 ];
+export function getSeoPageBySlug(slug: string): SeoPage | undefined {
+  return SEO_PAGES.find((page) => page.slug === slug);
+}

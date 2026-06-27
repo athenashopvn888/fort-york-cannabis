@@ -1,8 +1,8 @@
 import Link from "next/link";
 import styles from "./GBPLandingPage.module.css";
-import { gbpLocation, isKnown, PENDING_OWNER_INPUT } from "../lib/gbp-location";
+import { gbpLocation, isKnown } from "../lib/gbp-location";
 
-const categoryLinks: { [key: string]: string } = {
+const categoryLinks: Record<string, string> = {
   Flower: "/#menu-status",
   "Pre-rolls": "/#menu-status",
   Edibles: "/#menu-status",
@@ -12,7 +12,30 @@ const categoryLinks: { [key: string]: string } = {
 };
 
 export function GBPLandingPage() {
-  const schemaMarkup: any = {
+  type StoreSchema = {
+    "@context": "https://schema.org";
+    "@type": "Store";
+    name: string;
+    url: string;
+    hasMap: string;
+    address: {
+      "@type": "PostalAddress";
+      streetAddress: string;
+      addressLocality: string;
+      addressRegion: string;
+      postalCode: string;
+      addressCountry: string;
+    };
+    telephone?: string;
+    openingHours?: string[];
+    geo?: {
+      "@type": "GeoCoordinates";
+      latitude: number;
+      longitude: number;
+    };
+  };
+
+  const schemaMarkup: StoreSchema = {
     "@context": "https://schema.org",
     "@type": "Store",
     name: gbpLocation.storeName,
@@ -26,7 +49,6 @@ export function GBPLandingPage() {
       postalCode: gbpLocation.postalCode,
       addressCountry: gbpLocation.country,
     },
-    priceRange: PENDING_OWNER_INPUT,
   };
 
   if (isKnown(gbpLocation.phoneIntl)) {
