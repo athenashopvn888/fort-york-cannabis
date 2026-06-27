@@ -1,4 +1,4 @@
-﻿.container {
+.container {
   max-width: 1120px;
   margin: 0 auto;
   padding: 44px 20px 72px;
@@ -226,5 +226,119 @@
 
   .napGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+.microLabel {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--brand-copper);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 22px;
+  align-items: center;
+  text-align: left;
+  padding: 22px;
+}
+
+.heroText {
+  padding: clamp(16px, 3vw, 42px);
+}
+
+.heroImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(242, 211, 168, 0.22);
+}
+
+.launchPanel,
+.mediaSection {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 22px;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: clamp(24px, 4vw, 38px);
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 18, 34, 0.1);
+  box-shadow: 0 18px 44px rgba(7, 18, 34, 0.08);
+}
+
+.trustGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.trustCard {
+  display: grid;
+  gap: 6px;
+  min-height: 104px;
+  padding: 16px;
+  border-radius: 8px;
+  background: rgba(31, 179, 184, 0.08);
+  border: 1px solid rgba(31, 179, 184, 0.18);
+}
+
+.trustCard span {
+  color: var(--brand-copper);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trustCard strong {
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.mediaSection {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.mediaImage,
+.fullImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(7, 18, 34, 0.1);
+}
+
+.mediaCopy {
+  padding: 8px;
+}
+
+.fullImage {
+  margin-top: 18px;
+}
+
+.napItem a {
+  color: #14777f;
+  font-weight: 800;
+}
+
+@media (max-width: 860px) {
+  .hero,
+  .launchPanel,
+  .mediaSection,
+  .trustGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    text-align: center;
   }
 }

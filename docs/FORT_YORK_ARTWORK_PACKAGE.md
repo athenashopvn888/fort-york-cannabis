@@ -1,4 +1,4 @@
-﻿# Fort York Cannabis Artwork Package
+# Fort York Cannabis Artwork Package
 
 ## Purpose
 
@@ -15,11 +15,11 @@ Current generated assets are first-pass production-intent coded raster/vector co
 | Favicon/icon set | root and `app/` icons | multiple | PNG/ICO/WebP | Browser/mobile icons | Monogram-derived icon set | FYC only | Address/details | Final icon review | Existing set should be regenerated from final mark later |
 | Homepage hero desktop | `public/banners/fort_york_hero_banner.webp` | 2400x1300 | WebP | Homepage hero | Fort wall, skyline, waterfront, copper/teal retail panel | Fort York Cannabis theme only | Fake claims | Owner visual approval | Current concept exists |
 | Homepage hero mobile | `public/banners/fort_york_hero_mobile.webp` | 900x1200 | WebP | Future mobile hero use | Tall crop of brand system | Fort York / CityPlace | Fake claims | Mobile design approval | Current concept exists |
-| GBP landing hero | `public/banners/fort_york_local_banner.webp` | 1800x950 | WebP | GBP landing visual | Local SEO visual for Fort York/CityPlace | Confirmed location themes | Phone/hours/reviews | Owner review | Current concept exists |
+| GBP landing hero | `public/banners/fort_york_gbp_landing_hero.webp` | 1800x760 | WebP | GBP landing visual | Local SEO visual for Fort York/CityPlace | Confirmed location themes | Phone/hours/reviews | Owner review | Final-preview concept exists |
 | Category banners/cards | `public/banners/fort_york_*_banner.webp` | 1400x900 | WebP | Homepage/category tiles | Category-safe brand art | Broad category name only | Inventory/prices/brands | Menu source | Current concepts exist |
 | Contact/location banner | `public/banners/fort_york_contact_banner.webp` | 1600x900 | WebP | Contact page | Address-forward downtown visual | 38 Fort York Blvd if needed | Phone/hours until confirmed | Phone/hours | Current concept exists |
 | FAQ/info banner | `public/banners/fort_york_faq_banner.webp` | 1600x900 | WebP | FAQ/info pages | Trust and pending facts visual | Safe owner facts only | Claims | Owner review | Current concept exists |
-| Open Graph image | `public/banners/fort_york_og_banner.webp` | 1200x630 | WebP | Social/metadata | Share card visual | Fort York Cannabis | Fake offer/review claims | Final social copy | Current concept exists |
+| Open Graph image | `public/banners/fort_york_social_preview.webp` | 1200x630 | WebP | Social/metadata | Share card visual | Fort York Cannabis | Fake offer/review claims | Final social copy | Final-preview concept exists |
 
 ## Storefront / Signage Assets
 
@@ -30,7 +30,7 @@ Current generated assets are first-pass production-intent coded raster/vector co
 | Window vinyl concept | `public/brand/signage/fort-york-window-vinyl-concept.svg` | 2200x1200 | SVG | Window vinyl | Fort wall/waterfront pattern with brand | FYC, Fort York Cannabis | Menu/prices/reviews | Window measurements | First-pass concept exists |
 | Hours decal | `public/brand/signage/fort-york-hours-decal-concept.svg` | 1200x1600 | SVG | Door/window | Hours panel with pending status | Hours pending confirmation | Actual hours until approved | Owner-approved hours | First-pass pending-hours concept exists |
 | Pickup/menu QR decal | Not created yet | TBD | SVG/PDF | Future door/window | QR panel only after live menu exists | Domain/QR/menu label | Fake menu or ordering claim | Live menu URL | Needed later |
-| Exterior mockup direction | Not created yet | TBD | PNG/PDF | Owner/sign shop review | Apply sign concept to storefront photo or elevation | Confirmed sign text only | Fake exterior photo | Storefront photo/elevation | Needed later |
+| Storefront preview mockup | `public/banners/fort_york_storefront_preview.webp` | 1600x980 | WebP | Owner/sign shop review | Applies sign, window, door, hours, and menu placeholder concepts to a coded storefront elevation | Confirmed sign text only; pending placeholders | Fake phone/hours/menu/license | Storefront photo/elevation and vendor specs | Final-preview concept exists |
 | Interior wall panel | Not created yet | TBD | SVG/PDF | Interior brand moment | FYC monogram, fort-wall geometry | Brand only | Compliance-sensitive claims | Interior wall size | Optional later |
 
 ## Production Notes
@@ -38,3 +38,15 @@ Current generated assets are first-pass production-intent coded raster/vector co
 - Final print/sign files should be exported by a designer/sign shop as PDF/SVG/AI with outlined fonts.
 - Before fabrication, confirm sign dimensions, landlord rules, municipal sign rules, AGCO/compliance language, and final hours.
 - The current coded concepts are useful for direction, but not a substitute for final production preflight.
+## Final Preview Additions - 2026-06-26
+
+The completed local visual preview package now also includes:
+
+- `public/banners/fort_york_district_map.webp`
+- `public/banners/fort_york_cta_panel.webp`
+- `public/banners/fort_york_storefront_preview.webp`
+- `public/banners/fort_york_signage_preview.webp`
+- `public/banners/fort_york_social_preview.webp`
+- `public/brand/signage/fort-york-menu-qr-placeholder-concept.svg`
+
+These assets are suitable for owner visual review only. Final production signage, print files, and confirmed website copy still require owner/vendor approval.

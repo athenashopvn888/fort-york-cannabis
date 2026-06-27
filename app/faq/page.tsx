@@ -60,12 +60,23 @@ export default function FAQPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main className={styles.main}>
         <Navbar />
-        <section style={{ width: "100%", overflow: "hidden", marginTop: "92px" }}>
-          <img src="/banners/fort_york_faq_banner.webp" alt="FORT YORK CANNABIS FAQ" style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }} />
+        <section className={styles.bannerSection}>
+          <img src="/banners/fort_york_faq_banner.webp" alt="FORT YORK CANNABIS FAQ" className={styles.bannerImage} />
         </section>
         <div className={styles.content}>
-          <h1 className={styles.pageTitle}>Frequently Asked Questions</h1>
-          <p className={styles.pageSubtitle}>Known Fort York Cannabis launch facts only. Unknowns stay marked as PENDING_OWNER_INPUT.</p>
+          <div className={styles.introPanel}>
+            <span className={styles.microLabel}>Launch-safe answers</span>
+            <h1 className={styles.pageTitle}>Frequently Asked Questions</h1>
+            <p className={styles.pageSubtitle}>Known Fort York Cannabis launch facts only. Unknowns stay marked as PENDING_OWNER_INPUT.</p>
+          </div>
+          <div className={styles.visualPanel}>
+            <img src="/banners/fort_york_signage_preview.webp" alt="Fort York Cannabis signage and compliance preview" className={styles.visualImage} />
+            <div>
+              <span className={styles.microLabel}>Trust and compliance</span>
+              <h2 className={styles.categoryTitle}>Preview Rules</h2>
+              <p className={styles.pageSubtitle}>No fake hours, no fake phone number, no fake menu, no fake reviews, and no unsupported opening or license claims are used in this local preview.</p>
+            </div>
+          </div>
           {FAQ_CATEGORIES.map((cat) => (
             <div key={cat.title} className={styles.category}>
               <h2 className={styles.categoryTitle}>{cat.title}</h2>

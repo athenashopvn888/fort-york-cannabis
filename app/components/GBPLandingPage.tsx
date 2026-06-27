@@ -11,6 +11,12 @@ const categoryLinks: Record<string, string> = {
   Accessories: "/#menu-status",
 };
 
+const trustItems = [
+  { label: "Address", value: "38 Fort York Blvd" },
+  { label: "Area", value: "Fort York / CityPlace" },
+  { label: "Facts", value: "Pending facts stay gated" },
+];
+
 export function GBPLandingPage() {
   type StoreSchema = {
     "@context": "https://schema.org";
@@ -75,8 +81,12 @@ export function GBPLandingPage() {
       />
 
       <header className={styles.hero}>
-        <h1 className={styles.h1}>{gbpLocation.storeName} - Weed Dispensary in {gbpLocation.city}</h1>
-        <p className={styles.heroTagline}>Serving Fort York, CityPlace, the waterfront, and downtown Toronto</p>
+        <div className={styles.heroText}>
+          <span className={styles.microLabel}>GBP landing preview</span>
+          <h1 className={styles.h1}>{gbpLocation.storeName} - Weed Dispensary in {gbpLocation.city}</h1>
+          <p className={styles.heroTagline}>Serving Fort York, CityPlace, the waterfront, and downtown Toronto</p>
+        </div>
+        <img src="/banners/fort_york_gbp_landing_hero.webp" alt="Fort York Cannabis local landing page visual" className={styles.heroImage} />
       </header>
 
       <div className={styles.btnRow}>
@@ -88,9 +98,39 @@ export function GBPLandingPage() {
         </a>
       </div>
 
+      <section className={styles.launchPanel}>
+        <div>
+          <span className={styles.microLabel}>Launch-safe conversion path</span>
+          <h2 className={styles.h2}>Ready for GBP Review, Not Ready for GBP Publishing Yet</h2>
+          <p className={styles.infoText}>This page now looks like a complete local landing concept, but phone, hours, menu, delivery, pickup, license wording, and final approval remain PENDING_OWNER_INPUT.</p>
+        </div>
+        <div className={styles.trustGrid}>
+          {trustItems.map((item) => (
+            <div key={item.label} className={styles.trustCard}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className={styles.section}>
         <h2 className={styles.h2}>Local Cannabis Store Near Fort York</h2>
         <p className={styles.introText}>{gbpLocation.introVariant}</p>
+      </section>
+
+      <section className={styles.mediaSection}>
+        <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area map concept" className={styles.mediaImage} />
+        <div className={styles.mediaCopy}>
+          <span className={styles.microLabel}>Local area trust</span>
+          <h2 className={styles.h2}>{gbpLocation.sectionTitle}</h2>
+          <p className={styles.infoText}>{gbpLocation.neighborhoodDescription} {gbpLocation.transitNote}</p>
+          <div className={styles.areaList}>
+            {gbpLocation.nearbyAreas.map((area) => (
+              <span key={area} className={styles.areaTag}>{area}</span>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className={styles.section}>
@@ -128,7 +168,7 @@ export function GBPLandingPage() {
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Website</span>
-              <span><a href={`https://${gbpLocation.domain}/`} style={{ color: "inherit" }}>https://{gbpLocation.domain}/</a></span>
+              <span><a href={`https://${gbpLocation.domain}/`}>https://{gbpLocation.domain}/</a></span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Store Hours</span>
@@ -138,25 +178,21 @@ export function GBPLandingPage() {
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Google Maps</span>
-              <a href={gbpLocation.directionsUrl} style={{ color: "inherit" }} target="_blank" rel="noopener noreferrer">Open map</a>
+              <a href={gbpLocation.directionsUrl} target="_blank" rel="noopener noreferrer">Open map</a>
             </div>
           </div>
           <div className={styles.mapWrapper}>
-            <img src="/banners/fort_york_local_banner.webp" alt="Fort York and CityPlace local cannabis storefront direction" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="/banners/fort_york_storefront_preview.webp" alt="Fort York Cannabis storefront concept" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
         </div>
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.h2}>{gbpLocation.sectionTitle}</h2>
+        <h2 className={styles.h2}>Future Customer Actions</h2>
         <p className={styles.infoText}>
-          {gbpLocation.neighborhoodDescription} {gbpLocation.transitNote}
+          The page has visual areas for directions, menu, visit, and future call actions. Phone and menu remain blocked until the owner confirms them.
         </p>
-        <div className={styles.areaList}>
-          {gbpLocation.nearbyAreas.map((area) => (
-            <span key={area} className={styles.areaTag}>{area}</span>
-          ))}
-        </div>
+        <img src="/banners/fort_york_cta_panel.webp" alt="Fort York Cannabis future customer action panel" className={styles.fullImage} />
       </section>
 
       <section className={styles.section}>

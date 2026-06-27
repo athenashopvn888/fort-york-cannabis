@@ -16,9 +16,14 @@ export default function ContactPage() {
   return (
     <main className={styles.main}>
       <Navbar />
-      <section className={styles.hero} style={{ paddingTop: "92px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
-          <img src="/banners/fort_york_contact_banner.webp" alt="Contact FORT YORK CANNABIS" style={{ width: "100%", height: "auto", display: "block", borderRadius: "8px" }} />
+      <section className={styles.hero}>
+        <div className={styles.heroGrid}>
+          <div className={styles.heroCopy}>
+            <span className={styles.microLabel}>Contact and location</span>
+            <h1>FORT YORK CANNABIS</h1>
+            <p>Local storefront preview for 38 Fort York Blvd in Toronto. Phone, hours, and launch details remain pending owner input.</p>
+          </div>
+          <img src="/banners/fort_york_contact_banner.webp" alt="Contact FORT YORK CANNABIS" className={styles.heroImage} />
         </div>
       </section>
       <section className={styles.infoSection}>
@@ -41,7 +46,21 @@ export default function ContactPage() {
             </div>
           </div>
           <div className={styles.mapSection}>
-            <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.openBadge}>Open Google Maps</a>
+            <div className={styles.mapCopy}>
+              <span className={styles.microLabel}>Map and visit actions</span>
+              <h2 className={styles.infoTitle}>Find the Store</h2>
+              <p className={styles.infoText}>The provided Google Maps link is ready for owner review. No GBP edits or live-service updates have been made.</p>
+              <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.openBadge}>Open Google Maps</a>
+            </div>
+            <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace local area concept" className={styles.mapImage} />
+          </div>
+          <div className={styles.storefrontPanel}>
+            <img src="/banners/fort_york_storefront_preview.webp" alt="FORT YORK CANNABIS storefront visual preview" className={styles.storefrontImage} />
+            <div className={styles.storefrontCopy}>
+              <span className={styles.microLabel}>Storefront preview</span>
+              <h2 className={styles.infoTitle}>Retail-Ready Direction</h2>
+              <p className={styles.infoText}>Main sign, door 19+, window vinyl, menu QR placeholder, and hours decal concepts are prepared for visual review only. Final production art still needs approval.</p>
+            </div>
           </div>
         </div>
       </section>

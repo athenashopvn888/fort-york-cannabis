@@ -68,6 +68,17 @@ export default async function SeoLandingPage({
         </div>
       </section>
 
+      <section className={styles.previewSection}>
+        <div className={styles.previewGrid}>
+          <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto area concept" className={styles.previewImage} />
+          <div className={styles.previewCopy}>
+            <span className={styles.microLabel}>Local SEO/GEO preview</span>
+            <h2 className={styles.sectionTitle}>Fort York and CityPlace Context</h2>
+            <p className={styles.sectionBody}>These supporting pages keep the Fort York, CityPlace, waterfront, and downtown Toronto language natural while avoiding unverified phone, hours, menu, delivery, pickup, license, or review claims.</p>
+          </div>
+        </div>
+      </section>
+
       <section className={styles.content}>
         <div className={styles.container}>
           {page.sections.map((s, i) => (

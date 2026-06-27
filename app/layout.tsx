@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       "A Fort York / CityPlace cannabis storefront at 38 Fort York Blvd. Phone, hours, and menu are pending owner confirmation.",
     images: [
       {
-        url: `${siteUrl}/banners/fort_york_og_banner.webp`,
+        url: `${siteUrl}/banners/fort_york_social_preview.webp`,
         width: 1200,
         height: 630,
         alt: "FORT YORK CANNABIS downtown Toronto banner",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FORT YORK CANNABIS | Downtown Toronto Cannabis Store",
     description: "Fort York / CityPlace cannabis storefront. Details pending owner confirmation.",
-    images: [`${siteUrl}/banners/fort_york_og_banner.webp`],
+    images: [`${siteUrl}/banners/fort_york_social_preview.webp`],
   },
   robots: {
     index: true,
@@ -67,7 +67,7 @@ const jsonLd = {
   description:
     "Cannabis storefront at 38 Fort York Blvd in Toronto, ON. Phone, hours, menu, and launch details are pending owner confirmation.",
   url: siteUrl,
-  image: `${siteUrl}/banners/fort_york_og_banner.webp`,
+  image: `${siteUrl}/banners/fort_york_social_preview.webp`,
   hasMap: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9",
   address: {
     "@type": "PostalAddress",
@@ -107,3 +107,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -12,6 +12,19 @@ const MENU_CATEGORIES = [
   { name: "Accessories", detail: "Store setup pending owner input", banner: "/banners/fort_york_accessories_banner.webp" },
 ];
 
+const ACTIONS = [
+  { label: "Directions", note: "38 Fort York Blvd", href: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9", external: true },
+  { label: "Menu Status", note: "PENDING_OWNER_INPUT", href: "#menu-status" },
+  { label: "Call", note: "PENDING_OWNER_INPUT", href: "/contact" },
+  { label: "Visit", note: "Toronto launch preview", href: "/weed-dispensary-toronto" },
+];
+
+const LOCAL_FEATURES = [
+  { label: "Fort York", body: "Heritage-wall geometry and neighbourhood language anchor the brand close to the store address." },
+  { label: "CityPlace", body: "Condo-district polish, clear CTAs, and a downtown retail layout support repeat local shoppers." },
+  { label: "Waterfront", body: "Teal waterfront cues and night-city contrast make the preview feel local without using lazy cannabis visuals." },
+];
+
 const LOCAL_FAQS = [
   {
     q: "Where is FORT YORK CANNABIS located?",
@@ -56,13 +69,17 @@ export default function HomePage() {
             <h1 className={styles.brandTitle}>FORT YORK CANNABIS</h1>
             <p className={styles.brandSub}>Cannabis store near Fort York, CityPlace, and downtown Toronto</p>
             <div className={styles.brandBadge}>38 Fort York Blvd</div>
+            <div className={styles.heroActions}>
+              <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.heroActionPrimary}>Get Directions</a>
+              <Link href="/weed-dispensary-toronto" className={styles.heroActionSecondary}>Local Landing Page</Link>
+            </div>
           </div>
 
           <div className={styles.bentoGrid} id="menu-status">
             {MENU_CATEGORIES.map((cat, index) => (
               <Link
                 key={cat.name}
-                href="/weed-dispensary-toronto/"
+                href="/weed-dispensary-toronto"
                 className={`${styles.bentoTile} ${index === 0 ? styles.bentoExotic : index === 1 ? styles.bentoPremium : ""}`}
               >
                 <div
@@ -80,12 +97,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className={styles.actionStripSection} aria-label="Future customer actions">
+        <div className={styles.container}>
+          <div className={styles.actionStrip}>
+            {ACTIONS.map((action) => {
+              const content = (
+                <>
+                  <span className={styles.actionLabel}>{action.label}</span>
+                  <span className={styles.actionNote}>{action.note}</span>
+                </>
+              );
+              return action.external ? (
+                <a key={action.label} href={action.href} target="_blank" rel="noopener noreferrer" className={styles.actionCard}>{content}</a>
+              ) : (
+                <Link key={action.label} href={action.href} className={styles.actionCard}>{content}</Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <section className={styles.categoriesSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Downtown Toronto Launch Direction</h2>
+            <span className={styles.microLabel}>Launch concept</span>
+            <h2 className={styles.sectionTitle}>Downtown Toronto Storefront Direction</h2>
             <p className={styles.sectionSubtitle}>
-              A polished Fort York / CityPlace cannabis storefront with heritage-fort geometry, waterfront tones, and clean downtown energy.
+              A polished Fort York / CityPlace cannabis storefront with heritage-fort geometry, waterfront tones, and clean downtown retail energy.
             </p>
           </div>
           <div className={styles.storeGrid}>
@@ -105,6 +143,50 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className={styles.visualSection}>
+        <div className={styles.container}>
+          <div className={styles.visualGrid}>
+            <div className={styles.visualImageCard}>
+              <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area concept" className={styles.visualImage} />
+            </div>
+            <div className={styles.visualCopy}>
+              <span className={styles.microLabel}>Neighbourhood system</span>
+              <h2 className={styles.sectionTitle}>Built Around Fort York, CityPlace, and the Waterfront</h2>
+              <p className={styles.sectionSubtitle}>
+                The visual language now has a clear local spine: fort-wall texture, waterfront teal, condo-grid order, and a premium retail storefront tone.
+              </p>
+              <div className={styles.visualList}>
+                {LOCAL_FEATURES.map((feature) => (
+                  <div key={feature.label} className={styles.visualListItem}>
+                    <strong>{feature.label}</strong>
+                    <span>{feature.body}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.ctaPreviewSection}>
+        <div className={styles.container}>
+          <div className={styles.ctaPreview}>
+            <img src="/banners/fort_york_cta_panel.webp" alt="Fort York Cannabis future call directions menu visit action preview" className={styles.ctaImage} />
+            <div className={styles.ctaContent}>
+              <span className={styles.microLabel}>Conversion preview</span>
+              <h2 className={styles.sectionTitle}>Clear Actions, No Fake Facts</h2>
+              <p className={styles.sectionSubtitle}>
+                The finished preview shows how call, directions, menu, and visit actions will work after owner facts are approved. Until then, the site keeps unknowns visibly gated.
+              </p>
+              <div className={styles.ctaActions}>
+                <Link href="/contact" className={styles.ctaButton}>Contact Preview</Link>
+                <Link href="/weed-dispensary-toronto" className={styles.ctaMuted}>GBP Landing Preview</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className={styles.seoSection}>
         <div className={styles.container}>
           <div className={styles.seoPanel}>
@@ -116,8 +198,25 @@ export default function HomePage() {
               The launch content is intentionally careful: it does not publish phone, hours, live-hours language, unverified extended-hours claims, reviews, ratings, delivery claims, or license wording until those facts are confirmed by the owner.
             </p>
             <p className={styles.seoPanelText}>
-              The first-pass creative direction uses Fort York heritage-wall shapes, CityPlace high-rise energy, and a waterfront night palette so the site feels local to downtown Toronto without copying the FORT YORK brand.
+              The preview now pairs that SEO/GEO scaffold with a fuller downtown retail design system so the owner can review the site as a near-finished launch concept.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.signageSection}>
+        <div className={styles.container}>
+          <div className={styles.signageGrid}>
+            <div className={styles.visualCopy}>
+              <span className={styles.microLabel}>Storefront preview</span>
+              <h2 className={styles.sectionTitle}>Signage and Window Direction</h2>
+              <p className={styles.sectionSubtitle}>
+                The brand now carries into main sign, door 19+, window vinyl, menu QR placeholder, and hours decal concepts. Final files still need owner and sign-vendor approval.
+              </p>
+            </div>
+            <div className={styles.visualImageCard}>
+              <img src="/banners/fort_york_storefront_preview.webp" alt="FORT YORK CANNABIS storefront signage concept" className={styles.visualImage} />
+            </div>
           </div>
         </div>
       </section>
