@@ -202,12 +202,12 @@
   }
 }
 
-.previewSection {
+.localFeatureSection {
   padding: 0 24px 24px;
   background: #eef7f8;
 }
 
-.previewGrid {
+.localFeatureGrid {
   max-width: 980px;
   margin: 0 auto;
   display: grid;
@@ -221,14 +221,14 @@
   box-shadow: 0 16px 38px rgba(7, 18, 34, 0.07);
 }
 
-.previewImage {
+.localFeatureImage {
   display: block;
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.previewCopy {
+.localFeatureCopy {
   padding: 8px;
 }
 
@@ -243,11 +243,11 @@
 }
 
 @media (max-width: 760px) {
-  .previewSection {
+  .localFeatureSection {
     padding-inline: 16px;
   }
 
-  .previewGrid {
+  .localFeatureGrid {
     grid-template-columns: 1fr;
     padding: 18px;
   }

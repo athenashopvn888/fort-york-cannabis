@@ -1,7 +1,7 @@
-﻿export const pendingLabel = "Coming soon";
-export const previewPhone = "437-872-8446";
-export const previewPhoneIntl = "+14378728446";
-export const previewHours = "11AM-2AM";
+export const pendingLabel = "Coming soon";
+export const storePhone = "437-872-8446";
+export const storePhoneIntl = "+14378728446";
+export const storeHours = "11AM-2AM";
 export const schemaOpeningHours = "Mo-Su 11:00-02:00";
 
 export const gbpLocation = {
@@ -17,13 +17,13 @@ export const gbpLocation = {
   addressRegion: "ON",
   postalCode: "M5V 3Z3",
   addressCountry: "CA",
-  phone: previewPhone,
-  phoneIntl: previewPhoneIntl,
+  phone: storePhone,
+  phoneIntl: storePhoneIntl,
   neighborhood: "Fort York / CityPlace",
   city: "Toronto",
   serviceArea: ["Fort York", "CityPlace", "Toronto waterfront", "King West", "Entertainment District"],
   hours: [schemaOpeningHours],
-  displayHours: previewHours,
+  displayHours: storeHours,
   priceRange: "$$",
   latitude: 43.63936,
   longitude: -79.39523,
@@ -63,7 +63,7 @@ export const gbpLocation = {
     "Serves Fort York, CityPlace, the waterfront, King West, Rogers Centre, and the Entertainment District.",
     "Phone is 437-872-8446 and hours are 11AM-2AM.",
   ],
-  ownerInputNeeded: [
+  internalLaunchInputs: [
     "Final license details",
     "Opening date",
     "Pickup and delivery details",

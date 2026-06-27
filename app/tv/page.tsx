@@ -1,41 +1,27 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./tv.module.css";
+import {
+  FLOWER_TIER_ORDER,
+  STORE_INFO,
+  allFlowers,
+  formatPricePoint,
+  formatType,
+  getFlowerEffects,
+  getFlowerPriceRows,
+  getProductImage,
+  getTierDetail,
+  normalizeTier,
+  type FlowerProduct,
+} from "../lib/products";
 
-type PricePoint = { regular?: number; sale?: number | null };
-type Flower = {
-  sku: string;
-  name: string;
-  slug: string;
-  type?: string;
-  tier?: string;
-  thc?: string;
-  image: string;
-  price3g?: PricePoint | null;
-  price5g?: PricePoint | null;
-  price14g?: PricePoint | null;
-  price28g?: PricePoint | null;
-};
+const MAX_ROWS = 8;
 
-const TIERS = ["EXOTIC", "PREMIUM", "AAA+", "AA", "BUDGET"];
-const STORE = {
-  name: "FORT YORK CANNABIS",
-  address: "38 FORT YORK BLVD",
-  phone: "437-872-8446",
-  hours: "11AM-2AM",
-};
-
-function displayPrice(product: Flower) {
-  const points = [product.price3g, product.price5g, product.price14g, product.price28g]
-    .flatMap((price) => (price ? [price.sale ?? price.regular] : []))
-    .filter((value): value is number => typeof value === "number");
-  return points.length ? `FROM $${Math.min(...points)}` : "PRICE IN STORE";
-}
-
-function groupByTier(flowers: Flower[]) {
-  return flowers.reduce<Record<string, Flower[]>>((groups, flower) => {
-    const tier = (flower.tier || "BUDGET").toUpperCase();
+function groupByTier(flowers: FlowerProduct[]) {
+  return flowers.reduce<Record<string, FlowerProduct[]>>((groups, flower) => {
+    const tier = normalizeTier(flower.tier);
     groups[tier] = groups[tier] || [];
     groups[tier].push(flower);
     return groups;
@@ -47,8 +33,93 @@ function rotateList<T>(items: T[], offset: number, limit: number) {
   return Array.from({ length: Math.min(limit, items.length) }, (_, index) => items[(offset + index) % items.length]);
 }
 
+function PriceCell({ product, compact = false }: { product: FlowerProduct; compact?: boolean }) {
+  const rows = getFlowerPriceRows(product).slice(0, compact ? 2 : 4);
+  return (
+    <div className={compact ? styles.priceStackCompact : styles.priceStack}>
+      {rows.map((row) => (
+        <div key={row.field} className={row.promo ? styles.priceDeal : styles.priceLine}>
+          <span>{row.shortLabel}</span>
+          <strong>{formatPricePoint(row.price)}</strong>
+          {row.promo && !compact ? <em>{row.promo}</em> : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function TypeTag({ type }: { type: string }) {
+  return <span className={`${styles.typeTag} ${styles[type] || ""}`}>{formatType(type)}</span>;
+}
+
+function FeatureCard({ tier, products, tick }: { tier: string; products: FlowerProduct[]; tick: number }) {
+  const detail = getTierDetail(tier);
+  const product = products.length ? products[tick % products.length] : undefined;
+
+  return (
+    <article className={styles.featureCard} style={{ "--tier-color": detail.accent } as CSSProperties}>
+      <div className={styles.featureTier}>
+        <span>{detail.name}</span>
+        <strong>{products.length} strains</strong>
+      </div>
+      {product ? (
+        <>
+          <div className={styles.featureImageWrap}>
+            <img src={getProductImage(product)} alt={product.name} />
+            {product.isSale ? <span className={styles.saleBadge}>Sale</span> : null}
+            {product.isHot ? <span className={styles.hotBadge}>Top Pick</span> : null}
+            {product.thc ? <span className={styles.thcBadge}>{product.thc}</span> : null}
+          </div>
+          <div className={styles.featureCopy}>
+            <TypeTag type={product.type} />
+            <h2>{product.name}</h2>
+            <p>{getFlowerEffects(product).join(" / ")}</p>
+            <small>SKU {product.sku}</small>
+            <PriceCell product={product} />
+          </div>
+        </>
+      ) : (
+        <div className={styles.emptyBoard}>Call for current {detail.name} menu</div>
+      )}
+    </article>
+  );
+}
+
+function TierBoard({ tier, products, tick }: { tier: string; products: FlowerProduct[]; tick: number }) {
+  const detail = getTierDetail(tier);
+  const visible = rotateList(products, tick, MAX_ROWS);
+
+  return (
+    <article className={styles.tierCard} style={{ "--tier-color": detail.accent } as CSSProperties}>
+      <div className={styles.tierHead}>
+        <div>
+          <span>{detail.name}</span>
+          <small>{detail.description}</small>
+        </div>
+        <strong>{products.length} strains</strong>
+      </div>
+      <div className={styles.productRows}>
+        {visible.map((flower) => (
+          <div className={styles.productRow} key={flower.sku}>
+            <img src={getProductImage(flower)} alt="" />
+            <div className={styles.rowMain}>
+              <strong>{flower.name}</strong>
+              <span>
+                <TypeTag type={flower.type} />
+                {flower.thc ? <b>THC {flower.thc}</b> : null}
+                {flower.isSale ? <em>Sale</em> : null}
+              </span>
+            </div>
+            <PriceCell product={flower} compact />
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+}
+
 export default function FortYorkTvPage() {
-  const [flowers, setFlowers] = useState<Flower[]>([]);
+  const [flowers, setFlowers] = useState<FlowerProduct[]>(allFlowers);
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
 
@@ -56,11 +127,17 @@ export default function FortYorkTvPage() {
     let active = true;
 
     async function load() {
-      const flowerRes = await fetch("/api/tv-data?type=flowers");
-      const flowerData = await flowerRes.json();
-      if (!active) return;
-      setFlowers(flowerData);
-      setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      try {
+        const flowerRes = await fetch("/api/tv-data?type=flowers");
+        const flowerData = await flowerRes.json();
+        if (!active) return;
+        if (Array.isArray(flowerData) && flowerData.length > 0) {
+          setFlowers(flowerData);
+        }
+        setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      } catch {
+        if (active) setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      }
     }
 
     load();
@@ -81,65 +158,35 @@ export default function FortYorkTvPage() {
       <header className={styles.header}>
         <div>
           <span className={styles.eyebrow}>Flower Menu Board</span>
-          <h1>{STORE.name}</h1>
+          <h1>{STORE_INFO.name}</h1>
         </div>
         <div className={styles.storeMeta}>
-          <strong>{STORE.address}</strong>
-          <span>{STORE.phone}</span>
-          <span>OPEN {STORE.hours}</span>
+          <strong>{STORE_INFO.shortAddress}</strong>
+          <span>{STORE_INFO.phone}</span>
+          <span>Open {STORE_INFO.hours}</span>
         </div>
       </header>
 
+      <section className={styles.dealRail} aria-label="Flower bundle pricing">
+        <strong>3G TOTAL: Buy 2g Get 1g Free</strong>
+        <strong>6G TOTAL: Buy 3g Get 3g Free</strong>
+        <span>Top-tier bundle labels show total grams.</span>
+      </section>
+
       <section className={styles.heroPanel} aria-label="Featured flower by tier">
-        {TIERS.map((tier, index) => {
-          const products = grouped[tier] || [];
-          const product = products.length ? products[(tick + index) % products.length] : undefined;
-          return (
-            <article className={styles.featureCard} key={tier}>
-              <span>{tier}</span>
-              {product ? (
-                <>
-                  <img src={product.image} alt={product.name} />
-                  <strong>{product.name}</strong>
-                  <small>{[product.type, product.thc ? `THC ${product.thc}` : ""].filter(Boolean).join(" / ")}</small>
-                  <b>{displayPrice(product)}</b>
-                </>
-              ) : (
-                <strong>More strains soon</strong>
-              )}
-            </article>
-          );
-        })}
+        {FLOWER_TIER_ORDER.map((tier, index) => (
+          <FeatureCard key={tier} tier={tier} products={grouped[tier] || []} tick={tick + index} />
+        ))}
       </section>
 
       <section className={styles.tierGrid}>
-        {TIERS.map((tier, index) => {
-          const tierProducts = rotateList(grouped[tier] || [], tick + index, 7);
-          return (
-            <article className={styles.tierCard} key={tier}>
-              <div className={styles.tierHead}>
-                <span>{tier}</span>
-                <strong>{(grouped[tier] || []).length} strains</strong>
-              </div>
-              <div className={styles.productRows}>
-                {tierProducts.map((flower) => (
-                  <div className={styles.productRow} key={flower.sku}>
-                    <img src={flower.image} alt="" />
-                    <div>
-                      <strong>{flower.name}</strong>
-                      <span>{[flower.type, flower.thc ? `THC ${flower.thc}` : ""].filter(Boolean).join(" / ")}</span>
-                    </div>
-                    <b>{displayPrice(flower)}</b>
-                  </div>
-                ))}
-              </div>
-            </article>
-          );
-        })}
+        {FLOWER_TIER_ORDER.map((tier, index) => (
+          <TierBoard key={tier} tier={tier} products={grouped[tier] || []} tick={tick + index} />
+        ))}
       </section>
 
       <footer className={styles.footerRail}>
-        <strong>FLOWER / PRE-ROLLS / VAPES / EDIBLES / CONCENTRATES / ACCESSORIES</strong>
+        <strong>Flower / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories</strong>
         <small>Updated {loadedAt || "--"}</small>
       </footer>
     </main>

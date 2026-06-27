@@ -6,7 +6,13 @@ import {
   MENU_CATEGORIES,
   MENU_SOURCE_STATE,
   MENU_STATUS_NOTICE,
+  STORE_INFO,
+  getFeaturedMenuProducts,
   getMenuItemCount,
+  getProductDisplayPrice,
+  getProductImage,
+  getProductMeta,
+  getProductPath,
 } from "../lib/products";
 import styles from "./menu.module.css";
 
@@ -20,6 +26,8 @@ export const metadata: Metadata = {
 };
 
 export default function MenuPage() {
+  const featured = getFeaturedMenuProducts();
+
   return (
     <main className={styles.main}>
       <Navbar />
@@ -27,32 +35,39 @@ export default function MenuPage() {
       <section className={styles.hero}>
         <div className={styles.container}>
           <span className={styles.microLabel}>Fort York Cannabis Menu</span>
-          <h1 className={styles.title}>Browse Menu</h1>
+          <h1 className={styles.title}>Menu</h1>
           <p className={styles.lede}>{MENU_STATUS_NOTICE}</p>
           <div className={styles.statusGrid}>
             <div className={styles.statusCard}>
-              <span>Status</span>
-              <strong>{MENU_SOURCE_STATE.label}</strong>
+              <span>Call</span>
+              <strong>{STORE_INFO.phone}</strong>
             </div>
             <div className={styles.statusCard}>
               <span>Hours</span>
-              <strong>11AM-2AM</strong>
+              <strong>{STORE_INFO.hours}</strong>
             </div>
             <div className={styles.statusCard}>
               <span>Menu items</span>
               <strong>{MENU_SOURCE_STATE.productCount}</strong>
             </div>
           </div>
+          <nav className={styles.heroNav} aria-label="Menu categories">
+            {MENU_CATEGORIES.map((category) => (
+              <Link key={category.slug} href={`/items/${category.slug}`}>
+                {category.name}
+              </Link>
+            ))}
+          </nav>
         </div>
       </section>
 
       <section className={styles.categorySection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <span className={styles.microLabel}>Explore Categories</span>
-            <h2 className={styles.sectionTitle}>Shop By Category</h2>
+            <span className={styles.microLabel}>Browse Categories</span>
+            <h2 className={styles.sectionTitle}>Shop Fort York Categories</h2>
             <p className={styles.sectionCopy}>
-              Choose a category to view products, images, THC details, tiers, and prices where available.
+              Choose a category to view product images, THC details, tiers, weights, bundle pricing, and prices where available.
             </p>
           </div>
 
@@ -70,6 +85,25 @@ export default function MenuPage() {
                 </Link>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.featureSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.microLabel}>Featured Products</span>
+            <h2 className={styles.sectionTitle}>View Details</h2>
+          </div>
+          <div className={styles.featureGrid}>
+            {featured.map((product) => (
+              <Link key={product.sku} href={getProductPath(product)} className={styles.featureCard}>
+                <img src={getProductImage(product)} alt={`${product.name} at Fort York Cannabis`} />
+                <span>{getProductMeta(product)}</span>
+                <strong>{product.name}</strong>
+                <em>{getProductDisplayPrice(product)}</em>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

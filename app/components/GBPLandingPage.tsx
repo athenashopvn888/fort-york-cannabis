@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./GBPLandingPage.module.css";
 import { gbpLocation, isKnown } from "../lib/gbp-location";
-import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE, MENU_SOURCE_STATE } from "../lib/menu-preview";
+import { MENU_CATALOG_CATEGORIES, MENU_CATALOG_NOTICE, MENU_SOURCE_STATE } from "../lib/menu-catalog";
 
 const trustItems = [
   { label: "Address", value: "38 Fort York Blvd" },
@@ -130,17 +130,17 @@ export function GBPLandingPage() {
         </div>
       </section>
 
-      <section className={styles.section} id="menu-preview">
+      <section className={styles.section} id="menu">
         <h2 className={styles.h2}>Menu</h2>
-        <p className={styles.infoText}>{MENU_PREVIEW_NOTICE}</p>
+        <p className={styles.infoText}>{MENU_CATALOG_NOTICE}</p>
         <p className={styles.menuStatusLine}>Open 11AM-2AM - {MENU_SOURCE_STATE.productCount} menu items</p>
-        <div className={styles.previewRail} aria-label="Menu categories">
-          {MENU_PREVIEW_CATEGORIES.map((category) => (
+        <div className={styles.menuRail} aria-label="Menu categories">
+          {MENU_CATALOG_CATEGORIES.map((category) => (
             <span key={category.name}>{category.name}</span>
           ))}
         </div>
         <div className={styles.productGrid}>
-          {MENU_PREVIEW_CATEGORIES.map((category) => (
+          {MENU_CATALOG_CATEGORIES.map((category) => (
             <Link key={category.name} href={category.href} className={styles.productCard}>
               <img src={category.banner} alt={`${category.name} category at Fort York Cannabis`} className={styles.productImage} />
               <div className={styles.productCopy}>

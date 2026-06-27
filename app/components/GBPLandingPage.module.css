@@ -245,14 +245,14 @@
   text-transform: uppercase;
 }
 
-.previewRail {
+.menuRail {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
   margin-top: 18px;
 }
 
-.previewRail span {
+.menuRail span {
   display: inline-flex;
   align-items: center;
   justify-content: center;

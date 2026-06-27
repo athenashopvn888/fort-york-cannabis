@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE, MENU_SOURCE_STATE } from "./lib/menu-preview";
+import { MENU_CATALOG_CATEGORIES, MENU_CATALOG_NOTICE, MENU_SOURCE_STATE } from "./lib/menu-catalog";
 
 const ACTIONS = [
   { label: "Address", note: "38 Fort York Blvd", href: "/contact" },
@@ -76,21 +76,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.menuPreviewSection} id="menu-preview" aria-labelledby="menu-preview-title">
+      <section className={styles.menuSection} id="menu" aria-labelledby="menu-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <span className={styles.microLabel}>Menu</span>
-            <h2 id="menu-preview-title" className={styles.sectionTitle}>Explore Categories</h2>
-            <p className={styles.sectionSubtitle}>{MENU_PREVIEW_NOTICE}</p>
+            <h2 id="menu-title" className={styles.sectionTitle}>Explore Categories</h2>
+            <p className={styles.sectionSubtitle}>{MENU_CATALOG_NOTICE}</p>
             <p className={styles.menuSourcePill}>Open 11AM-2AM - {MENU_SOURCE_STATE.productCount} menu items</p>
           </div>
           <div className={styles.menuToolbar} aria-label="Menu categories">
-            {MENU_PREVIEW_CATEGORIES.map((category) => (
+            {MENU_CATALOG_CATEGORIES.map((category) => (
               <span key={category.name}>{category.name}</span>
             ))}
           </div>
           <div className={styles.menuCategoryGrid}>
-            {MENU_PREVIEW_CATEGORIES.map((category) => (
+            {MENU_CATALOG_CATEGORIES.map((category) => (
               <Link key={category.name} href={category.href} className={styles.menuCategoryCard}>
                 <img src={category.banner} alt={`${category.name} category at Fort York Cannabis`} className={styles.menuCategoryImage} />
                 <div className={styles.menuCategoryCopy}>

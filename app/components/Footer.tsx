@@ -41,7 +41,7 @@ export default function Footer() {
             <nav className={styles.links}>
               <Link href="/">Home</Link>
               <Link href="/weed-dispensary-toronto/">Toronto Store Page</Link>
-              <Link href="/#menu-preview">Menu</Link>
+              <Link href="/#menu">Menu</Link>
               <Link href="/info/fort-york-cannabis-store">Fort York Cannabis Store</Link>
               <Link href="/info/cityplace-cannabis-dispensary">CityPlace Cannabis Dispensary</Link>
               <Link href="/info/downtown-toronto-weed-dispensary">Downtown Toronto Weed Store</Link>

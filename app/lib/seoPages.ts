@@ -57,7 +57,7 @@ export const SEO_PAGES: SeoPage[] = [
   {
     slug: "downtown-toronto-weed-dispensary",
     title: "Downtown Toronto Weed Dispensary | FORT YORK CANNABIS",
-    metaDescription: "FORT YORK CANNABIS is a downtown Toronto cannabis store for 38 Fort York Blvd. Phone is 437-872-8446, hours are 11AM-2AM, and final menu approval is pending.",
+    metaDescription: "FORT YORK CANNABIS is a downtown Toronto cannabis store for 38 Fort York Blvd. Phone is 437-872-8446, hours are 11AM-2AM, and the menu is available for browsing.",
     h1: "Downtown Toronto Weed Dispensary",
     heroTagline: "Fort York, CityPlace, waterfront, and King West cannabis store information",
     banner: "/brand/faq-info-banner.webp",

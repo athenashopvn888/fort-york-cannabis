@@ -1,14 +1,29 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 import styles from "../items.module.css";
 import {
+  STORE_INFO,
   findMenuProduct,
+  formatItemPrice,
+  formatPricePoint,
   getAllProductStaticParams,
+  getFlowerBestValue,
+  getFlowerDescription,
+  getFlowerEffects,
   getFlowerPriceRows,
+  getItemDescription,
+  getItemDetailChips,
+  getItemEffects,
   getMenuCategoryBySlug,
   getProductDisplayPrice,
   getProductImage,
   getProductMeta,
+  getProductPath,
+  getRelatedProducts,
+  getSalePrice,
+  getTierDetail,
 } from "../../../lib/products";
 
 export const dynamic = "force-static";
@@ -34,7 +49,7 @@ export async function generateMetadata({
 
   return {
     title: `${item.name} | ${menuCategory.name} | FORT YORK CANNABIS`,
-    description: `${item.name} at FORT YORK CANNABIS, 38 Fort York Blvd in Toronto. ${getProductMeta(item)}.`,
+    description: `${item.name} at FORT YORK CANNABIS, ${STORE_INFO.address}. ${getProductMeta(item)}.`,
     alternates: {
       canonical: `/items/${category}/${item.slug}`,
     },
@@ -55,44 +70,166 @@ export default async function ProductDetailPage({
   }
 
   const isFlower = "tier" in item;
-  const flowerPrices = isFlower ? getFlowerPriceRows(item) : [];
+  const related = getRelatedProducts(item, 8);
 
   return (
     <main className={styles.detailPage}>
+      <Navbar />
+
+      <nav className={styles.detailBreadcrumb} aria-label="Breadcrumb">
+        <Link href="/">Home</Link>
+        <span>/</span>
+        <Link href="/menu">Menu</Link>
+        <span>/</span>
+        <Link href={`/items/${menuCategory.slug}`}>{menuCategory.name}</Link>
+        <span>/</span>
+        <span>{item.name}</span>
+      </nav>
+
       <section className={styles.detailShell}>
         <div className={styles.detailImageWrap}>
           <img src={getProductImage(item)} alt={`${item.name} at Fort York Cannabis`} />
+          <div className={styles.detailImageBadges}>
+            {isFlower && item.isSale ? <span className={styles.saleBadge}>Sale</span> : null}
+            {isFlower && item.isHot ? <span className={styles.hotBadge}>Top Pick</span> : null}
+            {isFlower && item.thc ? <span className={styles.thcBadge}>THC {item.thc}</span> : null}
+          </div>
         </div>
         <div className={styles.detailCopy}>
-          <Link href={`/items/${menuCategory.slug}`} className={styles.backLink}>Back to {menuCategory.name}</Link>
+          <div className={styles.backRow}>
+            <Link href="/menu" className={styles.backLink}>Back to Menu</Link>
+            <Link href={`/items/${menuCategory.slug}`} className={styles.backLink}>Back to {menuCategory.name}</Link>
+          </div>
           <span className={styles.kicker}>{menuCategory.name}</span>
           <h1>{item.name}</h1>
           <p className={styles.detailMeta}>{getProductMeta(item)}</p>
           <strong className={styles.detailPrice}>{getProductDisplayPrice(item)}</strong>
 
-          {isFlower ? (
-            <div className={styles.priceGrid} aria-label="Flower weights and prices">
-              {flowerPrices.map((row) => (
-                <div key={row.label} className={styles.priceCard}>
-                  <span>{row.label}</span>
-                  <strong>${row.price.sale ?? row.price.regular}</strong>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className={styles.detailFacts}>
-              <div><span>Category</span><strong>{item.category}</strong></div>
-              {item.thc ? <div><span>THC</span><strong>{item.thc}</strong></div> : null}
-              {item.mg ? <div><span>Potency</span><strong>{item.mg}</strong></div> : null}
-            </div>
-          )}
+          {isFlower ? <FlowerDetail product={item} /> : <ItemDetail product={item} />}
 
           <div className={styles.storeCallout}>
-            <strong>FORT YORK CANNABIS</strong>
-            <span>38 Fort York Blvd / 437-872-8446 / Open 11AM-2AM</span>
+            <strong>{STORE_INFO.name}</strong>
+            <span>{STORE_INFO.shortAddress}</span>
+            <span>{STORE_INFO.phone}</span>
+            <span>Open {STORE_INFO.hours}</span>
           </div>
         </div>
       </section>
+
+      {related.length > 0 ? (
+        <section className={styles.relatedSection}>
+          <div className={styles.relatedHeader}>
+            <span className={styles.kicker}>{isFlower ? "More Strains" : "More Items"}</span>
+            <h2>{isFlower ? `More from ${getTierDetail(item.tier).name}` : `More ${menuCategory.name}`}</h2>
+          </div>
+          <div className={styles.relatedGrid}>
+            {related.map((product) => (
+              <Link key={product.sku} href={getProductPath(product)} className={styles.relatedCard}>
+                <img src={getProductImage(product)} alt="" loading="lazy" />
+                <span>{"tier" in product ? getTierDetail(product.tier).name : menuCategory.name}</span>
+                <strong>{product.name}</strong>
+                <em>{getProductDisplayPrice(product)}</em>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <Footer />
     </main>
+  );
+}
+
+function FlowerDetail({ product }: { product: Extract<ReturnType<typeof findMenuProduct>, { tier: string }> }) {
+  const rows = getFlowerPriceRows(product);
+  const bestValue = getFlowerBestValue(product);
+  const effects = getFlowerEffects(product);
+
+  return (
+    <>
+      <div className={styles.chipRowLarge}>
+        <span>{getTierDetail(product.tier).name}</span>
+        <span>{product.type}</span>
+        {product.thc ? <span>THC {product.thc}</span> : null}
+        {product.sku ? <span>SKU {product.sku}</span> : null}
+      </div>
+
+      <div className={styles.effectsRow} aria-label="Effects">
+        {effects.map((effect) => (
+          <span key={effect}>{effect}</span>
+        ))}
+      </div>
+
+      <section className={styles.pricingTable} aria-label="Flower weights and prices">
+        <div className={styles.tableHeader}>
+          <span>Weight</span>
+          <span>Price</span>
+          <span>$/g</span>
+        </div>
+        {rows.map((row) => {
+          const effective = getSalePrice(row.price);
+          const perGram = (effective / row.grams).toFixed(2);
+          return (
+            <div key={row.field} className={row.promo ? styles.bundleRow : styles.tableRow}>
+              {row.promo ? <p className={styles.bundleNote}>{row.label}: {row.promo}</p> : null}
+              <div className={styles.tableCells}>
+                <span>{row.label}</span>
+                <strong>
+                  {row.price.sale !== null && row.price.sale !== row.price.regular ? (
+                    <>
+                      <em>${row.price.regular}</em> {formatPricePoint(row.price)}
+                    </>
+                  ) : (
+                    formatPricePoint(row.price)
+                  )}
+                </strong>
+                <span>${perGram}/g</span>
+              </div>
+            </div>
+          );
+        })}
+      </section>
+
+      {bestValue ? <p className={styles.valueNote}>Best value: ${bestValue.perGram}/g at {bestValue.label}</p> : null}
+
+      <section className={styles.descBlock}>
+        <h2>About {product.name}</h2>
+        <p>{getFlowerDescription(product)}</p>
+      </section>
+    </>
+  );
+}
+
+function ItemDetail({ product }: { product: Extract<ReturnType<typeof findMenuProduct>, { category: string }> }) {
+  const chips = getItemDetailChips(product);
+  const effects = getItemEffects(product);
+
+  return (
+    <>
+      <div className={styles.chipRowLarge}>
+        {chips.map((chip) => (
+          <span key={chip}>{chip}</span>
+        ))}
+      </div>
+
+      <div className={styles.effectsRow} aria-label="Item details">
+        {effects.map((effect) => (
+          <span key={effect}>{effect}</span>
+        ))}
+      </div>
+
+      <div className={styles.detailFacts}>
+        <div><span>Category</span><strong>{product.category}</strong></div>
+        {product.type ? <div><span>Subtype</span><strong>{product.type}</strong></div> : null}
+        {product.thc ? <div><span>THC</span><strong>{product.thc}</strong></div> : null}
+        {product.mg ? <div><span>Potency</span><strong>{product.mg}</strong></div> : null}
+        <div><span>Price</span><strong>{formatItemPrice(product.price) || "Price in store"}</strong></div>
+      </div>
+
+      <section className={styles.descBlock}>
+        <h2>About {product.name}</h2>
+        <p>{getItemDescription(product)}</p>
+      </section>
+    </>
   );
 }

@@ -178,7 +178,7 @@
   font-weight: 850;
 }
 
-.menuPreviewSection,
+.menuSection,
 .storeInfoSection,
 .faqSection {
   padding: 86px 0;
@@ -186,7 +186,7 @@
   color: var(--ink);
 }
 
-.menuPreviewSection {
+.menuSection {
   padding-top: 108px;
 }
 
@@ -561,7 +561,7 @@
     width: 100%;
   }
 
-  .menuPreviewSection,
+  .menuSection,
   .storeInfoSection,
   .localSection,
   .visitSection,

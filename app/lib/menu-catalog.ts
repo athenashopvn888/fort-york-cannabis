@@ -1,6 +1,6 @@
 import { MENU_CATEGORIES, MENU_SOURCE_STATE, MENU_STATUS_NOTICE, getMenuItemCount } from "./products";
 
-export type MenuPreviewCategory = {
+export type MenuCatalogCategory = {
   name: string;
   detail: string;
   banner: string;
@@ -10,9 +10,9 @@ export type MenuPreviewCategory = {
 
 export { MENU_SOURCE_STATE };
 
-export const MENU_PREVIEW_NOTICE = MENU_STATUS_NOTICE;
+export const MENU_CATALOG_NOTICE = MENU_STATUS_NOTICE;
 
-export const MENU_PREVIEW_CATEGORIES: MenuPreviewCategory[] = MENU_CATEGORIES.map(
+export const MENU_CATALOG_CATEGORIES: MenuCatalogCategory[] = MENU_CATEGORIES.map(
   (category) => ({
     name: category.name,
     detail: category.detail,

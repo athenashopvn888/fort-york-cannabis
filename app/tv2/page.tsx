@@ -1,33 +1,36 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./tv2.module.css";
-
-type Item = {
-  sku: string;
-  name: string;
-  category?: string;
-  type?: string;
-  thc?: string;
-  cbd?: string;
-  mg?: string;
-  price?: string;
-  image: string;
-};
+import {
+  STORE_INFO,
+  allItems,
+  formatItemPrice,
+  formatPercentLike,
+  formatType,
+  getItemCategoryLabel,
+  getItemDetailChips,
+  getItemEffects,
+  getProductImage,
+  type ItemProduct,
+} from "../lib/products";
 
 type CategoryBoard = {
+  id: string;
   label: string;
   subtitle: string;
+  accent: string;
   categories: string[];
 };
 
 const BOARDS: CategoryBoard[] = [
-  { label: "Pre-Rolls", subtitle: "Ready-to-go rolls", categories: ["PREROLLS"] },
-  { label: "Vapes", subtitle: "Pens and disposables", categories: ["VAPE PENS", "VAPE DISPOSABLE", "THC VAPE", "VAPES"] },
-  { label: "Edibles", subtitle: "Gummies, chocolates, drinks", categories: ["EDIBLES"] },
-  { label: "Concentrates", subtitle: "Hash, resin, diamonds", categories: ["CONCENTRATES"] },
-  { label: "Accessories", subtitle: "Add-ons and essentials", categories: ["ADD ONS", "ACCESSORIES"] },
-  { label: "More", subtitle: "Cigarettes and specialty", categories: ["CIGARETTES", "MAGIC", "MAGIC & OTHERS"] },
+  { id: "PREROLLS", label: "Pre-Rolls", subtitle: "Ready-to-go rolls", accent: "#b5452f", categories: ["PREROLLS"] },
+  { id: "VAPES", label: "Vapes", subtitle: "Pens and disposables", accent: "#087e8b", categories: ["VAPE PENS", "VAPE DISPOSABLE", "THC VAPE", "VAPES"] },
+  { id: "EDIBLES", label: "Edibles", subtitle: "Gummies, chocolates, drinks", accent: "#7c5cbb", categories: ["EDIBLES"] },
+  { id: "CONCENTRATES", label: "Concentrates", subtitle: "Hash, resin, diamonds", accent: "#a6652d", categories: ["CONCENTRATES"] },
+  { id: "ACCESSORIES", label: "Accessories", subtitle: "Add-ons and essentials", accent: "#288b5b", categories: ["ADD ONS", "ACCESSORIES"] },
+  { id: "MORE", label: "Cigarettes / Magic Stuff", subtitle: "Other add-ons", accent: "#5f6f7a", categories: ["CIGARETTES", "MAGIC", "MAGIC & OTHERS"] },
 ];
 
 function rotateList<T>(items: T[], offset: number, limit: number) {
@@ -35,8 +38,83 @@ function rotateList<T>(items: T[], offset: number, limit: number) {
   return Array.from({ length: Math.min(limit, items.length) }, (_, index) => items[(offset + index) % items.length]);
 }
 
+function getBoardItems(items: ItemProduct[], board: CategoryBoard) {
+  const keys = new Set(board.categories.map((category) => category.toUpperCase()));
+  return items.filter((item) => keys.has((item.category || "").toUpperCase()));
+}
+
+function ItemMeta({ item }: { item: ItemProduct }) {
+  const chips = getItemDetailChips(item)
+    .filter((chip) => !chip.startsWith("SKU "))
+    .slice(0, 4);
+
+  return (
+    <div className={styles.metaChips}>
+      {chips.map((chip) => (
+        <span key={chip}>{chip}</span>
+      ))}
+    </div>
+  );
+}
+
+function FeaturedItem({ item, accent }: { item?: ItemProduct; accent: string }) {
+  if (!item) {
+    return <div className={styles.emptyFeature}>Call for current menu</div>;
+  }
+
+  return (
+    <div className={styles.feature} style={{ "--accent": accent } as CSSProperties}>
+      <div className={styles.featureImage}>
+        <img src={getProductImage(item)} alt={item.name} />
+        {item.promoImage || item.isSale ? <span>Feature</span> : null}
+      </div>
+      <div className={styles.featureCopy}>
+        <small>{getItemCategoryLabel(item.category)}</small>
+        <h3>{item.name}</h3>
+        <ItemMeta item={item} />
+        <p>{getItemEffects(item).join(" / ")}</p>
+        <strong>{formatItemPrice(item.price) || "Price in store"}</strong>
+      </div>
+    </div>
+  );
+}
+
+function Board({ board, items, tick }: { board: CategoryBoard; items: ItemProduct[]; tick: number }) {
+  const featured = items.length ? items[tick % items.length] : undefined;
+  const rows = rotateList(items, tick, 6);
+
+  return (
+    <article className={styles.board} style={{ "--accent": board.accent } as CSSProperties}>
+      <div className={styles.boardHeader}>
+        <div>
+          <span>{board.subtitle}</span>
+          <h2>{board.label}</h2>
+        </div>
+        <strong>{items.length} items</strong>
+      </div>
+      <FeaturedItem item={featured} accent={board.accent} />
+      <div className={styles.itemRows}>
+        {rows.map((item) => (
+          <div className={styles.itemRow} key={item.sku}>
+            <img src={getProductImage(item)} alt="" />
+            <div>
+              <strong>{item.name}</strong>
+              <span>
+                {formatType(item.type) ? <b>{formatType(item.type)}</b> : null}
+                {item.thc ? <b>THC {formatPercentLike(item.thc)}</b> : null}
+                {item.mg ? <b>{item.mg}</b> : null}
+              </span>
+            </div>
+            <em>{formatItemPrice(item.price) || "Price in store"}</em>
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+}
+
 export default function FortYorkTv2Page() {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<ItemProduct[]>(allItems);
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
 
@@ -44,11 +122,17 @@ export default function FortYorkTv2Page() {
     let active = true;
 
     async function load() {
-      const res = await fetch("/api/tv-data?type=items");
-      const data = await res.json();
-      if (!active) return;
-      setItems(data);
-      setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      try {
+        const res = await fetch("/api/tv-data?type=items");
+        const data = await res.json();
+        if (!active) return;
+        if (Array.isArray(data) && data.length > 0) {
+          setItems(data);
+        }
+        setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      } catch {
+        if (active) setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      }
     }
 
     load();
@@ -63,11 +147,11 @@ export default function FortYorkTv2Page() {
   }, []);
 
   const grouped = useMemo(() => {
-    return BOARDS.map((board, index) => {
-      const keys = new Set(board.categories.map((category) => category.toUpperCase()));
-      const products = items.filter((item) => keys.has((item.category || "").toUpperCase()));
-      return { ...board, products: rotateList(products, tick + index, 5), count: products.length };
-    });
+    return BOARDS.map((board, index) => ({
+      ...board,
+      products: getBoardItems(items, board),
+      offset: tick + index,
+    }));
   }, [items, tick]);
 
   return (
@@ -78,41 +162,20 @@ export default function FortYorkTv2Page() {
           <h1>Fort York Menu</h1>
         </div>
         <aside>
-          <strong>FORT YORK CANNABIS</strong>
-          <p>38 FORT YORK BLVD / 437-872-8446 / OPEN 11AM-2AM</p>
+          <strong>{STORE_INFO.name}</strong>
+          <p>{STORE_INFO.shortAddress} / {STORE_INFO.phone} / Open {STORE_INFO.hours}</p>
         </aside>
       </header>
 
       <section className={styles.categoryGrid}>
         {grouped.map((board) => (
-          <article className={styles.board} key={board.label}>
-            <div className={styles.boardHeader}>
-              <div>
-                <span>{board.subtitle}</span>
-                <h2>{board.label}</h2>
-              </div>
-              <strong>{board.count} items</strong>
-            </div>
-            <div className={styles.itemGrid}>
-              {board.products.map((item) => (
-                <div className={styles.itemCard} key={item.sku}>
-                  <img src={item.image} alt={item.name} />
-                  <div>
-                    <span>{item.category}</span>
-                    <h3>{item.name}</h3>
-                    <p>{[item.thc ? `THC ${item.thc}` : "", item.mg].filter(Boolean).join(" / ")}</p>
-                  </div>
-                  <b>{item.price || "PRICE IN STORE"}</b>
-                </div>
-              ))}
-            </div>
-          </article>
+          <Board key={board.id} board={board} items={board.products} tick={board.offset} />
         ))}
       </section>
 
       <footer className={styles.footer}>
         <strong>Browse Menu</strong>
-        <span>Flower on TV1 / Pre-rolls / Vapes / Edibles / Concentrates / Accessories</span>
+        <span>Pre-rolls / Vapes / Edibles / Concentrates / Accessories / Cigarettes / Magic Stuff</span>
         <small>Updated {loadedAt || "--"}</small>
       </footer>
     </main>
