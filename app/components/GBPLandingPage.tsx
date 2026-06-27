@@ -133,12 +133,19 @@ export function GBPLandingPage() {
       <section className={styles.section} id="menu-preview">
         <h2 className={styles.h2}>Menu Coming Soon</h2>
         <p className={styles.infoText}>{MENU_PREVIEW_NOTICE}</p>
+        <div className={styles.previewRail} aria-label="Menu preview categories">
+          {MENU_PREVIEW_CATEGORIES.map((category) => (
+            <span key={category.name}>{category.name}</span>
+          ))}
+        </div>
         <div className={styles.productGrid}>
           {MENU_PREVIEW_CATEGORIES.map((category) => (
             <Link key={category.name} href="/" className={styles.productCard}>
               <img src={category.banner} alt={`${category.name} category at Fort York Cannabis`} className={styles.productImage} />
-              <strong>{category.name}</strong>
-              <span>{category.detail}</span>
+              <div className={styles.productCopy}>
+                <strong>{category.name}</strong>
+                <span>{category.detail}</span>
+              </div>
             </Link>
           ))}
         </div>

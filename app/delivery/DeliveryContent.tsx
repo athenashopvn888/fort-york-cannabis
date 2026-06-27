@@ -7,6 +7,7 @@ export default function DeliveryContent() {
     <main className={styles.main}>
       <Navbar />
       <div className={styles.content}>
+        <img src="/brand/delivery-ordering-banner.webp" alt="Fort York Cannabis ordering details coming soon" className={styles.heroImage} />
         <h1 className={styles.pageTitle}>Pickup / Delivery <span className={styles.highlight}>Coming Soon</span></h1>
         <p className={styles.pageSubtitle}>
           Pickup, delivery, ordering, menu availability, and service-area details are coming soon for FORT YORK CANNABIS.

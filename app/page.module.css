@@ -242,6 +242,28 @@
   gap: 18px;
 }
 
+.menuToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin: -12px 0 28px;
+}
+
+.menuToolbar span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(7, 18, 34, 0.06);
+  border: 1px solid rgba(7, 18, 34, 0.12);
+  color: rgba(7, 18, 34, 0.76);
+  font-size: 12px;
+  font-weight: 900;
+}
+
 .menuCategoryCard,
 .storeCard,
 .localListItem {
@@ -253,9 +275,22 @@
 }
 
 .menuCategoryCard {
+  position: relative;
+  min-height: 286px;
   color: var(--ink);
   text-decoration: none;
+  background: #06111d;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menuCategoryCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(6, 17, 29, 0.04) 0%, rgba(6, 17, 29, 0.18) 40%, rgba(6, 17, 29, 0.86) 100%),
+    linear-gradient(135deg, rgba(42, 183, 169, 0.16), transparent 45%, rgba(201, 135, 70, 0.18));
+  pointer-events: none;
 }
 
 .menuCategoryCard:hover {
@@ -267,30 +302,67 @@
 .menuCategoryImage {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  min-height: 286px;
   object-fit: cover;
+  transition: transform 0.32s ease;
+}
+
+.menuCategoryCard:hover .menuCategoryImage {
+  transform: scale(1.035);
 }
 
 .menuCategoryCopy {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
   display: grid;
   gap: 6px;
-  padding: 18px;
+  padding: 22px;
 }
 
 .menuCategoryCopy strong,
 .storeCardTitle,
 .localListItem strong {
-  color: var(--ink);
-  font-size: 19px;
+  color: #ffffff;
+  font-size: 24px;
   font-weight: 900;
+  text-shadow: 0 10px 26px rgba(0, 0, 0, 0.42);
 }
 
 .menuCategoryCopy span,
 .storeCardText,
 .localListItem span {
-  color: rgba(7, 18, 34, 0.68);
+  color: rgba(242, 247, 246, 0.76);
   font-size: 14px;
   line-height: 1.55;
+}
+
+.menuCategoryCopy em {
+  width: fit-content;
+  margin-top: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(42, 183, 169, 0.18);
+  border: 1px solid rgba(118, 222, 213, 0.36);
+  color: #ffffff;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.storeCardTitle,
+.localListItem strong {
+  color: var(--ink);
+  font-size: 19px;
+  text-shadow: none;
+}
+
+.storeCardText,
+.localListItem span {
+  color: rgba(7, 18, 34, 0.68);
 }
 
 .storeCard {

@@ -80,8 +80,13 @@ export default function HomePage() {
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <span className={styles.microLabel}>Menu coming soon</span>
-            <h2 id="menu-preview-title" className={styles.sectionTitle}>Preview Categories</h2>
+            <h2 id="menu-preview-title" className={styles.sectionTitle}>Browse Preview Categories</h2>
             <p className={styles.sectionSubtitle}>{MENU_PREVIEW_NOTICE}</p>
+          </div>
+          <div className={styles.menuToolbar} aria-label="Menu preview categories">
+            {MENU_PREVIEW_CATEGORIES.map((category) => (
+              <span key={category.name}>{category.name}</span>
+            ))}
           </div>
           <div className={styles.menuCategoryGrid}>
             {MENU_PREVIEW_CATEGORIES.map((category) => (
@@ -90,6 +95,7 @@ export default function HomePage() {
                 <div className={styles.menuCategoryCopy}>
                   <strong>{category.name}</strong>
                   <span>{category.detail}</span>
+                  <em>View preview</em>
                 </div>
               </Link>
             ))}
