@@ -53,30 +53,50 @@
 }
 
 .dealRail {
-  align-items: center;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(244, 213, 154, 0.22);
   border-radius: 14px;
-  display: flex;
-  gap: 16px;
-  justify-content: center;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 16px 0;
   min-height: 58px;
   padding: 12px 18px;
-  text-align: center;
   text-transform: uppercase;
 }
 
-.dealRail strong {
-  color: #f6d18b;
-  font-size: clamp(1rem, 1.4vw, 1.8rem);
+.dealRailCard {
+  background: linear-gradient(135deg, rgba(246, 209, 139, 0.16), rgba(255, 255, 255, 0.07));
+  border: 1px solid rgba(244, 213, 154, 0.2);
+  border-left: 5px solid var(--tier-color, #f2c679);
+  border-radius: 12px;
+  display: grid;
+  gap: 5px;
+  padding: 10px 12px;
 }
 
-.dealRail span {
+.dealRailCard strong {
+  color: #f6d18b;
+  font-size: clamp(0.92rem, 1.05vw, 1.28rem);
+  line-height: 1.05;
+}
+
+.dealRailCard span {
+  align-items: center;
   color: #cde6e3;
-  font-size: clamp(0.78rem, 0.9vw, 1.1rem);
+  display: flex;
+  font-size: clamp(0.7rem, 0.78vw, 0.98rem);
   font-weight: 900;
-  letter-spacing: 0.08em;
+  gap: 8px;
+  justify-content: space-between;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.dealRailCard b {
+  color: #ffffff;
+  flex: 0 0 auto;
+  font-size: clamp(0.9rem, 1.1vw, 1.35rem);
 }
 
 .heroPanel {
@@ -110,12 +130,29 @@
   text-transform: uppercase;
 }
 
+.featureTier > div,
+.tierHead > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
 .featureTier span,
 .tierHead span {
   color: #ffffff;
   font-size: clamp(1.1rem, 1.55vw, 2.25rem);
   font-weight: 1000;
   line-height: 0.92;
+}
+
+.featureTier em,
+.tierHead em {
+  color: #f6d18b;
+  font-size: clamp(0.74rem, 0.9vw, 1.1rem);
+  font-style: normal;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+  line-height: 1;
 }
 
 .featureTier strong,
@@ -415,10 +452,13 @@
   }
 
   .header,
-  .dealRail,
   .footerRail {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .dealRail {
+    grid-template-columns: 1fr;
   }
 
   .storeMeta {

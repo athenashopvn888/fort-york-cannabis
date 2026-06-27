@@ -34,7 +34,7 @@ function rotateList<T>(items: T[], offset: number, limit: number) {
 }
 
 function PriceCell({ product, compact = false }: { product: FlowerProduct; compact?: boolean }) {
-  const rows = getFlowerPriceRows(product).slice(0, compact ? 2 : 4);
+  const rows = getFlowerPriceRows(product, "tv").slice(0, compact ? 2 : 4);
   return (
     <div className={compact ? styles.priceStackCompact : styles.priceStack}>
       {rows.map((row) => (
@@ -59,7 +59,10 @@ function FeatureCard({ tier, products, tick }: { tier: string; products: FlowerP
   return (
     <article className={styles.featureCard} style={{ "--tier-color": detail.accent } as CSSProperties}>
       <div className={styles.featureTier}>
-        <span>{detail.name}</span>
+        <div>
+          <span>{detail.name}</span>
+          <em>${detail.unitPrice} / G</em>
+        </div>
         <strong>{products.length} strains</strong>
       </div>
       {product ? (
@@ -94,6 +97,7 @@ function TierBoard({ tier, products, tick }: { tier: string; products: FlowerPro
       <div className={styles.tierHead}>
         <div>
           <span>{detail.name}</span>
+          <em>${detail.unitPrice} / G</em>
           <small>{detail.description}</small>
         </div>
         <strong>{products.length} strains</strong>
@@ -168,9 +172,16 @@ export default function FortYorkTvPage() {
       </header>
 
       <section className={styles.dealRail} aria-label="Flower bundle pricing">
-        <strong>3G TOTAL: Buy 2g Get 1g Free</strong>
-        <strong>6G TOTAL: Buy 3g Get 3g Free</strong>
-        <span>Top-tier bundle labels show total grams.</span>
+        {FLOWER_TIER_ORDER.slice(0, 3).map((tier) => {
+          const detail = getTierDetail(tier);
+          return (
+            <div className={styles.dealRailCard} key={tier} style={{ "--tier-color": detail.accent } as CSSProperties}>
+              <strong>{detail.name} = ${detail.unitPrice} / G</strong>
+              <span>{detail.deal3g} = 3g Total <b>${detail.unitPrice * 2}</b></span>
+              <span>{detail.deal6g} = 6g Total <b>${detail.unitPrice * 3}</b></span>
+            </div>
+          );
+        })}
       </section>
 
       <section className={styles.heroPanel} aria-label="Featured flower by tier">

@@ -275,30 +275,32 @@ export function getSalePrice(price: PricePoint) {
   return price.sale ?? price.regular;
 }
 
-export function getFlowerPriceRows(product: FlowerProduct): FlowerPriceRow[] {
+export function getFlowerPriceRows(product: FlowerProduct, channel: "web" | "tv" = "web"): FlowerPriceRow[] {
   const tier = normalizeTier(product.tier);
   const topBundle = isTopBundleTier(tier);
+  const isTv = channel === "tv";
+  const webBundleLabel = "Bundle Deal Pricing";
   const rows: Array<FlowerPriceRow | null> = [
     product.price3g
       ? {
           field: "price3g",
-          label: topBundle ? "3g Total" : "3g",
-          shortLabel: topBundle ? "3G TOTAL" : "3G",
+          label: topBundle ? (isTv ? "3g Total" : "3g Bundle") : "3g",
+          shortLabel: topBundle ? (isTv ? "3G TOTAL" : "3G BUNDLE") : "3G",
           grams: 3,
           price: product.price3g,
-          promo: topBundle ? "Buy 2g Get 1g Free" : tier === "BUDGET" ? "$10 / 3g Special" : undefined,
-          sourceNote: topBundle ? "ADC price3g field displays as a 3g total bundle." : undefined,
+          promo: topBundle ? (isTv ? "Buy 2g Get 1g Free" : webBundleLabel) : tier === "BUDGET" ? "$10 / 3g Special" : undefined,
+          sourceNote: topBundle ? "ADC price3g field displays as a 3g bundle price." : undefined,
         }
       : null,
     product.price5g
       ? {
           field: "price5g",
-          label: topBundle ? "6g Total" : "5g",
-          shortLabel: topBundle ? "6G TOTAL" : "5G",
+          label: topBundle ? (isTv ? "6g Total" : "6g Bundle") : "5g",
+          shortLabel: topBundle ? (isTv ? "6G TOTAL" : "6G BUNDLE") : "5G",
           grams: topBundle ? 6 : 5,
           price: product.price5g,
-          promo: topBundle ? "Buy 3g Get 3g Free" : tier === "AA" ? "$20 / 5g AA" : undefined,
-          sourceNote: topBundle ? "ADC price5g field displays as a 6g total bundle." : undefined,
+          promo: topBundle ? (isTv ? "Buy 3g Get 3g Free" : webBundleLabel) : tier === "AA" ? "$20 / 5g AA" : undefined,
+          sourceNote: topBundle ? "ADC price5g field displays as a 6g bundle price." : undefined,
         }
       : null,
     product.price14g
@@ -324,9 +326,15 @@ export function getFlowerPriceRows(product: FlowerProduct): FlowerPriceRow[] {
   return rows.filter((row): row is FlowerPriceRow => Boolean(row));
 }
 
+export function getFlowerFromPriceRow(product: FlowerProduct) {
+  return getFlowerPriceRows(product)
+    .slice()
+    .sort((a, b) => getSalePrice(a.price) - getSalePrice(b.price))[0];
+}
+
 export function getFlowerFromPrice(product: FlowerProduct) {
-  const rows = getFlowerPriceRows(product);
-  return rows.length ? Math.min(...rows.map((row) => getSalePrice(row.price))) : null;
+  const row = getFlowerFromPriceRow(product);
+  return row ? getSalePrice(row.price) : null;
 }
 
 export function getFlowerBestValue(product: FlowerProduct) {
@@ -381,8 +389,8 @@ export function getProductPath(product: MenuProduct) {
 
 export function getProductDisplayPrice(product: MenuProduct) {
   if ("tier" in product) {
-    const lowest = getFlowerFromPrice(product);
-    return lowest ? `From ${formatMoney(lowest)}` : "Price in store";
+    const row = getFlowerFromPriceRow(product);
+    return row ? `From ${formatPricePoint(row.price)} / ${row.label}` : "Price in store";
   }
 
   return formatItemPrice(product.price) || "Price in store";

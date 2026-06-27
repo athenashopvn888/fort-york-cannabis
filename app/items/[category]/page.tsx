@@ -74,6 +74,25 @@ function CategoryNavigation({ activeSlug }: { activeSlug: string }) {
   );
 }
 
+function StickyMenuNavigator({ activeSlug, showTiers }: { activeSlug: string; showTiers: boolean }) {
+  const groups = showTiers ? getFlowerTierGroups() : [];
+
+  return (
+    <div className={styles.stickyMenuNav}>
+      <CategoryNavigation activeSlug={activeSlug} />
+      {showTiers ? (
+        <nav className={styles.tierJump} aria-label="Jump to flower tier">
+          {groups.map((group) => (
+            <a key={group.tier} href={`#${getTierAnchor(group.tier)}`}>
+              {group.detail.name}
+            </a>
+          ))}
+        </nav>
+      ) : null}
+    </div>
+  );
+}
+
 function SaleBadges({ product }: { product: MenuProduct }) {
   if ("tier" in product) {
     return (
@@ -156,14 +175,6 @@ function FlowerTierSections() {
 
   return (
     <section className={styles.tierSections} aria-label="Flower tiers">
-      <nav className={styles.tierJump} aria-label="Jump to flower tier">
-        {groups.map((group) => (
-          <a key={group.tier} href={`#${getTierAnchor(group.tier)}`}>
-            {group.detail.name}
-          </a>
-        ))}
-      </nav>
-
       {groups.map((group) => (
         <section className={styles.tierSection} id={group.detail.slug} key={group.tier}>
           <div className={styles.tierHeader} style={{ "--tier-color": group.detail.accent } as CSSProperties}>
@@ -228,6 +239,8 @@ export default async function CategoryPage({
           <Link href="/menu" className={styles.panelLink}>Back to Menu</Link>
         </div>
       </section>
+
+      <StickyMenuNavigator activeSlug={category.slug} showTiers={isFlower} />
 
       {products.length > 0 ? (
         isFlower ? (
