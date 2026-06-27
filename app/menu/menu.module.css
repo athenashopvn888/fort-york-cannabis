@@ -77,7 +77,7 @@
 .requirementsSection {
   padding: 86px 0;
   background: #eef7f8;
-  color: var(--ink);
+  color: var(--brand-ink);
 }
 
 .requirementsSection {
@@ -241,7 +241,7 @@
 
 .featureSection {
   background: #ffffff;
-  color: var(--ink);
+  color: var(--brand-ink);
   padding: 86px 0;
 }
 
@@ -255,7 +255,7 @@
   background: #f8fbf7;
   border: 1px solid rgba(7, 18, 34, 0.1);
   border-radius: 8px;
-  color: var(--ink);
+  color: var(--brand-ink);
   display: grid;
   gap: 8px;
   min-height: 100%;

@@ -38,7 +38,7 @@
   border-radius: 8px;
   background: rgba(7, 18, 34, 0.92);
   border: 1px solid rgba(242, 211, 168, 0.34);
-  color: var(--brand-cream);
+  color: var(--brand-mist);
   font-size: 15px;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -46,7 +46,7 @@
 
 .heroH1 {
   margin: 0 0 14px;
-  color: var(--ink);
+  color: var(--brand-ink);
   font-size: clamp(32px, 5vw, 56px);
   font-weight: 900;
   line-height: 1.04;
@@ -81,7 +81,7 @@
 
 .sectionTitle {
   margin: 0 0 12px;
-  color: var(--ink);
+  color: var(--brand-ink);
   font-size: clamp(22px, 3vw, 32px);
   font-weight: 900;
   line-height: 1.14;
@@ -109,7 +109,7 @@
   border-radius: 8px;
   background: rgba(31, 179, 184, 0.08);
   border: 1px solid rgba(31, 179, 184, 0.18);
-  color: var(--ink);
+  color: var(--brand-ink);
   text-decoration: none;
 }
 
@@ -164,7 +164,7 @@
   justify-content: space-between;
   gap: 20px;
   padding: 16px 18px;
-  color: var(--ink);
+  color: var(--brand-ink);
   font-size: 15px;
   font-weight: 900;
   cursor: pointer;

@@ -86,7 +86,7 @@
   border-radius: 8px;
   background: rgba(242, 211, 168, 0.12);
   border: 1px solid rgba(242, 211, 168, 0.28);
-  color: var(--brand-cream);
+  color: var(--brand-mist);
   font-size: 14px;
   font-weight: 900;
 }
@@ -153,7 +153,7 @@
   border-radius: 8px;
   background: rgba(7, 18, 34, 0.04);
   border: 1px solid rgba(7, 18, 34, 0.08);
-  color: var(--ink);
+  color: var(--brand-ink);
   text-decoration: none;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
@@ -183,7 +183,7 @@
 .faqSection {
   padding: 86px 0;
   background: #eef7f8;
-  color: var(--ink);
+  color: var(--brand-ink);
 }
 
 .menuSection {
@@ -294,7 +294,7 @@
 .menuCategoryCard {
   position: relative;
   min-height: 286px;
-  color: var(--ink);
+  color: var(--brand-ink);
   text-decoration: none;
   background: #06111d;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -372,7 +372,7 @@
 
 .storeCardTitle,
 .localListItem strong {
-  color: var(--ink);
+  color: var(--brand-ink);
   font-size: 19px;
   text-shadow: none;
 }
@@ -487,7 +487,7 @@
   justify-content: space-between;
   gap: 20px;
   padding: 18px 22px;
-  color: var(--ink);
+  color: var(--brand-ink);
   font-size: 16px;
   font-weight: 900;
   cursor: pointer;
