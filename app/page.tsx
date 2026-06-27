@@ -2,15 +2,12 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
-const MENU_CATEGORIES = [
-  { name: "Flower", detail: "Menu coming soon", banner: "/banners/fort_york_flower_banner.webp" },
-  { name: "Pre-Rolls", detail: "Selection coming soon", banner: "/banners/fort_york_prerolls_banner.webp" },
-  { name: "Edibles", detail: "Details coming soon", banner: "/banners/fort_york_edibles_banner.webp" },
-  { name: "Vapes", detail: "Availability coming soon", banner: "/banners/fort_york_vapes_banner.webp" },
-  { name: "Concentrates", detail: "Catalog coming soon", banner: "/banners/fort_york_concentrates_banner.webp" },
-  { name: "Accessories", detail: "Store setup coming soon", banner: "/banners/fort_york_accessories_banner.webp" },
-];
+import {
+  DEMO_MENU_CATEGORIES,
+  DEMO_MENU_NOTICE,
+  FEATURED_DEMO_MENU_ITEMS,
+  getDemoItemsForCategory,
+} from "./lib/demo-menu";
 
 const ACTIONS = [
   { label: "Directions", note: "38 Fort York Blvd", href: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9", external: true },
@@ -76,7 +73,7 @@ export default function HomePage() {
           </div>
 
           <div className={styles.bentoGrid} id="menu-status">
-            {MENU_CATEGORIES.map((cat, index) => (
+            {DEMO_MENU_CATEGORIES.map((cat, index) => (
               <Link
                 key={cat.name}
                 href="/weed-dispensary-toronto"
@@ -114,6 +111,46 @@ export default function HomePage() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      <section className={styles.demoMenuSection} aria-labelledby="sample-menu-preview">
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.microLabel}>Sample menu preview</span>
+            <h2 id="sample-menu-preview" className={styles.sectionTitle}>Final Fort York Menu Coming Soon</h2>
+            <p className={styles.sectionSubtitle}>{DEMO_MENU_NOTICE}</p>
+          </div>
+          <div className={styles.demoMenuShell}>
+            <div className={styles.demoCategoryRail} aria-label="Sample menu categories">
+              {DEMO_MENU_CATEGORIES.map((category) => (
+                <div key={category.name} className={styles.demoCategoryCard}>
+                  <img src={category.banner} alt={`${category.name} sample menu category`} className={styles.demoCategoryImage} />
+                  <div className={styles.demoCategoryCopy}>
+                    <strong>{category.name}</strong>
+                    <span>{getDemoItemsForCategory(category.name).length} sample cards</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.demoMenuGrid}>
+              {FEATURED_DEMO_MENU_ITEMS.map((item) => (
+                <article key={`${item.category}-${item.name}`} className={styles.demoMenuCard}>
+                  <span className={styles.demoBadge}>Preview only</span>
+                  <h3>{item.name}</h3>
+                  <div className={styles.demoMeta}>
+                    <span>{item.category}</span>
+                    <span>{item.format}</span>
+                  </div>
+                  <p>{item.profile}</p>
+                  <small>{item.note}</small>
+                </article>
+              ))}
+            </div>
+          </div>
+          <p className={styles.demoFootnote}>
+            No prices, availability, live inventory, product ratings, or product schema are published for this sample menu preview.
+          </p>
         </div>
       </section>
 

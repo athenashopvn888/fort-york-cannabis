@@ -1,6 +1,7 @@
 ﻿import Link from "next/link";
 import styles from "./GBPLandingPage.module.css";
 import { gbpLocation, isKnown, pendingLabel } from "../lib/gbp-location";
+import { DEMO_MENU_CATEGORIES, DEMO_MENU_NOTICE, FEATURED_DEMO_MENU_ITEMS } from "../lib/demo-menu";
 
 const categoryLinks: Record<string, string> = {
   Flower: "/#menu-status",
@@ -134,19 +135,31 @@ export function GBPLandingPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.h2}>Menu Coming Soon</h2>
-        <p className={styles.infoText}>
-          FORT YORK CANNABIS is prepared for a full product menu structure, but exact inventory, pricing, brands, and availability are pending owner confirmation.
-        </p>
+        <h2 className={styles.h2}>Sample Menu Preview</h2>
+        <p className={styles.infoText}>{DEMO_MENU_NOTICE}</p>
+        <div className={styles.menuNotice}>
+          Final Fort York menu coming soon. These cards are layout examples only, with no live prices, live availability, or confirmed inventory claims.
+        </div>
         <div className={styles.productGrid}>
-          {gbpLocation.products.map((p) => {
-            const href = categoryLinks[p] || "/#menu-status";
+          {DEMO_MENU_CATEGORIES.map((category) => {
+            const href = categoryLinks[category.name] || "/#sample-menu-preview";
             return (
-              <Link key={p} href={href} className={styles.productCard}>
-                {p}
+              <Link key={category.name} href={href} className={styles.productCard}>
+                <strong>{category.name}</strong>
+                <span>{category.detail}</span>
               </Link>
             );
           })}
+        </div>
+        <div className={styles.sampleMenuGrid}>
+          {FEATURED_DEMO_MENU_ITEMS.map((item) => (
+            <article key={`${item.category}-${item.name}`} className={styles.sampleMenuCard}>
+              <span className={styles.sampleBadge}>Preview only</span>
+              <h3>{item.name}</h3>
+              <p>{item.category} - {item.format}</p>
+              <small>{item.note}</small>
+            </article>
+          ))}
         </div>
       </section>
 

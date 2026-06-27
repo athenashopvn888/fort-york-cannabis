@@ -6,7 +6,7 @@ FORT YORK CANNABIS should feel like a polished downtown Toronto cannabis storefr
 
 ## 2. Visual Mood
 
-Modern urban retail, waterfront at night, Fort York masonry, condo-district precision, and clean adult-use cannabis presentation. The look should be confident and local, not cartoonish, not cheap, and not copied from After Dark.
+Modern urban retail, waterfront at night, Fort York masonry, condo-district precision, and clean adult-use cannabis presentation. The look should be confident and local, not cartoonish, not cheap, and not copied from another store.
 
 ## 3. Color Palette
 
@@ -59,7 +59,7 @@ Visuals must reinforce Fort York, CityPlace, waterfront, downtown Toronto, King 
 
 ## 13. What Not To Do
 
-- Do not copy After Dark visually.
+- Do not copy another store visually.
 - Do not rely on random circles, blobs, or decorative lines as the identity.
 - Do not use fake storefront photos, fake staff, fake reviews, fake ratings, fake hours, or fake license claims.
 - Do not overuse cannabis leaves or smoke cliches.

@@ -215,6 +215,87 @@
   line-height: 1.65;
 }
 
+
+
+.menuNotice {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: rgba(242, 211, 168, 0.18);
+  border: 1px solid rgba(194, 132, 60, 0.24);
+  color: rgba(7, 18, 34, 0.74);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.productCard {
+  display: grid;
+  gap: 6px;
+}
+
+.productCard strong {
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.productCard span {
+  color: rgba(7, 18, 34, 0.64);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.sampleMenuGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.sampleMenuCard {
+  display: flex;
+  min-height: 164px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border-radius: 8px;
+  background: rgba(7, 18, 34, 0.04);
+  border: 1px solid rgba(7, 18, 34, 0.1);
+}
+
+.sampleBadge {
+  width: fit-content;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: rgba(31, 179, 184, 0.08);
+  border: 1px solid rgba(31, 179, 184, 0.16);
+  color: var(--brand-copper);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sampleMenuCard h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.sampleMenuCard p,
+.sampleMenuCard small {
+  margin: 0;
+  color: rgba(7, 18, 34, 0.68);
+  line-height: 1.5;
+}
+
+.sampleMenuCard small {
+  margin-top: auto;
+  font-weight: 800;
+}
+
 @media (max-width: 760px) {
   .container {
     padding-inline: 16px;
@@ -224,7 +305,8 @@
     padding: 56px 18px;
   }
 
-  .napGrid {
+  .napGrid,
+  .sampleMenuGrid {
     grid-template-columns: 1fr;
   }
 }

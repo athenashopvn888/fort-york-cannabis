@@ -4,7 +4,7 @@
 
 This package defines the production artwork needed for FORT YORK CANNABIS across website, GBP landing page, social/Open Graph, storefront signage, window decals, door signage, and future print/promo assets.
 
-Current generated assets are first-pass production-intent coded raster/vector concepts. They are stronger than placeholder artwork, but final print/signage files should be recreated or approved by a designer/sign shop before fabrication.
+Current generated assets are first-pass production-intent coded raster/vector concepts. They are stronger than draft artwork, but final print/signage files should be recreated or approved by a designer/sign shop before fabrication.
 
 ## Website Assets
 
@@ -25,12 +25,12 @@ Current generated assets are first-pass production-intent coded raster/vector co
 
 | Asset | Filename | Size | Format | Where It Appears | Design Brief | Text To Include | Text NOT To Include | Pending Inputs | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Main storefront sign | `public/brand/signage/fort-york-main-sign-concept.svg` | 2400x900 | SVG | Exterior fascia concept | High contrast wordmark, copper frame, teal cannabis line | FORT YORK CANNABIS, domain/address optional | Phone/hours/license | Sign dimensions, landlord/sign permit rules | First-pass concept exists |
-| Door 19+ sign | `public/brand/signage/fort-york-door-19-plus-concept.svg` | 1200x1600 | SVG | Door/window | Clear adult-use entry notice | Adults 19+, valid ID required | Hours/phone unless confirmed | Compliance/legal review | First-pass concept exists |
-| Window vinyl concept | `public/brand/signage/fort-york-window-vinyl-concept.svg` | 2200x1200 | SVG | Window vinyl | Fort wall/waterfront pattern with brand | FYC, Fort York Cannabis | Menu/prices/reviews | Window measurements | First-pass concept exists |
-| Hours decal | `public/brand/signage/fort-york-hours-decal-concept.svg` | 1200x1600 | SVG | Door/window | Hours panel with pending status | Hours pending confirmation | Actual hours until approved | Owner-approved hours | First-pass pending-hours concept exists |
+| Main storefront sign | `docs/assets/fort-york/signage/fort-york-main-sign-concept.svg` | 2400x900 | SVG | Exterior fascia concept | High contrast wordmark, copper frame, teal cannabis line | FORT YORK CANNABIS, domain/address optional | Phone/hours/license | Sign dimensions, landlord/sign permit rules | First-pass concept exists |
+| Door 19+ sign | `docs/assets/fort-york/signage/fort-york-door-19-plus-concept.svg` | 1200x1600 | SVG | Door/window | Clear adult-use entry notice | Adults 19+, valid ID required | Hours/phone unless confirmed | Compliance/legal review | First-pass concept exists |
+| Window vinyl concept | `docs/assets/fort-york/signage/fort-york-window-vinyl-concept.svg` | 2200x1200 | SVG | Window vinyl | Fort wall/waterfront pattern with brand | FYC, Fort York Cannabis | Menu/prices/reviews | Window measurements | First-pass concept exists |
+| Hours decal | `docs/assets/fort-york/signage/fort-york-hours-decal-concept.svg` | 1200x1600 | SVG | Door/window | Hours panel with pending status | Hours pending confirmation | Actual hours until approved | Owner-approved hours | First-pass pending-hours concept exists |
 | Pickup/menu QR decal | Not created yet | TBD | SVG/PDF | Future door/window | QR panel only after live menu exists | Domain/QR/menu label | Fake menu or ordering claim | Live menu URL | Needed later |
-| Storefront preview mockup | `public/banners/fort_york_storefront_preview.webp` | 1600x980 | WebP | Owner/sign shop review | Applies sign, window, door, hours, and menu placeholder concepts to a coded storefront elevation | Confirmed sign text only; pending placeholders | Fake phone/hours/menu/license | Storefront photo/elevation and vendor specs | Final-preview concept exists |
+| Storefront preview mockup | `docs/assets/fort-york/signage/fort_york_storefront_preview.webp` | 1600x980 | WebP | Owner/sign shop review | Applies sign, window, door, hours, and menu sample elements to a coded storefront elevation | Confirmed sign text only; pending-status copy | Fake phone/hours/menu/license | Storefront photo/elevation and vendor specs | Final-preview concept exists |
 | Interior wall panel | Not created yet | TBD | SVG/PDF | Interior brand moment | FYC monogram, fort-wall geometry | Brand only | Compliance-sensitive claims | Interior wall size | Optional later |
 
 ## Production Notes
@@ -44,9 +44,9 @@ The completed local visual preview package now also includes:
 
 - `public/banners/fort_york_district_map.webp`
 - `public/banners/fort_york_cta_panel.webp`
-- `public/banners/fort_york_storefront_preview.webp`
-- `public/banners/fort_york_signage_preview.webp`
+- `docs/assets/fort-york/signage/fort_york_storefront_preview.webp`
+- `docs/assets/fort-york/signage/fort_york_signage_preview.webp`
 - `public/banners/fort_york_social_preview.webp`
-- `public/brand/signage/fort-york-menu-qr-placeholder-concept.svg`
+- `docs/assets/fort-york/signage/fort-york-menu-qr-sample-concept.svg`
 
 These assets are suitable for owner visual review only. Final production signage, print files, and confirmed website copy still require owner/vendor approval.

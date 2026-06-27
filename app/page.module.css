@@ -683,11 +683,148 @@
   margin-top: 22px;
 }
 
+
+
+.demoMenuSection {
+  padding: 82px 0;
+  background: linear-gradient(180deg, #eef7f8 0%, #ffffff 100%);
+  color: var(--ink);
+}
+
+.demoMenuShell {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.demoCategoryRail,
+.demoMenuGrid {
+  display: grid;
+  gap: 14px;
+}
+
+.demoCategoryRail {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.demoCategoryCard,
+.demoMenuCard {
+  overflow: hidden;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 18, 34, 0.1);
+  box-shadow: 0 18px 40px rgba(7, 18, 34, 0.08);
+}
+
+.demoCategoryImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.demoCategoryCopy {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+}
+
+.demoCategoryCopy strong {
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.demoCategoryCopy span {
+  color: rgba(7, 18, 34, 0.64);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.demoMenuGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.demoMenuCard {
+  position: relative;
+  display: flex;
+  min-height: 206px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  background:
+    linear-gradient(135deg, rgba(31, 179, 184, 0.08), rgba(242, 211, 168, 0.12)),
+    #ffffff;
+}
+
+.demoBadge {
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(7, 18, 34, 0.08);
+  border: 1px solid rgba(7, 18, 34, 0.1);
+  color: var(--brand-copper);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.demoMenuCard h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.demoMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.demoMeta span {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(31, 179, 184, 0.08);
+  border: 1px solid rgba(31, 179, 184, 0.16);
+  color: rgba(7, 18, 34, 0.72);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.demoMenuCard p,
+.demoMenuCard small {
+  margin: 0;
+  color: rgba(7, 18, 34, 0.68);
+  line-height: 1.55;
+}
+
+.demoMenuCard small {
+  margin-top: auto;
+  font-weight: 800;
+}
+
+.demoFootnote {
+  max-width: 860px;
+  margin: 22px auto 0;
+  color: rgba(7, 18, 34, 0.68);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
 @media (max-width: 900px) {
   .actionStrip,
   .visualGrid,
   .visitGrid,
-  .ctaPreview {
+  .ctaPreview,
+  .demoMenuShell,
+  .demoCategoryRail,
+  .demoMenuGrid {
     grid-template-columns: 1fr;
   }
 
@@ -709,7 +846,8 @@
 
   .visualSection,
   .ctaPreviewSection,
-  .visitSection {
+  .visitSection,
+  .demoMenuSection {
     padding: 56px 0;
   }
 }
