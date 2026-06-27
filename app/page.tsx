@@ -1,42 +1,37 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import {
-  DEMO_MENU_CATEGORIES,
-  DEMO_MENU_NOTICE,
-  FEATURED_DEMO_MENU_ITEMS,
-  getDemoItemsForCategory,
-} from "./lib/demo-menu";
+import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE } from "./lib/menu-preview";
 
 const ACTIONS = [
-  { label: "Directions", note: "38 Fort York Blvd", href: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9", external: true },
-  { label: "Menu", note: "Coming soon", href: "#menu-status" },
-  { label: "Phone", note: "Pending confirmation", href: "/contact" },
-  { label: "Visit", note: "Downtown Toronto", href: "/weed-dispensary-toronto" },
+  { label: "Address", note: "38 Fort York Blvd", href: "/contact" },
+  { label: "Directions", note: "Open Google Maps", href: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9", external: true },
+  { label: "Menu", note: "Coming soon", href: "#menu-preview" },
+  { label: "Hours", note: "Coming soon", href: "/contact" },
 ];
 
 const LOCAL_FEATURES = [
-  { label: "Fort York Cannabis Store", body: "Located at 38 Fort York Blvd with local relevance for Fort York residents and nearby visitors." },
-  { label: "Cannabis Store Near CityPlace", body: "Built for CityPlace, waterfront Toronto, King West, and downtown condo-area shoppers." },
-  { label: "Downtown Toronto Location", body: "Clear directions, simple store information, and future menu browsing without unsupported claims." },
+  { label: "Fort York", body: "A local cannabis store page centered on Fort York Boulevard and nearby downtown routes." },
+  { label: "CityPlace", body: "Helpful store information for adults 19+ around CityPlace, the waterfront, and condo-area foot traffic." },
+  { label: "Downtown Toronto", body: "Simple directions, clean local context, and a menu area ready for confirmed inventory." },
 ];
 
 const LOCAL_FAQS = [
   {
     q: "Where is FORT YORK CANNABIS located?",
-    a: "FORT YORK CANNABIS is planned for 38 Fort York Blvd, Toronto, ON M5V 3Z3, Canada.",
+    a: "FORT YORK CANNABIS is at 38 Fort York Blvd, Toronto, ON M5V 3Z3, Canada.",
   },
   {
     q: "What are the store hours?",
-    a: "Hours are pending owner confirmation. The site does not claim live-hours, late-night, or unverified extended-hours service.",
+    a: "Hours coming soon. This site does not use open-now, late-night, or 24-hour wording until hours are confirmed.",
   },
   {
-    q: "What phone number should customers call?",
-    a: "Phone is pending owner confirmation. No public phone number is published until confirmed.",
+    q: "Is the menu live?",
+    a: "Menu coming soon. Product categories are shown as a preview while final inventory is prepared.",
   },
   {
-    q: "What neighbourhoods does the site focus on?",
+    q: "Which neighbourhoods does the store serve?",
     a: "The local focus is Fort York, CityPlace, Downtown Toronto, the waterfront, King West, and the Entertainment District.",
   },
 ];
@@ -46,55 +41,22 @@ export default function HomePage() {
     <main className={styles.main}>
       <Navbar />
 
-      <section className={styles.welcomeBannerSection}>
-        <div className={styles.welcomeBannerContainer}>
-          <img
-            src="/banners/fort_york_welcome_banner.webp"
-            alt="FORT YORK CANNABIS local store banner"
-            className={styles.welcomeBannerImg}
-          />
-        </div>
-      </section>
-
       <section className={styles.hero}>
         <div className={styles.heroBg} />
         <div className={styles.heroOverlay} />
-        <div className={styles.heroStars} />
         <div className={styles.heroContent}>
-          <div className={styles.brandBlock}>
-            <span className={styles.brandIcon}>FYC</span>
-            <h1 className={styles.brandTitle}>FORT YORK CANNABIS</h1>
-            <p className={styles.brandSub}>Cannabis store near Fort York, CityPlace, and downtown Toronto</p>
-            <div className={styles.brandBadge}>38 Fort York Blvd</div>
-            <div className={styles.heroActions}>
-              <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.heroActionPrimary}>Get Directions</a>
-              <Link href="/weed-dispensary-toronto" className={styles.heroActionSecondary}>Toronto Store Page</Link>
-            </div>
-          </div>
-
-          <div className={styles.bentoGrid} id="menu-status">
-            {DEMO_MENU_CATEGORIES.map((cat, index) => (
-              <Link
-                key={cat.name}
-                href="/weed-dispensary-toronto"
-                className={`${styles.bentoTile} ${index === 0 ? styles.bentoExotic : index === 1 ? styles.bentoPremium : ""}`}
-              >
-                <div
-                  className={styles.bentoTileBg}
-                  style={{ backgroundImage: `url('${cat.banner}')` }}
-                />
-                <div className={styles.bentoTileOverlay} />
-                <div className={styles.bentoTileContent}>
-                  <span className={styles.bentoLabel}>{cat.name}</span>
-                  <span className={styles.bentoPrice}>{cat.detail}</span>
-                </div>
-              </Link>
-            ))}
+          <span className={styles.heroKicker}>Fort York / CityPlace</span>
+          <h1 className={styles.brandTitle}>FORT YORK CANNABIS</h1>
+          <p className={styles.brandSub}>Cannabis Store Near Fort York & CityPlace</p>
+          <p className={styles.localLine}>38 Fort York Blvd, Toronto</p>
+          <div className={styles.heroActions}>
+            <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.heroActionPrimary}>Get Directions</a>
+            <Link href="#menu-preview" className={styles.heroActionSecondary}>Menu Coming Soon</Link>
           </div>
         </div>
       </section>
 
-      <section className={styles.actionStripSection} aria-label="Customer actions">
+      <section className={styles.actionStripSection} aria-label="Store quick links">
         <div className={styles.container}>
           <div className={styles.actionStrip}>
             {ACTIONS.map((action) => {
@@ -114,53 +76,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.demoMenuSection} aria-labelledby="sample-menu-preview">
+      <section className={styles.menuPreviewSection} id="menu-preview" aria-labelledby="menu-preview-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <span className={styles.microLabel}>Sample menu preview</span>
-            <h2 id="sample-menu-preview" className={styles.sectionTitle}>Final Fort York Menu Coming Soon</h2>
-            <p className={styles.sectionSubtitle}>{DEMO_MENU_NOTICE}</p>
+            <span className={styles.microLabel}>Menu coming soon</span>
+            <h2 id="menu-preview-title" className={styles.sectionTitle}>Preview Categories</h2>
+            <p className={styles.sectionSubtitle}>{MENU_PREVIEW_NOTICE}</p>
           </div>
-          <div className={styles.demoMenuShell}>
-            <div className={styles.demoCategoryRail} aria-label="Sample menu categories">
-              {DEMO_MENU_CATEGORIES.map((category) => (
-                <div key={category.name} className={styles.demoCategoryCard}>
-                  <img src={category.banner} alt={`${category.name} sample menu category`} className={styles.demoCategoryImage} />
-                  <div className={styles.demoCategoryCopy}>
-                    <strong>{category.name}</strong>
-                    <span>{getDemoItemsForCategory(category.name).length} sample cards</span>
-                  </div>
+          <div className={styles.menuCategoryGrid}>
+            {MENU_PREVIEW_CATEGORIES.map((category) => (
+              <Link key={category.name} href="/weed-dispensary-toronto" className={styles.menuCategoryCard}>
+                <img src={category.banner} alt={`${category.name} category at Fort York Cannabis`} className={styles.menuCategoryImage} />
+                <div className={styles.menuCategoryCopy}>
+                  <strong>{category.name}</strong>
+                  <span>{category.detail}</span>
                 </div>
-              ))}
-            </div>
-            <div className={styles.demoMenuGrid}>
-              {FEATURED_DEMO_MENU_ITEMS.map((item) => (
-                <article key={`${item.category}-${item.name}`} className={styles.demoMenuCard}>
-                  <span className={styles.demoBadge}>Preview only</span>
-                  <h3>{item.name}</h3>
-                  <div className={styles.demoMeta}>
-                    <span>{item.category}</span>
-                    <span>{item.format}</span>
-                  </div>
-                  <p>{item.profile}</p>
-                  <small>{item.note}</small>
-                </article>
-              ))}
-            </div>
+              </Link>
+            ))}
           </div>
-          <p className={styles.demoFootnote}>
-            No prices, availability, live inventory, product ratings, or product schema are published for this sample menu preview.
-          </p>
         </div>
       </section>
 
-      <section className={styles.categoriesSection}>
+      <section className={styles.storeInfoSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <span className={styles.microLabel}>Local cannabis store</span>
+            <span className={styles.microLabel}>Downtown Toronto cannabis store</span>
             <h2 className={styles.sectionTitle}>Fort York Cannabis Store</h2>
             <p className={styles.sectionSubtitle}>
-              A modern downtown Toronto cannabis store for Fort York, CityPlace, the waterfront, King West, and nearby residents.
+              A premium local cannabis store experience for Fort York, CityPlace, the waterfront, King West, and nearby downtown Toronto residents.
             </p>
           </div>
           <div className={styles.storeGrid}>
@@ -173,28 +116,26 @@ export default function HomePage() {
               <p className={styles.storeCardText}>Serving Fort York, CityPlace, waterfront Toronto, King West, and downtown Toronto.</p>
             </div>
             <div className={styles.storeCard}>
-              <h3 className={styles.storeCardTitle}>Menu Coming Soon</h3>
-              <p className={styles.storeCardText}>Menu, phone, hours, license information, pickup, and delivery are pending owner confirmation.</p>
+              <h3 className={styles.storeCardTitle}>Opening Details Coming Soon</h3>
+              <p className={styles.storeCardText}>Phone, hours, license details, pickup, delivery, and the final menu will be added after approval.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className={styles.visualSection}>
+      <section className={styles.localSection}>
         <div className={styles.container}>
-          <div className={styles.visualGrid}>
-            <div className={styles.visualImageCard}>
-              <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.visualImage} />
-            </div>
-            <div className={styles.visualCopy}>
-              <span className={styles.microLabel}>Downtown Toronto location</span>
-              <h2 className={styles.sectionTitle}>Built Around Fort York, CityPlace, and the Waterfront</h2>
+          <div className={styles.localGrid}>
+            <img src="/banners/fort_york_district_map.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.localImage} />
+            <div className={styles.localCopy}>
+              <span className={styles.microLabel}>Fort York / CityPlace / Waterfront</span>
+              <h2 className={styles.sectionTitle}>Built Around Downtown Toronto Movement</h2>
               <p className={styles.sectionSubtitle}>
-                FORT YORK CANNABIS is positioned for adults 19+ around Fort York Boulevard, CityPlace, waterfront Toronto, King West, and nearby downtown routes.
+                Fort York Boulevard connects CityPlace residents, waterfront routes, King West traffic, and downtown Toronto visitors. The site keeps that local context front and center.
               </p>
-              <div className={styles.visualList}>
+              <div className={styles.localList}>
                 {LOCAL_FEATURES.map((feature) => (
-                  <div key={feature.label} className={styles.visualListItem}>
+                  <div key={feature.label} className={styles.localListItem}>
                     <strong>{feature.label}</strong>
                     <span>{feature.body}</span>
                   </div>
@@ -205,20 +146,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.ctaPreviewSection}>
+      <section className={styles.visitSection}>
         <div className={styles.container}>
-          <div className={styles.ctaPreview}>
-            <img src="/banners/fort_york_cta_panel.webp" alt="Fort York Cannabis call directions menu visit actions" className={styles.ctaImage} />
-            <div className={styles.ctaContent}>
+          <div className={styles.visitPanel}>
+            <div>
               <span className={styles.microLabel}>Plan your visit</span>
-              <h2 className={styles.sectionTitle}>Call / Directions / Menu</h2>
+              <h2 className={styles.sectionTitle}>Directions Ready. Menu Coming Soon.</h2>
               <p className={styles.sectionSubtitle}>
-                Directions are ready now. Phone, menu, hours, pickup, delivery, and license information will be published after owner confirmation.
+                Use the map link for directions to 38 Fort York Blvd. Phone, hours, pickup, delivery, and final menu details are coming soon.
               </p>
-              <div className={styles.ctaActions}>
-                <Link href="/contact" className={styles.ctaButton}>Contact and Location</Link>
-                <Link href="/weed-dispensary-toronto" className={styles.ctaMuted}>Toronto Store Page</Link>
-              </div>
+            </div>
+            <div className={styles.visitActions}>
+              <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>Get Directions</a>
+              <Link href="/contact" className={styles.ctaMuted}>Contact & Location</Link>
             </div>
           </div>
         </div>
@@ -227,12 +167,10 @@ export default function HomePage() {
       <section className={styles.seoSection}>
         <div className={styles.container}>
           <div className={styles.seoPanel}>
+            <span className={styles.microLabel}>Local search focus</span>
             <h2 className={styles.seoPanelTitle}>Cannabis Store Near Fort York and CityPlace</h2>
             <p className={styles.seoPanelText}>
-              FORT YORK CANNABIS is being prepared as a local cannabis store for adults 19+ at 38 Fort York Blvd in Toronto. The site is structured around local search themes including weed dispensary in Toronto, cannabis store near Fort York, cannabis dispensary near CityPlace, downtown Toronto weed store, and Fort York cannabis store.
-            </p>
-            <p className={styles.seoPanelText}>
-              Customer details stay clear and honest: phone, hours, live-hours language, extended-hours claims, reviews, ratings, delivery claims, and license wording are not published until confirmed.
+              FORT YORK CANNABIS supports local search themes including weed dispensary in Toronto, cannabis store near Fort York, cannabis dispensary near CityPlace, downtown Toronto weed store, and Fort York cannabis store.
             </p>
           </div>
         </div>
@@ -240,39 +178,13 @@ export default function HomePage() {
 
       <section className={styles.faqSection}>
         <div className={styles.faqContainer}>
-          <h2 className={styles.sectionTitle} style={{ textAlign: "center", marginBottom: "32px" }}>
-            Fort York Cannabis FAQ
-          </h2>
+          <h2 className={styles.sectionTitle}>Fort York Cannabis FAQ</h2>
           {LOCAL_FAQS.map((faq) => (
             <details key={faq.q} className={styles.faqItem}>
               <summary className={styles.faqQuestion}>{faq.q}</summary>
               <p className={styles.faqAnswer}>{faq.a}</p>
             </details>
           ))}
-        </div>
-      </section>
-
-      <section className={styles.storeSection} id="contact">
-        <div className={styles.container}>
-          <div className={styles.storeGrid}>
-            <div className={styles.storeCard}>
-              <span className={styles.storeIcon}>38</span>
-              <h3 className={styles.storeCardTitle}>Location</h3>
-              <p className={styles.storeCardText}>38 Fort York Blvd<br />Toronto, ON M5V 3Z3</p>
-            </div>
-            <div className={styles.storeCard}>
-              <span className={styles.storeIcon}>HRS</span>
-              <h3 className={styles.storeCardTitle}>Hours Pending Confirmation</h3>
-              <p className={styles.storeCardText}>Hours will be published after owner confirmation.</p>
-            </div>
-            <div className={styles.storeCard}>
-              <span className={styles.storeIcon}>MAP</span>
-              <h3 className={styles.storeCardTitle}>Directions</h3>
-              <p className={styles.storeCardText}>
-                <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer">Open Google Maps</a>
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 

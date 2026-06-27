@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -9,7 +9,7 @@ export default function Footer() {
           <div className={styles.col}>
             <div className={styles.brand}>FORT YORK CANNABIS</div>
             <p className={styles.desc}>
-              Cannabis store at 38 Fort York Blvd in Toronto. Phone, hours, menu, pickup, delivery, and license information are pending owner confirmation.
+              Cannabis store at 38 Fort York Blvd in Toronto. Phone, hours, menu, pickup, delivery, and license information are coming soon.
             </p>
             <div className={styles.buttons}>
               <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.btnPrimary}>
@@ -28,11 +28,11 @@ export default function Footer() {
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Phone:</span>
-              <span>Pending owner confirmation</span>
+              <span>Coming soon</span>
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Hours:</span>
-              <span className={styles.highlight}>Pending owner confirmation</span>
+              <span className={styles.highlight}>Coming soon</span>
             </div>
           </div>
 
@@ -41,7 +41,7 @@ export default function Footer() {
             <nav className={styles.links}>
               <Link href="/">Home</Link>
               <Link href="/weed-dispensary-toronto/">Toronto Store Page</Link>
-              <Link href="/#menu-status">Menu Coming Soon</Link>
+              <Link href="/#menu-preview">Menu Coming Soon</Link>
               <Link href="/info/fort-york-cannabis-store">Fort York Cannabis Store</Link>
               <Link href="/info/cityplace-cannabis-dispensary">CityPlace Cannabis Dispensary</Link>
               <Link href="/info/downtown-toronto-weed-dispensary">Downtown Toronto Weed Store</Link>
@@ -54,7 +54,7 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <p>
-            (c) {new Date().getFullYear()} FORT YORK CANNABIS. Adults 19+ only. Please consume responsibly. Store details are published after confirmation.
+            (c) {new Date().getFullYear()} FORT YORK CANNABIS. Adults 19+ only. Please consume responsibly. Store details are updated as they are ready.
           </p>
         </div>
       </div>

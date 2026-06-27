@@ -89,15 +89,15 @@ export default async function SeoLandingPage({
           ))}
 
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>Menu Categories Pending Owner Input</h2>
+            <h2 className={styles.sectionTitle}>Menu Categories Coming Soon</h2>
             <p className={styles.sectionBody}>
-              The site is prepared for common cannabis retail categories, but exact inventory, pricing, brands, pickup, delivery, and availability remain pending owner confirmation.
+              Menu categories are ready for review. Exact inventory, pricing, brands, pickup, delivery, and availability are coming soon.
             </p>
             <div className={styles.categoryGrid}>
               {MENU_CATEGORIES.map((category) => (
-                <Link key={category} href="/#menu-status" className={styles.categoryCard}>
+                <Link key={category} href="/#menu-preview" className={styles.categoryCard}>
                   <span className={styles.categoryLabel}>{category}</span>
-                  <span className={styles.categoryStatus}>Pending owner confirmation</span>
+                  <span className={styles.categoryStatus}>Coming soon</span>
                 </Link>
               ))}
             </div>
@@ -106,7 +106,7 @@ export default async function SeoLandingPage({
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Find Us</h2>
             <p className={styles.sectionBody}>
-              FORT YORK CANNABIS is planned for 38 Fort York Blvd, Toronto, ON M5V 3Z3, Canada. Use the contact page for the provided Google Maps link.
+              FORT YORK CANNABIS is at 38 Fort York Blvd, Toronto, ON M5V 3Z3, Canada. Use the contact page for the provided Google Maps link.
             </p>
             <div className={styles.visitBtns}>
               <Link href="/contact" className={styles.visitBtn}>Contact Page</Link>

@@ -3,7 +3,7 @@ import DeliveryContent from "./DeliveryContent";
 
 export const metadata: Metadata = {
   title: "Delivery Status | FORT YORK CANNABIS",
-  description: "FORT YORK CANNABIS delivery details are pending owner confirmation. This page does not claim delivery availability until approved.",
+  description: "FORT YORK CANNABIS delivery details are coming soon. Delivery details will be added once they are ready.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/delivery",
   },

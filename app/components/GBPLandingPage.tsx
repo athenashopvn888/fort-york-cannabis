@@ -1,16 +1,7 @@
 ﻿import Link from "next/link";
 import styles from "./GBPLandingPage.module.css";
-import { gbpLocation, isKnown, pendingLabel } from "../lib/gbp-location";
-import { DEMO_MENU_CATEGORIES, DEMO_MENU_NOTICE, FEATURED_DEMO_MENU_ITEMS } from "../lib/demo-menu";
-
-const categoryLinks: Record<string, string> = {
-  Flower: "/#menu-status",
-  "Pre-rolls": "/#menu-status",
-  Edibles: "/#menu-status",
-  "THC vapes": "/#menu-status",
-  Concentrates: "/#menu-status",
-  Accessories: "/#menu-status",
-};
+import { gbpLocation, isKnown } from "../lib/gbp-location";
+import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE } from "../lib/menu-preview";
 
 const trustItems = [
   { label: "Address", value: "38 Fort York Blvd" },
@@ -83,27 +74,29 @@ export function GBPLandingPage() {
 
       <header className={styles.hero}>
         <div className={styles.heroText}>
-          <span className={styles.microLabel}>Toronto cannabis store</span>
-          <h1 className={styles.h1}>{gbpLocation.storeName} - Weed Dispensary in {gbpLocation.city}</h1>
-          <p className={styles.heroTagline}>Serving Fort York, CityPlace, the waterfront, and downtown Toronto</p>
+          <span className={styles.microLabel}>Fort York / CityPlace</span>
+          <h1 className={styles.h1}>{gbpLocation.storeName}</h1>
+          <p className={styles.heroTagline}>Cannabis Store Near Fort York & CityPlace</p>
+          <p className={styles.addressLine}>38 Fort York Blvd, Toronto</p>
+          <div className={styles.heroActions}>
+            <a href={gbpLocation.directionsUrl} className={`${styles.btn} ${styles.btnPrimary}`} target="_blank" rel="noopener noreferrer">
+              Get Directions
+            </a>
+            <Link href="#menu-preview" className={`${styles.btn} ${styles.btnSecondary}`}>
+              Menu Coming Soon
+            </Link>
+          </div>
         </div>
-        <img src="/banners/fort_york_gbp_landing_hero.webp" alt="Fort York Cannabis local landing page" className={styles.heroImage} />
+        <div className={styles.heroMedia}>
+          <img src="/banners/fort_york_gbp_landing_hero.webp" alt="Fort York Cannabis near CityPlace and downtown Toronto" className={styles.heroImage} />
+        </div>
       </header>
-
-      <div className={styles.btnRow}>
-        <Link href={gbpLocation.menuUrl} className={`${styles.btn} ${styles.btnPrimary}`}>
-          Menu Coming Soon
-        </Link>
-        <a href={gbpLocation.directionsUrl} className={`${styles.btn} ${styles.btnSecondary}`} target="_blank" rel="noopener noreferrer">
-          Get Directions
-        </a>
-      </div>
 
       <section className={styles.launchPanel}>
         <div>
           <span className={styles.microLabel}>Store information</span>
           <h2 className={styles.h2}>Fort York Cannabis Store</h2>
-          <p className={styles.infoText}>FORT YORK CANNABIS is planned for 38 Fort York Blvd in downtown Toronto. Phone, hours, menu, pickup, delivery, and license information are pending owner confirmation.</p>
+          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone, hours, pickup, delivery, license details, and the final menu are coming soon.</p>
         </div>
         <div className={styles.trustGrid}>
           {trustItems.map((item) => (
@@ -134,31 +127,16 @@ export function GBPLandingPage() {
         </div>
       </section>
 
-      <section className={styles.section}>
-        <h2 className={styles.h2}>Sample Menu Preview</h2>
-        <p className={styles.infoText}>{DEMO_MENU_NOTICE}</p>
-        <div className={styles.menuNotice}>
-          Final Fort York menu coming soon. These cards are layout examples only, with no live prices, live availability, or confirmed inventory claims.
-        </div>
+      <section className={styles.section} id="menu-preview">
+        <h2 className={styles.h2}>Menu Coming Soon</h2>
+        <p className={styles.infoText}>{MENU_PREVIEW_NOTICE}</p>
         <div className={styles.productGrid}>
-          {DEMO_MENU_CATEGORIES.map((category) => {
-            const href = categoryLinks[category.name] || "/#sample-menu-preview";
-            return (
-              <Link key={category.name} href={href} className={styles.productCard}>
-                <strong>{category.name}</strong>
-                <span>{category.detail}</span>
-              </Link>
-            );
-          })}
-        </div>
-        <div className={styles.sampleMenuGrid}>
-          {FEATURED_DEMO_MENU_ITEMS.map((item) => (
-            <article key={`${item.category}-${item.name}`} className={styles.sampleMenuCard}>
-              <span className={styles.sampleBadge}>Preview only</span>
-              <h3>{item.name}</h3>
-              <p>{item.category} - {item.format}</p>
-              <small>{item.note}</small>
-            </article>
+          {MENU_PREVIEW_CATEGORIES.map((category) => (
+            <Link key={category.name} href="/" className={styles.productCard}>
+              <img src={category.banner} alt={`${category.name} category at Fort York Cannabis`} className={styles.productImage} />
+              <strong>{category.name}</strong>
+              <span>{category.detail}</span>
+            </Link>
           ))}
         </div>
       </section>
@@ -177,15 +155,11 @@ export function GBPLandingPage() {
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Phone</span>
-              <span>{pendingLabel}</span>
-            </div>
-            <div className={styles.napItem}>
-              <span className={styles.napLabel}>Website</span>
-              <span><a href={`https://${gbpLocation.domain}/`}>https://{gbpLocation.domain}/</a></span>
+              <span>Phone coming soon</span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Store Hours</span>
-              <span style={{ fontSize: "0.95rem" }}>{pendingLabel}</span>
+              <span>Hours coming soon</span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Google Maps</span>
@@ -193,17 +167,9 @@ export function GBPLandingPage() {
             </div>
           </div>
           <div className={styles.mapWrapper}>
-            <img src="/banners/fort_york_local_banner.webp" alt="Fort York and CityPlace cannabis store local area" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="/banners/fort_york_local_banner.webp" alt="Fort York and CityPlace cannabis store local area" className={styles.mapImage} />
           </div>
         </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.h2}>Call / Directions / Menu</h2>
-        <p className={styles.infoText}>
-          Directions are available now. Phone number, full menu, pickup, and delivery details will be published after owner confirmation.
-        </p>
-        <img src="/banners/fort_york_cta_panel.webp" alt="Fort York Cannabis customer actions" className={styles.fullImage} />
       </section>
 
       <section className={styles.section}>
@@ -211,15 +177,15 @@ export function GBPLandingPage() {
         <div className={styles.faqList}>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Where is {gbpLocation.storeName} located?</h3>
-            <p className={styles.faqAnswer}>{gbpLocation.storeName} is planned for {gbpLocation.address}.</p>
+            <p className={styles.faqAnswer}>{gbpLocation.storeName} is at {gbpLocation.address}.</p>
           </div>
           <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>Are store hours confirmed?</h3>
-            <p className={styles.faqAnswer}>No. Hours are pending owner confirmation, so this page avoids live-hours and unverified extended-hours claims.</p>
+            <h3 className={styles.faqQuestion}>Are store hours available?</h3>
+            <p className={styles.faqAnswer}>Hours coming soon. This page does not use live-hours, open-now, or extended-hours wording until hours are confirmed.</p>
           </div>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Is the menu live?</h3>
-            <p className={styles.faqAnswer}>No. Menu, brands, pricing, inventory, delivery, and pickup details are pending owner confirmation.</p>
+            <p className={styles.faqAnswer}>Menu coming soon. Preview categories are shown while final inventory is prepared.</p>
           </div>
         </div>
       </section>

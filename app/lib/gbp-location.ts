@@ -1,4 +1,4 @@
-﻿export const pendingLabel = "Pending owner confirmation";
+export const pendingLabel = "Coming soon";
 
 export const gbpLocation = {
   storeCode: "FYC01",
@@ -32,18 +32,18 @@ export const gbpLocation = {
     "Concentrates",
     "Accessories"
   ],
-  menuUrl: "/#menu-status",
+  menuUrl: "/#menu-preview",
   directionsUrl: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9",
   mapEmbedUrl: "",
   latitude: "",
   longitude: "",
   hours: [pendingLabel],
   seoTitle: "FORT YORK CANNABIS | Weed Dispensary in Toronto",
-  metaDescription: "FORT YORK CANNABIS is a cannabis store in Toronto near Fort York, CityPlace, the waterfront, and downtown Toronto. Store hours and phone are pending owner confirmation.",
+  metaDescription: "FORT YORK CANNABIS is a cannabis store in Toronto near Fort York, CityPlace, the waterfront, and downtown Toronto. Store hours and phone are coming soon.",
   localLandmarks: ["Fort York", "CityPlace", "Canoe Landing", "Toronto waterfront"],
-  introVariant: "FORT YORK CANNABIS is a planned local cannabis store at 38 Fort York Blvd in downtown Toronto, serving adults 19+ near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Phone, hours, menu, and launch details are pending owner confirmation.",
+  introVariant: "FORT YORK CANNABIS is at 38 Fort York Blvd in downtown Toronto, serving adults 19+ near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Phone, hours, menu, and opening details are coming soon.",
   neighborhoodDescription: "Fort York and CityPlace combine dense downtown condo living, waterfront access, historic Fort York context, and quick movement toward King West, Harbourfront, Rogers Centre, and the Entertainment District.",
-  parkingNote: "Parking, pickup, and delivery details are pending owner confirmation.",
+  parkingNote: "Parking, pickup, and delivery details are coming soon.",
   transitNote: "The area is served by downtown Toronto transit corridors around Fort York Boulevard, Bathurst Street, Spadina Avenue, Lake Shore Boulevard, and nearby waterfront routes.",
   sectionTitle: "Serving Fort York, CityPlace, and Downtown Toronto"
 };
