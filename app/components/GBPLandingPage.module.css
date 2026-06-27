@@ -230,6 +230,21 @@
   margin-top: 20px;
 }
 
+
+.menuStatusLine {
+  width: fit-content;
+  margin: 16px 0 0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(7, 18, 34, 0.06);
+  border: 1px solid rgba(7, 18, 34, 0.12);
+  color: rgba(7, 18, 34, 0.76);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .previewRail {
   display: flex;
   flex-wrap: wrap;

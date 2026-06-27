@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./GBPLandingPage.module.css";
 import { gbpLocation, isKnown } from "../lib/gbp-location";
-import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE } from "../lib/menu-preview";
+import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE, MENU_SOURCE_STATE } from "../lib/menu-preview";
 
 const trustItems = [
   { label: "Address", value: "38 Fort York Blvd" },
@@ -82,8 +82,8 @@ export function GBPLandingPage() {
             <a href={gbpLocation.directionsUrl} className={`${styles.btn} ${styles.btnPrimary}`} target="_blank" rel="noopener noreferrer">
               Get Directions
             </a>
-            <Link href="#menu-preview" className={`${styles.btn} ${styles.btnSecondary}`}>
-              Menu Coming Soon
+            <Link href="/menu" className={`${styles.btn} ${styles.btnSecondary}`}>
+              View Menu Status
             </Link>
           </div>
         </div>
@@ -133,6 +133,7 @@ export function GBPLandingPage() {
       <section className={styles.section} id="menu-preview">
         <h2 className={styles.h2}>Menu Coming Soon</h2>
         <p className={styles.infoText}>{MENU_PREVIEW_NOTICE}</p>
+        <p className={styles.menuStatusLine}>{MENU_SOURCE_STATE.label} - {MENU_SOURCE_STATE.storeCode}</p>
         <div className={styles.previewRail} aria-label="Menu preview categories">
           {MENU_PREVIEW_CATEGORIES.map((category) => (
             <span key={category.name}>{category.name}</span>
@@ -140,7 +141,7 @@ export function GBPLandingPage() {
         </div>
         <div className={styles.productGrid}>
           {MENU_PREVIEW_CATEGORIES.map((category) => (
-            <Link key={category.name} href="/" className={styles.productCard}>
+            <Link key={category.name} href={category.href} className={styles.productCard}>
               <img src={category.banner} alt={`${category.name} category at Fort York Cannabis`} className={styles.productImage} />
               <div className={styles.productCopy}>
                 <strong>{category.name}</strong>

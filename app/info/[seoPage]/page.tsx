@@ -4,16 +4,8 @@ import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { SEO_PAGES, getSeoPageBySlug } from "../../lib/seoPages";
+import { MENU_CATEGORIES } from "../../lib/products";
 import styles from "./seo.module.css";
-
-const MENU_CATEGORIES = [
-  "Flower",
-  "Pre-rolls",
-  "Edibles",
-  "THC vapes",
-  "Concentrates",
-  "Accessories",
-];
 
 export function generateStaticParams() {
   return SEO_PAGES.map((p) => ({ seoPage: p.slug }));
@@ -91,12 +83,12 @@ export default async function SeoLandingPage({
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Menu Categories Coming Soon</h2>
             <p className={styles.sectionBody}>
-              Menu categories are ready for review. Exact inventory, pricing, brands, pickup, delivery, and availability are coming soon.
+              Menu categories are ready for the network menu source. Exact products, pricing, brands, pickup, and delivery details remain pending owner/backend confirmation.
             </p>
             <div className={styles.categoryGrid}>
               {MENU_CATEGORIES.map((category) => (
-                <Link key={category} href="/#menu-preview" className={styles.categoryCard}>
-                  <span className={styles.categoryLabel}>{category}</span>
+                <Link key={category.slug} href={`/items/${category.slug}`} className={styles.categoryCard}>
+                  <span className={styles.categoryLabel}>{category.name}</span>
                   <span className={styles.categoryStatus}>Coming soon</span>
                 </Link>
               ))}

@@ -7,7 +7,7 @@ import styles from "./Navbar.module.css";
 const ALL_LINKS = [
   { href: "/", label: "Home" },
   { href: "/weed-dispensary-toronto/", label: "Toronto Store" },
-  { href: "/#menu-preview", label: "Menu Coming Soon" },
+  { href: "/menu", label: "Menu" },
   { href: "/info/fort-york-cannabis-store", label: "Fort York" },
   { href: "/info/cityplace-cannabis-dispensary", label: "CityPlace" },
   { href: "/contact", label: "Contact" },

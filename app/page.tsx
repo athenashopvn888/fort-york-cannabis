@@ -2,12 +2,12 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE } from "./lib/menu-preview";
+import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE, MENU_SOURCE_STATE } from "./lib/menu-preview";
 
 const ACTIONS = [
   { label: "Address", note: "38 Fort York Blvd", href: "/contact" },
   { label: "Directions", note: "Open Google Maps", href: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9", external: true },
-  { label: "Menu", note: "Coming soon", href: "#menu-preview" },
+  { label: "Menu", note: "Source pending", href: "/menu" },
   { label: "Hours", note: "Coming soon", href: "/contact" },
 ];
 
@@ -51,7 +51,7 @@ export default function HomePage() {
           <p className={styles.localLine}>38 Fort York Blvd, Toronto</p>
           <div className={styles.heroActions}>
             <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.heroActionPrimary}>Get Directions</a>
-            <Link href="#menu-preview" className={styles.heroActionSecondary}>Menu Coming Soon</Link>
+            <Link href="/menu" className={styles.heroActionSecondary}>View Menu Status</Link>
           </div>
         </div>
       </section>
@@ -80,8 +80,9 @@ export default function HomePage() {
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <span className={styles.microLabel}>Menu coming soon</span>
-            <h2 id="menu-preview-title" className={styles.sectionTitle}>Browse Preview Categories</h2>
+            <h2 id="menu-preview-title" className={styles.sectionTitle}>Prepared Menu Categories</h2>
             <p className={styles.sectionSubtitle}>{MENU_PREVIEW_NOTICE}</p>
+            <p className={styles.menuSourcePill}>{MENU_SOURCE_STATE.label} - {MENU_SOURCE_STATE.storeCode}</p>
           </div>
           <div className={styles.menuToolbar} aria-label="Menu preview categories">
             {MENU_PREVIEW_CATEGORIES.map((category) => (
@@ -90,12 +91,12 @@ export default function HomePage() {
           </div>
           <div className={styles.menuCategoryGrid}>
             {MENU_PREVIEW_CATEGORIES.map((category) => (
-              <Link key={category.name} href="/weed-dispensary-toronto" className={styles.menuCategoryCard}>
+              <Link key={category.name} href={category.href} className={styles.menuCategoryCard}>
                 <img src={category.banner} alt={`${category.name} category at Fort York Cannabis`} className={styles.menuCategoryImage} />
                 <div className={styles.menuCategoryCopy}>
                   <strong>{category.name}</strong>
                   <span>{category.detail}</span>
-                  <em>View preview</em>
+                  <em>Open category</em>
                 </div>
               </Link>
             ))}
