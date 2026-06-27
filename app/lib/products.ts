@@ -143,7 +143,7 @@ export const TIER_DETAILS: Record<
   AA: {
     name: "AA",
     slug: "aa",
-    description: "Quality daily-driver flower with reliable 5g and 14g pricing.",
+    description: "Quality daily-driver flower with reliable 6g and 14g pricing.",
     unitPrice: 4,
     accent: "#288b5b",
   },
@@ -295,12 +295,12 @@ export function getFlowerPriceRows(product: FlowerProduct, channel: "web" | "tv"
     product.price5g
       ? {
           field: "price5g",
-          label: topBundle ? (isTv ? "6g Total" : "6g Bundle") : "5g",
-          shortLabel: topBundle ? (isTv ? "6G TOTAL" : "6G BUNDLE") : "5G",
-          grams: topBundle ? 6 : 5,
+          label: topBundle ? (isTv ? "6g Total" : "6g Bundle") : "6g",
+          shortLabel: topBundle ? (isTv ? "6G TOTAL" : "6G BUNDLE") : "6G",
+          grams: 6,
           price: product.price5g,
-          promo: topBundle ? (isTv ? "Buy 3g Get 3g Free" : webBundleLabel) : tier === "AA" ? "$20 / 5g AA" : undefined,
-          sourceNote: topBundle ? "ADC price5g field displays as a 6g bundle price." : undefined,
+          promo: topBundle ? (isTv ? "Buy 3g Get 3g Free" : webBundleLabel) : tier === "AA" ? "$20 / 6g AA" : undefined,
+          sourceNote: "ADC price5g field displays as a 6g pack price.",
         }
       : null,
     product.price14g
