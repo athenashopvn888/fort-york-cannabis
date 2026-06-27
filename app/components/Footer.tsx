@@ -9,7 +9,7 @@ export default function Footer() {
           <div className={styles.col}>
             <div className={styles.brand}>FORT YORK CANNABIS</div>
             <p className={styles.desc}>
-              Cannabis store at 38 Fort York Blvd in Toronto. Phone, hours, menu, pickup, delivery, and license information are coming soon.
+              Cannabis store at 38 Fort York Blvd in Toronto. Phone is 437-872-8446 and preview hours are 11AM-2AM. Pickup, delivery, and license details need owner approval.
             </p>
             <div className={styles.buttons}>
               <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.btnPrimary}>
@@ -28,11 +28,11 @@ export default function Footer() {
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Phone:</span>
-              <span>Coming soon</span>
+              <span>437-872-8446</span>
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Hours:</span>
-              <span className={styles.highlight}>Coming soon</span>
+              <span className={styles.highlight}>11AM-2AM</span>
             </div>
           </div>
 
@@ -41,7 +41,7 @@ export default function Footer() {
             <nav className={styles.links}>
               <Link href="/">Home</Link>
               <Link href="/weed-dispensary-toronto/">Toronto Store Page</Link>
-              <Link href="/#menu-preview">Menu Coming Soon</Link>
+              <Link href="/#menu-preview">Preview Menu</Link>
               <Link href="/info/fort-york-cannabis-store">Fort York Cannabis Store</Link>
               <Link href="/info/cityplace-cannabis-dispensary">CityPlace Cannabis Dispensary</Link>
               <Link href="/info/downtown-toronto-weed-dispensary">Downtown Toronto Weed Store</Link>

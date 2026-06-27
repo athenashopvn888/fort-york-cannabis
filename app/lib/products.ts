@@ -57,37 +57,42 @@ const storeCode =
   process.env.MENU_STORE_CODE || process.env.NEXT_PUBLIC_MENU_STORE_CODE || "FYC01";
 const productCount = allFlowers.length + allItems.length;
 
+const previewStockLoaded = productCount > 0 && !liveMenuEnabled;
+
 export const MENU_SOURCE_STATE = {
-  mode: liveMenuEnabled && appsScriptConfigured ? "configured" : "coming-soon",
+  mode: liveMenuEnabled && appsScriptConfigured ? "configured" : previewStockLoaded ? "preview-stock" : "coming-soon",
   label:
     liveMenuEnabled && appsScriptConfigured
       ? "Live menu source configured"
-      : "Menu source pending",
+      : previewStockLoaded
+        ? "Preview stock loaded"
+        : "Menu source pending",
   storeCode,
   hasProductData: productCount > 0,
   productCount,
   liveMenuEnabled,
   appsScriptConfigured,
+  placeholderSource: previewStockLoaded ? "Temporary preview stock for owner review" : "No stock loaded",
   requiredInputs: [
-    "Confirmed Fort York store/menu code",
-    "Approved Apps Script or menu API endpoint",
-    "Confirmed inventory fields and product image source",
-    "Owner approval before enabling live menu fetch",
+    "Owner approval for final Fort York stock source",
+    "Final inventory, pricing, brands, and availability",
+    "Pickup, delivery, and checkout rules",
+    "Apps Script or menu API endpoint if live stock is approved",
   ],
 };
 
 export const MENU_STATUS_NOTICE =
-  "Fort York is prepared for the network menu system. Final products, prices, pickup, delivery, and live menu details will appear only after the approved menu source is connected.";
+  "Preview stock and prices are loaded for local review only. Final Fort York inventory, prices, pickup/delivery rules, and checkout actions are pending owner approval.";
 
 export const MENU_CATEGORIES: MenuCategory[] = [
   {
     key: "FLOWER",
     name: "Flower",
     slug: "flower",
-    detail: "Flower category ready for confirmed menu source.",
+    detail: "Flower preview stock loaded for owner review.",
     banner: "/brand/category-flower.webp",
     itemKeys: [],
-    seoTitle: "Flower Menu Coming Soon | FORT YORK CANNABIS",
+    seoTitle: "Flower Preview Menu | FORT YORK CANNABIS",
     seoDescription:
       "Fort York flower menu category is prepared for the approved menu source. Final products and pricing are pending owner/backend confirmation.",
   },
@@ -95,10 +100,10 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     key: "PREROLLS",
     name: "Pre-Rolls",
     slug: "pre-rolls",
-    detail: "Pre-roll category ready for confirmed menu source.",
+    detail: "Pre-roll preview stock loaded for owner review.",
     banner: "/brand/category-pre-rolls.webp",
     itemKeys: ["PREROLLS", "PRE-ROLLS", "PRE ROLLS"],
-    seoTitle: "Pre-Rolls Menu Coming Soon | FORT YORK CANNABIS",
+    seoTitle: "Pre-Rolls Preview Menu | FORT YORK CANNABIS",
     seoDescription:
       "Fort York pre-roll menu category is prepared for the approved menu source. Final products and pricing are pending owner/backend confirmation.",
   },
@@ -106,10 +111,10 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     key: "VAPES",
     name: "Vapes",
     slug: "vapes",
-    detail: "Vape category ready for confirmed menu source.",
+    detail: "Vape preview stock loaded for owner review.",
     banner: "/brand/category-vapes.webp",
     itemKeys: ["VAPE PENS", "VAPE DISPOSABLE", "THC VAPE", "VAPES"],
-    seoTitle: "Vapes Menu Coming Soon | FORT YORK CANNABIS",
+    seoTitle: "Vapes Preview Menu | FORT YORK CANNABIS",
     seoDescription:
       "Fort York vape menu category is prepared for the approved menu source. Final products and pricing are pending owner/backend confirmation.",
   },
@@ -117,10 +122,10 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     key: "EDIBLES",
     name: "Edibles",
     slug: "edibles",
-    detail: "Edibles category ready for confirmed menu source.",
+    detail: "Edibles preview stock loaded for owner review.",
     banner: "/brand/category-edibles.webp",
     itemKeys: ["EDIBLES"],
-    seoTitle: "Edibles Menu Coming Soon | FORT YORK CANNABIS",
+    seoTitle: "Edibles Preview Menu | FORT YORK CANNABIS",
     seoDescription:
       "Fort York edibles menu category is prepared for the approved menu source. Final products and pricing are pending owner/backend confirmation.",
   },
@@ -128,10 +133,10 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     key: "CONCENTRATES",
     name: "Concentrates",
     slug: "concentrates",
-    detail: "Concentrates category ready for confirmed menu source.",
+    detail: "Concentrates preview stock loaded for owner review.",
     banner: "/brand/category-concentrates.webp",
     itemKeys: ["CONCENTRATES"],
-    seoTitle: "Concentrates Menu Coming Soon | FORT YORK CANNABIS",
+    seoTitle: "Concentrates Preview Menu | FORT YORK CANNABIS",
     seoDescription:
       "Fort York concentrates menu category is prepared for the approved menu source. Final products and pricing are pending owner/backend confirmation.",
   },
@@ -139,10 +144,10 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     key: "ACCESSORIES",
     name: "Accessories",
     slug: "accessories",
-    detail: "Accessories category ready for confirmed menu source.",
+    detail: "Accessories preview stock loaded for owner review.",
     banner: "/brand/category-accessories.webp",
     itemKeys: ["ADD ONS", "ACCESSORIES"],
-    seoTitle: "Accessories Menu Coming Soon | FORT YORK CANNABIS",
+    seoTitle: "Accessories Preview Menu | FORT YORK CANNABIS",
     seoDescription:
       "Fort York accessories category is prepared for the approved menu source. Final products and pricing are pending owner/backend confirmation.",
   },

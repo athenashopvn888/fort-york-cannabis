@@ -1,17 +1,17 @@
+﻿import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import Link from "next/link";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import styles from "./items.module.css";
 import {
   MENU_CATEGORIES,
   MENU_SOURCE_STATE,
   getMenuCategoryBySlug,
+  getMenuItemCount,
   getMenuProductsByCategory,
   getProductImage,
   type MenuProduct,
 } from "../../lib/products";
-import styles from "./items.module.css";
+
+export const dynamic = "force-static";
 
 export function generateStaticParams() {
   return MENU_CATEGORIES.map((category) => ({ category: category.slug }));
@@ -20,102 +20,113 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ category: string }>;
-}): Promise<Metadata> {
+  params: Promise<{ category: string }>
+}) {
   const { category: slug } = await params;
   const category = getMenuCategoryBySlug(slug);
-  if (!category) return {};
+
+  if (!category) {
+    return {
+      title: "Fort York Menu Category | FORT YORK CANNABIS",
+    };
+  }
 
   return {
-    title: category.seoTitle,
-    description: category.seoDescription,
+    title: `${category.name} Preview Menu | FORT YORK CANNABIS Toronto`,
+    description: `${category.name} preview products for FORT YORK CANNABIS at 38 Fort York Blvd in Toronto. Final inventory and ordering require owner approval.`,
     alternates: {
-      canonical: `https://fortyorkcannabis.com/items/${slug}`,
+      canonical: `/items/${category.slug}`,
     },
   };
 }
 
-export default async function ItemsCategoryPage({
-  params,
-}: {
-  params: Promise<{ category: string }>;
-}) {
-  const { category: slug } = await params;
-  const category = getMenuCategoryBySlug(slug);
-  if (!category) notFound();
+function getPreviewPrice(product: MenuProduct) {
+  if ("tier" in product) {
+    const values = [product.price3g, product.price5g, product.price14g, product.price28g]
+      .flatMap((price) => (price ? [price.sale ?? price.regular] : []))
+      .filter((value): value is number => typeof value === "number");
 
-  const products = getMenuProductsByCategory(category);
+    if (!values.length) {
+      return "Price pending";
+    }
 
-  return (
-    <main className={styles.main}>
-      <Navbar />
+    return `From $${Math.min(...values)}`;
+  }
 
-      <section className={styles.hero}>
-        <img src={category.banner} alt={`${category.name} at Fort York Cannabis`} className={styles.heroImage} />
-        <div className={styles.heroOverlay} />
-        <div className={styles.heroCopy}>
-          <span className={styles.microLabel}>Fort York menu category</span>
-          <h1>{category.name}</h1>
-          <p>{category.detail}</p>
-          <Link href="/menu" className={styles.backLink}>Back to full menu</Link>
-        </div>
-      </section>
-
-      <section className={styles.productsSection}>
-        <div className={styles.container}>
-          <div className={styles.statusPanel}>
-            <div>
-              <span className={styles.microLabel}>Current menu mode</span>
-              <h2>{MENU_SOURCE_STATE.label}</h2>
-              <p>
-                Fort York category routes are ready, but final product names, pricing, pickup, delivery, and live menu details are not displayed until the approved source is connected.
-              </p>
-            </div>
-            <div className={styles.statusMeta}>
-              <span>Store code</span>
-              <strong>{MENU_SOURCE_STATE.storeCode}</strong>
-              <span>Confirmed category items</span>
-              <strong>{products.length}</strong>
-            </div>
-          </div>
-
-          {products.length > 0 ? (
-            <div className={styles.grid}>
-              {products.map((product) => (
-                <ProductCard key={product.sku || product.slug} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className={styles.emptyState}>
-              <span className={styles.emptyKicker}>Menu source pending</span>
-              <h2>{category.name} menu coming soon</h2>
-              <p>
-                This page is wired for the same generated-data menu pattern used across the store network. It will stay in a clean customer-facing fallback state until Fort York product data is approved.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      <Footer />
-    </main>
-  );
+  return product.price || "Price pending";
 }
 
 function ProductCard({ product }: { product: MenuProduct }) {
+  const slug = product.slug;
   const isFlower = "tier" in product;
   const detail = isFlower
-    ? [product.type, product.thc].filter(Boolean).join(" / ")
-    : [product.category, product.type, product.thc || product.mg].filter(Boolean).join(" / ");
+    ? [product.tier, product.type, product.thc ? `THC ${product.thc}` : ""].filter(Boolean).join(" / ")
+    : [product.category, product.thc ? `THC ${product.thc}` : ""].filter(Boolean).join(" / ");
 
   return (
     <article className={styles.card}>
-      <img src={getProductImage(product)} alt={product.name} className={styles.cardImage} />
+      <div className={styles.imageWrap}>
+        <img src={getProductImage(product)} alt={`${product.name} preview product at Fort York Cannabis`} loading="lazy" />
+        <span className={styles.previewBadge}>Preview stock</span>
+      </div>
       <div className={styles.cardBody}>
         <span className={styles.cardMeta}>{detail || "Fort York menu item"}</span>
         <h3>{product.name}</h3>
-        <p>Confirmed Fort York menu item. Final ordering actions require owner/backend approval.</p>
+        <strong className={styles.cardPrice}>{getPreviewPrice(product)}</strong>
+        <p>Temporary preview product for owner review. Final Fort York stock and ordering are pending approval.</p>
+        <Link href={`/items/${isFlower ? "flower" : product.category.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}/${slug}`}>
+          Preview details
+        </Link>
       </div>
     </article>
+  );
+}
+
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<{ category: string }>
+}) {
+  const { category: slug } = await params;
+  const category = getMenuCategoryBySlug(slug);
+
+  if (!category) {
+    notFound();
+  }
+
+  const products = getMenuProductsByCategory(category);
+  const count = getMenuItemCount(category);
+
+  return (
+    <main className={styles.page}>
+      <section className={styles.hero}>
+        <div>
+          <span className={styles.kicker}>Fort York preview menu</span>
+          <h1>{category.name}</h1>
+          <p>{category.detail}</p>
+        </div>
+        <div className={styles.statusPanel}>
+          <span>{MENU_SOURCE_STATE.label}</span>
+          <strong>{count} preview products</strong>
+          <p>Preview stock and prices are shown for local review only. Final Fort York inventory requires owner approval.</p>
+        </div>
+      </section>
+
+      {products.length > 0 ? (
+        <section className={styles.grid} aria-label={`${category.name} preview products`}>
+          {products.map((product) => (
+            <ProductCard key={product.sku} product={product} />
+          ))}
+        </section>
+      ) : (
+        <section className={styles.empty}>
+          <h2>Final inventory pending</h2>
+          <p>
+            This category route is ready for Fort York products, but final inventory, pricing, and availability still require owner approval.
+          </p>
+          <Link href="/menu">Back to menu</Link>
+        </section>
+      )}
+    </main>
   );
 }

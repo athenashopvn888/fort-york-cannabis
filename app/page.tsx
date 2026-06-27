@@ -7,8 +7,8 @@ import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE, MENU_SOURCE_STATE } from 
 const ACTIONS = [
   { label: "Address", note: "38 Fort York Blvd", href: "/contact" },
   { label: "Directions", note: "Open Google Maps", href: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9", external: true },
-  { label: "Menu", note: "Source pending", href: "/menu" },
-  { label: "Hours", note: "Coming soon", href: "/contact" },
+  { label: "Menu", note: "Preview stock loaded", href: "/menu" },
+  { label: "Hours", note: "11AM-2AM", href: "/contact" },
 ];
 
 const LOCAL_FEATURES = [
@@ -24,11 +24,11 @@ const LOCAL_FAQS = [
   },
   {
     q: "What are the store hours?",
-    a: "Hours coming soon. This site does not use open-now, late-night, or 24-hour wording until hours are confirmed.",
+    a: "11AM-2AM. This site does not use open-now, late-night, or 24-hour wording until hours are confirmed.",
   },
   {
     q: "Is the menu live?",
-    a: "Menu coming soon. Product categories are shown as a preview while final inventory is prepared.",
+    a: "Preview menu is loaded with temporary stock for owner review while final Fort York inventory is prepared.",
   },
   {
     q: "Which neighbourhoods does the store serve?",
@@ -79,8 +79,8 @@ export default function HomePage() {
       <section className={styles.menuPreviewSection} id="menu-preview" aria-labelledby="menu-preview-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <span className={styles.microLabel}>Menu coming soon</span>
-            <h2 id="menu-preview-title" className={styles.sectionTitle}>Prepared Menu Categories</h2>
+            <span className={styles.microLabel}>Preview menu</span>
+            <h2 id="menu-preview-title" className={styles.sectionTitle}>Preview Menu Categories</h2>
             <p className={styles.sectionSubtitle}>{MENU_PREVIEW_NOTICE}</p>
             <p className={styles.menuSourcePill}>{MENU_SOURCE_STATE.label} - {MENU_SOURCE_STATE.storeCode}</p>
           </div>
@@ -123,8 +123,8 @@ export default function HomePage() {
               <p className={styles.storeCardText}>Serving Fort York, CityPlace, waterfront Toronto, King West, and downtown Toronto.</p>
             </div>
             <div className={styles.storeCard}>
-              <h3 className={styles.storeCardTitle}>Opening Details Coming Soon</h3>
-              <p className={styles.storeCardText}>Phone, hours, license details, pickup, delivery, and the final menu will be added after approval.</p>
+              <h3 className={styles.storeCardTitle}>Store Details</h3>
+              <p className={styles.storeCardText}>Phone 437-872-8446 and preview hours 11AM-2AM are ready for owner review. License, pickup, delivery, and final Fort York stock still need approval.</p>
             </div>
           </div>
         </div>
@@ -158,9 +158,9 @@ export default function HomePage() {
           <div className={styles.visitPanel}>
             <div>
               <span className={styles.microLabel}>Plan your visit</span>
-              <h2 className={styles.sectionTitle}>Directions Ready. Menu Coming Soon.</h2>
+              <h2 className={styles.sectionTitle}>Directions Ready. Menu Preview Ready.</h2>
               <p className={styles.sectionSubtitle}>
-                Use the map link for directions to 38 Fort York Blvd. Phone, hours, pickup, delivery, and final menu details are coming soon.
+                Use the map link for directions to 38 Fort York Blvd. Phone is 437-872-8446, preview hours are 11AM-2AM, and final pickup/delivery details still need owner approval.
               </p>
             </div>
             <div className={styles.visitActions}>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | FORT YORK CANNABIS",
   },
   description:
-    "FORT YORK CANNABIS is a local cannabis store at 38 Fort York Blvd in Toronto, serving Fort York, CityPlace, the waterfront, and downtown Toronto. Hours, phone, and menu details are coming soon.",
+    "FORT YORK CANNABIS is a local cannabis store at 38 Fort York Blvd in Toronto, serving Fort York, CityPlace, the waterfront, and downtown Toronto. Phone is 437-872-8446 and preview hours are 11AM-2AM.",
   keywords: [
     "weed dispensary in Toronto",
     "cannabis store near Fort York",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "FORT YORK CANNABIS",
     title: "FORT YORK CANNABIS | Downtown Toronto Cannabis Store",
     description:
-      "A Fort York / CityPlace cannabis store at 38 Fort York Blvd. Phone, hours, and menu are coming soon.",
+      "A Fort York / CityPlace cannabis store at 38 Fort York Blvd. Phone is 437-872-8446 and preview hours are 11AM-2AM.",
     images: [
       {
         url: `${siteUrl}/brand/og-fort-york-cannabis.webp`,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "FORT YORK CANNABIS | Downtown Toronto Cannabis Store",
-    description: "Fort York / CityPlace cannabis store. Details coming soon.",
+    description: "Fort York / CityPlace cannabis store at 38 Fort York Blvd.",
     images: [`${siteUrl}/brand/og-fort-york-cannabis.webp`],
   },
   robots: {
@@ -65,8 +65,10 @@ const jsonLd = {
   "@id": siteUrl,
   name: "FORT YORK CANNABIS",
   description:
-    "Cannabis store at 38 Fort York Blvd in Toronto, ON. Phone, hours, menu, and launch details are coming soon.",
+    "Cannabis store at 38 Fort York Blvd in Toronto, ON. Phone is 437-872-8446 and preview hours are 11AM-2AM.",
   url: siteUrl,
+  telephone: "437-872-8446",
+  openingHours: "Mo-Su 11:00-02:00",
   image: `${siteUrl}/brand/og-fort-york-cannabis.webp`,
   hasMap: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9",
   address: {

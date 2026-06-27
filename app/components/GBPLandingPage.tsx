@@ -6,7 +6,7 @@ import { MENU_PREVIEW_CATEGORIES, MENU_PREVIEW_NOTICE, MENU_SOURCE_STATE } from 
 const trustItems = [
   { label: "Address", value: "38 Fort York Blvd" },
   { label: "Area", value: "Fort York / CityPlace" },
-  { label: "Menu", value: "Coming soon" },
+  { label: "Menu", value: "Preview stock loaded" },
 ];
 
 export function GBPLandingPage() {
@@ -99,7 +99,7 @@ export function GBPLandingPage() {
         <div>
           <span className={styles.microLabel}>Store information</span>
           <h2 className={styles.h2}>Fort York Cannabis Store</h2>
-          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone, hours, pickup, delivery, license details, and the final menu are coming soon.</p>
+          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-872-8446 and preview hours 11AM-2AM are ready for owner review. Pickup, delivery, license details, and final menu approval are pending.</p>
         </div>
         <div className={styles.trustGrid}>
           {trustItems.map((item) => (
@@ -131,7 +131,7 @@ export function GBPLandingPage() {
       </section>
 
       <section className={styles.section} id="menu-preview">
-        <h2 className={styles.h2}>Menu Coming Soon</h2>
+        <h2 className={styles.h2}>Preview Menu</h2>
         <p className={styles.infoText}>{MENU_PREVIEW_NOTICE}</p>
         <p className={styles.menuStatusLine}>{MENU_SOURCE_STATE.label} - {MENU_SOURCE_STATE.storeCode}</p>
         <div className={styles.previewRail} aria-label="Menu preview categories">
@@ -166,11 +166,11 @@ export function GBPLandingPage() {
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Phone</span>
-              <span>Phone coming soon</span>
+              <span>437-872-8446</span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Store Hours</span>
-              <span>Hours coming soon</span>
+              <span>11AM-2AM</span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Google Maps</span>
@@ -192,11 +192,11 @@ export function GBPLandingPage() {
           </div>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Are store hours available?</h3>
-            <p className={styles.faqAnswer}>Hours coming soon. This page does not use live-hours, open-now, or extended-hours wording until hours are confirmed.</p>
+            <p className={styles.faqAnswer}>11AM-2AM. This page does not use live-hours, open-now, or extended-hours wording until hours are confirmed.</p>
           </div>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Is the menu live?</h3>
-            <p className={styles.faqAnswer}>Menu coming soon. Preview categories are shown while final inventory is prepared.</p>
+            <p className={styles.faqAnswer}>Preview stock is loaded for owner review while final Fort York inventory is prepared.</p>
           </div>
         </div>
       </section>

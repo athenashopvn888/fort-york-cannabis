@@ -11,7 +11,7 @@ import {
 import styles from "./menu.module.css";
 
 export const metadata: Metadata = {
-  title: "Menu Coming Soon | FORT YORK CANNABIS",
+  title: "Preview Menu | FORT YORK CANNABIS",
   description:
     "FORT YORK CANNABIS menu categories are prepared for the network menu source. Final products, prices, and ordering details are pending owner/backend confirmation.",
   alternates: {
@@ -65,7 +65,7 @@ export default function MenuPage() {
                   <div className={styles.categoryCopy}>
                     <strong>{category.name}</strong>
                     <span>{category.detail}</span>
-                    <em>{count > 0 ? `${count} confirmed menu items` : "Menu source pending"}</em>
+                    <em>{count > 0 ? `${count} preview products` : "Preview stock pending"}</em>
                   </div>
                 </Link>
               );
