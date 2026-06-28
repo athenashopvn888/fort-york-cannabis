@@ -1,0 +1,22 @@
+{
+  "name": "FORT YORK CANNABIS",
+  "short_name": "Fort York",
+  "description": "FORT YORK CANNABIS at 38 Fort York Blvd in Toronto.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#08232a",
+  "theme_color": "#08232a",
+  "icons": [
+    {
+      "src": "/brand/fort-york-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/brand/fort-york-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
