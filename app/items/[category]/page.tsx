@@ -216,7 +216,10 @@ export default async function CategoryPage({
     <main className={styles.page}>
       <Navbar />
 
-      <section className={styles.hero}>
+      <section
+        className={styles.hero}
+        style={{ "--category-banner": `url(${category.banner})` } as CSSProperties}
+      >
         <div>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">
             <Link href="/">Home</Link>
