@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./AgeGate.module.css";
 
 function shouldShowAgeGate() {
@@ -17,6 +18,15 @@ function shouldShowAgeGate() {
 export default function AgeGate() {
   const [show, setShow] = useState(shouldShowAgeGate);
   const [underage, setUnderage] = useState(false);
+  useEffect(() => {
+    if (!show) return;
+
+    document.body.classList.add("ageGateLocked");
+
+    return () => {
+      document.body.classList.remove("ageGateLocked");
+    };
+  }, [show]);
 
   const handleVerify = () => {
     localStorage.setItem("fyc_age_verified", "true");
@@ -27,15 +37,15 @@ export default function AgeGate() {
     setUnderage(true);
   };
 
-  if (!show) return null;
+  if (!show || typeof document === "undefined") return null;
 
-  return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
+  return createPortal(
+    <div className={styles.overlay} role="presentation">
+      <div className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
         {underage ? (
           <div className={styles.underageState}>
             <span className={styles.warningIcon}>!</span>
-            <h2 className={styles.title}>Access Denied</h2>
+            <h2 id="age-gate-title" className={styles.title}>Access Denied</h2>
             <p className={styles.text}>
               You must be 19 years of age or older to enter this website.
             </p>
@@ -47,12 +57,12 @@ export default function AgeGate() {
           <div className={styles.promptState}>
             <div className={styles.logoWrap}>
               <img
-                src="/brand/fort-york-logo.svg"
+                src="/brand/fort-york-icon.svg"
                 alt="FORT YORK CANNABIS"
                 className={styles.logo}
               />
             </div>
-            <h2 className={styles.title}>Age Verification</h2>
+            <h2 id="age-gate-title" className={styles.title}>Age Verification</h2>
             <p className={styles.text}>
               FORT YORK CANNABIS requires all visitors to be of legal age.
               Are you <strong>19 years of age or older</strong>?
@@ -79,6 +89,7 @@ export default function AgeGate() {
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

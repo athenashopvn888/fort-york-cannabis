@@ -23,6 +23,7 @@ import {
   getProductPath,
   getRelatedProducts,
   getSalePrice,
+  getTierAnchor,
   getTierDetail,
 } from "../../../lib/products";
 
@@ -71,10 +72,23 @@ export default async function ProductDetailPage({
 
   const isFlower = "tier" in item;
   const related = getRelatedProducts(item, 8);
+  const tierDetail = isFlower ? getTierDetail(item.tier) : null;
+  const detailReturnHref = isFlower
+    ? `/items/${menuCategory.slug}#${getTierAnchor(item.tier)}`
+    : `/items/${menuCategory.slug}`;
+  const detailReturnLabel = tierDetail
+    ? `Back to ${tierDetail.name}`
+    : `Back to ${menuCategory.name}`;
 
   return (
     <main className={styles.detailPage}>
       <Navbar />
+
+      <nav className={styles.detailExitBar} aria-label="Product detail navigation">
+        <Link href={detailReturnHref} className={styles.detailExitPrimary}>{detailReturnLabel}</Link>
+        <Link href={`/items/${menuCategory.slug}`} className={styles.detailExitSecondary}>All {menuCategory.name}</Link>
+        <Link href="/menu" className={styles.detailExitSecondary}>Menu</Link>
+      </nav>
 
       <nav className={styles.detailBreadcrumb} aria-label="Breadcrumb">
         <Link href="/">Home</Link>
@@ -97,8 +111,8 @@ export default async function ProductDetailPage({
         </div>
         <div className={styles.detailCopy}>
           <div className={styles.backRow}>
+            <Link href={detailReturnHref} className={styles.backLink}>{detailReturnLabel}</Link>
             <Link href="/menu" className={styles.backLink}>Back to Menu</Link>
-            <Link href={`/items/${menuCategory.slug}`} className={styles.backLink}>Back to {menuCategory.name}</Link>
           </div>
           <span className={styles.kicker}>{menuCategory.name}</span>
           <h1>{item.name}</h1>
@@ -190,7 +204,7 @@ function FlowerDetail({ product }: { product: Extract<ReturnType<typeof findMenu
         })}
       </section>
 
-      {bestValue ? <p className={styles.valueNote}>Best value: ${bestValue.perGram}/g at {bestValue.label}</p> : null}
+      {bestValue ? <p className={styles.valueNote}>Lowest $/g: ${bestValue.perGram}/g at {bestValue.label}</p> : null}
 
       <section className={styles.descBlock}>
         <h2>About {product.name}</h2>

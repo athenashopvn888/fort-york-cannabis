@@ -134,11 +134,11 @@ export function GBPLandingPage() {
         <h2 className={styles.h2}>Menu</h2>
         <p className={styles.infoText}>{MENU_CATALOG_NOTICE}</p>
         <p className={styles.menuStatusLine}>Open 11AM-2AM - {MENU_SOURCE_STATE.productCount} menu items</p>
-        <div className={styles.menuRail} aria-label="Menu categories">
+        <nav className={styles.menuRail} aria-label="Menu categories">
           {MENU_CATALOG_CATEGORIES.map((category) => (
-            <span key={category.name}>{category.name}</span>
+            <Link key={category.name} href={category.href}>{category.name}</Link>
           ))}
-        </div>
+        </nav>
         <div className={styles.productGrid}>
           {MENU_CATALOG_CATEGORIES.map((category) => (
             <Link key={category.name} href={category.href} className={styles.productCard}>

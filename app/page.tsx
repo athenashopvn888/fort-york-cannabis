@@ -84,11 +84,11 @@ export default function HomePage() {
             <p className={styles.sectionSubtitle}>{MENU_CATALOG_NOTICE}</p>
             <p className={styles.menuSourcePill}>Open 11AM-2AM - {MENU_SOURCE_STATE.productCount} menu items</p>
           </div>
-          <div className={styles.menuToolbar} aria-label="Menu categories">
+          <nav className={styles.menuToolbar} aria-label="Menu categories">
             {MENU_CATALOG_CATEGORIES.map((category) => (
-              <span key={category.name}>{category.name}</span>
+              <Link key={category.name} href={category.href}>{category.name}</Link>
             ))}
-          </div>
+          </nav>
           <div className={styles.menuCategoryGrid}>
             {MENU_CATALOG_CATEGORIES.map((category) => (
               <Link key={category.name} href={category.href} className={styles.menuCategoryCard}>

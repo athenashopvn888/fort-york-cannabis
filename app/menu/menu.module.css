@@ -297,3 +297,80 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 700px) {
+  .container {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .hero {
+    padding: 126px 0 58px;
+  }
+
+  .title {
+    font-size: clamp(40px, 13vw, 58px);
+  }
+
+  .statusGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroNav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .heroNav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .heroNav a {
+    flex: 0 0 auto;
+    min-height: 38px;
+  }
+
+  .categorySection,
+  .featureSection {
+    padding: 56px 0;
+  }
+
+  .categoryGrid,
+  .featureGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .categoryCard {
+    min-height: 180px;
+  }
+
+  .categoryImage {
+    min-height: 180px;
+  }
+
+  .categoryCopy {
+    padding: 14px;
+  }
+
+  .categoryCopy strong {
+    font-size: 18px;
+  }
+
+  .categoryCopy span {
+    display: none;
+  }
+
+  .featureCard {
+    padding: 10px;
+  }
+
+  .featureCard img {
+    height: 104px;
+  }
+
+  .featureCard strong {
+    font-size: 13px;
+  }
+}

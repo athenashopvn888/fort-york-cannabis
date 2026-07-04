@@ -6,7 +6,7 @@
   font-family: Inter, Arial, sans-serif;
   min-height: 100vh;
   overflow: hidden;
-  padding: 16px;
+  padding: 6px;
 }
 
 .screen * {
@@ -18,10 +18,11 @@
   display: grid;
   gap: 12px;
   grid-template-rows: auto auto minmax(0, 1fr) auto;
-  height: calc(100vh - 32px);
-  margin: 0 auto;
-  max-width: 1920px;
-  min-height: 820px;
+  height: calc(100vh - 12px);
+  margin: 0;
+  max-width: none;
+  min-height: 0;
+  width: 100%;
 }
 
 .header {
@@ -150,11 +151,11 @@
 
 .stage {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   grid-template-areas:
     "exotic premium aaa addons"
     "aa budget oz addons";
-  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(210px, 0.44fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(214px, 0.34fr);
   grid-template-rows: minmax(0, 1fr) minmax(0, 0.92fr);
   min-height: 0;
 }
@@ -310,7 +311,7 @@
   display: grid;
   flex: 1;
   gap: 10px;
-  grid-template-columns: minmax(150px, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(170px, 0.9fr) minmax(0, 1.1fr);
   min-height: 0;
   padding: 10px;
 }
@@ -333,15 +334,15 @@
   border: 1px solid rgba(3, 28, 34, 0.12);
   border-radius: 8px;
   display: flex;
-  height: 126px;
+  height: clamp(136px, 15vh, 176px);
   justify-content: center;
   overflow: hidden;
   position: relative;
 }
 
 .imageFrame img {
-  height: 112px;
-  max-width: 92%;
+  height: calc(100% - 14px);
+  max-width: 94%;
   object-fit: contain;
 }
 
@@ -984,7 +985,7 @@
 
   .canvas {
     height: auto;
-    min-height: calc(100vh - 32px);
+    min-height: auto;
   }
 
   .header,

@@ -1,11 +1,15 @@
 .screen {
+  height: 100vh;
   min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(5, 42, 49, 0.94), rgba(7, 15, 18, 0.98)),
     radial-gradient(circle at 82% 12%, rgba(242, 198, 121, 0.22), transparent 26%);
   color: #fff8ed;
   font-family: Inter, Arial, sans-serif;
-  padding: 26px;
+  padding: 12px;
 }
 
 .header {
@@ -13,7 +17,7 @@
   border-bottom: 1px solid rgba(244, 213, 154, 0.25);
   display: flex;
   justify-content: space-between;
-  padding-bottom: 18px;
+  padding-bottom: 10px;
 }
 
 .header span,
@@ -52,16 +56,20 @@
 
 .categoryGrid {
   display: grid;
-  gap: 16px;
+  gap: 10px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding: 22px 0;
+  min-height: 0;
+  padding: 10px 0;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
 .board {
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(244, 213, 154, 0.24);
-  border-radius: 18px;
-  min-height: 560px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -70,7 +78,7 @@
   background: linear-gradient(90deg, var(--accent, #0b756d), rgba(5, 42, 49, 0.82));
   display: flex;
   justify-content: space-between;
-  padding: 14px 16px;
+  padding: 10px 12px;
 }
 
 .boardHeader h2 {
@@ -93,8 +101,8 @@
   align-items: stretch;
   display: grid;
   gap: 12px;
-  grid-template-columns: 170px minmax(0, 1fr);
-  padding: 14px;
+  grid-template-columns: 148px minmax(0, 1fr);
+  padding: 10px;
 }
 
 .featureImage {
@@ -104,12 +112,12 @@
   border-radius: 14px;
   display: flex;
   justify-content: center;
-  min-height: 160px;
+  min-height: 128px;
   position: relative;
 }
 
 .featureImage img {
-  height: 140px;
+  height: 118px;
   max-width: 94%;
   object-fit: contain;
 }
@@ -185,8 +193,10 @@
 
 .itemRows {
   display: grid;
-  gap: 8px;
-  padding: 0 14px 14px;
+  gap: 5px;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 10px 10px;
 }
 
 .itemRow {
@@ -195,15 +205,15 @@
   border-radius: 14px;
   display: grid;
   gap: 10px;
-  grid-template-columns: 54px minmax(0, 1fr) auto;
-  min-height: 78px;
-  padding: 8px;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  min-height: 54px;
+  padding: 6px;
 }
 
 .itemRow img {
-  height: 54px;
+  height: 42px;
   object-fit: contain;
-  width: 54px;
+  width: 42px;
 }
 
 .itemRow strong {
@@ -247,7 +257,7 @@
   display: flex;
   gap: 20px;
   justify-content: space-between;
-  padding-top: 16px;
+  padding-top: 10px;
   text-transform: uppercase;
 }
 

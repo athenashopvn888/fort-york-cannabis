@@ -78,7 +78,7 @@ function StickyMenuNavigator({ activeSlug, showTiers }: { activeSlug: string; sh
   const groups = showTiers ? getFlowerTierGroups() : [];
 
   return (
-    <div className={styles.stickyMenuNav}>
+    <div className={styles.stickyMenuNav} data-has-tiers={showTiers ? true : false}>
       <CategoryNavigation activeSlug={activeSlug} />
       {showTiers ? (
         <nav className={styles.tierJump} aria-label="Jump to flower tier">
@@ -213,7 +213,7 @@ export default async function CategoryPage({
   const isFlower = category.key === "FLOWER";
 
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} ${isFlower ? styles.flowerPage : styles.categoryPage}`}>
       <Navbar />
 
       <section

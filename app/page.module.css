@@ -267,7 +267,7 @@
   margin: -12px 0 28px;
 }
 
-.menuToolbar span {
+.menuToolbar a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -582,5 +582,90 @@
 @media (max-width: 640px) {
   .heroBg {
     background-image: url("/brand/hero-home-mobile.webp");
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .hero {
+    min-height: 520px;
+    padding: 116px 14px 58px;
+  }
+
+  .brandTitle {
+    max-width: 92vw;
+    font-size: clamp(34px, 11vw, 48px);
+    line-height: 1.02;
+  }
+
+  .brandSub {
+    font-size: 17px;
+  }
+
+  .localLine {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  .menuSection {
+    padding-top: 64px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 24px;
+  }
+
+  .sectionTitle {
+    font-size: clamp(28px, 9vw, 38px);
+  }
+
+  .menuToolbar {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin: -8px -10px 22px;
+    overflow-x: auto;
+    padding: 0 10px 4px;
+    scrollbar-width: none;
+  }
+
+  .menuToolbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menuToolbar a {
+    flex: 0 0 auto;
+    min-height: 38px;
+  }
+
+  .menuCategoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .menuCategoryCard {
+    min-height: 180px;
+  }
+
+  .menuCategoryImage {
+    min-height: 180px;
+  }
+
+  .menuCategoryCopy {
+    padding: 14px;
+  }
+
+  .menuCategoryCopy strong {
+    font-size: 18px;
+  }
+
+  .menuCategoryCopy span {
+    display: none;
+  }
+
+  .storeCard {
+    padding: 20px;
   }
 }

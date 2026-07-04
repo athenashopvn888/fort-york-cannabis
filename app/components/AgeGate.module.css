@@ -1,13 +1,139 @@
-﻿.overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(7,18,31,0.86); backdrop-filter: blur(12px); }
-.modal { width: min(100%, 440px); border-radius: 8px; background: linear-gradient(145deg, #0b1f33, #07121f); border: 1px solid rgba(225,184,107,0.28); box-shadow: 0 28px 90px rgba(0,0,0,0.42); padding: 30px; text-align: center; color: var(--brand-mist); }
-.logoWrap { display: flex; justify-content: center; margin-bottom: 18px; }
-.logo { width: 96px; height: 96px; object-fit: contain; border-radius: 8px; }
-.title { margin: 0 0 12px; font-size: 28px; text-transform: uppercase; }
-.text { color: var(--brand-slate); line-height: 1.7; margin-bottom: 20px; }
-.btnRow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-.yesBtn, .noBtn, .exitBtn { min-height: 44px; border-radius: 8px; border: 1px solid transparent; font-weight: 900; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
-.yesBtn { background: var(--brand-teal); color: var(--brand-ink); }
-.noBtn, .exitBtn { background: transparent; color: var(--brand-mist); border-color: rgba(244,247,246,0.18); }
-.disclaimer { display: block; color: var(--text-muted); font-size: 12px; }
-.warningIcon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-bottom: 14px; border-radius: 8px; background: rgba(201,135,70,0.15); border: 1px solid rgba(201,135,70,0.36); color: var(--brand-gold); font-weight: 900; }
-@media (max-width: 440px) { .btnRow { grid-template-columns: 1fr; } }
+﻿:global(body.ageGateLocked) {
+  overflow: hidden;
+  touch-action: none;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  padding: 20px;
+  overflow: auto;
+  background: rgba(7, 18, 31, 0.9);
+  backdrop-filter: blur(14px) saturate(1.15);
+  isolation: isolate;
+}
+
+.modal {
+  width: min(100%, 440px);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #0b1f33, #07121f);
+  border: 1px solid rgba(225, 184, 107, 0.34);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52);
+  padding: clamp(22px, 5vw, 30px);
+  text-align: center;
+  color: var(--brand-mist);
+}
+
+.logoWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.logo {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.title {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: clamp(24px, 7vw, 28px);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.text {
+  color: #d7e7ea;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+
+.btnRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.yesBtn,
+.noBtn,
+.exitBtn {
+  min-height: 46px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 900;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yesBtn {
+  background: var(--brand-teal);
+  color: var(--brand-ink);
+}
+
+.noBtn,
+.exitBtn {
+  background: transparent;
+  color: var(--brand-mist);
+  border-color: rgba(244, 247, 246, 0.22);
+}
+
+.disclaimer {
+  display: block;
+  color: #9fc1c8;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.warningIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  background: rgba(201, 135, 70, 0.15);
+  border: 1px solid rgba(201, 135, 70, 0.36);
+  color: var(--brand-gold);
+  font-weight: 900;
+}
+
+@media (max-width: 440px) {
+  .overlay {
+    align-items: center;
+    padding: 14px;
+  }
+
+  .btnRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Keep the legal gate detached from document flow on every viewport. */
+.overlay {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  align-items: center;
+  justify-items: center;
+}
+
+.modal {
+  margin: auto;
+  max-height: calc(100dvh - 28px);
+  overflow: auto;
+}
