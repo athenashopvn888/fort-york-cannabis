@@ -10,6 +10,18 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "dupontcannabis.com" }],
+        destination: "https://fortyorkcannabis.com/weed-dispensary-toronto/",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.dupontcannabis.com" }],
+        destination: "https://fortyorkcannabis.com/weed-dispensary-toronto/",
+        permanent: true,
+      },
       { source: "/product-category/edibles", destination: "/items/edibles", permanent: true },
       { source: "/product-category/vape-pen", destination: "/items/vapes", permanent: true },
       { source: "/product-category/concentrates", destination: "/items/concentrates", permanent: true },
