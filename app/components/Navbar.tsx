@@ -8,6 +8,7 @@ const ALL_LINKS = [
   { href: "/", label: "Home" },
   { href: "/weed-dispensary-toronto/", label: "Toronto Store" },
   { href: "/menu", label: "Menu" },
+  { href: "/info/fort-york-cannabis-local-visit-guide-2026", label: "Visit Guide" },
   { href: "/info/fort-york-cannabis-store", label: "Fort York" },
   { href: "/info/cityplace-cannabis-dispensary", label: "CityPlace" },
   { href: "/contact", label: "Contact" },

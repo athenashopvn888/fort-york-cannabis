@@ -23,8 +23,8 @@ export const SEO_PAGES: SeoPage[] = [
         body: "FORT YORK CANNABIS is at 38 Fort York Blvd in Toronto, close to Fort York, CityPlace, the waterfront, and downtown Toronto residential traffic.",
       },
       {
-        heading: "Store Details Coming Soon",
-        body: "Store name, domain, address, Google Maps link, Toronto city label, and local landing route are ready. Phone is 437-872-8446 and hours are 11AM-2AM. Pickup, delivery, and license details will be posted when available.",
+        heading: "Store Details For Visit Planning",
+        body: "Use this page to confirm the store name, address, Google Maps route, phone number, hours, and Toronto local landing page before visiting. Phone is 437-872-8446 and hours are 11AM-2AM.",
       },
     ],
     faqs: [
@@ -42,16 +42,16 @@ export const SEO_PAGES: SeoPage[] = [
     sections: [
       {
         heading: "Serving CityPlace And Downtown Toronto",
-        body: "FORT YORK CANNABIS is positioned for CityPlace, Fort York, waterfront Toronto, King West, and Entertainment District customers without claiming delivery, hours, ratings, or inventory that have not been confirmed.",
+        body: "FORT YORK CANNABIS is positioned for CityPlace, Fort York, waterfront Toronto, King West, and Entertainment District customers who need clear address, hours, menu, contact, and directions context.",
       },
       {
-        heading: "Menu And Service Details Coming Soon",
-        body: "The site supports a polished menu experience, and the menu is available for browsing. Pickup and delivery details will be posted when available.",
+        heading: "Menu And Store Details",
+        body: "Browse the Fort York menu categories on the site, then use the contact page or staff help for store-specific questions before visiting.",
       },
     ],
     faqs: [
       { q: "Is this near CityPlace?", a: "Yes. The address at 38 Fort York Blvd is positioned for Fort York and CityPlace local search." },
-      { q: "Is delivery available?", a: "Delivery details are coming soon." },
+      { q: "How can shoppers plan a visit?", a: "Use the store page for address, hours, menu browsing, contact information, and directions before heading out." },
     ],
   },
   {
@@ -64,16 +64,52 @@ export const SEO_PAGES: SeoPage[] = [
     sections: [
       {
         heading: "Downtown Toronto Cannabis Store",
-        body: "This page supports downtown Toronto weed store, weed dispensary in Toronto, cannabis store near Fort York, and cannabis dispensary near CityPlace themes using confirmed address facts and customer-friendly coming-soon language.",
+        body: "This page supports downtown Toronto weed store, weed dispensary in Toronto, cannabis store near Fort York, and cannabis dispensary near CityPlace themes using confirmed address, hours, phone, menu, and local-area context.",
       },
       {
-        heading: "No Unsupported Claims",
-        body: "This page does not claim open-now wording, extended hours, best/top ranked status, customer reviews, ratings, delivery, staff history, license status, or live menu availability until those details are approved.",
+        heading: "Plan With Current Store Details",
+        body: "Adults 19+ can use this page to confirm the Fort York Boulevard location, browse menu categories, check hours, and choose the next step before visiting.",
       },
     ],
     faqs: [
-      { q: "Can this page use live-hours wording?", a: "No. Live-hours wording requires verified hours." },
-      { q: "Can this page list products?", a: "Only broad categories are shown. Menu is loaded while exact Fort York inventory is pending." },
+      { q: "What hours are listed?", a: "FORT YORK CANNABIS lists hours as 11AM-2AM." },
+      { q: "How can shoppers browse the menu?", a: "Use the menu category links for flower, pre-rolls, vapes, edibles, concentrates, accessories, and other available sections." },
+    ],
+  },
+  {
+    slug: "fort-york-cannabis-local-visit-guide-2026",
+    title: "FORT YORK CANNABIS Local Visit Guide | Toronto Adult 19+",
+    metaDescription: "Plan a visit to FORT YORK CANNABIS at 38 Fort York Blvd with adult 19+ store-page checks, menu-category paths, and Fort York CityPlace directions context.",
+    h1: "FORT YORK CANNABIS Local Visit Guide for Adults 19+",
+    heroTagline: "A practical Fort York and CityPlace visit guide for adults 19+",
+    banner: "/brand/visit-cta-banner.webp",
+    sections: [
+      {
+        heading: "Confirm The Right Storefront",
+        body: "FORT YORK CANNABIS is tied to 38 Fort York Blvd, Fort York, CityPlace, the waterfront, King West, Rogers Centre, and the Entertainment District. Use this page to confirm you are on the right store path before visiting.",
+      },
+      {
+        heading: "Use The Menu Before Visiting",
+        body: "Start with the Fort York menu to browse categories such as flower, pre-rolls, vapes, edibles, concentrates, accessories, cigarettes, and specialty items. For item-specific questions, use the current menu experience, contact the store, or ask staff before visiting.",
+      },
+      {
+        heading: "What To Check Before You Go",
+        body: "Confirm the address, map route, store hours, phone number, menu categories, and valid adult 19+ identification before heading to the store.",
+      },
+      {
+        heading: "Why The Local Context Matters",
+        body: "Fort York searches often come from people moving around CityPlace, condo towers, stadium traffic, waterfront routes, and downtown Toronto errands. Clear local context helps shoppers recognize the correct store and choose the most useful next page.",
+      },
+      {
+        heading: "Helpful Next Steps",
+        body: "Open the Toronto store page, browse the menu, use the contact page for directions, and confirm any store-specific question before leaving.",
+      },
+    ],
+    faqs: [
+      { q: "Is this guide only for FORT YORK CANNABIS?", a: "Yes. This guide is written for FORT YORK CANNABIS at 38 Fort York Blvd in Toronto." },
+      { q: "How can shoppers check current product details?", a: "Use the current menu experience or contact the store before visiting." },
+      { q: "What should shoppers check first?", a: "Start with the official store page, confirm the location context, then use menu category links or staff help for product questions." },
+      { q: "Why mention Fort York and CityPlace?", a: "Local shoppers often search with neighbourhood, street, condo-area, and downtown route language. Clear context helps them confirm the right store." },
     ],
   },
 ];

@@ -6,7 +6,7 @@ import styles from "./faq.module.css";
 export const metadata: Metadata = {
   title: "FAQ | FORT YORK CANNABIS",
   description:
-    "Frequently asked questions for FORT YORK CANNABIS in Toronto. Phone is 437-872-8446, hours are 11AM-2AM, with pickup and delivery details posted when available.",
+    "Frequently asked questions for FORT YORK CANNABIS in Toronto. Phone is 437-872-8446, hours are 11AM-2AM, with menu browsing and store details.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/faq",
   },
@@ -33,8 +33,8 @@ const FAQ_CATEGORIES = [
   {
     title: "Menu",
     faqs: [
-      { q: "Is the menu live?", a: "No. Inventory, pricing, brands, and categories will be added once details are ready." },
-      { q: "Which categories will the menu include?", a: "The menu includes flower, pre-rolls, edibles, vapes, concentrates, and accessories." },
+      { q: "Can shoppers browse the menu?", a: "Yes. Browse menu categories for flower, pre-rolls, edibles, vapes, concentrates, accessories, cigarettes, and specialty items." },
+      { q: "How should shoppers check product details?", a: "Use the current menu experience or contact the store before visiting if a specific item question matters." },
     ],
   },
 ];
@@ -67,14 +67,14 @@ export default function FAQPage() {
           <div className={styles.introPanel}>
             <span className={styles.microLabel}>Customer questions</span>
             <h1 className={styles.pageTitle}>Frequently Asked Questions</h1>
-            <p className={styles.pageSubtitle}>Fort York Cannabis store details are listed below. Phone is 437-872-8446 and hours are 11AM-2AM. Pickup and delivery details will be posted when available.</p>
+            <p className={styles.pageSubtitle}>Fort York Cannabis store details are listed below. Phone is 437-872-8446, hours are 11AM-2AM, and menu categories are available for browsing.</p>
           </div>
           <div className={styles.visualPanel}>
             <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.visualImage} />
             <div>
               <span className={styles.microLabel}>Store information</span>
               <h2 className={styles.categoryTitle}>Fort York / CityPlace / Downtown Toronto</h2>
-              <p className={styles.pageSubtitle}>FORT YORK CANNABIS is at 38 Fort York Blvd in Toronto, with customer details updated as details are ready.</p>
+              <p className={styles.pageSubtitle}>FORT YORK CANNABIS is at 38 Fort York Blvd in Toronto, with address, hours, phone, menu, and local-area details available for visit planning.</p>
             </div>
           </div>
           {FAQ_CATEGORIES.map((cat) => (

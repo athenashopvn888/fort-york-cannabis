@@ -55,7 +55,7 @@ export const gbpLocation = {
   metaDescription:
     "FORT YORK CANNABIS is a cannabis store at 38 Fort York Blvd in Toronto, serving Fort York, CityPlace, the waterfront, King West, and nearby downtown Toronto customers.",
   introVariant:
-    "FORT YORK CANNABIS is preparing a cannabis store experience at 38 Fort York Blvd in downtown Toronto, serving adults 19+ near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Open 11AM-2AM. Phone is 437-872-8446.",
+    "FORT YORK CANNABIS serves adults 19+ at 38 Fort York Blvd in downtown Toronto near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Open 11AM-2AM. Phone is 437-872-8446.",
   complianceNote:
     "Cannabis products are for adults 19+ only. Pickup and delivery details will be posted when available.",
   localProofPoints: [

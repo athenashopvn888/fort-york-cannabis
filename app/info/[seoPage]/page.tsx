@@ -62,14 +62,14 @@ export default async function SeoLandingPage({
 
       <section className={styles.localFeatureSection}>
         <div className={styles.localFeatureGrid}>
-          <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.localFeatureImage} />
-          <div className={styles.localFeatureCopy}>
-            <span className={styles.microLabel}>Downtown Toronto local guide</span>
-            <h2 className={styles.sectionTitle}>Fort York and CityPlace Context</h2>
-            <p className={styles.sectionBody}>FORT YORK CANNABIS keeps Fort York, CityPlace, waterfront, and downtown Toronto information clear while avoiding unverified phone, hours, menu, delivery, pickup, license, or review claims.</p>
+            <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.localFeatureImage} />
+            <div className={styles.localFeatureCopy}>
+              <span className={styles.microLabel}>Downtown Toronto local guide</span>
+              <h2 className={styles.sectionTitle}>Fort York and CityPlace Context</h2>
+            <p className={styles.sectionBody}>FORT YORK CANNABIS keeps Fort York, CityPlace, waterfront, and downtown Toronto information clear with address, hours, menu, contact, and directions context for adults 19+.</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <section className={styles.content}>
         <div className={styles.container}>

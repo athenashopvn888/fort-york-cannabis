@@ -36,13 +36,13 @@ export default function ContactPage() {
             </div>
             <div className={styles.infoCard}>
               <div className={styles.infoIcon}>HRS</div>
-              <h2 className={styles.infoTitle}>Hours Coming Soon</h2>
-              <p className={styles.infoText}>Store hours will be added once details are ready.</p>
+              <h2 className={styles.infoTitle}>Store Hours</h2>
+              <p className={styles.infoText}>Open 11AM-2AM.</p>
             </div>
             <div className={styles.infoCard}>
               <div className={styles.infoIcon}>TEL</div>
-              <h2 className={styles.infoTitle}>Phone Coming Soon</h2>
-              <p className={styles.infoText}>The public phone number will be added once details are ready.</p>
+              <h2 className={styles.infoTitle}>Phone</h2>
+              <p className={styles.infoText}>437-872-8446.</p>
             </div>
           </div>
           <div className={styles.mapSection}>
@@ -59,7 +59,7 @@ export default function ContactPage() {
             <div className={styles.customerCopy}>
               <span className={styles.microLabel}>Store information</span>
               <h2 className={styles.infoTitle}>Call / Directions / Menu</h2>
-              <p className={styles.infoText}>Directions are ready now. Phone, menu, pickup, delivery, and license information will be added once details are ready.</p>
+              <p className={styles.infoText}>Directions, phone, hours, and menu browsing are ready now. Pickup, delivery, and license-specific details will be added once ready.</p>
             </div>
           </div>
         </div>

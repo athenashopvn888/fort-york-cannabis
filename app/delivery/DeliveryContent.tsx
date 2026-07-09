@@ -10,7 +10,7 @@ export default function DeliveryContent() {
         <img src="/brand/delivery-ordering-banner.webp" alt="Fort York Cannabis ordering details coming soon" className={styles.heroImage} />
         <h1 className={styles.pageTitle}>Pickup / Delivery <span className={styles.highlight}>Coming Soon</span></h1>
         <p className={styles.pageSubtitle}>
-          Pickup, delivery, ordering, menu availability, and service-area details are coming soon for FORT YORK CANNABIS.
+          Pickup, delivery, ordering, and service-area details are coming soon for FORT YORK CANNABIS. Menu categories are available for browsing now.
         </p>
         <div className={styles.formSection}>
           <h2 className={styles.formTitle}>Ordering Details Coming Soon</h2>
@@ -32,7 +32,7 @@ export default function DeliveryContent() {
           <div className={styles.infoCard}>
             <span className={styles.infoIcon}>3</span>
             <h3 className={styles.infoTitle}>Menu Status</h3>
-            <p className={styles.infoDesc}>Menu, brands, inventory, and pricing will be added once details are ready.</p>
+            <p className={styles.infoDesc}>Browse menu categories now, then contact the store before visiting if a specific product question matters.</p>
           </div>
         </div>
       </div>

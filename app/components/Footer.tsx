@@ -42,6 +42,7 @@ export default function Footer() {
               <Link href="/">Home</Link>
               <Link href="/weed-dispensary-toronto/">Toronto Store Page</Link>
               <Link href="/#menu">Menu</Link>
+              <Link href="/info/fort-york-cannabis-local-visit-guide-2026">Local Visit Guide</Link>
               <Link href="/info/fort-york-cannabis-store">Fort York Cannabis Store</Link>
               <Link href="/info/cityplace-cannabis-dispensary">CityPlace Cannabis Dispensary</Link>
               <Link href="/info/downtown-toronto-weed-dispensary">Downtown Toronto Weed Store</Link>
