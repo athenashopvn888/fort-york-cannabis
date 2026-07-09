@@ -14,7 +14,7 @@
   height: 100dvh;
   padding: 20px;
   overflow: auto;
-  background: rgba(7, 18, 31, 0.9);
+  background: rgba(5, 6, 5, 0.92);
   backdrop-filter: blur(14px) saturate(1.15);
   isolation: isolate;
 }
@@ -22,8 +22,8 @@
 .modal {
   width: min(100%, 440px);
   border-radius: 8px;
-  background: linear-gradient(145deg, #0b1f33, #07121f);
-  border: 1px solid rgba(225, 184, 107, 0.34);
+  background: linear-gradient(145deg, #090a08, #050605);
+  border: 1px solid rgba(142, 224, 0, 0.42);
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52);
   padding: clamp(22px, 5vw, 30px);
   text-align: center;
@@ -52,7 +52,7 @@
 }
 
 .text {
-  color: #d7e7ea;
+  color: #e6ebdf;
   line-height: 1.7;
   margin: 0 0 20px;
 }
@@ -91,7 +91,7 @@
 
 .disclaimer {
   display: block;
-  color: #9fc1c8;
+  color: #aeb8a5;
   font-size: 12px;
   line-height: 1.55;
 }
@@ -104,9 +104,9 @@
   height: 44px;
   margin-bottom: 14px;
   border-radius: 8px;
-  background: rgba(201, 135, 70, 0.15);
-  border: 1px solid rgba(201, 135, 70, 0.36);
-  color: var(--brand-gold);
+  background: rgba(142, 224, 0, 0.15);
+  border: 1px solid rgba(142, 224, 0, 0.38);
+  color: var(--brand-aqua);
   font-weight: 900;
 }
 

@@ -2,7 +2,7 @@
 .detailPage {
   min-height: 100vh;
   background: linear-gradient(180deg, #eef7f8 0%, #f8fbf7 58%, #fffaf1 100%);
-  color: #08232a;
+  color: #050605;
   padding: 118px 24px 72px;
 }
 
@@ -1481,9 +1481,9 @@
   .stickyMenuNav .categoryNav a[aria-current="page"],
   .stickyMenuNav .tierJump a:hover,
   .stickyMenuNav .tierJump a:focus-visible {
-    background: #2ab7a9;
-    border-color: #78e1d8;
-    color: #06111d;
+    background: #8ee000;
+    border-color: #b6ff23;
+    color: #050605;
   }
 
   .hero .categoryNav {
@@ -1608,9 +1608,9 @@
 .detailExitPrimary:focus-visible,
 .detailExitSecondary:hover,
 .detailExitSecondary:focus-visible {
-  border-color: #78e1d8;
-  background: #2ab7a9;
-  color: #06111d;
+  border-color: #b6ff23;
+  background: #8ee000;
+  color: #050605;
 }
 
 @media (max-width: 820px) {
@@ -1632,7 +1632,7 @@
     overflow-x: auto;
     border-top: 1px solid rgba(244, 247, 246, 0.1);
     border-bottom: 1px solid rgba(244, 247, 246, 0.14);
-    background: linear-gradient(180deg, rgba(7, 18, 31, 0.99), rgba(6, 17, 29, 0.99));
+    background: linear-gradient(180deg, rgba(5, 6, 5, 0.99), rgba(10, 13, 8, 0.99));
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
     scrollbar-width: none;
   }
@@ -1654,9 +1654,9 @@
   }
 
   .detailExitPrimary {
-    background: #2ab7a9;
-    border-color: #78e1d8;
-    color: #06111d;
+    background: #8ee000;
+    border-color: #b6ff23;
+    color: #050605;
   }
 
   .detailBreadcrumb {

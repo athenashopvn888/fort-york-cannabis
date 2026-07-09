@@ -5,13 +5,13 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#08232a",
-  "theme_color": "#08232a",
+  "background_color": "#050605",
+  "theme_color": "#8ee000",
   "icons": [
     {
-      "src": "/brand/fort-york-icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/brand/fort-york-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {

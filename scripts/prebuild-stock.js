@@ -4,7 +4,10 @@
  */
 
 const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || "";
-const STORE_CODE = process.env.MENU_STORE_CODE || process.env.NEXT_PUBLIC_MENU_STORE_CODE || "FYC01";
+const DEFAULT_STORE_CODE = "FYC01";
+const STORE_CODE =
+  (process.env.MENU_STORE_CODE || process.env.NEXT_PUBLIC_MENU_STORE_CODE || DEFAULT_STORE_CODE).trim() ||
+  DEFAULT_STORE_CODE;
 const LIVE_MENU_ENABLED = process.env.FORT_YORK_ENABLE_LIVE_MENU === "true";
 
 async function main() {

@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/brand/fort-york-icon.svg", type: "image/svg+xml" },
+      { url: "/brand/fort-york-icon.png", sizes: "512x512", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
@@ -103,7 +103,7 @@ export default function RootLayout({
       <head>
         <meta name="geo.region" content="CA-ON" />
         <meta name="geo.placename" content="Toronto" />
-        <link rel="icon" href="/brand/fort-york-icon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/brand/fort-york-icon.png" type="image/png" />
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"

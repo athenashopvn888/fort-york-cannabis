@@ -76,8 +76,10 @@ export const allItems: ItemProduct[] = itemsJson as ItemProduct[];
 
 const liveMenuEnabled = process.env.FORT_YORK_ENABLE_LIVE_MENU === "true";
 const appsScriptConfigured = Boolean(process.env.APPS_SCRIPT_URL);
+const defaultStoreCode = "FYC01";
 const storeCode =
-  process.env.MENU_STORE_CODE || process.env.NEXT_PUBLIC_MENU_STORE_CODE || STORE_INFO.code;
+  (process.env.MENU_STORE_CODE || process.env.NEXT_PUBLIC_MENU_STORE_CODE || STORE_INFO.code || defaultStoreCode).trim() ||
+  defaultStoreCode;
 const productCount = allFlowers.length + allItems.length;
 
 export const MENU_SOURCE_STATE = {

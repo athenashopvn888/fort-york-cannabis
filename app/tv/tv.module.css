@@ -2,7 +2,7 @@
   background:
     linear-gradient(135deg, rgba(3, 16, 23, 0.92), rgba(5, 42, 49, 0.9)),
     url('/banners/fort_york_flower_banner.webp') center/cover;
-  color: #08232a;
+  color: #050605;
   font-family: Inter, Arial, sans-serif;
   min-height: 100vh;
   overflow: hidden;
@@ -165,7 +165,7 @@
   border: 1px solid rgba(3, 28, 34, 0.14);
   border-radius: 8px;
   box-shadow: 0 26px 62px rgba(0, 0, 0, 0.32), 0 2px 0 rgba(255, 255, 255, 0.9) inset;
-  color: #08232a;
+  color: #050605;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -275,7 +275,7 @@
 
 .valueCell {
   background: #eef7f4;
-  color: #08232a;
+  color: #050605;
 }
 
 .dealCell span,
@@ -758,7 +758,7 @@
   border: 1px solid rgba(3, 28, 34, 0.14);
   border-radius: 8px;
   box-shadow: 0 26px 62px rgba(0, 0, 0, 0.32), 0 2px 0 rgba(255, 255, 255, 0.9) inset;
-  color: #08232a;
+  color: #050605;
   display: grid;
   grid-area: addons;
   grid-template-rows: auto auto minmax(0, 1fr);
@@ -947,7 +947,7 @@
   background: #fffaf2;
   border: 1px solid rgba(3, 28, 34, 0.14);
   border-radius: 8px;
-  color: #08232a;
+  color: #050605;
   display: grid;
   gap: 12px;
   grid-template-columns: max-content minmax(0, 1fr) max-content;

@@ -27,19 +27,19 @@ Use strong geometric sans-serif display styling for headlines, supported by clea
 
 ## 5. Logo Rules
 
-The FYC mark should be used as a monogram badge for favicon, age gate, mobile header, and small signage. The full wordmark should read FORT YORK CANNABIS with Fort York and Cannabis stacked or separated by a copper rule. Do not add leaves, smoke mascots, fake awards, or unverified license language.
+The FYC mark should follow the live storefront package: black base, white FORT YORK type, neon-lime CANNABIS/accent work, dark cannabis leaf texture, lime splatter, and the CN Tower/leaf mark. Do not add fake awards, review claims, or unverified license language.
 
 ## 6. Icon/Favicon Rules
 
-Favicons should use the FYC monogram, dark base, copper border, and teal accent. Keep tiny versions high contrast and legible. Do not include address, phone, hours, or detailed artwork in favicon assets.
+Favicons should use the high-contrast black/lime Fort York mark derived from the live storefront artwork. Keep tiny versions high contrast and legible. Do not include address, phone, hours, or detailed artwork in favicon assets.
 
 ## 7. Website Art Direction
 
-Website visuals should use structured architectural artwork: skyline blocks, fort-wall masonry, waterfront bands, copper transit/grid lines, and clean retail panels. The current assets are first-pass production-intent coded raster artwork, not final sign-shop production art.
+Website visuals should match the live store design: black storefront panels, neon-lime splatter, dark leaf texture, bold white type, lime category accents, and the actual door/window/fence mockups.
 
 ## 8. Banner Art Direction
 
-Banners should avoid random circles/lines. Use consistent Fort York visual ingredients: masonry wall rhythm, downtown skyline, waterfront reflection bands, and copper/teal framing. Each banner can change accent emphasis by section or category.
+Banners should avoid random abstract shapes. Use consistent Fort York visual ingredients from the live design: black panels, lime borders, splatter, dark leaves, CN Tower/leaf logo, and bold white/lime category lettering.
 
 ## 9. Category Card Art Direction
 
@@ -47,7 +47,7 @@ Category cards should feel like curated retail tiles, not product inventory clai
 
 ## 10. Storefront Signage Direction
 
-Main sign should be high-contrast, legible from street distance, and built around the full wordmark. Recommended: dark fascia, copper border or trim, white FORT YORK text, teal CANNABIS text, and optional domain/address secondary line.
+Main sign should be high-contrast, legible from street distance, and built around the full wordmark: black fascia, white FORT YORK text, neon-lime CANNABIS text, lime splatter/leaf texture, and optional domain/address secondary line.
 
 ## 11. Window/Door Signage Direction
 

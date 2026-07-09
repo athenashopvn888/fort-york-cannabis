@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav className={styles.navbar} id="main-nav">
       <div className={styles.topBar}>
         <Link href="/" className={styles.logo} style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
-          <img src="/brand/fort-york-icon.svg" alt="FORT YORK CANNABIS logo" style={{ width: "34px", height: "34px", borderRadius: "8px" }} />
+          <img src="/brand/fort-york-icon.png" alt="FORT YORK CANNABIS logo" style={{ width: "34px", height: "34px", borderRadius: "8px" }} />
           <span style={{
             fontFamily: "var(--font-display)",
             fontWeight: 900,

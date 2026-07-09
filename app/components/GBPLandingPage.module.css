@@ -95,7 +95,7 @@
 }
 
 .btnPrimary {
-  background: linear-gradient(135deg, var(--brand-teal), #14777f);
+  background: linear-gradient(135deg, var(--brand-teal), #5f9600);
   color: #ffffff;
   box-shadow: 0 12px 28px rgba(31, 179, 184, 0.24);
 }
@@ -347,7 +347,7 @@
 }
 
 .napItem a {
-  color: #14777f;
+  color: #5f9600;
   font-weight: 800;
 }
 

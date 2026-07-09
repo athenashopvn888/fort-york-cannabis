@@ -368,7 +368,7 @@ export default function FortYorkTvPage() {
       <div className={styles.canvas}>
         <header className={styles.header}>
           <div className={styles.brandLockup}>
-            <img src="/brand/fort-york-icon.svg" alt="" />
+            <img src="/brand/fort-york-icon.png" alt="" />
             <div>
               <span className={styles.eyebrow}>Flower Menu Board</span>
               <h1>{STORE_INFO.name}</h1>
