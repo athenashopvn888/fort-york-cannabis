@@ -171,8 +171,8 @@
 
 /* Fort York final footer contrast polish */
 .footer {
-  margin: 54px calc(50% - 50vw) -72px;
-  width: 100vw;
+  margin: 54px 0 -72px;
+  width: 100%;
   background: #06111d !important;
   color: #d9e9ec !important;
 }
@@ -202,7 +202,7 @@
 
 @media (max-width: 820px) {
   .footer {
-    margin: 36px calc(50% - 50vw) -44px;
+    margin: 36px 0 -44px;
     padding: 38px 18px 24px;
   }
 }
