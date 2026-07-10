@@ -33,6 +33,17 @@ const BOARDS: CategoryBoard[] = [
   { id: "MORE", label: "Cigarettes / Magic Stuff", subtitle: "Other add-ons", accent: "#5f6f7a", categories: ["CIGARETTES", "MAGIC", "MAGIC & OTHERS"] },
 ];
 
+const FOOTER_MESSAGES = [
+  {
+    label: "Browse Menu",
+    text: "Pre-Rolls / Vapes / Edibles / Concentrates / Accessories / Cigarettes / Magic Stuff",
+  },
+  {
+    label: "Store Policy",
+    text: "ALL SALES ARE FINAL - NO REFUND, NO EXCHANGE",
+  },
+];
+
 function rotateList<T>(items: T[], offset: number, limit: number) {
   if (!items.length) return [];
   return Array.from({ length: Math.min(limit, items.length) }, (_, index) => items[(offset + index) % items.length]);
@@ -192,6 +203,7 @@ export default function FortYorkTv2Page() {
       offset: tick + index,
     }));
   }, [items, tick]);
+  const footerMessage = FOOTER_MESSAGES[tick % FOOTER_MESSAGES.length];
 
   return (
     <main className={styles.screen}>
@@ -213,8 +225,8 @@ export default function FortYorkTv2Page() {
       </section>
 
       <footer className={styles.footer}>
-        <strong>Browse Menu</strong>
-        <span>Pre-rolls / Vapes / Edibles / Concentrates / Accessories / Cigarettes / Magic Stuff</span>
+        <strong>{footerMessage.label}</strong>
+        <span>{footerMessage.text}</span>
         <small>Updated {loadedAt || "--"}</small>
       </footer>
     </main>
