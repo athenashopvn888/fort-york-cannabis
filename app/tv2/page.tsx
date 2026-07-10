@@ -43,6 +43,45 @@ function getBoardItems(items: ItemProduct[], board: CategoryBoard) {
   return items.filter((item) => keys.has((item.category || "").toUpperCase()));
 }
 
+function getItemKey(item: ItemProduct) {
+  return `${item.sku || "item"}-${item.slug}`;
+}
+
+function getItemFamily(item: ItemProduct) {
+  const name = item.name.toUpperCase();
+  if (name.includes("GRABBA")) return "GRABBA";
+
+  return name
+    .replace(/[^A-Z0-9\s]/g, " ")
+    .replace(/\b(X\d+|AVAILABLE|NEW)\b/g, " ")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .join(" ") || getItemKey(item);
+}
+
+function getVisibleRows(items: ItemProduct[], featured: ItemProduct | undefined, tick: number, limit: number) {
+  const featuredKey = featured ? getItemKey(featured) : "";
+  const seenFamilies = new Set(featured ? [getItemFamily(featured)] : []);
+  const candidates = rotateList(items, tick + 1, items.length).filter((item) => getItemKey(item) !== featuredKey);
+  const rows: ItemProduct[] = [];
+  const deferred: ItemProduct[] = [];
+
+  for (const item of candidates) {
+    const family = getItemFamily(item);
+    if (!seenFamilies.has(family)) {
+      rows.push(item);
+      seenFamilies.add(family);
+    } else {
+      deferred.push(item);
+    }
+
+    if (rows.length >= limit) return rows;
+  }
+
+  return [...rows, ...deferred].slice(0, limit);
+}
+
 function ItemMeta({ item }: { item: ItemProduct }) {
   const chips = getItemDetailChips(item)
     .filter((chip) => !chip.startsWith("SKU "))
@@ -81,7 +120,7 @@ function FeaturedItem({ item, accent }: { item?: ItemProduct; accent: string }) 
 
 function Board({ board, items, tick }: { board: CategoryBoard; items: ItemProduct[]; tick: number }) {
   const featured = items.length ? items[tick % items.length] : undefined;
-  const rows = rotateList(items, tick, 6);
+  const rows = getVisibleRows(items, featured, tick, 6);
 
   return (
     <article className={styles.board} style={{ "--accent": board.accent } as CSSProperties}>
@@ -95,7 +134,7 @@ function Board({ board, items, tick }: { board: CategoryBoard; items: ItemProduc
       <FeaturedItem item={featured} accent={board.accent} />
       <div className={styles.itemRows}>
         {rows.map((item) => (
-          <div className={styles.itemRow} key={item.sku}>
+          <div className={styles.itemRow} key={getItemKey(item)}>
             <img src={getProductImage(item)} alt="" />
             <div>
               <strong>{item.name}</strong>
