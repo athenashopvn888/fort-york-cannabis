@@ -145,7 +145,7 @@ export const TIER_DETAILS: Record<
   AA: {
     name: "AA",
     slug: "aa",
-    description: "Quality daily-driver flower with reliable 6g and 14g pricing.",
+    description: "Quality daily-driver flower with reliable 5g and 14g pricing.",
     unitPrice: 4,
     accent: "#288b5b",
   },
@@ -280,8 +280,11 @@ export function getSalePrice(price: PricePoint) {
 export function getFlowerPriceRows(product: FlowerProduct, channel: "web" | "tv" = "web"): FlowerPriceRow[] {
   const tier = normalizeTier(product.tier);
   const topBundle = isTopBundleTier(tier);
+  const isAaTier = tier === "AA";
   const isTv = channel === "tv";
   const webBundleLabel = "Bundle Deal Pricing";
+  const price5gLabel = topBundle ? (isTv ? "6g Total" : "6g Bundle") : isAaTier ? "5g" : "6g";
+  const price5gShortLabel = topBundle ? (isTv ? "6G TOTAL" : "6G BUNDLE") : isAaTier ? "5G" : "6G";
   const rows: Array<FlowerPriceRow | null> = [
     product.price3g
       ? {
@@ -297,12 +300,12 @@ export function getFlowerPriceRows(product: FlowerProduct, channel: "web" | "tv"
     product.price5g
       ? {
           field: "price5g",
-          label: topBundle ? (isTv ? "6g Total" : "6g Bundle") : "6g",
-          shortLabel: topBundle ? (isTv ? "6G TOTAL" : "6G BUNDLE") : "6G",
-          grams: 6,
+          label: price5gLabel,
+          shortLabel: price5gShortLabel,
+          grams: isAaTier ? 5 : 6,
           price: product.price5g,
-          promo: topBundle ? (isTv ? "Buy 3g Get 3g Free" : webBundleLabel) : tier === "AA" ? "$20 / 6g AA" : undefined,
-          sourceNote: "ADC price5g field displays as a 6g pack price.",
+          promo: topBundle ? (isTv ? "Buy 3g Get 3g Free" : webBundleLabel) : isAaTier ? "$20 / 5g AA" : undefined,
+          sourceNote: isAaTier ? "ADC price5g field displays as a 5g AA pack price." : "ADC price5g field displays as a 6g pack price.",
         }
       : null,
     product.price14g
