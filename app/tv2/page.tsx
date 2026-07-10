@@ -25,11 +25,11 @@ type CategoryBoard = {
 };
 
 const BOARDS: CategoryBoard[] = [
-  { id: "PREROLLS", label: "Pre-Rolls", subtitle: "Ready-to-go rolls", accent: "#b5452f", categories: ["PREROLLS"] },
+  { id: "PREROLLS", label: "Infused Preroll", subtitle: "Infused ready-to-go rolls", accent: "#b5452f", categories: ["PREROLLS"] },
   { id: "VAPES", label: "Vapes", subtitle: "Pens and disposables", accent: "#087e8b", categories: ["VAPE PENS", "VAPE DISPOSABLE", "THC VAPE", "VAPES"] },
   { id: "EDIBLES", label: "Edibles", subtitle: "Gummies, chocolates, drinks", accent: "#7c5cbb", categories: ["EDIBLES"] },
   { id: "CONCENTRATES", label: "Concentrates", subtitle: "Hash, resin, diamonds", accent: "#a6652d", categories: ["CONCENTRATES"] },
-  { id: "ACCESSORIES", label: "Accessories", subtitle: "Add-ons and essentials", accent: "#288b5b", categories: ["ADD ONS", "ACCESSORIES"] },
+  { id: "PREROLL_SINGLES", label: "Pre Rolls", subtitle: "Single rolls and add-ons", accent: "#288b5b", categories: ["ADD ONS", "ACCESSORIES"] },
 ];
 
 const PROMO_IMAGES = [
@@ -41,7 +41,7 @@ const PROMO_IMAGES = [
 const FOOTER_MESSAGES = [
   {
     label: "Browse Menu",
-    text: "Pre-Rolls / Vapes / Edibles / Concentrates / Accessories / Specials",
+    text: "Pre Rolls / Infused Preroll / Vapes / Edibles / Concentrates / Specials",
   },
   {
     label: "Store Policy",
@@ -218,8 +218,12 @@ export default function FortYorkTv2Page() {
       offset: tick + index,
     }));
   }, [items, tick]);
-  const mainBoards = grouped.slice(0, 4);
-  const accessoriesBoard = grouped.find((board) => board.id === "ACCESSORIES");
+  const boardById = new Map(grouped.map((board) => [board.id, board]));
+  const topBoards = ["PREROLL_SINGLES", "VAPES", "EDIBLES"]
+    .map((id) => boardById.get(id))
+    .filter((board): board is (typeof grouped)[number] => Boolean(board));
+  const concentratesBoard = boardById.get("CONCENTRATES");
+  const infusedPrerollBoard = boardById.get("PREROLLS");
   const footerMessage = FOOTER_MESSAGES[tick % FOOTER_MESSAGES.length];
 
   return (
@@ -236,12 +240,15 @@ export default function FortYorkTv2Page() {
       </header>
 
       <section className={styles.categoryGrid}>
-        {mainBoards.map((board) => (
+        {topBoards.map((board) => (
           <Board key={board.id} board={board} items={board.products} tick={board.offset} />
         ))}
+        {concentratesBoard ? (
+          <Board key={concentratesBoard.id} board={concentratesBoard} items={concentratesBoard.products} tick={concentratesBoard.offset} />
+        ) : null}
         <PromoBoard tick={tick} />
-        {accessoriesBoard ? (
-          <Board key={accessoriesBoard.id} board={accessoriesBoard} items={accessoriesBoard.products} tick={accessoriesBoard.offset} />
+        {infusedPrerollBoard ? (
+          <Board key={infusedPrerollBoard.id} board={infusedPrerollBoard} items={infusedPrerollBoard.products} tick={infusedPrerollBoard.offset} />
         ) : null}
       </section>
 
