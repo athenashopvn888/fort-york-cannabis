@@ -30,13 +30,18 @@ const BOARDS: CategoryBoard[] = [
   { id: "EDIBLES", label: "Edibles", subtitle: "Gummies, chocolates, drinks", accent: "#7c5cbb", categories: ["EDIBLES"] },
   { id: "CONCENTRATES", label: "Concentrates", subtitle: "Hash, resin, diamonds", accent: "#a6652d", categories: ["CONCENTRATES"] },
   { id: "ACCESSORIES", label: "Accessories", subtitle: "Add-ons and essentials", accent: "#288b5b", categories: ["ADD ONS", "ACCESSORIES"] },
-  { id: "MORE", label: "Cigarettes / Magic Stuff", subtitle: "Other add-ons", accent: "#5f6f7a", categories: ["CIGARETTES", "MAGIC", "MAGIC & OTHERS"] },
+];
+
+const PROMO_IMAGES = [
+  { src: "/promos/tv2-50-oz-offer-19plus.webp", alt: "Fort York Cannabis 50 dollar ounce offer" },
+  { src: "/promos/tv2-flower-pricing-19plus.webp", alt: "Fort York Cannabis flower pricing" },
+  { src: "/promos/tv2-edibles-vape-pens-19plus.webp", alt: "Fort York Cannabis edibles and vape pens" },
 ];
 
 const FOOTER_MESSAGES = [
   {
     label: "Browse Menu",
-    text: "Pre-Rolls / Vapes / Edibles / Concentrates / Accessories / Cigarettes / Magic Stuff",
+    text: "Pre-Rolls / Vapes / Edibles / Concentrates / Accessories / Specials",
   },
   {
     label: "Store Policy",
@@ -163,6 +168,16 @@ function Board({ board, items, tick }: { board: CategoryBoard; items: ItemProduc
   );
 }
 
+function PromoBoard({ tick }: { tick: number }) {
+  const promo = PROMO_IMAGES[tick % PROMO_IMAGES.length];
+
+  return (
+    <article className={styles.promoBoard} aria-label="Fort York Cannabis promotions">
+      <img src={promo.src} alt={promo.alt} />
+    </article>
+  );
+}
+
 export default function FortYorkTv2Page() {
   const [items, setItems] = useState<ItemProduct[]>(allItems);
   const [tick, setTick] = useState(0);
@@ -203,6 +218,8 @@ export default function FortYorkTv2Page() {
       offset: tick + index,
     }));
   }, [items, tick]);
+  const mainBoards = grouped.slice(0, 4);
+  const accessoriesBoard = grouped.find((board) => board.id === "ACCESSORIES");
   const footerMessage = FOOTER_MESSAGES[tick % FOOTER_MESSAGES.length];
 
   return (
@@ -219,9 +236,13 @@ export default function FortYorkTv2Page() {
       </header>
 
       <section className={styles.categoryGrid}>
-        {grouped.map((board) => (
+        {mainBoards.map((board) => (
           <Board key={board.id} board={board} items={board.products} tick={board.offset} />
         ))}
+        <PromoBoard tick={tick} />
+        {accessoriesBoard ? (
+          <Board key={accessoriesBoard.id} board={accessoriesBoard} items={accessoriesBoard.products} tick={accessoriesBoard.offset} />
+        ) : null}
       </section>
 
       <footer className={styles.footer}>

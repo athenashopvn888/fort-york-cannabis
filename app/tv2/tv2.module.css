@@ -73,6 +73,24 @@
   overflow: hidden;
 }
 
+.promoBoard {
+  align-items: center;
+  background: #020503;
+  border: 1px solid rgba(142, 224, 0, 0.38);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.promoBoard img {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
 .boardHeader {
   align-items: start;
   background: linear-gradient(90deg, var(--accent, #0b756d), rgba(5, 42, 49, 0.82));
