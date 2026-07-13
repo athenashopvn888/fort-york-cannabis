@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
+import TvPromoTakeover from "../components/TvPromoTakeover";
 import styles from "./tv.module.css";
 import {
   FLOWER_TIER_ORDER,
@@ -418,6 +419,10 @@ export default function FortYorkTvPage() {
           <small>Updated {loadedAt || "--"}</small>
         </footer>
       </div>
+      <TvPromoTakeover
+        src="https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/buy_3g_get_3g_free_6g_total.webp"
+        alt="Fort York Cannabis buy 3 grams and get 3 grams free, 6 grams total promotion"
+      />
     </main>
   );
 }

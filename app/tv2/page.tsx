@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
+import TvPromoTakeover from "../components/TvPromoTakeover";
 import styles from "./tv2.module.css";
 import {
   STORE_INFO,
@@ -257,6 +258,10 @@ export default function FortYorkTv2Page() {
         <span>{footerMessage.text}</span>
         <small>Updated {loadedAt || "--"}</small>
       </footer>
+      <TvPromoTakeover
+        src="https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/buy_2g_get_1g_free_3g_total.webp"
+        alt="Fort York Cannabis buy 2 grams and get 1 gram free, 3 grams total promotion"
+      />
     </main>
   );
 }
