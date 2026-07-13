@@ -14,12 +14,14 @@ type TvPromoTakeoverProps = {
   alt: string;
 };
 
+type PromoPhase = "hidden" | "entering" | "visible" | "exiting";
+
 const subscribeToClient = () => () => {};
 
 export default function TvPromoTakeover({ src, alt }: TvPromoTakeoverProps) {
   const mounted = useSyncExternalStore(subscribeToClient, () => true, () => false);
   const [imageReady, setImageReady] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [phase, setPhase] = useState<PromoPhase>("hidden");
 
   useEffect(() => {
     const preload = new Image();
@@ -36,19 +38,24 @@ export default function TvPromoTakeover({ src, alt }: TvPromoTakeoverProps) {
     if (!imageReady) return;
 
     let promoActive = false;
-    let hideTimer: number | undefined;
+    let holdTimer: number | undefined;
+    let exitTimer: number | undefined;
     let releaseTimer: number | undefined;
 
     const showPromo = () => {
       if (promoActive) return;
       promoActive = true;
-      setVisible(true);
-      hideTimer = window.setTimeout(() => {
-        setVisible(false);
-        releaseTimer = window.setTimeout(() => {
-          promoActive = false;
-        }, SLIDE_DURATION_MS);
-      }, SLIDE_DURATION_MS + PROMO_HOLD_MS);
+      setPhase("entering");
+      holdTimer = window.setTimeout(() => {
+        setPhase("visible");
+        exitTimer = window.setTimeout(() => {
+          setPhase("exiting");
+          releaseTimer = window.setTimeout(() => {
+            setPhase("hidden");
+            promoActive = false;
+          }, SLIDE_DURATION_MS);
+        }, PROMO_HOLD_MS);
+      }, SLIDE_DURATION_MS);
     };
 
     const initialPreviewTimer = window.setTimeout(showPromo, INITIAL_PREVIEW_DELAY_MS);
@@ -57,7 +64,8 @@ export default function TvPromoTakeover({ src, alt }: TvPromoTakeoverProps) {
     return () => {
       window.clearTimeout(initialPreviewTimer);
       window.clearInterval(promoTimer);
-      if (hideTimer !== undefined) window.clearTimeout(hideTimer);
+      if (holdTimer !== undefined) window.clearTimeout(holdTimer);
+      if (exitTimer !== undefined) window.clearTimeout(exitTimer);
       if (releaseTimer !== undefined) window.clearTimeout(releaseTimer);
     };
   }, [imageReady]);
@@ -66,9 +74,9 @@ export default function TvPromoTakeover({ src, alt }: TvPromoTakeoverProps) {
 
   return createPortal(
     <aside
-      className={`${styles.takeover} ${visible ? styles.visible : ""}`}
-      aria-hidden={!visible}
-      aria-label={visible ? "Fort York Cannabis promotion" : undefined}
+      className={`${styles.takeover} ${styles[phase]}`}
+      aria-hidden={phase === "hidden"}
+      aria-label={phase !== "hidden" ? "Fort York Cannabis promotion" : undefined}
     >
       <img
         src={src}
