@@ -4,7 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import styles from "./TvPromoTakeover.module.css";
 
-const PROMO_INTERVAL_MS = 5 * 60 * 1000;
+const PROMO_INTERVAL_MS = 60 * 1000;
 const INITIAL_PREVIEW_DELAY_MS = 5 * 1000;
 const PROMO_HOLD_MS = 5 * 1000;
 const SLIDE_DURATION_MS = 650;
