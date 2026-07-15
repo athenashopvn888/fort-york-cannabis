@@ -17,3 +17,17 @@
 .pillActive { color: var(--brand-ink); background: var(--brand-teal); border-color: var(--brand-aqua); }
 .pillActive:hover { color: var(--brand-ink); background: var(--brand-aqua); }
 @media (max-width: 620px) { .topBar { min-height: 60px; } .open { font-size: 10px; max-width: 128px; white-space: normal; text-align: center; } }
+
+.pillHiring {
+  color: #07111f;
+  background: #fbbf24;
+  border-color: #fbbf24;
+  font-weight: 900;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.24);
+}
+
+.pillHiring:hover {
+  color: #07111f;
+  background: #facc15;
+  border-color: #facc15;
+}

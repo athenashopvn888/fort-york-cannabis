@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         url: `https://${gbpLocation.domain}/brand/og-fort-york-cannabis.webp`,
         width: 1200,
         height: 630,
-        alt: "FORT YORK CANNABIS local landing page",
+        alt: "FORT YORK CANNABIS local store page",
       },
     ],
   },

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 
-const ALL_LINKS = [
+const ALL_LINKS: { href: string; label: string; featured?: boolean }[] = [
   { href: "/", label: "Home" },
   { href: "/weed-dispensary-toronto/", label: "Toronto Store" },
   { href: "/menu", label: "Menu" },
@@ -12,6 +12,8 @@ const ALL_LINKS = [
   { href: "/info/fort-york-cannabis-store", label: "Fort York" },
   { href: "/info/cityplace-cannabis-dispensary", label: "CityPlace" },
   { href: "/contact", label: "Contact" },
+    { href: "/careers/budtender", label: "Join Team", featured: true },
+
   { href: "/faq", label: "FAQ" },
 ];
 
@@ -46,7 +48,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`${styles.pill} ${isActive ? styles.pillActive : ""}`}
+                className={`${styles.pill} ${link.featured ? styles.pillHiring : ""} ${isActive ? styles.pillActive : ""}`}
               >
                 {link.label}
               </Link>

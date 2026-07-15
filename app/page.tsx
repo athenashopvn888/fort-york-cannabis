@@ -56,6 +56,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className={styles.hiringCallout} aria-label="Hiring at FORT YORK CANNABIS">
+        <div className={styles.hiringCalloutInner}>
+          <div>
+            <span className={styles.hiringEyebrow}>Budtenders / Managers Wanted</span>
+            <h2>Join Fort York</h2>
+            <p>Fort York Cannabis is taking online applications for budtender and manager roles. We are looking for motivated, reliable people who can handle downtown customer flow. Online applications only. Please do not call the store about hiring.</p>
+          </div>
+          <Link href="/careers/budtender" className={styles.hiringButton}>Apply Online</Link>
+        </div>
+      </section>
+
+
+
       <section className={styles.actionStripSection} aria-label="Store quick links">
         <div className={styles.container}>
           <div className={styles.actionStrip}>

@@ -24,7 +24,7 @@ export const SEO_PAGES: SeoPage[] = [
       },
       {
         heading: "Store Details For Visit Planning",
-        body: "Use this page to confirm the store name, address, Google Maps route, phone number, hours, and Toronto local landing page before visiting. Phone is 437-872-8446 and hours are 11AM-2AM.",
+        body: "Use this page to confirm the store name, address, Google Maps route, phone number, hours, and Toronto local store page before visiting. Phone is 437-872-8446 and hours are 11AM-2AM.",
       },
     ],
     faqs: [
@@ -79,7 +79,7 @@ export const SEO_PAGES: SeoPage[] = [
   {
     slug: "fort-york-cannabis-local-visit-guide-2026",
     title: "FORT YORK CANNABIS Local Visit Guide | Toronto Adult 19+",
-    metaDescription: "Plan a visit to FORT YORK CANNABIS at 38 Fort York Blvd with adult 19+ store-page checks, menu-category paths, and Fort York CityPlace directions context.",
+    metaDescription: "Plan a visit to FORT YORK CANNABIS at 38 Fort York Blvd with adult 19+ store-page checks, menu-category guides, and Fort York CityPlace directions context.",
     h1: "FORT YORK CANNABIS Local Visit Guide for Adults 19+",
     heroTagline: "A practical Fort York and CityPlace visit guide for adults 19+",
     banner: "/brand/visit-cta-banner.webp",
