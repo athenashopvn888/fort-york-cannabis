@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SEO_PAGES } from "./lib/seoPages";
 import { MENU_CATEGORIES } from "./lib/products";
+import { RESOURCE_PAGES } from "./resources/resourceData";
 
 const BASE = "https://fortyorkcannabis.com";
 
@@ -31,5 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.55,
   }));
 
-  return [...staticPages, ...seoPages, ...menuPages];
+  const resourcePages: MetadataRoute.Sitemap = RESOURCE_PAGES.map((page) => ({
+    url: `${BASE}${page.path}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: page.path === "/resources" ? 0.75 : 0.65,
+  }));
+
+  return [...staticPages, ...seoPages, ...menuPages, ...resourcePages];
 }
