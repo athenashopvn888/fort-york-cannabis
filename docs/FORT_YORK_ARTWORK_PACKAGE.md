@@ -17,7 +17,6 @@ Current generated assets are first-pass production-intent coded raster/vector co
 | Homepage hero mobile | `public/banners/fort_york_hero_mobile.webp` | 900x1200 | WebP | Future mobile hero use | Tall crop of brand system | Fort York / CityPlace | Fake claims | Mobile design approval | Current concept exists |
 | GBP landing hero | `public/banners/fort_york_gbp_landing_hero.webp` | 1800x760 | WebP | GBP landing visual | Local SEO visual for Fort York/CityPlace | Confirmed location themes | Phone/hours/reviews | Owner review | Final-preview concept exists |
 | Category banners/cards | `public/banners/fort_york_*_banner.webp` | 1400x900 | WebP | Homepage/category tiles | Black/lime category-safe brand art derived from supplied storefront artwork | Broad category name only | Inventory/prices/brands | Menu source | Current live-store package |
-| Contact/location banner | `public/banners/fort_york_contact_banner.webp` | 1600x900 | WebP | Contact page | Address-forward downtown visual | 38 Fort York Blvd if needed | Phone/hours until confirmed | Phone/hours | Current concept exists |
 | FAQ/info banner | `public/banners/fort_york_faq_banner.webp` | 1600x900 | WebP | FAQ/info pages | Trust and pending facts visual | Safe owner facts only | Claims | Owner review | Current concept exists |
 | Open Graph image | `public/banners/fort_york_social_preview.webp` | 1200x630 | WebP | Social/metadata | Share card visual | Fort York Cannabis | Fake offer/review claims | Final social copy | Final-preview concept exists |
 

@@ -23,7 +23,7 @@ export default function ContactPage() {
             <h1>FORT YORK CANNABIS</h1>
             <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-872-8446. Open 11AM-2AM. Pickup and delivery details will be posted when available.</p>
           </div>
-          <img src="/brand/contact-location-banner.webp" alt="Contact FORT YORK CANNABIS" className={styles.heroImage} />
+          <img src="/banners/fort_york_hero_banner.webp" alt="FORT YORK CANNABIS storefront banner" className={styles.heroImage} />
         </div>
       </section>
       <section className={styles.infoSection}>

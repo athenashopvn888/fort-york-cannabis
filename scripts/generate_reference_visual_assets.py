@@ -318,7 +318,6 @@ def main() -> None:
         ("accessories", "category-accessories.webp"),
     ]:
         save(category_image(kind), name)
-    save(support_banner((1400, 640), "CONTACT", 31, "contact"), "contact-location-banner.webp")
     save(support_banner((1400, 560), "FAQ", 41, "faq"), "faq-info-banner.webp")
     save(support_banner((1400, 560), "ORDERING", 45, "delivery"), "delivery-ordering-banner.webp")
     save(local_area((1200, 760)), "local-area-waterfront.webp")
