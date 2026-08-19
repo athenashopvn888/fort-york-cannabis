@@ -64,7 +64,7 @@ export interface FlowerPriceRow {
 export const STORE_INFO = {
   name: "FORT YORK CANNABIS",
   code: "FYC01",
-  phone: "437-872-8446",
+  phone: "437-783-2511",
   hours: "11AM-2AM",
   address: "38 Fort York Blvd, Toronto",
   shortAddress: "38 Fort York Blvd",
@@ -98,7 +98,7 @@ export const MENU_SOURCE_STATE = {
 };
 
 export const MENU_STATUS_NOTICE =
-  "Browse Fort York flower, pre-rolls, vapes, edibles, concentrates, and accessories. Call 437-872-8446 for product questions.";
+  "Browse Fort York flower, pre-rolls, vapes, edibles, concentrates, and accessories. Call 437-783-2511 for product questions.";
 
 export const FLOWER_TIER_ORDER = ["EXOTIC", "PREMIUM", "AAA+", "AA", "BUDGET"] as const;
 export const TOP_BUNDLE_TIERS = ["EXOTIC", "PREMIUM", "AAA+"] as const;

@@ -137,7 +137,7 @@ export default function HomePage() {
             </div>
             <div className={styles.storeCard}>
               <h3 className={styles.storeCardTitle}>Store Details</h3>
-              <p className={styles.storeCardText}>Phone 437-872-8446. Open 11AM-2AM at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
+              <p className={styles.storeCardText}>Phone 437-783-2511. Open 11AM-2AM at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function HomePage() {
               <span className={styles.microLabel}>Plan your visit</span>
               <h2 className={styles.sectionTitle}>Directions Ready. Menu Ready.</h2>
               <p className={styles.sectionSubtitle}>
-                Use the map link for directions to 38 Fort York Blvd. Phone is 437-872-8446. Open 11AM-2AM. Pickup and delivery details will be posted when available.
+                Use the map link for directions to 38 Fort York Blvd. Phone is 437-783-2511. Open 11AM-2AM. Pickup and delivery details will be posted when available.
               </p>
             </div>
             <div className={styles.visitActions}>

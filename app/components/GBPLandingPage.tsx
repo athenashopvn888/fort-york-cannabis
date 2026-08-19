@@ -99,7 +99,7 @@ export function GBPLandingPage() {
         <div>
           <span className={styles.microLabel}>Store information</span>
           <h2 className={styles.h2}>Fort York Cannabis Store</h2>
-          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-872-8446. Open 11AM-2AM at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
+          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-783-2511. Open 11AM-2AM at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
         </div>
         <div className={styles.trustGrid}>
           {trustItems.map((item) => (
@@ -167,7 +167,7 @@ export function GBPLandingPage() {
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Phone</span>
-              <span>437-872-8446</span>
+              <span>437-783-2511</span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Store Hours</span>

@@ -7,7 +7,7 @@ Local-only first-pass storefront scaffold for `fortyorkcannabis.com`.
 - Store name: FORT YORK CANNABIS
 - Domain: https://fortyorkcannabis.com
 - Address: 38 Fort York Blvd, Toronto, ON M5V 3Z3, Canada
-- Phone: 437-872-8446
+- Phone: 437-783-2511
 - Hours: 11AM-2AM
 - GBP landing route: /weed-dispensary-toronto/
 - Menu inventory store code: FYC01

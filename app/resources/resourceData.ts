@@ -48,7 +48,7 @@ export const SITE = {
   baseUrl: "https://fortyorkcannabis.com",
   storePage: "/weed-dispensary-toronto",
   address: "38 Fort York Blvd, Toronto, ON",
-  phone: "437-872-8446",
+  phone: "437-783-2511",
   hours: "11AM-2AM",
 };
 
