@@ -236,7 +236,7 @@ export default function FortYorkTv2Page() {
         </div>
         <aside>
           <strong>{STORE_INFO.name}</strong>
-          <p>{STORE_INFO.shortAddress} / {STORE_INFO.phone} / Open {STORE_INFO.hours}</p>
+          <p>{STORE_INFO.shortAddress} / Open {STORE_INFO.hours}</p>
         </aside>
       </header>
 

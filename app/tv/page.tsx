@@ -381,10 +381,6 @@ export default function FortYorkTvPage() {
               <strong>{STORE_INFO.shortAddress}</strong>
             </div>
             <div>
-              <span>Call</span>
-              <strong>{STORE_INFO.phone}</strong>
-            </div>
-            <div>
               <span>Open</span>
               <strong>{STORE_INFO.hours}</strong>
             </div>

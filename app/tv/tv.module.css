@@ -85,7 +85,7 @@
 .storeMeta {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(3, max-content);
+  grid-template-columns: repeat(2, max-content);
   text-align: right;
   text-transform: uppercase;
 }
