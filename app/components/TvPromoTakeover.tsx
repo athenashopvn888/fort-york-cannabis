@@ -10,6 +10,10 @@ const PROMO_HOLD_MS = 5 * 1000;
 const SLIDE_DURATION_MS = 650;
 
 type TvPromoTakeoverProps = {
+  promos: readonly [TvPromo, ...TvPromo[]];
+};
+
+export type TvPromo = {
   src: string;
   alt: string;
 };
@@ -18,26 +22,39 @@ type PromoPhase = "hidden" | "entering" | "visible" | "exiting";
 
 const subscribeToClient = () => () => {};
 
-export default function TvPromoTakeover({ src, alt }: TvPromoTakeoverProps) {
+export default function TvPromoTakeover({ promos }: TvPromoTakeoverProps) {
   const mounted = useSyncExternalStore(subscribeToClient, () => true, () => false);
-  const [imageReady, setImageReady] = useState(false);
+  const [imagesReady, setImagesReady] = useState(false);
+  const [activePromoIndex, setActivePromoIndex] = useState(0);
   const [phase, setPhase] = useState<PromoPhase>("hidden");
 
   useEffect(() => {
-    const preload = new Image();
-    const markReady = () => setImageReady(true);
-    preload.addEventListener("load", markReady);
-    preload.src = src;
+    let active = true;
+    const loadedPromos = new Set<number>();
+    const preloads = promos.map((promo, index) => {
+      const preload = new Image();
+      const markReady = () => {
+        if (!active || loadedPromos.has(index)) return;
+        loadedPromos.add(index);
+        if (loadedPromos.size === promos.length) setImagesReady(true);
+      };
+      preload.addEventListener("load", markReady);
+      preload.src = promo.src;
+      if (preload.complete && preload.naturalWidth > 0) markReady();
+      return { preload, markReady };
+    });
 
-    if (preload.complete && preload.naturalWidth > 0) markReady();
-
-    return () => preload.removeEventListener("load", markReady);
-  }, [src]);
+    return () => {
+      active = false;
+      preloads.forEach(({ preload, markReady }) => preload.removeEventListener("load", markReady));
+    };
+  }, [promos]);
 
   useEffect(() => {
-    if (!imageReady) return;
+    if (!imagesReady) return;
 
     let promoActive = false;
+    let nextPromoIndex = 0;
     let holdTimer: number | undefined;
     let exitTimer: number | undefined;
     let releaseTimer: number | undefined;
@@ -45,6 +62,8 @@ export default function TvPromoTakeover({ src, alt }: TvPromoTakeoverProps) {
     const showPromo = () => {
       if (promoActive) return;
       promoActive = true;
+      setActivePromoIndex(nextPromoIndex);
+      nextPromoIndex = (nextPromoIndex + 1) % promos.length;
       setPhase("entering");
       holdTimer = window.setTimeout(() => {
         setPhase("visible");
@@ -68,9 +87,11 @@ export default function TvPromoTakeover({ src, alt }: TvPromoTakeoverProps) {
       if (exitTimer !== undefined) window.clearTimeout(exitTimer);
       if (releaseTimer !== undefined) window.clearTimeout(releaseTimer);
     };
-  }, [imageReady]);
+  }, [imagesReady, promos.length]);
 
   if (!mounted) return null;
+
+  const activePromo = promos[activePromoIndex];
 
   return createPortal(
     <aside
@@ -79,12 +100,11 @@ export default function TvPromoTakeover({ src, alt }: TvPromoTakeoverProps) {
       aria-label={phase !== "hidden" ? "Fort York Cannabis promotion" : undefined}
     >
       <img
-        src={src}
-        alt={alt}
+        src={activePromo.src}
+        alt={activePromo.alt}
         loading="eager"
         fetchPriority="high"
         decoding="async"
-        onLoad={() => setImageReady(true)}
       />
     </aside>,
     document.body,
