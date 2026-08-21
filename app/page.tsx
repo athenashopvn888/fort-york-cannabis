@@ -8,7 +8,7 @@ const ACTIONS = [
   { label: "Address", note: "38 Fort York Blvd", href: "/contact" },
   { label: "Directions", note: "Open Google Maps", href: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9", external: true },
   { label: "Menu", note: "Browse Menu", href: "/menu" },
-  { label: "Hours", note: "Open 11AM-2AM", href: "/contact" },
+  { label: "Hours", note: "Open 24 hours", href: "/contact" },
 ];
 
 const LOCAL_FEATURES = [
@@ -24,7 +24,7 @@ const LOCAL_FAQS = [
   },
   {
     q: "What are the store hours?",
-    a: "Open 11AM-2AM daily.",
+    a: "Open 24 hours, seven days a week.",
   },
   {
     q: "Is the menu live?",
@@ -95,7 +95,7 @@ export default function HomePage() {
             <span className={styles.microLabel}>Menu</span>
             <h2 id="menu-title" className={styles.sectionTitle}>Explore Categories</h2>
             <p className={styles.sectionSubtitle}>{MENU_CATALOG_NOTICE}</p>
-            <p className={styles.menuSourcePill}>Open 11AM-2AM - {MENU_SOURCE_STATE.productCount} menu items</p>
+            <p className={styles.menuSourcePill}>Open 24 hours - {MENU_SOURCE_STATE.productCount} menu items</p>
           </div>
           <nav className={styles.menuToolbar} aria-label="Menu categories">
             {MENU_CATALOG_CATEGORIES.map((category) => (
@@ -137,7 +137,7 @@ export default function HomePage() {
             </div>
             <div className={styles.storeCard}>
               <h3 className={styles.storeCardTitle}>Store Details</h3>
-              <p className={styles.storeCardText}>Phone 437-783-2511. Open 11AM-2AM at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
+              <p className={styles.storeCardText}>Phone 437-783-2511. Open 24 hours at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function HomePage() {
               <span className={styles.microLabel}>Plan your visit</span>
               <h2 className={styles.sectionTitle}>Directions Ready. Menu Ready.</h2>
               <p className={styles.sectionSubtitle}>
-                Use the map link for directions to 38 Fort York Blvd. Phone is 437-783-2511. Open 11AM-2AM. Pickup and delivery details will be posted when available.
+                Use the map link for directions to 38 Fort York Blvd. Phone is 437-783-2511. Open 24 hours. Pickup and delivery details will be posted when available.
               </p>
             </div>
             <div className={styles.visitActions}>

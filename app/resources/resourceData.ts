@@ -49,7 +49,7 @@ export const SITE = {
   storePage: "/weed-dispensary-toronto",
   address: "38 Fort York Blvd, Toronto, ON",
   phone: "437-783-2511",
-  hours: "11AM-2AM",
+  hours: "24 hours",
 };
 
 export const AUTHORS: Record<ResourceAuthorKey, ResourceAuthor> = {

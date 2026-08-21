@@ -36,7 +36,7 @@ export default function Navbar() {
           </span>
         </Link>
         <div className={styles.topBarRight}>
-          <span className={styles.open}>11AM-2AM</span>
+          <span className={styles.open}>OPEN 24 HOURS</span>
         </div>
       </div>
 

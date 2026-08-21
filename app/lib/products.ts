@@ -65,7 +65,7 @@ export const STORE_INFO = {
   name: "FORT YORK CANNABIS",
   code: "FYC01",
   phone: "437-783-2511",
-  hours: "11AM-2AM",
+  hours: "24 hours",
   address: "38 Fort York Blvd, Toronto",
   shortAddress: "38 Fort York Blvd",
   domain: "fortyorkcannabis.com",

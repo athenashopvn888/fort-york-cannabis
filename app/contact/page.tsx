@@ -6,7 +6,7 @@ import styles from "./contact.module.css";
 export const metadata: Metadata = {
   title: "Contact FORT YORK CANNABIS | 38 Fort York Blvd, Toronto",
   description:
-    "Contact page for FORT YORK CANNABIS at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Hours are 11AM-2AM.",
+    "Contact page for FORT YORK CANNABIS at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. The store is open 24 hours.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/contact",
   },
@@ -21,7 +21,7 @@ export default function ContactPage() {
           <div className={styles.heroCopy}>
             <span className={styles.microLabel}>Contact and location</span>
             <h1>FORT YORK CANNABIS</h1>
-            <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Open 11AM-2AM. Pickup and delivery details will be posted when available.</p>
+            <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Open 24 hours. Pickup and delivery details will be posted when available.</p>
           </div>
           <img src="/banners/fort_york_hero_banner.webp" alt="FORT YORK CANNABIS storefront banner" className={styles.heroImage} />
         </div>
@@ -37,7 +37,7 @@ export default function ContactPage() {
             <div className={styles.infoCard}>
               <div className={styles.infoIcon}>HRS</div>
               <h2 className={styles.infoTitle}>Store Hours</h2>
-              <p className={styles.infoText}>Open 11AM-2AM.</p>
+              <p className={styles.infoText}>Open 24 hours, seven days a week.</p>
             </div>
             <div className={styles.infoCard}>
               <div className={styles.infoIcon}>TEL</div>

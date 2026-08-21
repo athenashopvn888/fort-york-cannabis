@@ -1,8 +1,8 @@
 export const pendingLabel = "Coming soon";
 export const storePhone = "437-783-2511";
 export const storePhoneIntl = "+14377832511";
-export const storeHours = "11AM-2AM";
-export const schemaOpeningHours = "Mo-Su 11:00-02:00";
+export const storeHours = "24 hours";
+export const schemaOpeningHours = "Mo-Su 00:00-23:59";
 
 export const gbpLocation = {
   storeCode: "FYC01",
@@ -55,13 +55,13 @@ export const gbpLocation = {
   metaDescription:
     "FORT YORK CANNABIS is a cannabis store at 38 Fort York Blvd in Toronto, serving Fort York, CityPlace, the waterfront, King West, and nearby downtown Toronto customers.",
   introVariant:
-    "FORT YORK CANNABIS serves adults 19+ at 38 Fort York Blvd in downtown Toronto near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Open 11AM-2AM. Phone is 437-783-2511.",
+    "FORT YORK CANNABIS serves adults 19+ at 38 Fort York Blvd in downtown Toronto near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Open 24 hours. Phone is 437-783-2511.",
   complianceNote:
     "Cannabis products are for adults 19+ only. Pickup and delivery details will be posted when available.",
   localProofPoints: [
     "Located at 38 Fort York Blvd in downtown Toronto.",
     "Serves Fort York, CityPlace, the waterfront, King West, Rogers Centre, and the Entertainment District.",
-    "Phone is 437-783-2511 and hours are 11AM-2AM.",
+    "Phone is 437-783-2511 and the store is open 24 hours.",
   ],
   internalLaunchInputs: [
     "Final license details",

@@ -99,7 +99,7 @@ export function GBPLandingPage() {
         <div>
           <span className={styles.microLabel}>Store information</span>
           <h2 className={styles.h2}>Fort York Cannabis Store</h2>
-          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-783-2511. Open 11AM-2AM at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
+          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-783-2511. Open 24 hours at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
         </div>
         <div className={styles.trustGrid}>
           {trustItems.map((item) => (
@@ -133,7 +133,7 @@ export function GBPLandingPage() {
       <section className={styles.section} id="menu">
         <h2 className={styles.h2}>Menu</h2>
         <p className={styles.infoText}>{MENU_CATALOG_NOTICE}</p>
-        <p className={styles.menuStatusLine}>Open 11AM-2AM - {MENU_SOURCE_STATE.productCount} menu items</p>
+        <p className={styles.menuStatusLine}>Open 24 hours - {MENU_SOURCE_STATE.productCount} menu items</p>
         <nav className={styles.menuRail} aria-label="Menu categories">
           {MENU_CATALOG_CATEGORIES.map((category) => (
             <Link key={category.name} href={category.href}>{category.name}</Link>
@@ -171,7 +171,7 @@ export function GBPLandingPage() {
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Store Hours</span>
-              <span>11AM-2AM</span>
+              <span>Open {gbpLocation.displayHours}</span>
             </div>
             <div className={styles.napItem}>
               <span className={styles.napLabel}>Google Maps</span>
@@ -193,7 +193,7 @@ export function GBPLandingPage() {
           </div>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Are store hours available?</h3>
-            <p className={styles.faqAnswer}>Open 11AM-2AM daily.</p>
+            <p className={styles.faqAnswer}>Open 24 hours, seven days a week.</p>
           </div>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Can I browse the menu?</h3>
