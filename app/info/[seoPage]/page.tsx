@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -37,32 +38,100 @@ export default async function SeoLandingPage({
   const { seoPage: slug } = await params;
   const page = getSeoPageBySlug(slug);
   if (!page) notFound();
+  const heroPreview = page.heroPreview;
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
 
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
+      />
       <Navbar />
 
-      {page.banner && (
+      {page.banner && !heroPreview && (
         <section className={styles.bannerSection}>
-          <img
+          <Image
             src={page.banner}
             alt={page.h1}
             className={styles.bannerImg}
+            width={1600}
+            height={720}
+            sizes="100vw"
+            priority
           />
         </section>
       )}
 
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <span className={styles.heroIcon}>FYC</span>
-          <h1 className={styles.heroH1}>{page.h1}</h1>
-          <p className={styles.heroTagline}>{page.heroTagline}</p>
-        </div>
-      </section>
+      {heroPreview ? (
+        <section className={styles.productHero}>
+          <div className={styles.productHeroInner}>
+            <div className={styles.productHeroCopy}>
+              <span className={styles.productHeroKicker}>{heroPreview.eyebrow}</span>
+              <h1>{page.h1}</h1>
+              <p>{heroPreview.intro}</p>
+              <div className={styles.productHeroActions}>
+                <Link href={heroPreview.primaryAction.href} className={styles.productHeroPrimary}>
+                  {heroPreview.primaryAction.label}
+                </Link>
+                <Link href={heroPreview.secondaryAction.href} className={styles.productHeroSecondary}>
+                  {heroPreview.secondaryAction.label}
+                </Link>
+              </div>
+            </div>
+            <div className={styles.productPreviewStage} aria-label={`${page.h1} product preview`}>
+              {heroPreview.products.map((product, index) => (
+                <Link
+                  key={product.name}
+                  href={heroPreview.primaryAction.href}
+                  className={styles.productPreviewCard}
+                >
+                  <Image
+                    src={product.image}
+                    alt={`${product.name} product preview`}
+                    width={800}
+                    height={800}
+                    priority={index === 0}
+                    sizes="(max-width: 720px) 44vw, (max-width: 980px) 46vw, 220px"
+                  />
+                  <span>{product.name}</span>
+                </Link>
+              ))}
+              <p className={styles.productHeroDisclosure}>{heroPreview.disclosure}</p>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className={styles.hero}>
+          <div className={styles.heroInner}>
+            <span className={styles.heroIcon}>FYC</span>
+            <h1 className={styles.heroH1}>{page.h1}</h1>
+            <p className={styles.heroTagline}>{page.heroTagline}</p>
+          </div>
+        </section>
+      )}
 
       <section className={styles.localFeatureSection}>
         <div className={styles.localFeatureGrid}>
-            <img src="/brand/local-area-waterfront.webp" alt="Fort York CityPlace downtown Toronto local area" className={styles.localFeatureImage} />
+            <Image
+              src="/brand/local-area-waterfront.webp"
+              alt="Fort York CityPlace downtown Toronto local area"
+              className={styles.localFeatureImage}
+              width={1200}
+              height={800}
+              sizes="(max-width: 760px) 100vw, 48vw"
+            />
             <div className={styles.localFeatureCopy}>
               <span className={styles.microLabel}>Downtown Toronto local guide</span>
               <h2 className={styles.sectionTitle}>Fort York and CityPlace Context</h2>
@@ -83,7 +152,7 @@ export default async function SeoLandingPage({
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Menu Categories</h2>
             <p className={styles.sectionBody}>
-              Browse Fort York menu categories for flower, pre-rolls, vapes, edibles, concentrates, and accessories. Pickup and delivery details will be posted when available.
+              Browse flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates, Cigarettes, and accessories. The Cigarettes category includes $25 cartons plus 2 Pack $5 Mix &amp; Match on selected SKUs.
             </p>
             <div className={styles.categoryGrid}>
               {MENU_CATEGORIES.map((category) => (

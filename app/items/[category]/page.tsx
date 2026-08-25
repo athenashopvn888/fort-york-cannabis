@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "../../components/Navbar";
@@ -25,8 +26,10 @@ import {
   getTierDetail,
   type FlowerProduct,
   type ItemProduct,
+  type MenuCategory,
   type MenuProduct,
 } from "../../lib/products";
+import { CIGARETTE_MIX_MATCH_LABEL, isCigaretteDealSku } from "../../lib/cigaretteDeals.mjs";
 
 export const dynamic = "force-static";
 
@@ -114,7 +117,13 @@ function FlowerCard({ product }: { product: FlowerProduct }) {
   return (
     <article className={styles.card} style={{ "--tier-color": tier.accent } as CSSProperties}>
       <Link href={getProductPath(product)} className={styles.imageWrap} aria-label={`View ${product.name}`}>
-        <img src={getProductImage(product)} alt={`${product.name} at Fort York Cannabis`} loading="lazy" />
+        <Image
+          src={getProductImage(product)}
+          alt={`${product.name} at Fort York Cannabis`}
+          width={360}
+          height={280}
+          sizes="(max-width: 760px) 92vw, (max-width: 1100px) 45vw, 280px"
+        />
         <SaleBadges product={product} />
         {product.thc ? <span className={styles.thcBadge}>THC {product.thc}</span> : null}
       </Link>
@@ -144,12 +153,21 @@ function FlowerCard({ product }: { product: FlowerProduct }) {
 
 function ItemCard({ product }: { product: ItemProduct }) {
   const chips = getItemDetailChips(product).slice(0, 5);
+  const cigaretteDeal = product.category.toUpperCase() === "CIGARETTES" && isCigaretteDealSku(product.sku);
+  const itemPrice = formatItemPrice(product.price) || "Price in store";
 
   return (
     <article className={styles.card}>
       <Link href={getProductPath(product)} className={styles.imageWrap} aria-label={`View ${product.name}`}>
-        <img src={getProductImage(product)} alt={`${product.name} at Fort York Cannabis`} loading="lazy" />
+        <Image
+          src={getProductImage(product)}
+          alt={`${product.name} at Fort York Cannabis`}
+          width={360}
+          height={280}
+          sizes="(max-width: 760px) 92vw, (max-width: 1100px) 45vw, 280px"
+        />
         <SaleBadges product={product} />
+        {cigaretteDeal ? <span className={styles.mixMatchBadge}>2 Pack $5</span> : null}
       </Link>
       <div className={styles.cardBody}>
         <span className={styles.cardMeta}>{getProductMeta(product)}</span>
@@ -159,7 +177,20 @@ function ItemCard({ product }: { product: ItemProduct }) {
             <span key={chip}>{chip}</span>
           ))}
         </div>
-        <strong className={styles.cardPrice}>{formatItemPrice(product.price) || "Price in store"}</strong>
+        {cigaretteDeal ? (
+          <div className={styles.cigarettePricePair} aria-label={`${itemPrice} carton and ${CIGARETTE_MIX_MATCH_LABEL}`}>
+            <div>
+              <span>Carton</span>
+              <strong>{itemPrice}</strong>
+            </div>
+            <div className={styles.mixMatchPrice}>
+              <span>Mix &amp; Match</span>
+              <strong>2 Pack $5</strong>
+            </div>
+          </div>
+        ) : (
+          <strong className={styles.cardPrice}>{itemPrice}</strong>
+        )}
         <Link href={getProductPath(product)}>View Details</Link>
       </div>
     </article>
@@ -187,11 +218,50 @@ function FlowerTierSections() {
           </div>
           <div className={styles.grid}>
             {group.products.map((product) => (
-              <FlowerCard key={product.sku} product={product} />
+              <FlowerCard key={`${product.sku}-${product.slug}`} product={product} />
             ))}
           </div>
         </section>
       ))}
+    </section>
+  );
+}
+
+function CigaretteOfferStrip() {
+  return (
+    <section className={styles.cigaretteOfferStrip} aria-label="Cigarette carton and mix and match prices">
+      <div>
+        <span>Carton Price</span>
+        <strong>$25 Cartons</strong>
+      </div>
+      <div className={styles.cigaretteOfferPromo}>
+        <span>Selected SKUs</span>
+        <strong>{CIGARETTE_MIX_MATCH_LABEL}</strong>
+      </div>
+      <p>Approved cigarette SKUs show both prices. Other cigarette and smoke-shelf items keep their listed price.</p>
+    </section>
+  );
+}
+
+function CategorySeoIntro({ category }: { category: MenuCategory }) {
+  const content = category.seoContent;
+  if (!content) return null;
+
+  return (
+    <section className={styles.categorySeoIntro} aria-labelledby={`${category.slug}-local-heading`}>
+      <div className={styles.categorySeoCopy}>
+        <span>{content.eyebrow}</span>
+        <h2 id={`${category.slug}-local-heading`}>{content.heading}</h2>
+        {content.paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+        <Link href={content.landingHref}>{content.landingLabel}</Link>
+      </div>
+      <ul className={styles.categorySeoHighlights} aria-label={`${category.name} shopping details`}>
+        {content.highlights.map((highlight) => (
+          <li key={highlight}>{highlight}</li>
+        ))}
+      </ul>
     </section>
   );
 }
@@ -245,13 +315,17 @@ export default async function CategoryPage({
 
       <StickyMenuNavigator activeSlug={category.slug} showTiers={isFlower} />
 
+      {category.key === "CIGARETTES" ? <CigaretteOfferStrip /> : null}
+
+      <CategorySeoIntro category={category} />
+
       {products.length > 0 ? (
         isFlower ? (
           <FlowerTierSections />
         ) : (
           <section className={styles.grid} aria-label={`${category.name} products`}>
             {products.map((product) => (
-              <ProductCard key={product.sku} product={product} />
+              <ProductCard key={`${product.sku}-${product.slug}`} product={product} />
             ))}
           </section>
         )

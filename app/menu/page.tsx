@@ -19,7 +19,7 @@ import styles from "./menu.module.css";
 export const metadata: Metadata = {
   title: "Menu | FORT YORK CANNABIS",
   description:
-    "Browse the FORT YORK CANNABIS menu for flower, pre-rolls, vapes, edibles, concentrates, and accessories at 38 Fort York Blvd in Toronto.",
+    "Browse the FORT YORK CANNABIS menu for flower, pre-rolls, vape pens, disposable vapes, edibles, concentrates, cigarettes, and accessories at 38 Fort York Blvd in Toronto.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/menu",
   },
@@ -97,7 +97,7 @@ export default function MenuPage() {
           </div>
           <div className={styles.featureGrid}>
             {featured.map((product) => (
-              <Link key={product.sku} href={getProductPath(product)} className={styles.featureCard}>
+              <Link key={`${product.sku}-${product.slug}`} href={getProductPath(product)} className={styles.featureCard}>
                 <img src={getProductImage(product)} alt={`${product.name} at Fort York Cannabis`} />
                 <span>{getProductMeta(product)}</span>
                 <strong>{product.name}</strong>

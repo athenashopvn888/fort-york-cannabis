@@ -28,7 +28,7 @@ const LOCAL_FAQS = [
   },
   {
     q: "Is the menu live?",
-    a: "Yes. Browse flower, pre-rolls, vapes, edibles, concentrates, and accessories from the menu.",
+    a: "Yes. Browse flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates, Cigarettes, and accessories from the menu.",
   },
   {
     q: "Which neighbourhoods does the store serve?",

@@ -5,9 +5,32 @@ export type SeoPage = {
   h1: string;
   heroTagline: string;
   banner?: string;
+  heroPreview?: {
+    eyebrow: string;
+    intro: string;
+    products: { name: string; image: string }[];
+    disclosure: string;
+    primaryAction: { label: string; href: string };
+    secondaryAction: { label: string; href: string };
+  };
   sections: { heading: string; body: string }[];
   faqs: { q: string; a: string }[];
 };
+
+const NATIVE_CIGARETTE_PREVIEW = [
+  { name: "Canadian Classics Original", image: "/products/1014-CANADIAN-CLASSSICS-ORIGINAL.webp" },
+  { name: "Canadian Classics Silver", image: "/products/1015-CANADIAN-CLASSICS-SILVER.webp" },
+  { name: "Canadian Full", image: "/products/1006-CANADIAN-FULL.webp" },
+  { name: "Canadian Lights", image: "/products/1005-CANADIAN-LIGHTS.webp" },
+  { name: "Canadian Goose Full", image: "/products/1011-CANADIAN-GOOSE.webp" },
+  { name: "Canadian Menthol", image: "/products/1013-CANADIAN-MENTHOL.webp" },
+] as const;
+
+const NICOTINE_VAPE_PREVIEW = [
+  { name: "Flavour Beast E-Liquid Salt", image: "/products/1093-Flavour-Beast-e-liquid-salt.webp" },
+  { name: "Geek Max", image: "/products/GEEKMAX500x500HQ.webp" },
+  { name: "Uwell Caliburn Pod", image: "/products/1088-Uwell-Caliburn-pod.webp" },
+] as const;
 
 export const SEO_PAGES: SeoPage[] = [
   {
@@ -73,7 +96,7 @@ export const SEO_PAGES: SeoPage[] = [
     ],
     faqs: [
       { q: "What hours are listed?", a: "FORT YORK CANNABIS is open 24 hours, seven days a week." },
-      { q: "How can shoppers browse the menu?", a: "Use the menu category links for flower, pre-rolls, vapes, edibles, concentrates, accessories, and other available sections." },
+      { q: "How can shoppers browse the menu?", a: "Use the menu category links for flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates, Cigarettes, and accessories." },
     ],
   },
   {
@@ -90,7 +113,7 @@ export const SEO_PAGES: SeoPage[] = [
       },
       {
         heading: "Use The Menu Before Visiting",
-        body: "Start with the Fort York menu to browse categories such as flower, pre-rolls, vapes, edibles, concentrates, accessories, cigarettes, and specialty items. For item-specific questions, use the current menu experience, contact the store, or ask staff before visiting.",
+        body: "Start with flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates, Cigarettes, or accessories. Product names, sizes, and listed prices help adults 19+ narrow their choices before contacting staff with item-specific questions.",
       },
       {
         heading: "What To Check Before You Go",
@@ -110,6 +133,112 @@ export const SEO_PAGES: SeoPage[] = [
       { q: "How can shoppers check current product details?", a: "Use the current menu experience or contact the store before visiting." },
       { q: "What should shoppers check first?", a: "Start with the official store page, confirm the location context, then use menu category links or staff help for product questions." },
       { q: "Why mention Fort York and CityPlace?", a: "Local shoppers often search with neighbourhood, street, condo-area, and downtown route language. Clear context helps them confirm the right store." },
+    ],
+  },
+  {
+    slug: "native-cigarettes-fort-york",
+    title: "Native Cigarettes Fort York & CityPlace",
+    metaDescription:
+      "Compare Native cigarette cartons and selected-SKU Mix & Match details at FORT YORK CANNABIS, 38 Fort York Blvd near CityPlace. Adults 19+.",
+    h1: "Native Cigarettes Near Fort York and CityPlace",
+    heroTagline: "Native cigarette cartons and smoke-shelf choices for adults 19+ in downtown Toronto",
+    heroPreview: {
+      eyebrow: "FORT YORK CANNABIS · 38 Fort York Blvd",
+      intro:
+        "Compare Native cigarette brands, carton pricing, and the selected-SKU Mix & Match offer before a Fort York or CityPlace visit.",
+      products: [...NATIVE_CIGARETTE_PREVIEW],
+      disclosure: "Brand preview only. Selection varies by store; check the current cigarette menu before visiting.",
+      primaryAction: { label: "Browse Cigarettes", href: "/items/cigarettes" },
+      secondaryAction: { label: "Smoke-Shelf Guides", href: "/resources/native-smokes" },
+    },
+    sections: [
+      {
+        heading: "Compare Native Cigarette Cartons and Packs",
+        body: "Adults 19+ can compare Native cigarette names, carton pricing, and qualifying pack offers at Fort York. Each listing includes the product format and price needed to narrow the choice before visiting.",
+      },
+      {
+        heading: "$25 Cartons and 2 Pack $5 Mix & Match",
+        body: "Selected approved cigarette SKUs show both the $25 Carton price and the 2 Pack $5 Mix & Match offer. Qualifying products are marked individually because the Mix & Match deal does not apply to every cigarette, pouch, Backwoods, grabba, or smoke-shelf item.",
+      },
+      {
+        heading: "Cigarettes Near CityPlace and the Waterfront",
+        body: "FORT YORK CANNABIS is at 38 Fort York Blvd in downtown Toronto, close to CityPlace, Fort York, and waterfront routes. The store is open 24 hours, giving adults 19+ a local option for daytime, evening, and overnight visits.",
+      },
+      {
+        heading: "More Smoke-Shelf Choices",
+        body: "The Cigarettes collection also includes separately priced Backwoods, grabba, grabba shaker, and nicotine pouch listings. These products keep their own listed prices and are not automatically part of the selected-SKU cigarette offer.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does every cigarette product qualify for 2 Pack $5 Mix & Match?",
+        a: "No. The offer applies only to approved cigarette SKUs. Qualifying products show the 2 Pack $5 Mix & Match price beside the carton price.",
+      },
+      {
+        q: "Are $25 carton prices still shown?",
+        a: "Yes. Qualifying cigarette products show the $25 Carton price and the 2 Pack $5 Mix & Match offer together.",
+      },
+      {
+        q: "Where is FORT YORK CANNABIS?",
+        a: "FORT YORK CANNABIS is at 38 Fort York Blvd, Toronto, ON M5V 3Z3, near Fort York and CityPlace.",
+      },
+      {
+        q: "Can shoppers confirm cigarette details before visiting?",
+        a: "Yes. Browse the Cigarettes collection for product names and listed prices, or call 437-783-2511 with a product-specific question.",
+      },
+    ],
+  },
+  {
+    slug: "nicotine-vapes-fort-york",
+    title: "Nicotine Vapes Fort York & CityPlace",
+    metaDescription:
+      "Browse nicotine vape pens, pods, devices and e-liquid at FORT YORK CANNABIS near Fort York and CityPlace in downtown Toronto. Adults 19+.",
+    h1: "Nicotine Vape Pens Near Fort York and CityPlace",
+    heroTagline: "Nicotine vape pens, pods, devices, e-liquid, and disposable formats for adults 19+",
+    heroPreview: {
+      eyebrow: "NICOTINE VAPES · FORT YORK AND CITYPLACE",
+      intro:
+        "Compare nicotine vape pens, pods, devices, e-liquid, and disposable formats at 38 Fort York Blvd in downtown Toronto.",
+      products: [...NICOTINE_VAPE_PREVIEW],
+      disclosure: "Product preview only. Names and prices can change; check the current Nicotine Vapes menu before visiting.",
+      primaryAction: { label: "Browse Nicotine Vapes", href: "/items/vapes" },
+      secondaryAction: { label: "THC Vape Disposables", href: "/items/vape-disposables" },
+    },
+    sections: [
+      {
+        heading: "Nicotine Vape Pens, Pods, and Devices",
+        body: "Adults 19+ can compare nicotine vape pens, pod hardware, e-liquid, rechargeable devices, and disposable formats in one focused collection. Product names, format details, and listed prices help make the choice clearer before a visit.",
+      },
+      {
+        heading: "Nicotine Vapes and THC Vapes Stay Separate",
+        body: "The Nicotine Vapes collection is dedicated to nicotine products. Cannabis products such as Gas Gang and Drizzle remain in the separate Vape Disposables collection, so shoppers do not have to sort two different product types in one list.",
+      },
+      {
+        heading: "Vape Pens Near CityPlace and Fort York",
+        body: "FORT YORK CANNABIS is at 38 Fort York Blvd near CityPlace, Fort York, and the downtown Toronto waterfront. The store is open 24 hours for adults 19+ planning a local visit.",
+      },
+      {
+        heading: "Compare the Listed Vape Format",
+        body: "Check whether a listing is a vape pen, pod, device, e-liquid, or disposable format, then compare the displayed product details and price. Call 437-783-2511 if a product-specific question remains before visiting.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is the Nicotine Vapes collection the same as THC Vape Disposables?",
+        a: "No. Nicotine vape pens, pods, devices, e-liquid, and nicotine disposable formats are kept separate from cannabis THC Vape Disposables.",
+      },
+      {
+        q: "What types of nicotine vape products can shoppers compare?",
+        a: "The category is organized for nicotine vape pens, disposable formats, pod hardware, devices, and e-liquid. Check the current menu for the listed products and prices.",
+      },
+      {
+        q: "Where can adults 19+ find the Fort York vape menu?",
+        a: "Use the Nicotine Vapes collection for nicotine products and the Vape Disposables collection for THC cannabis vapes.",
+      },
+      {
+        q: "Where is the store?",
+        a: "FORT YORK CANNABIS is at 38 Fort York Blvd, Toronto, ON M5V 3Z3, near CityPlace and the downtown waterfront.",
+      },
     ],
   },
 ];

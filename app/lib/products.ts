@@ -1,5 +1,6 @@
 import flowersJson from "./flowers.json";
 import itemsJson from "./items.json";
+import { CIGARETTE_CARTON_LABEL, isCigaretteDealSku } from "./cigaretteDeals.mjs";
 
 export interface PricePoint {
   regular: number;
@@ -49,6 +50,14 @@ export interface MenuCategory {
   itemKeys: string[];
   seoTitle: string;
   seoDescription: string;
+  seoContent?: {
+    eyebrow: string;
+    heading: string;
+    paragraphs: string[];
+    highlights: string[];
+    landingHref: string;
+    landingLabel: string;
+  };
 }
 
 export interface FlowerPriceRow {
@@ -98,7 +107,7 @@ export const MENU_SOURCE_STATE = {
 };
 
 export const MENU_STATUS_NOTICE =
-  "Browse Fort York flower, pre-rolls, vapes, edibles, concentrates, and accessories. Call 437-783-2511 for product questions.";
+  "Browse Fort York flower, pre-rolls, vape pens, disposable vapes, edibles, concentrates, cigarettes, and accessories. Call 437-783-2511 for product questions.";
 
 export const FLOWER_TIER_ORDER = ["EXOTIC", "PREMIUM", "AAA+", "AA", "BUDGET"] as const;
 export const TOP_BUNDLE_TIERS = ["EXOTIC", "PREMIUM", "AAA+"] as const;
@@ -183,15 +192,37 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       "Browse the Fort York pre-roll menu with product names, THC details, sizes, and prices where available.",
   },
   {
-    key: "VAPES",
-    name: "Vapes",
+    key: "VAPE_PENS",
+    name: "Nicotine Vapes",
     slug: "vapes",
-    detail: "Browse vape pens, cartridges, and disposable vape options.",
+    detail: "Browse nicotine vape pens, pods, devices, e-liquid, and disposable formats.",
     banner: "/brand/category-vapes.webp",
-    itemKeys: ["VAPE PENS", "VAPE DISPOSABLE", "THC VAPE", "VAPES"],
-    seoTitle: "Vapes Menu | FORT YORK CANNABIS",
+    itemKeys: ["VAPE PENS"],
+    seoTitle: "Nicotine Vape Pens Menu | FORT YORK CANNABIS",
     seoDescription:
-      "Browse the Fort York vapes menu with product names, THC details, puff or size details, and prices where available.",
+      "Browse nicotine vape pens, pods, devices, e-liquid, puff details, and listed prices near Fort York and CityPlace in downtown Toronto. Adults 19+.",
+    seoContent: {
+      eyebrow: "Nicotine vape pens · Adults 19+",
+      heading: "Nicotine Vape Pens Near Fort York and CityPlace",
+      paragraphs: [
+        "Adults 19+ can compare nicotine vape pens, pod hardware, e-liquid, devices, and disposable formats at FORT YORK CANNABIS, 38 Fort York Blvd. Product names, formats, and listed prices make it easier to narrow the choice before a downtown Toronto visit.",
+        "Nicotine Vapes and cannabis vapes stay in separate categories. Use this collection for nicotine products; Gas Gang, Drizzle, and other THC disposable vapes remain in the Vape Disposables collection.",
+      ],
+      highlights: ["Vape pens and disposable formats", "Pods, devices, and e-liquid", "Separate THC Vape Disposables collection"],
+      landingHref: "/info/nicotine-vapes-fort-york",
+      landingLabel: "Explore the Nicotine Vapes guide",
+    },
+  },
+  {
+    key: "VAPE_DISPOSABLES",
+    name: "Vape Disposables",
+    slug: "vape-disposables",
+    detail: "Browse THC disposable vape options including Gas Gang and Drizzle.",
+    banner: "/brand/category-vapes.webp",
+    itemKeys: ["VAPE DISPOSABLE", "THC VAPE"],
+    seoTitle: "Disposable Vapes Menu | FORT YORK CANNABIS",
+    seoDescription:
+      "Browse the Fort York THC disposable vapes menu with product names, potency details, sizes, and prices where available.",
   },
   {
     key: "EDIBLES",
@@ -216,15 +247,37 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       "Browse the Fort York concentrates menu with product names, potency details, sizes, and prices where available.",
   },
   {
+    key: "CIGARETTES",
+    name: "Cigarettes",
+    slug: "cigarettes",
+    detail: "$25 cartons plus 2 Pack $5 Mix & Match on selected SKUs.",
+    banner: "/promos/tv2-cigarettes-2-pack-5-19plus.png",
+    itemKeys: ["CIGARETTES"],
+    seoTitle: "Cigarettes Menu | FORT YORK CANNABIS",
+    seoDescription:
+      "Browse Native cigarette cartons and smoke-shelf products near Fort York and CityPlace, including $25 cartons and 2 Pack $5 Mix & Match on selected SKUs.",
+    seoContent: {
+      eyebrow: "Native cigarettes · Adults 19+",
+      heading: "Native Cigarettes Near Fort York and CityPlace",
+      paragraphs: [
+        "Adults 19+ can compare Native cigarette cartons, cigarette packs, Backwoods, grabba, and nicotine pouches at FORT YORK CANNABIS, 38 Fort York Blvd. Clear product names and listed prices help shoppers plan a stop near CityPlace and the downtown Toronto waterfront.",
+        "Selected approved cigarette SKUs display both a $25 Carton price and the 2 Pack $5 Mix & Match offer. The Mix & Match price does not apply to every cigarette or smoke-shelf item, so qualifying products are marked individually.",
+      ],
+      highlights: ["$25 cigarette cartons", "2 Pack $5 Mix & Match on selected SKUs", "Backwoods, grabba, and nicotine pouch listings"],
+      landingHref: "/info/native-cigarettes-fort-york",
+      landingLabel: "Explore the Native Cigarettes guide",
+    },
+  },
+  {
     key: "ACCESSORIES",
     name: "Accessories",
     slug: "accessories",
-    detail: "Browse accessories, add-ons, cigarettes, and specialty items.",
+    detail: "Browse accessories, add-ons, and specialty items.",
     banner: "/brand/category-accessories.webp",
-    itemKeys: ["ADD ONS", "ACCESSORIES", "CIGARETTES", "MAGIC & OTHERS", "MAGIC"],
+    itemKeys: ["ADD ONS", "ACCESSORIES", "MAGIC & OTHERS", "MAGIC"],
     seoTitle: "Accessories Menu | FORT YORK CANNABIS",
     seoDescription:
-      "Browse Fort York accessories, add-ons, cigarettes, and specialty items with prices where available.",
+      "Browse Fort York accessories, add-ons, and specialty items with prices where available.",
   },
 ];
 
@@ -382,9 +435,11 @@ export function getProductCategorySlug(product: MenuProduct) {
   if ("tier" in product) return "flower";
   const category = product.category.toUpperCase();
   if (["PREROLLS", "PRE-ROLLS", "PRE ROLLS"].includes(category)) return "pre-rolls";
-  if (["VAPE PENS", "VAPE DISPOSABLE", "THC VAPE", "VAPES"].includes(category)) return "vapes";
+  if (category === "VAPE PENS") return "vapes";
+  if (["VAPE DISPOSABLE", "THC VAPE", "VAPES"].includes(category)) return "vape-disposables";
   if (category === "EDIBLES") return "edibles";
   if (category === "CONCENTRATES") return "concentrates";
+  if (category === "CIGARETTES") return "cigarettes";
   return "accessories";
 }
 
@@ -396,6 +451,11 @@ export function getProductDisplayPrice(product: MenuProduct) {
   if ("tier" in product) {
     const row = getFlowerFromPriceRow(product);
     return row ? `From ${formatPricePoint(row.price)} / ${row.label}` : "Price in store";
+  }
+
+  if (product.category.toUpperCase() === "CIGARETTES" && isCigaretteDealSku(product.sku)) {
+    const price = formatItemPrice(product.price);
+    return price ? `${price} Carton` : CIGARETTE_CARTON_LABEL;
   }
 
   return formatItemPrice(product.price) || "Price in store";
@@ -441,7 +501,7 @@ export function formatPercentLike(value?: string) {
 export function getItemCategoryLabel(category?: string) {
   const value = String(category || "").toUpperCase();
   if (value === "PREROLLS") return "Pre-Rolls";
-  if (value === "VAPE PENS") return "Vape Pens";
+  if (value === "VAPE PENS") return "Nicotine Vapes";
   if (value === "VAPE DISPOSABLE") return "Disposable Vapes";
   if (value === "ADD ONS") return "Add-Ons";
   if (value === "MAGIC & OTHERS") return "Magic Stuff";
@@ -520,6 +580,19 @@ export function findMenuProduct(categorySlug: string, productSlug: string): Menu
   const category = getMenuCategoryBySlug(categorySlug);
   if (!category) return undefined;
   return getMenuProductsByCategory(category).find((product) => product.slug === productSlug);
+}
+
+export function getLegacyProductRedirect(categorySlug: string, productSlug: string) {
+  const item = allItems.find((product) => product.slug === productSlug);
+  if (!item) return undefined;
+
+  const currentCategory = getProductCategorySlug(item);
+  const isLegacyCigarettePath = categorySlug === "accessories" && currentCategory === "cigarettes";
+  const isLegacyDisposablePath = categorySlug === "vapes" && currentCategory === "vape-disposables";
+
+  return isLegacyCigarettePath || isLegacyDisposablePath
+    ? `/items/${currentCategory}/${item.slug}`
+    : undefined;
 }
 
 export function getRelatedProducts(product: MenuProduct, limit = 8): MenuProduct[] {

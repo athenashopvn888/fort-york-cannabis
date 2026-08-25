@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import styles from "../items.module.css";
@@ -16,6 +17,7 @@ import {
   getItemDescription,
   getItemDetailChips,
   getItemEffects,
+  getLegacyProductRedirect,
   getMenuCategoryBySlug,
   getProductDisplayPrice,
   getProductImage,
@@ -26,6 +28,7 @@ import {
   getTierAnchor,
   getTierDetail,
 } from "../../../lib/products";
+import { CIGARETTE_MIX_MATCH_LABEL, isCigaretteDealSku } from "../../../lib/cigaretteDeals.mjs";
 
 export const dynamic = "force-static";
 
@@ -67,6 +70,8 @@ export default async function ProductDetailPage({
   const menuCategory = getMenuCategoryBySlug(category);
 
   if (!item || !menuCategory) {
+    const legacyRedirect = getLegacyProductRedirect(category, productSlug);
+    if (legacyRedirect) permanentRedirect(legacyRedirect);
     notFound();
   }
 
@@ -102,7 +107,14 @@ export default async function ProductDetailPage({
 
       <section className={styles.detailShell}>
         <div className={styles.detailImageWrap}>
-          <img src={getProductImage(item)} alt={`${item.name} at Fort York Cannabis`} />
+          <Image
+            src={getProductImage(item)}
+            alt={`${item.name} at Fort York Cannabis`}
+            width={720}
+            height={720}
+            sizes="(max-width: 760px) 94vw, 48vw"
+            priority
+          />
           <div className={styles.detailImageBadges}>
             {isFlower && item.isSale ? <span className={styles.saleBadge}>Sale</span> : null}
             {isFlower && item.isHot ? <span className={styles.hotBadge}>Top Pick</span> : null}
@@ -138,8 +150,14 @@ export default async function ProductDetailPage({
           </div>
           <div className={styles.relatedGrid}>
             {related.map((product) => (
-              <Link key={product.sku} href={getProductPath(product)} className={styles.relatedCard}>
-                <img src={getProductImage(product)} alt="" loading="lazy" />
+              <Link key={`${product.sku}-${product.slug}`} href={getProductPath(product)} className={styles.relatedCard}>
+                <Image
+                  src={getProductImage(product)}
+                  alt=""
+                  width={260}
+                  height={180}
+                  sizes="(max-width: 760px) 92vw, (max-width: 1100px) 45vw, 260px"
+                />
                 <span>{"tier" in product ? getTierDetail(product.tier).name : menuCategory.name}</span>
                 <strong>{product.name}</strong>
                 <em>{getProductDisplayPrice(product)}</em>
@@ -217,6 +235,7 @@ function FlowerDetail({ product }: { product: Extract<ReturnType<typeof findMenu
 function ItemDetail({ product }: { product: Extract<ReturnType<typeof findMenuProduct>, { category: string }> }) {
   const chips = getItemDetailChips(product);
   const effects = getItemEffects(product);
+  const cigaretteDeal = product.category.toUpperCase() === "CIGARETTES" && isCigaretteDealSku(product.sku);
 
   return (
     <>
@@ -237,7 +256,14 @@ function ItemDetail({ product }: { product: Extract<ReturnType<typeof findMenuPr
         {product.type ? <div><span>Subtype</span><strong>{product.type}</strong></div> : null}
         {product.thc ? <div><span>THC</span><strong>{product.thc}</strong></div> : null}
         {product.mg ? <div><span>Potency</span><strong>{product.mg}</strong></div> : null}
-        <div><span>Price</span><strong>{formatItemPrice(product.price) || "Price in store"}</strong></div>
+        {cigaretteDeal ? (
+          <>
+            <div><span>Carton</span><strong>{formatItemPrice(product.price) || "$25"}</strong></div>
+            <div className={styles.mixMatchFact}><span>Mix &amp; Match</span><strong>{CIGARETTE_MIX_MATCH_LABEL}</strong></div>
+          </>
+        ) : (
+          <div><span>Price</span><strong>{formatItemPrice(product.price) || "Price in store"}</strong></div>
+        )}
       </div>
 
       <section className={styles.descBlock}>

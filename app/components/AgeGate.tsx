@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 import styles from "./AgeGate.module.css";
 
 function shouldShowAgeGate() {
@@ -15,9 +16,24 @@ function shouldShowAgeGate() {
   return localStorage.getItem("fyc_age_verified") !== "true";
 }
 
+function subscribeToAgeGate() {
+  return () => undefined;
+}
+
+function getServerAgeGateSnapshot() {
+  return false;
+}
+
 export default function AgeGate() {
-  const [show, setShow] = useState(shouldShowAgeGate);
+  const shouldShow = useSyncExternalStore(
+    subscribeToAgeGate,
+    shouldShowAgeGate,
+    getServerAgeGateSnapshot,
+  );
+  const [dismissed, setDismissed] = useState(false);
   const [underage, setUnderage] = useState(false);
+  const show = shouldShow && !dismissed;
+
   useEffect(() => {
     if (!show) return;
 
@@ -30,7 +46,7 @@ export default function AgeGate() {
 
   const handleVerify = () => {
     localStorage.setItem("fyc_age_verified", "true");
-    setShow(false);
+    setDismissed(true);
   };
 
   const handleUnderage = () => {
@@ -56,10 +72,13 @@ export default function AgeGate() {
         ) : (
           <div className={styles.promptState}>
             <div className={styles.logoWrap}>
-              <img
+              <Image
                 src="/brand/fort-york-logo.png"
                 alt="FORT YORK CANNABIS"
                 className={styles.logo}
+                width={720}
+                height={280}
+                priority
               />
             </div>
             <h2 id="age-gate-title" className={styles.title}>Age Verification</h2>

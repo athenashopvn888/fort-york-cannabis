@@ -76,7 +76,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
       "FORT YORK CANNABIS resources for Fort York, CityPlace, King West, Gas Gang, Drizzle, nicotine pouches, Backwoods, grabba, vapes, edibles, pre-rolls, flower, and accessories.",
     h1: "FORT YORK CANNABIS Resource Centre",
     excerpt:
-      "Downtown Toronto guides for the full menu: Gas Gang, Drizzle, nicotine pouches, Backwoods, grabba, vapes, edibles, pre-rolls, flower, concentrates, accessories, and local visits.",
+      "Downtown Toronto guides covering Gas Gang, Drizzle, nicotine pouches, Backwoods, grabba, vape pens, disposable vapes, edibles, pre-rolls, flower, concentrates, accessories, and local visits.",
     primaryKeyword: "FORT YORK CANNABIS resources",
     supportingKeywords: [
       "Fort York cannabis guide",
@@ -110,8 +110,10 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     ],
     commercialLinks: [
       { label: "View the Fort York store page", href: SITE.storePage },
-      { label: "Shop vapes", href: "/items/vapes" },
-      { label: "Shop accessories, pouches, and smokes", href: "/items/accessories" },
+      { label: "Shop Nicotine Vapes", href: "/items/vapes" },
+      { label: "Shop Vape Disposables", href: "/items/vape-disposables" },
+      { label: "Shop Cigarettes", href: "/items/cigarettes" },
+      { label: "Shop accessories and add-ons", href: "/items/accessories" },
       { label: "Browse edibles", href: "/items/edibles" },
     ],
     related: [
@@ -150,15 +152,17 @@ export const RESOURCE_PAGES: ResourcePage[] = [
         ],
       },
       {
-        heading: "Use Accessories for Smoke-Shelf Items",
+        heading: "Compare Cigarettes and Accessories Separately",
         body: [
-          "Fort York groups cigarettes, pouches, Backwoods, grabba, and specialty add-ons through the accessories path, so resource pages should point shoppers there without calling everything flower.",
+          "Cigarettes, nicotine pouches, Backwoods, and grabba share the Cigarettes menu category. Approved carton SKUs show the Mix & Match offer, while specialty add-ons remain under Accessories.",
         ],
       },
     ],
     commercialLinks: [
-      { label: "Shop vapes", href: "/items/vapes" },
-      { label: "Shop accessories and smokes", href: "/items/accessories" },
+      { label: "Shop Nicotine Vapes", href: "/items/vapes" },
+      { label: "Shop Vape Disposables", href: "/items/vape-disposables" },
+      { label: "Shop Cigarettes", href: "/items/cigarettes" },
+      { label: "Shop accessories", href: "/items/accessories" },
       { label: "Shop pre-rolls", href: "/items/pre-rolls" },
       { label: "Shop edibles", href: "/items/edibles" },
     ],
@@ -242,7 +246,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
         ],
       },
     ],
-    commercialLinks: [{ label: "Shop vapes", href: "/items/vapes" }],
+    commercialLinks: [{ label: "Shop Vape Disposables", href: "/items/vape-disposables" }],
     related: ["/resources/vape-guides", "/resources/menu-guide", "/resources/value-guides"],
   },
   {
@@ -275,7 +279,11 @@ export const RESOURCE_PAGES: ResourcePage[] = [
         ],
       },
     ],
-    commercialLinks: [{ label: "Shop vapes", href: "/items/vapes" }],
+    commercialLinks: [
+      { label: "Nicotine Vapes near Fort York", href: "/info/nicotine-vapes-fort-york" },
+      { label: "Shop Nicotine Vapes", href: "/items/vapes" },
+      { label: "Shop Vape Disposables", href: "/items/vape-disposables" },
+    ],
     related: ["/resources/brand-guides/gas-gang-drizzle-vapes", "/resources/menu-guide"],
   },
   {
@@ -286,7 +294,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     title: "Nicotine Pouches Guide",
     seoTitle: "Nicotine Pouches, Happy Dad, ZYN, Velo, Pablo, Killa | Fort York",
     metaDescription:
-      "FORT YORK CANNABIS nicotine pouch guide for Happy Dad, ZYN, Velo, Pablo, and Killa from the current accessories menu.",
+      "FORT YORK CANNABIS nicotine pouch guide for Happy Dad, ZYN, Velo, Pablo, and Killa from the current Cigarettes menu category.",
     h1: "Nicotine Pouches: Happy Dad, ZYN, Velo, Pablo, Killa",
     excerpt:
       "A current pouch guide for Happy Dad 6MGx20, ZYN, and nicotine pouches naming Velo, Pablo, and Killa.",
@@ -303,7 +311,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     sections: [
       {
         heading: "Current Listed Pouch Names",
-        body: ["Pouch shoppers search brand names. Fort York can speak directly to those searches while routing the click through accessories."],
+        body: ["Pouch shoppers can compare the listed brand names and prices inside the Cigarettes menu category."],
         bullets: [
           "Happy Dad 6MGx20 nicotine pouches",
           "ZYN nicotine pouches",
@@ -311,7 +319,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
         ],
       },
     ],
-    commercialLinks: [{ label: "Shop accessories and pouches", href: "/items/accessories" }],
+    commercialLinks: [{ label: "Shop Cigarettes and pouches", href: "/items/cigarettes" }],
     related: ["/resources/native-smokes", "/resources/native-smokes/backwoods-grabba-guide"],
   },
   {
@@ -334,7 +342,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     dateModified: updated,
     image: { src: "/brand/category-accessories.webp", alt: "Fort York smoke shelf guide" },
     intro: [
-      "The accessories shelf carries more than rolling papers. Fort York's current data includes pouches, Backwoods, grabba, and grabba shaker, so those words need visible guide pages.",
+      "Fort York's Cigarettes category includes cigarettes, pouches, Backwoods, grabba, and grabba shaker, while Accessories keeps add-ons and specialty items separate.",
     ],
     sections: [
       {
@@ -345,8 +353,10 @@ export const RESOURCE_PAGES: ResourcePage[] = [
       },
     ],
     commercialLinks: [
+      { label: "Native Cigarettes near Fort York", href: "/info/native-cigarettes-fort-york" },
       { label: "Nicotine pouches guide", href: "/resources/nicotine-pouches" },
       { label: "Backwoods and grabba guide", href: "/resources/native-smokes/backwoods-grabba-guide" },
+      { label: "Shop Cigarettes", href: "/items/cigarettes" },
       { label: "Shop accessories", href: "/items/accessories" },
     ],
     related: ["/resources/nicotine-pouches", "/resources/menu-guide"],
@@ -359,7 +369,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     title: "Backwoods and Grabba Guide",
     seoTitle: "Backwoods and Grabba Guide | FORT YORK CANNABIS",
     metaDescription:
-      "Fort York guide for Backwoods assorted flavors, grabba, grabba RedRose / RedHerring, and grabba shaker from the current accessories menu.",
+      "Fort York guide for Backwoods assorted flavors, grabba, grabba RedRose / RedHerring, and grabba shaker from the current Cigarettes menu category.",
     h1: "Backwoods and Grabba at Fort York",
     excerpt:
       "Backwoods assorted flavors, grabba, RedRose / RedHerring, and grabba shaker get a clear product-name guide.",
@@ -385,7 +395,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
         ],
       },
     ],
-    commercialLinks: [{ label: "Shop accessories", href: "/items/accessories" }],
+    commercialLinks: [{ label: "Shop Cigarettes and smoke-shelf items", href: "/items/cigarettes" }],
     related: ["/resources/native-smokes", "/resources/nicotine-pouches"],
   },
   {
@@ -488,7 +498,8 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     sections: [{ heading: "Product Names Carry Price Intent", body: ["Gas Gang at $45/$50, Drizzle at $50, and pouches at $20 are current product-price terms that can support value pages without pretending they are flower deals."] }],
     commercialLinks: [
       { label: "Shop flower", href: "/items/flower" },
-      { label: "Shop vapes", href: "/items/vapes" },
+      { label: "Shop Nicotine Vapes", href: "/items/vapes" },
+      { label: "Shop Vape Disposables", href: "/items/vape-disposables" },
       { label: "Shop accessories", href: "/items/accessories" },
     ],
     related: ["/resources/brand-guides/gas-gang-drizzle-vapes", "/resources/nicotine-pouches"],
