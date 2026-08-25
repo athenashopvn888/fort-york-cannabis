@@ -199,14 +199,17 @@
 
 .productPreviewCard span {
   bottom: 11px;
+  display: -webkit-box;
   font-size: 0.69rem;
   font-weight: 850;
   left: 13px;
+  line-height: 1.25;
   overflow: hidden;
   position: absolute;
   right: 13px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
   z-index: 2;
 }
 
@@ -372,7 +375,7 @@
 
   .productPreviewCard {
     border-radius: 14px;
-    height: 145px;
+    height: 158px;
   }
 }
 

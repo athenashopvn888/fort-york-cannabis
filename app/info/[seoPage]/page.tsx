@@ -39,6 +39,11 @@ export default async function SeoLandingPage({
   const page = getSeoPageBySlug(slug);
   if (!page) notFound();
   const heroPreview = page.heroPreview;
+  const localFeature = page.localFeature ?? {
+    eyebrow: "Downtown Toronto local guide",
+    heading: "Fort York and CityPlace Context",
+    body: "FORT YORK CANNABIS keeps Fort York, CityPlace, waterfront, and downtown Toronto information clear with address, hours, menu, contact, and directions context for adults 19+.",
+  };
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -133,9 +138,9 @@ export default async function SeoLandingPage({
               sizes="(max-width: 760px) 100vw, 48vw"
             />
             <div className={styles.localFeatureCopy}>
-              <span className={styles.microLabel}>Downtown Toronto local guide</span>
-              <h2 className={styles.sectionTitle}>Fort York and CityPlace Context</h2>
-            <p className={styles.sectionBody}>FORT YORK CANNABIS keeps Fort York, CityPlace, waterfront, and downtown Toronto information clear with address, hours, menu, contact, and directions context for adults 19+.</p>
+              <span className={styles.microLabel}>{localFeature.eyebrow}</span>
+              <h2 className={styles.sectionTitle}>{localFeature.heading}</h2>
+            <p className={styles.sectionBody}>{localFeature.body}</p>
             </div>
           </div>
         </section>

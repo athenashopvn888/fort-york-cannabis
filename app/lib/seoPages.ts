@@ -1,3 +1,5 @@
+import itemsJson from "./items.json";
+
 export type SeoPage = {
   slug: string;
   title: string;
@@ -5,6 +7,11 @@ export type SeoPage = {
   h1: string;
   heroTagline: string;
   banner?: string;
+  localFeature?: {
+    eyebrow: string;
+    heading: string;
+    body: string;
+  };
   heroPreview?: {
     eyebrow: string;
     intro: string;
@@ -26,11 +33,10 @@ const NATIVE_CIGARETTE_PREVIEW = [
   { name: "Canadian Menthol", image: "/products/1013-CANADIAN-MENTHOL.webp" },
 ] as const;
 
-const NICOTINE_VAPE_PREVIEW = [
-  { name: "Flavour Beast E-Liquid Salt", image: "/products/1093-Flavour-Beast-e-liquid-salt.webp" },
-  { name: "Geek Max", image: "/products/GEEKMAX500x500HQ.webp" },
-  { name: "Uwell Caliburn Pod", image: "/products/1088-Uwell-Caliburn-pod.webp" },
-] as const;
+const NICOTINE_VAPE_PREVIEW = (itemsJson as Array<{ name: string; image: string; category: string }>)
+  .filter((item) => item.category.toUpperCase() === "VAPE PENS" && Boolean(item.image))
+  .slice(0, 5)
+  .map((item) => ({ name: item.name, image: item.image }));
 
 export const SEO_PAGES: SeoPage[] = [
   {
@@ -142,6 +148,11 @@ export const SEO_PAGES: SeoPage[] = [
       "Compare Native cigarette cartons and selected-SKU Mix & Match details at FORT YORK CANNABIS, 38 Fort York Blvd near CityPlace. Adults 19+.",
     h1: "Native Cigarettes Near Fort York and CityPlace",
     heroTagline: "Native cigarette cartons and smoke-shelf choices for adults 19+ in downtown Toronto",
+    localFeature: {
+      eyebrow: "Fort York and CityPlace",
+      heading: "Cigarette Shopping at 38 Fort York Blvd",
+      body: "Adults 19+ near Fort York, CityPlace, and the downtown waterfront can compare Native cigarette cartons, packs, and separately priced smoke-shelf products at one 24-hour location.",
+    },
     heroPreview: {
       eyebrow: "FORT YORK CANNABIS · 38 Fort York Blvd",
       intro:
@@ -195,6 +206,11 @@ export const SEO_PAGES: SeoPage[] = [
       "Browse nicotine vape pens, pods, devices and e-liquid at FORT YORK CANNABIS near Fort York and CityPlace in downtown Toronto. Adults 19+.",
     h1: "Nicotine Vape Pens Near Fort York and CityPlace",
     heroTagline: "Nicotine vape pens, pods, devices, e-liquid, and disposable formats for adults 19+",
+    localFeature: {
+      eyebrow: "Fort York and CityPlace",
+      heading: "Nicotine Vapes at 38 Fort York Blvd",
+      body: "Adults 19+ near CityPlace, Fort York, and the downtown waterfront can compare current nicotine vape formats at a 24-hour location, with THC Vape Disposables kept in their own collection.",
+    },
     heroPreview: {
       eyebrow: "NICOTINE VAPES · FORT YORK AND CITYPLACE",
       intro:

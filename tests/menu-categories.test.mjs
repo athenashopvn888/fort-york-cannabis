@@ -78,3 +78,14 @@ test("category metadata uses one absolute store-branded title", () => {
 test("Next Image accepts the approved live-menu image host", () => {
   assert.match(nextConfigSource, /pub-eb3e1fe18a43477eabc885cfb791d97c\.r2\.dev/);
 });
+
+test("nicotine landing preview follows current VAPE PENS menu data", () => {
+  assert.match(seoPagesSource, /itemsJson as Array/);
+  assert.match(seoPagesSource, /item\.category\.toUpperCase\(\) === "VAPE PENS"/);
+  assert.match(seoPagesSource, /\.slice\(0, 5\)/);
+});
+
+test("priority landings replace internal context copy with shopper value", () => {
+  assert.match(seoPagesSource, /heading: "Cigarette Shopping at 38 Fort York Blvd"/);
+  assert.match(seoPagesSource, /heading: "Nicotine Vapes at 38 Fort York Blvd"/);
+});
