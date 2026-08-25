@@ -163,10 +163,12 @@
   border-radius: 18px;
   box-shadow: 0 24px 58px rgba(0, 0, 0, 0.3);
   color: #ffffff;
-  display: flex;
-  height: 154px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 176px;
   justify-content: center;
   overflow: hidden;
+  padding: 12px 12px 13px;
   position: relative;
   text-decoration: none;
 }
@@ -185,7 +187,8 @@
 
 .productPreviewCard img {
   filter: drop-shadow(0 16px 19px rgba(0, 0, 0, 0.42));
-  height: 64%;
+  height: 100%;
+  min-height: 0;
   object-fit: contain;
   position: relative;
   transition: transform 0.25s ease;
@@ -198,15 +201,15 @@
 }
 
 .productPreviewCard span {
-  bottom: 11px;
   display: -webkit-box;
   font-size: 0.69rem;
   font-weight: 850;
-  left: 13px;
   line-height: 1.25;
+  min-height: 2.5em;
   overflow: hidden;
-  position: absolute;
-  right: 13px;
+  padding-top: 7px;
+  position: relative;
+  width: 100%;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   white-space: normal;
@@ -375,7 +378,7 @@
 
   .productPreviewCard {
     border-radius: 14px;
-    height: 158px;
+    height: 184px;
   }
 }
 
