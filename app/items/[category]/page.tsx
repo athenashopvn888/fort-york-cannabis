@@ -52,7 +52,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${category.name} Menu | FORT YORK CANNABIS Toronto`,
+    title: { absolute: category.seoTitle },
     description: category.seoDescription,
     alternates: {
       canonical: `/items/${category.slug}`,

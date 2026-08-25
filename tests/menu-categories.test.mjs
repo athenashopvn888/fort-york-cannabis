@@ -69,3 +69,7 @@ test("SEO landing pages are internally linked and included in the generated site
   assert.match(footerSource, /href="\/info\/nicotine-vapes-fort-york"/);
   assert.match(sitemapSource, /SEO_PAGES\.map/);
 });
+
+test("category metadata uses one absolute store-branded title", () => {
+  assert.match(categoryPageSource, /title: \{ absolute: category\.seoTitle \}/);
+});
