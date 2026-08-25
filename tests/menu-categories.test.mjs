@@ -10,6 +10,7 @@ const infoPageSource = readFileSync(new URL("../app/info/[seoPage]/page.tsx", im
 const seoPagesSource = readFileSync(new URL("../app/lib/seoPages.ts", import.meta.url), "utf8");
 const footerSource = readFileSync(new URL("../app/components/Footer.tsx", import.meta.url), "utf8");
 const sitemapSource = readFileSync(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+const nextConfigSource = readFileSync(new URL("../next.config.ts", import.meta.url), "utf8");
 const items = JSON.parse(readFileSync(new URL("../app/lib/items.json", import.meta.url), "utf8"));
 
 test("menu has dedicated Nicotine Vapes, Vape Disposables, and Cigarettes categories", () => {
@@ -72,4 +73,8 @@ test("SEO landing pages are internally linked and included in the generated site
 
 test("category metadata uses one absolute store-branded title", () => {
   assert.match(categoryPageSource, /title: \{ absolute: category\.seoTitle \}/);
+});
+
+test("Next Image accepts the approved live-menu image host", () => {
+  assert.match(nextConfigSource, /pub-eb3e1fe18a43477eabc885cfb791d97c\.r2\.dev/);
 });
