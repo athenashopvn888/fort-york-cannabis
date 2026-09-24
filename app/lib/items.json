@@ -1,17 +1,5 @@
 [
   {
-    "sku": "920",
-    "name": "DEADLY MOONROCK PREROLL",
-    "slug": "deadly-moonrock-preroll",
-    "category": "PREROLLS",
-    "type": "i/h/s",
-    "thc": "50%+",
-    "mg": "",
-    "price": "$20",
-    "image": "/products/920-DEADLY-PREROLL.png",
-    "promoImage": null
-  },
-  {
     "sku": "930, 931, 932, 933",
     "name": "KNOCK OUT *INFUSED* PREROLLS x2 each",
     "slug": "knock-out-infused-prerolls-x2-each",
@@ -20,20 +8,32 @@
     "thc": "0.33",
     "mg": "",
     "price": "$25",
-    "image": "/products/e42b5a7c-28f1-4378-b89a-107df2ee4e12.png",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/e42b5a7c-28f1-4378-b89a-107df2ee4e12.png",
     "promoImage": null
   },
   {
-    "sku": "1023",
-    "name": "* ROLLED GOLD FULL",
-    "slug": "rolled-gold-full",
+    "sku": "945, 946, 947",
+    "name": "MOONROCKETS HYB, IND, SAT",
+    "slug": "moonrockets-hyb-ind-sat",
+    "category": "PREROLLS",
+    "type": "",
+    "thc": "90%+",
+    "mg": "",
+    "price": "$20",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/moonrockets_showcase_600x600.webp",
+    "promoImage": null
+  },
+  {
+    "sku": "1016",
+    "name": "* ROLLED GOLD LIGHTS",
+    "slug": "rolled-gold-lights",
     "category": "CIGARETTES",
     "type": "",
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/Rolled-Gold-Full-Flavor-1-800x800.png.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1023-ROLLED-GOLD.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "868",
@@ -44,31 +44,19 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/Afghan-Hash.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "999",
-    "name": "10 X PREMIUM MIX CIGARETTES",
-    "slug": "10-x-premium-mix-cigarettes",
-    "category": "CIGARETTES",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$3",
-    "image": "/products/999Cigs.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/Afghan-Hash.webp",
     "promoImage": null
   },
   {
     "sku": "803, 804, 805",
-    "name": "2g GAS GANG Vol.3 HYBRID",
-    "slug": "2g-gas-gang-vol3-hybrid",
+    "name": "2g GAS GANG Vol.3 HYBRID THCVape",
+    "slug": "2g-gas-gang-vol3-hybrid-thcvape",
     "category": "VAPE DISPOSABLE",
     "type": "i/h/s",
     "thc": "98%+",
     "mg": "",
     "price": "$50",
-    "image": "/products/gasgang2gvol3assorted.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/gasgang2gvol3assorted.webp",
     "promoImage": null
   },
   {
@@ -80,20 +68,44 @@
     "thc": "0.28",
     "mg": "",
     "price": "$5",
-    "image": "/products/amnesiahaze.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/amnesiahaze.webp",
     "promoImage": null
   },
   {
     "sku": "701, 702, 704, 705, 706, 707, 708",
-    "name": "BACKWOODS ASSORTED FLAVORS $2-$25",
-    "slug": "backwoods-assorted-flavors-2-25",
+    "name": "BACKWOODS ASSORTED FLAVORS $20-$25",
+    "slug": "backwoods-assorted-flavors-20-25",
     "category": "CIGARETTES",
     "type": "",
     "thc": "",
     "mg": "",
     "price": "$20",
-    "image": "/products/backwoodsassorted600x600.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/backwoodsassorted600x600.webp",
     "promoImage": null
+  },
+  {
+    "sku": "1002, 1003",
+    "name": "BB FULL CARTON",
+    "slug": "bb-full-carton",
+    "category": "CIGARETTES",
+    "type": "",
+    "thc": "",
+    "mg": "",
+    "price": "$25",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1003-BB-FULL-CARTON.webp",
+    "promoImage": "CIG_2_FOR_5"
+  },
+  {
+    "sku": "1000, 1001",
+    "name": "BB LIGHTS CARTON",
+    "slug": "bb-lights-carton",
+    "category": "CIGARETTES",
+    "type": "",
+    "thc": "",
+    "mg": "",
+    "price": "$25",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1001-BB-LIGHTS-CARTONS.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "1014",
@@ -104,8 +116,8 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1014-CANADIAN-CLASSSICS-ORIGINAL.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1014-CANADIAN-CLASSSICS-ORIGINAL.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "1015",
@@ -116,8 +128,8 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1015-CANADIAN-CLASSICS-SILVER.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1015-CANADIAN-CLASSICS-SILVER.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "1006",
@@ -128,8 +140,8 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1006-CANADIAN-FULL.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1006-CANADIAN-FULL.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "1011",
@@ -140,8 +152,8 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1011-CANADIAN-GOOSE.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1011-CANADIAN-GOOSE.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "1012",
@@ -152,8 +164,8 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1012-CANADIAN-GOOSE-LIGHTS.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1012-CANADIAN-GOOSE-LIGHTS.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "1005",
@@ -164,8 +176,8 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1005-CANADIAN-LIGHTS.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1005-CANADIAN-LIGHTS.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "1013",
@@ -176,43 +188,19 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1013-CANADIAN-MENTHOL.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "564, 565, 566",
-    "name": "DANK CHOCO BAR 1500MG",
-    "slug": "dank-choco-bar-1500mg",
-    "category": "CONCENTRATES",
-    "type": "",
-    "thc": "",
-    "mg": "1500mg",
-    "price": "$45",
-    "image": "/products/Dank-Chocolate.jpg",
-    "promoImage": null
-  },
-  {
-    "sku": "970, 971",
-    "name": "DRINK 50MG / 200MG EUPHORIA EXT",
-    "slug": "drink-50mg-200mg-euphoria-ext",
-    "category": "EDIBLES",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$15",
-    "image": "/products/970-971-DRINK-50MG-200MG-EUPHORIA-EXT.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1013-CANADIAN-MENTHOL.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "813",
-    "name": "DRIZZLE SWITCH 3in1 / 2G",
-    "slug": "drizzle-switch-3in1-2g",
+    "name": "DRIZZLE SWITCH 3in1 / 2G THCVape",
+    "slug": "drizzle-switch-3in1-2g-thcvape",
     "category": "VAPE DISPOSABLE",
     "type": "i/h/s",
     "thc": "98%+",
     "mg": "",
     "price": "$50",
-    "image": "/products/DRIZZLESWITCH2GASSORTEDFLAVORS600x600.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/DRIZZLESWITCH2GASSORTEDFLAVORS600x600.webp",
     "promoImage": null
   },
   {
@@ -224,19 +212,7 @@
     "thc": "",
     "mg": "",
     "price": "$20",
-    "image": "/products/961-962-963-DUMMY-BEARS.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "1093",
-    "name": "Flavour Beast e-liquid salt",
-    "slug": "flavour-beast-e-liquid-salt",
-    "category": "VAPE PENS",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$35",
-    "image": "/products/1093-Flavour-Beast-e-liquid-salt.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/961-962-963-DUMMY-BEARS.webp",
     "promoImage": null
   },
   {
@@ -248,43 +224,31 @@
     "thc": "",
     "mg": "",
     "price": "$40",
-    "image": "/products/stellargummies600x600.webp",
+    "image": "",
     "promoImage": null
   },
   {
     "sku": "800, 801, 802",
-    "name": "GAS GANG DISPO VAPE 1G",
-    "slug": "gas-gang-dispo-vape-1g",
+    "name": "GAS GANG DISPO THCVape 1G",
+    "slug": "gas-gang-dispo-thcvape-1g",
     "category": "VAPE DISPOSABLE",
     "type": "i/h/s",
     "thc": "98%+",
     "mg": "",
-    "price": "$45",
-    "image": "/products/GasGang.jpg",
+    "price": "$40",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/GasGang.jpg",
     "promoImage": null
   },
   {
-    "sku": "1073",
-    "name": "GEEK MAX – 5% | 20K–30K PUFFS | MANY FLAVORS",
-    "slug": "geek-max-5-20k30k-puffs-many-flavors",
+    "sku": "1072",
+    "name": "GEEK PROMAX – 5% | 30K PUFFS NVape",
+    "slug": "geek-promax-5-30k-puffs-nvape",
     "category": "VAPE PENS",
     "type": "",
     "thc": "",
     "mg": "",
-    "price": "$35",
-    "image": "/products/GEEKMAX500x500HQ.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "966",
-    "name": "GOOBER THC CHOCOLATE 1000MG",
-    "slug": "goober-thc-chocolate-1000mg",
-    "category": "EDIBLES",
-    "type": "",
-    "thc": "",
-    "mg": "1000MG",
-    "price": "$30",
-    "image": "/products/966-GOOBER-THC-CHOCOLOATE-1000MG.webp",
+    "price": "$25",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/GEEK-PROMAX.jpg",
     "promoImage": null
   },
   {
@@ -296,7 +260,7 @@
     "thc": "",
     "mg": "1000MG",
     "price": "$30",
-    "image": "/products/965-GOOBER-THC-GUMMIES-1000MG.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/965-GOOBER-THC-GUMMIES-1000MG.webp",
     "promoImage": null
   },
   {
@@ -308,7 +272,7 @@
     "thc": "",
     "mg": "",
     "price": "$5",
-    "image": "/products/GRABBA-2G.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/GRABBA-2G.webp",
     "promoImage": null
   },
   {
@@ -320,19 +284,19 @@
     "thc": "",
     "mg": "",
     "price": "$5",
-    "image": "/products/GRABBA-2G.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/GRABBA-2G.webp",
     "promoImage": null
   },
   {
-    "sku": "668, 669",
-    "name": "GRABBA SHAKER *RedRose / Red Herring*",
-    "slug": "grabba-shaker-redrose-red-herring",
+    "sku": "668, 669, 670, 671",
+    "name": "GRABBA SHAKER *RedRose / Red Herring* X2 AVAILABLE",
+    "slug": "grabba-shaker-redrose-red-herring-x2-available",
     "category": "CIGARETTES",
     "type": "",
     "thc": "",
     "mg": "",
-    "price": "$19",
-    "image": "/products/GrabbaShaker.webp",
+    "price": "$20",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/668_669_670_671_GRABBA_SHAKER.webp",
     "promoImage": null
   },
   {
@@ -344,19 +308,7 @@
     "thc": "",
     "mg": "",
     "price": "$40",
-    "image": "/products/GrandCannabis.png",
-    "promoImage": null
-  },
-  {
-    "sku": "1053",
-    "name": "HAPPY DAD 6MGx20 NICOTINE POUCHES",
-    "slug": "happy-dad-6mgx20-nicotine-pouches",
-    "category": "CONCENTRATES",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$20",
-    "image": "/products/Zyn-Nicotine-pouches.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/GrandCannabis.png",
     "promoImage": null
   },
   {
@@ -368,7 +320,7 @@
     "thc": "",
     "mg": "1500mg / 3000mg / 5000mg",
     "price": "$25",
-    "image": "/products/KnockOutGummies.jpg",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/KnockOutGummies.jpg",
     "promoImage": null
   },
   {
@@ -380,19 +332,19 @@
     "thc": "0.31",
     "mg": "",
     "price": "$8",
-    "image": "/products/pinkkush.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/pinkkush.webp",
     "promoImage": null
   },
   {
     "sku": "680, 681, 682, 683",
-    "name": "LIVE RESIN GUMMIES IND / SAT in ASSORTED FLAVORS",
-    "slug": "live-resin-gummies-ind-sat-in-assorted-flavors",
+    "name": "LIVE RESIN GUMMIES SOUR IND / SAT in ASSORTED FLAVORS",
+    "slug": "live-resin-gummies-sour-ind-sat-in-assorted-flavors",
     "category": "EDIBLES",
     "type": "",
     "thc": "",
     "mg": "150mg / 600mg",
     "price": "$16",
-    "image": "/products/LiveResinGummies.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/LiveResinGummies.webp",
     "promoImage": null
   },
   {
@@ -404,7 +356,7 @@
     "thc": "0.33",
     "mg": "",
     "price": "$10",
-    "image": "/products/mauiwowie.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/mauiwowie.webp",
     "promoImage": null
   },
   {
@@ -416,19 +368,7 @@
     "thc": "",
     "mg": "8000mg",
     "price": "$60",
-    "image": "/products/MindFCK-Psilocybin-Chocolate-8000mg.jpg",
-    "promoImage": null
-  },
-  {
-    "sku": "633",
-    "name": "MINDF*CK GUMMIES BAR 5000MG",
-    "slug": "mindfck-gummies-bar-5000mg",
-    "category": "MAGIC & OTHERS",
-    "type": "",
-    "thc": "",
-    "mg": "5000mg",
-    "price": "$35",
-    "image": "/products/631-Mindfck-Psilocybin-Gummies-Bar-5000mg.jpg",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/MindFCK-Psilocybin-Chocolate-8000mg.jpg",
     "promoImage": null
   },
   {
@@ -440,8 +380,8 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1017-NEXUS-FULL.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1017-NEXUS-FULL.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "1018",
@@ -452,19 +392,19 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1018-NEXUS-LIGHTS.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1018-NEXUS-LIGHTS.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
-    "sku": "1056, 1057, 1058",
-    "name": "NICOTINE POUCHES , VELO, PABLO, KILLA",
-    "slug": "nicotine-pouches-velo-pablo-killa",
-    "category": "CIGARETTES",
+    "sku": "606, 607, 608, 609, 612",
+    "name": "NRTHRN EXTRACTS GUMMIES",
+    "slug": "nrthrn-extracts-gummies",
+    "category": "EDIBLES",
     "type": "",
     "thc": "",
-    "mg": "",
-    "price": "$20",
-    "image": "/products/assortednicotinepouches600.webp",
+    "mg": "1200mg",
+    "price": "$25",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/northernextractgummies1200mg.jpg",
     "promoImage": null
   },
   {
@@ -476,19 +416,31 @@
     "thc": "",
     "mg": "400mg",
     "price": "$20",
-    "image": "/products/Fruit-Gummies-1.jpg",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/northernextractgummies400mg.jpg",
     "promoImage": null
   },
   {
-    "sku": "606, 607, 608, 609, 612",
-    "name": "NRTHRN EXTRACTS GUMMIES",
-    "slug": "nrthrn-extracts-gummies",
-    "category": "EDIBLES",
+    "sku": "1081",
+    "name": "OVNS 10000 – 5% | 10K PUFFS NVape",
+    "slug": "ovns-10000-5-10k-puffs-nvape",
+    "category": "VAPE PENS",
     "type": "",
     "thc": "",
-    "mg": "1200mg",
-    "price": "$25",
-    "image": "/products/Fruit-Gummies-1.jpg",
+    "mg": "",
+    "price": "$17",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1081OVNS10000.jpg",
+    "promoImage": null
+  },
+  {
+    "sku": "1082",
+    "name": "OVNS PIONEER – 5% | 22K PUFFS NVape",
+    "slug": "ovns-pioneer-5-22k-puffs-nvape",
+    "category": "VAPE PENS",
+    "type": "",
+    "thc": "",
+    "mg": "",
+    "price": "$23",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/OVNS_PIONEER_5_22K_PUFFS.webp",
     "promoImage": null
   },
   {
@@ -500,7 +452,7 @@
     "thc": "0.28",
     "mg": "",
     "price": "$5",
-    "image": "/products/pinkanimal.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/pinkanimal.webp",
     "promoImage": null
   },
   {
@@ -512,7 +464,7 @@
     "thc": "0.38",
     "mg": "",
     "price": "$12",
-    "image": "/products/pinkgodfatherog.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/pinkgodfatherog.webp",
     "promoImage": null
   },
   {
@@ -524,7 +476,7 @@
     "thc": "0.31",
     "mg": "",
     "price": "$8",
-    "image": "/products/laughingbuddha.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/laughingbuddha.webp",
     "promoImage": null
   },
   {
@@ -536,7 +488,7 @@
     "thc": "0.33",
     "mg": "",
     "price": "$10",
-    "image": "/products/pinkpredator.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/pinkpredator.webp",
     "promoImage": null
   },
   {
@@ -548,8 +500,8 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1008-PUTTERS-FULL.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1008-PUTTERS-FULL.webp",
+    "promoImage": "CIG_2_FOR_5"
   },
   {
     "sku": "710",
@@ -560,19 +512,7 @@
     "thc": "",
     "mg": "",
     "price": "$3",
-    "image": "/products/rawblackkingsizeslimupnsmokeonline580x2xc0c39f81-d3b7-402b-9de1-f73d1f563d49.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "876, 877, 878",
-    "name": "RESIN TAG ALONG 2G HYBRID, IND, SAT",
-    "slug": "resin-tag-along-2g-hybrid-ind-sat",
-    "category": "CONCENTRATES",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$50",
-    "image": "/products/876-RESIN-TAG-ALONG-2G-HYBRID.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/rawblackkingsizeslimupnsmokeonline580x2xc0c39f81-d3b7-402b-9de1-f73d1f563d49.webp",
     "promoImage": null
   },
   {
@@ -584,7 +524,7 @@
     "thc": "",
     "mg": "500mg",
     "price": "$40",
-    "image": "/products/Shatter-Bar.jpg",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/Shatter-Bar.jpg",
     "promoImage": null
   },
   {
@@ -596,7 +536,7 @@
     "thc": "",
     "mg": "150mg",
     "price": "$20",
-    "image": "/products/Euphoria-Extractions-Shatter-Chews-120mg.jpg",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/Euphoria-Extractions-Shatter-Chews-120mg.jpg",
     "promoImage": null
   },
   {
@@ -608,7 +548,7 @@
     "thc": "",
     "mg": "600mg",
     "price": "$40",
-    "image": "/products/Euphoria-Extractions-Shatter-Chews-600mg.jpg",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/Euphoria-Extractions-Shatter-Chews-600mg.jpg",
     "promoImage": null
   },
   {
@@ -620,7 +560,7 @@
     "thc": "",
     "mg": "600mg",
     "price": "$40",
-    "image": "/products/Euphoria-Extractions-Shatter-Chews-600mg.jpg",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/Euphoria-Extractions-Shatter-Chews-600mg.jpg",
     "promoImage": null
   },
   {
@@ -632,19 +572,19 @@
     "thc": "",
     "mg": "1000mg / 2000mg",
     "price": "$40",
-    "image": "/products/stellargummies600x600.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/stellargummies600x600.webp",
     "promoImage": null
   },
   {
-    "sku": "1087",
-    "name": "STLTH Type-C device",
-    "slug": "stlth-type-c-device",
-    "category": "VAPE PENS",
+    "sku": "615",
+    "name": "STELLAR GUMMIES 500MG",
+    "slug": "stellar-gummies-500mg",
+    "category": "EDIBLES",
     "type": "",
     "thc": "",
-    "mg": "",
-    "price": "$15",
-    "image": "",
+    "mg": "500mg",
+    "price": "$25",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/615_Stellar500.webp",
     "promoImage": null
   },
   {
@@ -656,7 +596,7 @@
     "thc": "",
     "mg": "1000mg",
     "price": "$35",
-    "image": "/products/STONERPATCHTHCSYRUP500x500HQ.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/STONERPATCHTHCSYRUP500x500HQ.webp",
     "promoImage": null
   },
   {
@@ -668,7 +608,7 @@
     "thc": "0.38",
     "mg": "",
     "price": "$12",
-    "image": "/products/strawberrycough.webp",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/strawberrycough.webp",
     "promoImage": null
   },
   {
@@ -680,103 +620,7 @@
     "thc": "",
     "mg": "",
     "price": "$25",
-    "image": "/products/1019-TIMES-FULL.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "635, 636",
-    "name": "TRIPNOTIK CHOCO 5000MG",
-    "slug": "tripnotik-choco-5000mg",
-    "category": "MAGIC & OTHERS",
-    "type": "",
-    "thc": "",
-    "mg": "5000mg",
-    "price": "$50",
-    "image": "/products/635-Triptonik-Milk-Choco.jpg",
-    "promoImage": null
-  },
-  {
-    "sku": "637",
-    "name": "TRIPNOTIK GUMMIES 4000MG",
-    "slug": "tripnotik-gummies-4000mg",
-    "category": "MAGIC & OTHERS",
-    "type": "",
-    "thc": "",
-    "mg": "4000mg",
-    "price": "$30",
-    "image": "/products/Tripnotik-Psilocybin-Gummies.jpg",
-    "promoImage": null
-  },
-  {
-    "sku": "1088",
-    "name": "Uwell Caliburn pod",
-    "slug": "uwell-caliburn-pod",
-    "category": "VAPE PENS",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$10",
-    "image": "/products/1088-Uwell-Caliburn-pod.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "1069",
-    "name": "Vice disposable 25k",
-    "slug": "vice-disposable-25k",
-    "category": "VAPE PENS",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$25",
-    "image": "",
-    "promoImage": null
-  },
-  {
-    "sku": "687, 688, 689",
-    "name": "WESLEY HOT CHOCOLATE 40mg THC / 40mg CBD / 20mg CBD + 20mg THC",
-    "slug": "wesley-hot-chocolate-40mg-thc-40mg-cbd-20mg-cbd-20mg-thc",
-    "category": "EDIBLES",
-    "type": "",
-    "thc": "",
-    "mg": "40mg / 20mg + 20mg",
-    "price": "$8",
-    "image": "/products/WesleyHotCoco.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "686",
-    "name": "WESLEY TEA",
-    "slug": "wesley-tea",
-    "category": "EDIBLES",
-    "type": "",
-    "thc": "",
-    "mg": "40mg",
-    "price": "$5",
-    "image": "/products/WesleyTea.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "1055",
-    "name": "ZPods / ZPODS – Mango Pineapple (3×2 mL pods, 5% synthetic nic)",
-    "slug": "zpods-zpods-mango-pineapple-32-ml-pods-5-synthetic-nic",
-    "category": "CONCENTRATES",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$20",
-    "image": "/products/ZpodsMANGO-PINEAPPLE-E-CigzVapeShopGuelph.webp",
-    "promoImage": null
-  },
-  {
-    "sku": "1054",
-    "name": "ZYN NICOTINE POUCHES",
-    "slug": "zyn-nicotine-pouches",
-    "category": "CONCENTRATES",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$20",
-    "image": "/products/Zyn-Nicotine-pouches.webp",
-    "promoImage": null
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1019-TIMES-FULL.webp",
+    "promoImage": "CIG_2_FOR_5"
   }
 ]

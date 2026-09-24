@@ -1,0 +1,14 @@
+{
+  "storeCode": "FYC01",
+  "sourceTimestamp": "2026-09-24T02:13:39.000Z",
+  "processedAt": "2026-09-24T03:17:42.182Z",
+  "version": "FYC01-2026-09-24T02:13:39.000Z-8c788c5fb170-4df5898cd65e",
+  "checksum": "871071325b35e24fe4e964d8173489425c231fc397354ca4153c251d11062eba",
+  "flowerCount": 50,
+  "itemCount": 52,
+  "flowerSkuSha256": "8c788c5fb1702b593737d4bc247a8ce06f76045e8dc6d3ac1e89852458ca1b62",
+  "itemSkuSha256": "4df5898cd65e0daabb2072700221e11aeb564c4531162d52ce5819ba17504acb",
+  "validation": "PASS",
+  "servedFrom": "fresh",
+  "fallbackReason": null
+}

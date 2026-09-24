@@ -7,13 +7,16 @@ import {
   MENU_SOURCE_STATE,
   MENU_STATUS_NOTICE,
   STORE_INFO,
-  getFeaturedMenuProducts,
-  getMenuItemCount,
   getProductDisplayPrice,
   getProductImage,
   getProductMeta,
   getProductPath,
 } from "../lib/products";
+import {
+  getFeaturedMenuProductsFrom,
+  getMenuProductsByCategoryFrom,
+  loadLiveMenuCatalog,
+} from "../lib/liveMenuCatalog";
 import styles from "./menu.module.css";
 
 export const metadata: Metadata = {
@@ -25,8 +28,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function MenuPage() {
-  const featured = getFeaturedMenuProducts();
+export const dynamic = "force-dynamic";
+
+export default async function MenuPage() {
+  const { flowers, items } = await loadLiveMenuCatalog();
+  const featured = getFeaturedMenuProductsFrom(flowers, items);
 
   return (
     <main className={styles.main}>
@@ -73,7 +79,7 @@ export default function MenuPage() {
 
           <div className={styles.categoryGrid}>
             {MENU_CATEGORIES.map((category) => {
-              const count = getMenuItemCount(category);
+              const count = getMenuProductsByCategoryFrom(category, flowers, items).length;
               return (
                 <Link key={category.slug} href={`/items/${category.slug}`} className={styles.categoryCard}>
                   <img src={category.banner} alt={`${category.name} category for Fort York Cannabis`} className={styles.categoryImage} />
@@ -112,3 +118,4 @@ export default function MenuPage() {
     </main>
   );
 }
+

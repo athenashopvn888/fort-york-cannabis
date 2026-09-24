@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { getProductImage, getProductPath, formatType, type FlowerProduct } from "../lib/products";
+import { getProductImage, getProductPath, formatType, hasPositivePrice, type FlowerProduct } from "../lib/products";
 import {
   getFlowersByTierKey,
   getTierRouteConfig,
@@ -13,13 +13,12 @@ import { TIER_SEO } from "../lib/tierSeoContent";
 import { STORE_NAP } from "../lib/storeNap";
 import styles from "./tier.module.css";
 
-function chipWeightsForFlower(flower: FlowerProduct, tierKey: string): string[] {
+function chipWeightsForFlower(flower: FlowerProduct): string[] {
   const chips: string[] = [];
-  if (flower.price3g) chips.push("3g");
-  // Menu bot owns 6g bundle display on menu cards; AA is the only tier that maps price5g to 5g.
-  if (flower.price5g && tierKey === "AA") chips.push("5g");
-  if (flower.price14g) chips.push("14g");
-  if (flower.price28g) chips.push("28g");
+  if (hasPositivePrice(flower.price3g)) chips.push("3g");
+  if (hasPositivePrice(flower.price5g)) chips.push("5g");
+  if (hasPositivePrice(flower.price14g)) chips.push("14g");
+  if (hasPositivePrice(flower.price28g)) chips.push("28g");
   return chips;
 }
 
@@ -129,7 +128,7 @@ export default async function TierPage({
       <section className={styles.gridSection}>
         <div className={styles.grid}>
           {flowers.map((flower) => {
-            const chips = chipWeightsForFlower(flower, route.key);
+            const chips = chipWeightsForFlower(flower);
             return (
               <Link key={flower.sku} href={getProductPath(flower)} className={styles.card}>
                 <img

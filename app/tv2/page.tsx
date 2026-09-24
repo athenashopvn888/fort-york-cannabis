@@ -43,10 +43,6 @@ const TAKEOVER_PROMOS = [
     src: "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/buy_2g_get_1g_free_3g_total.webp",
     alt: "Fort York Cannabis buy 2 grams and get 1 gram free, 3 grams total promotion",
   },
-  {
-    src: "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/buy_3g_get_3g_free_6g_total.webp",
-    alt: "Fort York Cannabis buy 3 grams and get 3 grams free, 6 grams total promotion",
-  },
 ] as const;
 
 const FOOTER_MESSAGES = [

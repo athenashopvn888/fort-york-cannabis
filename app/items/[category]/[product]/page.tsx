@@ -17,20 +17,24 @@ import {
   getItemDescription,
   getItemDetailChips,
   getItemEffects,
-  getLegacyProductRedirect,
   getMenuCategoryBySlug,
   getProductDisplayPrice,
   getProductImage,
   getProductMeta,
   getProductPath,
-  getRelatedProducts,
   getSalePrice,
   getTierAnchor,
   getTierDetail,
 } from "../../../lib/products";
+import {
+  findMenuProductFrom,
+  getLegacyProductRedirectFrom,
+  getRelatedProductsFrom,
+  loadLiveMenuCatalog,
+} from "../../../lib/liveMenuCatalog";
 import { CIGARETTE_MIX_MATCH_LABEL, isCigaretteDealSku } from "../../../lib/cigaretteDeals.mjs";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return getAllProductStaticParams();
@@ -42,7 +46,8 @@ export async function generateMetadata({
   params: Promise<{ category: string; product: string }>;
 }) {
   const { category, product: productSlug } = await params;
-  const item = findMenuProduct(category, productSlug);
+  const { flowers, items } = await loadLiveMenuCatalog();
+  const item = findMenuProductFrom(category, productSlug, flowers, items);
   const menuCategory = getMenuCategoryBySlug(category);
 
   if (!item || !menuCategory) {
@@ -66,17 +71,18 @@ export default async function ProductDetailPage({
   params: Promise<{ category: string; product: string }>;
 }) {
   const { category, product: productSlug } = await params;
-  const item = findMenuProduct(category, productSlug);
+  const { flowers, items } = await loadLiveMenuCatalog();
+  const item = findMenuProductFrom(category, productSlug, flowers, items);
   const menuCategory = getMenuCategoryBySlug(category);
 
   if (!item || !menuCategory) {
-    const legacyRedirect = getLegacyProductRedirect(category, productSlug);
+    const legacyRedirect = getLegacyProductRedirectFrom(category, productSlug, items);
     if (legacyRedirect) permanentRedirect(legacyRedirect);
     notFound();
   }
 
   const isFlower = "tier" in item;
-  const related = getRelatedProducts(item, 8);
+  const related = getRelatedProductsFrom(item, flowers, items, 8);
   const tierDetail = isFlower ? getTierDetail(item.tier) : null;
   const detailReturnHref = isFlower
     ? `/items/${menuCategory.slug}#${getTierAnchor(item.tier)}`

@@ -13,11 +13,8 @@ import {
   formatType,
   getFlowerEffects,
   getFlowerPriceRows,
-  getFlowerTierGroups,
   getItemDetailChips,
   getMenuCategoryBySlug,
-  getMenuItemCount,
-  getMenuProductsByCategory,
   getProductDisplayPrice,
   getProductImage,
   getProductMeta,
@@ -29,9 +26,14 @@ import {
   type MenuCategory,
   type MenuProduct,
 } from "../../lib/products";
+import {
+  getMenuProductsByCategoryFrom,
+  getFlowerTierGroupsFrom,
+  loadLiveMenuCatalog,
+} from "../../lib/liveMenuCatalog";
 import { CIGARETTE_MIX_MATCH_LABEL, isCigaretteDealSku } from "../../lib/cigaretteDeals.mjs";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return MENU_CATEGORIES.map((category) => ({ category: category.slug }));
@@ -77,8 +79,8 @@ function CategoryNavigation({ activeSlug }: { activeSlug: string }) {
   );
 }
 
-function StickyMenuNavigator({ activeSlug, showTiers }: { activeSlug: string; showTiers: boolean }) {
-  const groups = showTiers ? getFlowerTierGroups() : [];
+function StickyMenuNavigator({ activeSlug, showTiers, flowers }: { activeSlug: string; showTiers: boolean; flowers: FlowerProduct[] }) {
+  const groups = showTiers ? getFlowerTierGroupsFrom(flowers) : [];
 
   return (
     <div className={styles.stickyMenuNav} data-has-tiers={showTiers ? true : false}>
@@ -201,8 +203,8 @@ function ProductCard({ product }: { product: MenuProduct }) {
   return "tier" in product ? <FlowerCard product={product} /> : <ItemCard product={product} />;
 }
 
-function FlowerTierSections() {
-  const groups = getFlowerTierGroups();
+function FlowerTierSections({ flowers }: { flowers: FlowerProduct[] }) {
+  const groups = getFlowerTierGroupsFrom(flowers);
 
   return (
     <section className={styles.tierSections} aria-label="Flower tiers">
@@ -272,14 +274,15 @@ export default async function CategoryPage({
   params: Promise<{ category: string }>;
 }) {
   const { category: slug } = await params;
+  const { flowers, items } = await loadLiveMenuCatalog();
   const category = getMenuCategoryBySlug(slug);
 
   if (!category) {
     notFound();
   }
 
-  const products = getMenuProductsByCategory(category);
-  const count = getMenuItemCount(category);
+  const products = getMenuProductsByCategoryFrom(category, flowers, items);
+  const count = getMenuProductsByCategoryFrom(category, flowers, items).length;
   const isFlower = category.key === "FLOWER";
 
   return (
@@ -313,7 +316,7 @@ export default async function CategoryPage({
         </div>
       </section>
 
-      <StickyMenuNavigator activeSlug={category.slug} showTiers={isFlower} />
+      <StickyMenuNavigator activeSlug={category.slug} showTiers={isFlower} flowers={flowers} />
 
       {category.key === "CIGARETTES" ? <CigaretteOfferStrip /> : null}
 
@@ -321,7 +324,7 @@ export default async function CategoryPage({
 
       {products.length > 0 ? (
         isFlower ? (
-          <FlowerTierSections />
+          <FlowerTierSections flowers={flowers} />
         ) : (
           <section className={styles.grid} aria-label={`${category.name} products`}>
             {products.map((product) => (
