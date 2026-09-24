@@ -1257,10 +1257,6 @@
     padding: 6px;
   }
 
-  .weightPill:nth-child(n+3) {
-    display: none;
-  }
-
   .weightPill span,
   .weightPill em {
     font-size: 0.48rem;

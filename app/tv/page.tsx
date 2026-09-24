@@ -13,6 +13,7 @@ import {
   formatType,
   getFlowerEffects,
   getFlowerPriceRows,
+  hasPositivePrice,
   getItemCategoryLabel,
   getProductImage,
   getTierDetail,
@@ -57,7 +58,7 @@ function getOzFlowers(flowers: FlowerProduct[]) {
   const seen = new Set<string>();
 
   return flowers.filter((flower) => {
-    if (!flower.price28g || seen.has(flower.sku)) return false;
+    if (!hasPositivePrice(flower.price28g) || seen.has(flower.sku)) return false;
     seen.add(flower.sku);
     return true;
   });
@@ -69,7 +70,7 @@ function getAddOnItems(items: ItemProduct[]) {
 }
 
 function PriceCell({ product, compact = false }: { product: FlowerProduct; compact?: boolean }) {
-  const rows = getFlowerPriceRows(product, "tv").slice(0, compact ? 2 : 3);
+  const rows = getFlowerPriceRows(product, "tv");
 
   return (
     <div className={compact ? styles.priceStackCompact : styles.priceStack}>
@@ -104,7 +105,7 @@ function TierMenuCard({
   const featured = products.length ? products[tick % products.length] : undefined;
   const visible = rotateList(products, tick, MAX_ROWS);
   const isBundleTier = isTopBundleTier(tier);
-  const featuredRows = featured ? getFlowerPriceRows(featured, "tv").slice(0, 3) : [];
+  const featuredRows = featured ? getFlowerPriceRows(featured, "tv") : [];
   const effects = featured ? getFlowerEffects(featured) : [];
 
   return (
@@ -124,11 +125,9 @@ function TierMenuCard({
         <section className={styles.dealStrip} aria-label={`${detail.name} bundle pricing`}>
           <div className={styles.dealCell}>
             <span>{detail.deal3g || "Buy 2g Get 1g Free"}</span>
-            <strong>3g Total ${detail.unitPrice * 2}</strong>
-          </div>
-          <div className={styles.dealCell}>
-            <span>{detail.deal6g || "Buy 3g Get 3g Free"}</span>
-            <strong>6g Total ${detail.unitPrice * 3}</strong>
+            <strong>
+              {featured && hasPositivePrice(featured.price3g) ? `3g ${formatPricePoint(featured.price3g)}` : "3g"}
+            </strong>
           </div>
         </section>
       ) : (
@@ -137,7 +136,7 @@ function TierMenuCard({
             <span>Unit Price</span>
             <strong>{unitLabel(detail.unitPrice)}</strong>
           </div>
-          {featuredRows.slice(0, 2).map((row) => (
+          {featuredRows.map((row) => (
             <div className={styles.valueCell} key={row.field}>
               <span>{row.shortLabel}</span>
               <strong>{formatPricePoint(row.price)}</strong>
@@ -241,7 +240,7 @@ function OzMenuCard({ flowers, tick }: { flowers: FlowerProduct[]; tick: number 
               <TypeTag type={featured.type} />
               <h3>{featured.name}</h3>
               <p>{effects.join(" / ")}</p>
-              <strong>{featured.price28g ? formatPricePoint(featured.price28g) : "Ask"}</strong>
+              <strong>{hasPositivePrice(featured.price28g) ? formatPricePoint(featured.price28g) : "Ask"}</strong>
             </div>
           </section>
 
@@ -254,7 +253,7 @@ function OzMenuCard({ flowers, tick }: { flowers: FlowerProduct[]; tick: number 
                     {formatType(flower.type)} {flower.thc ? `THC ${flower.thc}` : ""}
                   </span>
                 </div>
-                <b>{flower.price28g ? formatPricePoint(flower.price28g) : "Ask"}</b>
+                <b>{hasPositivePrice(flower.price28g) ? formatPricePoint(flower.price28g) : "Ask"}</b>
               </div>
             ))}
           </section>
@@ -411,7 +410,7 @@ export default function FortYorkTvPage() {
         </section>
 
         <footer className={styles.footerRail}>
-          <strong>Top tiers show total grams: 3g Total and 6g Total</strong>
+          <strong>Flower weights: 3g, 5g, 14g, and 28g</strong>
           <span>Flower / OZ / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories</span>
           <small>Updated {loadedAt || "--"}</small>
         </footer>

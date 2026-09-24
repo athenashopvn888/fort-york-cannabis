@@ -121,7 +121,6 @@ export const TIER_DETAILS: Record<
     unitPrice: number;
     accent: string;
     deal3g?: string;
-    deal6g?: string;
   }
 > = {
   EXOTIC: {
@@ -131,7 +130,6 @@ export const TIER_DETAILS: Record<
     unitPrice: 20,
     accent: "#b5452f",
     deal3g: "Buy 2g Get 1g Free",
-    deal6g: "Buy 3g Get 3g Free",
   },
   PREMIUM: {
     name: "Premium",
@@ -140,16 +138,14 @@ export const TIER_DETAILS: Record<
     unitPrice: 15,
     accent: "#7c5cbb",
     deal3g: "Buy 2g Get 1g Free",
-    deal6g: "Buy 3g Get 3g Free",
   },
   "AAA+": {
     name: "AAA+",
     slug: "aaa-plus",
-    description: "Heavy-hitting AAA+ strains with 3g and 6g total bundle options.",
+    description: "Heavy-hitting AAA+ strains with 3g, 5g, 14g, and 28g prices where the source price is positive.",
     unitPrice: 10,
     accent: "#087e8b",
     deal3g: "Buy 2g Get 1g Free",
-    deal6g: "Buy 3g Get 3g Free",
   },
   AA: {
     name: "AA",
@@ -330,38 +326,42 @@ export function getSalePrice(price: PricePoint) {
   return price.sale ?? price.regular;
 }
 
+/** A weight chip is shown only when the source price itself is positive. */
+export function hasPositivePrice(price: PricePoint | null | undefined): price is PricePoint {
+  if (!price || typeof price !== "object") return false;
+  const sale = price.sale;
+  const regular = price.regular;
+  if (typeof sale === "number" && Number.isFinite(sale) && sale > 0) return true;
+  if (typeof regular === "number" && Number.isFinite(regular) && regular > 0) return true;
+  return false;
+}
+
 export function getFlowerPriceRows(product: FlowerProduct, channel: "web" | "tv" = "web"): FlowerPriceRow[] {
   const tier = normalizeTier(product.tier);
   const topBundle = isTopBundleTier(tier);
-  const isAaTier = tier === "AA";
-  const isTv = channel === "tv";
-  const webBundleLabel = "Bundle Deal Pricing";
-  const price5gLabel = topBundle ? (isTv ? "6g Total" : "6g Bundle") : isAaTier ? "5g" : "6g";
-  const price5gShortLabel = topBundle ? (isTv ? "6G TOTAL" : "6G BUNDLE") : isAaTier ? "5G" : "6G";
+  if (channel !== "web" && channel !== "tv") return [];
   const rows: Array<FlowerPriceRow | null> = [
-    product.price3g
+    hasPositivePrice(product.price3g)
       ? {
           field: "price3g",
-          label: topBundle ? (isTv ? "3g Total" : "3g Bundle") : "3g",
-          shortLabel: topBundle ? (isTv ? "3G TOTAL" : "3G BUNDLE") : "3G",
+          label: "3g",
+          shortLabel: "3G",
           grams: 3,
           price: product.price3g,
-          promo: topBundle ? (isTv ? "Buy 2g Get 1g Free" : webBundleLabel) : tier === "BUDGET" ? "$10 / 3g Special" : undefined,
-          sourceNote: topBundle ? "ADC price3g field displays as a 3g bundle price." : undefined,
+          promo: topBundle ? "Buy 2g Get 1g Free" : tier === "BUDGET" ? "$10 / 3g Special" : undefined,
         }
       : null,
-    product.price5g
+    hasPositivePrice(product.price5g)
       ? {
           field: "price5g",
-          label: price5gLabel,
-          shortLabel: price5gShortLabel,
-          grams: isAaTier ? 5 : 6,
+          label: "5g",
+          shortLabel: "5G",
+          grams: 5,
           price: product.price5g,
-          promo: topBundle ? (isTv ? "Buy 3g Get 3g Free" : webBundleLabel) : isAaTier ? "$20 / 5g AA" : undefined,
-          sourceNote: isAaTier ? "ADC price5g field displays as a 5g AA pack price." : "ADC price5g field displays as a 6g pack price.",
+          promo: tier === "AA" ? "$20 / 5g AA" : undefined,
         }
       : null,
-    product.price14g
+    hasPositivePrice(product.price14g)
       ? {
           field: "price14g",
           label: "14g",
@@ -370,11 +370,11 @@ export function getFlowerPriceRows(product: FlowerProduct, channel: "web" | "tv"
           price: product.price14g,
         }
       : null,
-    product.price28g
+    hasPositivePrice(product.price28g)
       ? {
           field: "price28g",
           label: "28g",
-          shortLabel: "OZ",
+          shortLabel: "28G",
           grams: 28,
           price: product.price28g,
         }
