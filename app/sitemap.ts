@@ -1,7 +1,8 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 import { SEO_PAGES } from "./lib/seoPages";
 import { MENU_CATEGORIES } from "./lib/products";
 import { RESOURCE_PAGES } from "./resources/resourceData";
+import { TIER_ROUTE_SLUGS } from "./lib/tierRoutes";
 
 const BASE = "https://fortyorkcannabis.com";
 
@@ -10,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${BASE}/visit`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/hours`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/careers/budtender`, lastModified: now, changeFrequency: "monthly", priority: 0.65 },
     { url: `${BASE}/weed-dispensary-toronto/`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
@@ -17,6 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/delivery`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
     { url: `${BASE}/menu`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
   ];
+
+  const tierPages: MetadataRoute.Sitemap = TIER_ROUTE_SLUGS.map((slug) => ({
+    url: `${BASE}/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
 
   const seoPages: MetadataRoute.Sitemap = SEO_PAGES.map((p) => ({
     url: `${BASE}/info/${p.slug}`,
@@ -39,5 +49,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.path === "/resources" ? 0.75 : 0.65,
   }));
 
-  return [...staticPages, ...seoPages, ...menuPages, ...resourcePages];
+  return [...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages];
 }

@@ -1,0 +1,92 @@
+﻿.main {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background: #071222;
+  color: #f8fafc;
+  padding-bottom: 48px;
+}
+.hero {
+  padding: 128px 24px 48px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(8, 126, 139, 0.28), transparent 42%),
+    radial-gradient(circle at 88% 20%, rgba(181, 69, 47, 0.18), transparent 36%),
+    #071222;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.heroInner { width: min(100% - 2rem, 920px); margin: 0 auto; }
+.eyebrow {
+  margin: 0 0 12px;
+  color: #7dd3c7;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.heroTitle {
+  margin: 0 0 16px;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+.heroLead {
+  margin: 0 0 22px;
+  max-width: 46rem;
+  color: #cbd5e1;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.napCard {
+  display: grid;
+  gap: 8px;
+  padding: 20px 22px;
+  border: 1px solid rgba(125, 211, 199, 0.35);
+  border-radius: 16px;
+  background: rgba(7, 18, 34, 0.85);
+  margin-bottom: 18px;
+}
+.napCard strong {
+  color: #7dd3c7;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.napCard p, .napCard a {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  text-decoration: none;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn, .btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn { background: #087e8b; color: #fff; }
+.btnSecondary { background: transparent; color: #e2e8f0; border: 1px solid rgba(255,255,255,0.2); }
+.content { width: min(100% - 2rem, 920px); margin: 0 auto; padding: 40px 0 24px; }
+.mapWrap { margin-bottom: 32px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+.mapFrame { width: 100%; min-height: 280px; border: 0; }
+.section { margin-bottom: 32px; }
+.section h2 { margin: 0 0 10px; font-size: 1.35rem; }
+.section p { margin: 0; color: #cbd5e1; line-height: 1.7; }
+.faq details {
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.faq summary { cursor: pointer; font-weight: 700; }
+.faq p { margin: 10px 0 0; color: #cbd5e1; line-height: 1.6; }
+.related { margin-top: 36px; }
+.related nav { display: flex; flex-wrap: wrap; gap: 12px; }
+.related a { color: #7dd3c7; }

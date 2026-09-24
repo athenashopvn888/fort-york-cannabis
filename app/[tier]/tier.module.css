@@ -1,0 +1,85 @@
+﻿.main {
+  min-height: 100vh;
+  background: #071222;
+  color: #f8fafc;
+  padding-bottom: 48px;
+}
+.hero {
+  padding: 120px 24px 36px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background:
+    radial-gradient(circle at 10% 0%, color-mix(in srgb, var(--tier-color, #087e8b) 35%, transparent), transparent 42%),
+    #071222;
+}
+.heroInner { width: min(100% - 2rem, 1100px); margin: 0 auto; }
+.eyebrow {
+  margin: 0 0 10px;
+  color: color-mix(in srgb, var(--tier-color, #7dd3c7) 80%, #fff);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.title {
+  margin: 0 0 12px;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--tier-color, #7dd3c7);
+}
+.intro { margin: 0 0 14px; max-width: 48rem; color: #cbd5e1; line-height: 1.7; }
+.stat { margin: 0 0 16px; color: #94a3b8; }
+.stat strong { color: #f8fafc; }
+.siblingNav { display: flex; flex-wrap: wrap; gap: 10px; }
+.siblingNav a {
+  color: #e2e8f0;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+.gridSection { width: min(100% - 2rem, 1100px); margin: 28px auto; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  text-decoration: none;
+  color: inherit;
+}
+.cardImg {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #0b1a2e;
+}
+.cardBody { padding: 12px; }
+.cardTitle {
+  margin: 0 0 4px;
+  font-size: 0.98rem;
+  font-weight: 800;
+}
+.cardMeta { margin: 0; color: #94a3b8; font-size: 0.82rem; }
+.chips { margin: 8px 0 0; color: #7dd3c7; font-size: 0.78rem; font-weight: 700; }
+.copy { width: min(100% - 2rem, 860px); margin: 12px auto 0; }
+.copy article { margin-bottom: 24px; }
+.copy h2 { margin: 0 0 8px; font-size: 1.25rem; }
+.copy p { margin: 0; color: #cbd5e1; line-height: 1.7; }
+.faq details {
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.faq summary { cursor: pointer; font-weight: 700; }
+.faq p { margin: 10px 0 0; color: #cbd5e1; }
