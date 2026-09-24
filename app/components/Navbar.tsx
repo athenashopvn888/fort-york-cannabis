@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -6,14 +6,18 @@ import styles from "./Navbar.module.css";
 
 const ALL_LINKS: { href: string; label: string; featured?: boolean }[] = [
   { href: "/", label: "Home" },
-  { href: "/weed-dispensary-toronto/", label: "Toronto Store" },
+  { href: "/visit", label: "Visit" },
+  { href: "/hours", label: "Hours" },
   { href: "/menu", label: "Menu" },
-  { href: "/info/fort-york-cannabis-local-visit-guide-2026", label: "Visit Guide" },
-  { href: "/info/fort-york-cannabis-store", label: "Fort York" },
-  { href: "/info/cityplace-cannabis-dispensary", label: "CityPlace" },
+  { href: "/exotic", label: "Exotic" },
+  { href: "/premium", label: "Premium" },
+  { href: "/aaa", label: "AAA+" },
+  { href: "/aa", label: "AA" },
+  { href: "/budget", label: "Budget" },
+  { href: "/info/native-cigarettes-fort-york", label: "Native Cigs" },
+  { href: "/info/nicotine-vapes-fort-york", label: "Vapes" },
   { href: "/contact", label: "Contact" },
-    { href: "/careers/budtender", label: "Join Team", featured: true },
-
+  { href: "/careers/budtender", label: "Join Team", featured: true },
   { href: "/faq", label: "FAQ" },
 ];
 
@@ -59,3 +63,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

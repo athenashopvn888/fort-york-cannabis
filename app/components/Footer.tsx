@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -40,6 +40,13 @@ export default function Footer() {
             <h3 className={styles.colTitle}>Quick Links</h3>
             <nav className={styles.links}>
               <Link href="/">Home</Link>
+              <Link href="/visit">Visit</Link>
+              <Link href="/hours">Hours</Link>
+              <Link href="/exotic">Exotic Weed</Link>
+              <Link href="/premium">Premium Weed</Link>
+              <Link href="/aaa">AAA+ Weed</Link>
+              <Link href="/aa">AA Weed</Link>
+              <Link href="/budget">Budget Weed</Link>
               <Link href="/weed-dispensary-toronto/">Toronto Store Page</Link>
               <Link href="/#menu">Menu</Link>
               <Link href="/info/fort-york-cannabis-local-visit-guide-2026">Local Visit Guide</Link>
@@ -64,3 +71,4 @@ export default function Footer() {
     </footer>
   );
 }
+

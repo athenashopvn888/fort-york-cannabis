@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 import AgeGate from "./components/AgeGate";
+import { STORE_NAP, HOME_FAQS, storeJsonLd, faqPageJsonLd } from "./lib/storeNap";
 
-const siteUrl = "https://fortyorkcannabis.com";
+const siteUrl = STORE_NAP.origin;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -66,30 +67,19 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
+const graphJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Store",
-  "@id": siteUrl,
-  name: "FORT YORK CANNABIS",
-  description:
-    "Cannabis store at 38 Fort York Blvd in Toronto, ON. Phone is 437-783-2511 and the store is open 24 hours.",
-  url: siteUrl,
-  telephone: "437-783-2511",
-  openingHours: "Mo-Su 00:00-23:59",
-  image: `${siteUrl}/brand/og-fort-york-cannabis.webp`,
-  hasMap: "https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "38 Fort York Blvd",
-    addressLocality: "Toronto",
-    addressRegion: "ON",
-    postalCode: "M5V 3Z3",
-    addressCountry: "CA",
-  },
-  areaServed: [
-    { "@type": "Place", name: "Fort York" },
-    { "@type": "Place", name: "CityPlace" },
-    { "@type": "City", name: "Toronto" },
+  "@graph": [
+    (() => {
+      const store = storeJsonLd() as Record<string, unknown>;
+      delete store["@context"];
+      return store;
+    })(),
+    (() => {
+      const faq = faqPageJsonLd(HOME_FAQS) as Record<string, unknown>;
+      delete faq["@context"];
+      return faq;
+    })(),
   ],
 };
 
@@ -107,7 +97,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(graphJsonLd) }}
         />
       </head>
       <body>
@@ -117,3 +107,4 @@ export default function RootLayout({
     </html>
   );
 }
+
