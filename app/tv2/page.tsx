@@ -2,11 +2,10 @@
 
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import TvPromoTakeover from "../components/TvPromoTakeover";
 import styles from "./tv2.module.css";
 import { isCigaretteDealSku, isCigaretteMixAndMatchSku } from "../lib/cigaretteDeals.mjs";
-import { getTv2DaytimePromo, isTv2Daytime } from "./daytimePromos.mjs";
+import { getTv2DaytimePromo, isCigaretteOfferVisible, isTv2Daytime } from "./daytimePromos.mjs";
 import {
   STORE_INFO,
   allItems,
@@ -165,7 +164,17 @@ function FeaturedItem({ item, accent, showCigaretteDeal }: { item?: ItemProduct;
   );
 }
 
-function Board({ board, items, tick }: { board: CategoryBoard; items: ItemProduct[]; tick: number }) {
+function Board({
+  board,
+  items,
+  tick,
+  offerOverlay = false,
+}: {
+  board: CategoryBoard;
+  items: ItemProduct[];
+  tick: number;
+  offerOverlay?: boolean;
+}) {
   const featured = items.length ? items[tick % items.length] : undefined;
   const rows = getVisibleRows(items, featured, tick, 6);
   const showCigaretteDeal = board.id === "CIGARETTES" && tick % 2 === 1;
@@ -198,14 +207,49 @@ function Board({ board, items, tick }: { board: CategoryBoard; items: ItemProduc
           </div>
         ))}
       </div>
+      {offerOverlay ? (
+        <div className={styles.timedPromoOverlay} aria-label="Mix and Match 2 Pack $5 Cigarette Offer">
+          <img src="/banners/2pack5cig.webp" alt="Mix and Match 2 Pack $5 Cigarette Offer" />
+        </div>
+      ) : null}
     </article>
   );
 }
 
-function PromoBoard({ cardId, promo }: { cardId: string; promo: { src: string; alt: string } }) {
+function PromoBoard({
+  cardId,
+  promo,
+  accent,
+}: {
+  cardId: string;
+  promo: { src: string; fallbackSrc?: string; alt: string };
+  accent: string;
+}) {
   return (
-    <article className={styles.promoBoard} aria-label={promo.alt} data-promo-card={cardId}>
-      <Image src={promo.src} alt={promo.alt} fill priority sizes="(min-width: 1300px) 33vw, 50vw" />
+    <article
+      className={styles.promoBoard}
+      aria-label={promo.alt}
+      data-promo-card={cardId}
+      style={{ "--accent": accent } as CSSProperties}
+    >
+      <div className={styles.boardHeader}>
+        <h2>PROMO</h2>
+      </div>
+      <div className={styles.promoViewport}>
+        <img
+          className={styles.promoImg}
+          src={promo.src}
+          alt={promo.alt}
+          referrerPolicy="no-referrer"
+          onError={(event) => {
+            const target = event.currentTarget;
+            if (promo.fallbackSrc && target.dataset.fallbackApplied !== "true") {
+              target.dataset.fallbackApplied = "true";
+              target.src = promo.fallbackSrc;
+            }
+          }}
+        />
+      </div>
     </article>
   );
 }
@@ -215,6 +259,7 @@ export default function FortYorkTv2Page() {
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
   const [daytime, setDaytime] = useState(false);
+  const [cigaretteOfferVisible, setCigaretteOfferVisible] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -246,6 +291,17 @@ export default function FortYorkTv2Page() {
       window.clearInterval(rotate);
       window.clearInterval(daytimeRefresh);
     };
+  }, []);
+
+  useEffect(() => {
+    const startedAt = performance.now();
+    const updateOffer = () => {
+      setCigaretteOfferVisible(
+        isCigaretteOfferVisible(isTv2Daytime(), performance.now() - startedAt),
+      );
+    };
+    const offerTimer = window.setInterval(updateOffer, 250);
+    return () => window.clearInterval(offerTimer);
   }, []);
 
   const grouped = useMemo(() => {
@@ -281,7 +337,7 @@ export default function FortYorkTv2Page() {
         {topBoards.map((board) => {
           const promo = getTv2DaytimePromo(board.id, daytime);
           return promo ? (
-            <PromoBoard key={board.id} cardId={board.id} promo={promo} />
+            <PromoBoard key={board.id} cardId={board.id} promo={promo} accent={board.accent} />
           ) : (
             <Board key={board.id} board={board} items={board.products} tick={board.offset} />
           );
@@ -292,13 +348,19 @@ export default function FortYorkTv2Page() {
         {cigarettesBoard ? (() => {
           const promo = getTv2DaytimePromo(cigarettesBoard.id, daytime);
           return promo ? (
-            <PromoBoard key={cigarettesBoard.id} cardId={cigarettesBoard.id} promo={promo} />
+            <PromoBoard
+              key={cigarettesBoard.id}
+              cardId={cigarettesBoard.id}
+              promo={promo}
+              accent={cigarettesBoard.accent}
+            />
           ) : (
             <Board
               key={cigarettesBoard.id}
               board={cigarettesBoard}
               items={cigarettesBoard.products}
               tick={cigarettesBoard.offset}
+              offerOverlay={cigaretteOfferVisible}
             />
           );
         })() : null}
