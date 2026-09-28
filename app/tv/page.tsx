@@ -3,6 +3,8 @@
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./tv.module.css";
+import HiringRibbon from "../components/HiringRibbon";
+import { tvHiring } from "../lib/tvHiring";
 import {
   FLOWER_TIER_ORDER,
   STORE_INFO,
@@ -400,13 +402,16 @@ export default function FortYorkTvPage() {
         </nav>
 
         <section className={styles.stage} aria-label="Fort York flower tiers and specials">
-          <TierMenuCard tier="EXOTIC" products={grouped.EXOTIC || []} tick={tick} className={styles.cardExotic} />
-          <TierMenuCard tier="PREMIUM" products={grouped.PREMIUM || []} tick={tick + 1} className={styles.cardPremium} />
-          <TierMenuCard tier="AAA+" products={grouped["AAA+"] || []} tick={tick + 2} className={styles.cardAaa} />
-          <TierMenuCard tier="AA" products={grouped.AA || []} tick={tick + 3} className={styles.cardAa} />
-          <TierMenuCard tier="BUDGET" products={grouped.BUDGET || []} tick={tick + 4} className={styles.cardBudget} />
-          <OzMenuCard flowers={ozFlowers} tick={tick + 5} />
-          <AddOnsCard items={addOnItems} tick={tick + 6} />
+          <HiringRibbon hiring={tvHiring} />
+          <div className={styles.stageGrid}>
+            <TierMenuCard tier="EXOTIC" products={grouped.EXOTIC || []} tick={tick} className={styles.cardExotic} />
+            <TierMenuCard tier="PREMIUM" products={grouped.PREMIUM || []} tick={tick + 1} className={styles.cardPremium} />
+            <TierMenuCard tier="AAA+" products={grouped["AAA+"] || []} tick={tick + 2} className={styles.cardAaa} />
+            <TierMenuCard tier="AA" products={grouped.AA || []} tick={tick + 3} className={styles.cardAa} />
+            <TierMenuCard tier="BUDGET" products={grouped.BUDGET || []} tick={tick + 4} className={styles.cardBudget} />
+            <OzMenuCard flowers={ozFlowers} tick={tick + 5} />
+            <AddOnsCard items={addOnItems} tick={tick + 6} />
+          </div>
         </section>
 
         <footer className={styles.footerRail}>

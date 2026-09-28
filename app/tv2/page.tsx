@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import TvPromoTakeover from "../components/TvPromoTakeover";
 import styles from "./tv2.module.css";
+import HiringRibbon from "../components/HiringRibbon";
+import { tvHiring } from "../lib/tvHiring";
 import { isCigaretteDealSku, isCigaretteMixAndMatchSku } from "../lib/cigaretteDeals.mjs";
 import { getTv2DaytimePromo, isTv2Daytime } from "./daytimePromos.mjs";
 import {
@@ -276,6 +278,8 @@ export default function FortYorkTv2Page() {
           <p>{STORE_INFO.shortAddress} / Open {STORE_INFO.hours}</p>
         </aside>
       </header>
+
+      <HiringRibbon hiring={tvHiring} />
 
       <section className={styles.categoryGrid}>
         {topBoards.map((board) => {

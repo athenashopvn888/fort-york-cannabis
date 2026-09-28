@@ -4,9 +4,12 @@
     url('/banners/fort_york_flower_banner.webp') center/cover;
   color: #050605;
   font-family: Inter, Arial, sans-serif;
+  height: 100vh;
   min-height: 100vh;
   overflow: hidden;
   padding: 6px;
+  position: relative;
+  z-index: 1;
 }
 
 .screen * {
@@ -167,13 +170,21 @@
 }
 
 .stage {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+.stageGrid {
   display: grid;
+  flex: 1 1 auto;
   gap: 10px;
   grid-template-areas:
     "exotic premium aaa addons"
     "aa budget oz addons";
   grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(214px, 0.34fr);
-  grid-template-rows: minmax(0, 1fr) minmax(0, 0.92fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
   min-height: 0;
 }
 
@@ -1023,7 +1034,7 @@
     width: 100%;
   }
 
-  .stage {
+  .stageGrid {
     grid-template-areas:
       "exotic"
       "premium"
@@ -1044,5 +1055,258 @@
   .footerRail span {
     text-align: left;
     white-space: normal;
+  }
+}
+
+/* 1920x1080 boards: keep every product row inside the card once the ribbon is on screen. */
+@media (min-width: 1300px) and (max-height: 1100px) {
+  .canvas {
+    gap: 6px;
+  }
+
+  .hoursAlert {
+    font-size: 28px;
+    min-height: 0;
+    padding: 4px 14px;
+  }
+
+  .tierRibbon {
+    padding: 4px;
+  }
+
+  .tierRibbon span {
+    min-height: 32px;
+  }
+
+  .stage,
+  .stageGrid {
+    gap: 6px;
+  }
+
+  .tierHead,
+  .addOnsHead {
+    min-height: 0;
+    padding: 4px 8px;
+  }
+
+  .tierTitle span,
+  .addOnsHead span {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .tierTitle h2 {
+    font-size: 22px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .unitBadge {
+    padding: 3px 6px;
+  }
+
+  .unitBadge strong {
+    font-size: 15px;
+  }
+
+  .unitBadge small {
+    margin-top: 0;
+  }
+
+  .addOnsHead strong {
+    font-size: 22px;
+  }
+
+  .dealStrip,
+  .valueStrip,
+  .ozStrip {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .dealCell,
+  .valueCell,
+  .ozStrip div {
+    padding: 4px 6px;
+  }
+
+  .dealCell span,
+  .valueCell span,
+  .ozStrip span {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .dealCell strong,
+  .valueCell strong,
+  .ozStrip strong {
+    font-size: 15px;
+    line-height: 1;
+    margin-top: 1px;
+  }
+
+  .cardBody,
+  .specialBody {
+    gap: 6px;
+    grid-template-columns: minmax(96px, 0.52fr) minmax(0, 1.48fr);
+    min-height: 0;
+    padding: 6px;
+  }
+
+  .featurePane,
+  .tablePane,
+  .featureCopy {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .imageFrame {
+    height: 72px;
+  }
+
+  .featureCopy h3 {
+    -webkit-line-clamp: 2;
+    font-size: 16px;
+    margin: 2px 0;
+  }
+
+  .effectLine,
+  .skuLine {
+    margin: 0;
+  }
+
+  .featurePrices {
+    gap: 4px;
+  }
+
+  .featurePrice {
+    min-height: 0;
+    padding: 4px 6px;
+  }
+
+  .rowsHead,
+  .addOnRowsHead {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    line-height: 1;
+    min-height: 0;
+    padding: 3px 8px;
+  }
+
+  .productRows,
+  .ozRows {
+    gap: 4px;
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+  }
+
+  .productRow,
+  .ozRow {
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    line-height: 1.05;
+    min-height: 0;
+    overflow: hidden;
+    padding: 2px 6px;
+  }
+
+  .rowMain,
+  .ozRow > div,
+  .addOnRow > div {
+    display: block;
+    min-width: 0;
+  }
+
+  .rowName,
+  .ozRow strong,
+  .addOnRow strong {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .rowMeta,
+  .ozRow span,
+  .addOnRow span {
+    display: flex;
+    line-height: 1;
+    margin-top: 1px;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .priceStackCompact {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2px;
+    justify-content: flex-end;
+  }
+
+  .priceStackCompact .priceLine,
+  .priceStackCompact .priceDeal {
+    min-height: 0;
+    padding: 0 3px;
+    width: auto;
+  }
+
+  .specialBody {
+    grid-template-columns: 148px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .ozFeature {
+    grid-template-columns: 52px minmax(0, 1fr);
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .ozImageFrame {
+    height: 52px;
+  }
+
+  .ozImageFrame img {
+    height: 44px;
+  }
+
+  .addOnFeature {
+    gap: 4px;
+    padding: 6px;
+  }
+
+  .addOnImageFrame {
+    height: 52px;
+  }
+
+  .addOnImageFrame img {
+    height: 44px;
+  }
+
+  .addOnFeature h2 {
+    -webkit-line-clamp: 1;
+    margin: 2px 0;
+  }
+
+  .addOnRows {
+    gap: 3px;
+    grid-template-rows: auto repeat(9, minmax(0, 1fr));
+    padding: 4px;
+  }
+
+  .addOnRow {
+    min-height: 0;
+    overflow: hidden;
+    padding: 2px 4px;
+  }
+
+  .addOnRow img {
+    height: 22px;
+    width: 22px;
+  }
+
+  .footerRail {
+    min-height: 0;
+    padding: 4px 10px;
   }
 }
