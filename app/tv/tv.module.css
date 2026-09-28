@@ -1156,8 +1156,9 @@
 
   .rowsHead,
   .addOnRowsHead {
+    line-height: 1;
     min-height: 0;
-    padding: 4px 8px;
+    padding: 2px 8px;
   }
 
   .productRows,
@@ -1168,9 +1169,35 @@
 
   .productRow,
   .ozRow {
+    align-items: center;
+    line-height: 1.05;
     min-height: 0;
     overflow: hidden;
-    padding: 2px 6px;
+    padding: 0 6px;
+  }
+
+  .rowMain,
+  .ozRow > div,
+  .addOnRow > div {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .rowName,
+  .ozRow strong,
+  .addOnRow strong {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .rowMeta,
+  .ozRow span,
+  .addOnRow span {
+    flex: 0 1 auto;
+    margin-top: 0;
+    min-width: 0;
   }
 
   .priceStackCompact {
@@ -1187,9 +1214,16 @@
     width: auto;
   }
 
+  .specialBody {
+    grid-template-columns: 148px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
   .ozFeature {
-    grid-template-columns: 64px minmax(0, 1fr);
+    grid-template-columns: 52px minmax(0, 1fr);
+    height: 100%;
     min-height: 0;
+    overflow: hidden;
   }
 
   .ozImageFrame {

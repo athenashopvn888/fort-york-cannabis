@@ -19,6 +19,7 @@
   align-items: end;
   border-bottom: 1px solid rgba(244, 213, 154, 0.25);
   display: flex;
+  flex: 0 0 auto;
   justify-content: space-between;
   padding-bottom: 10px;
 }
@@ -289,6 +290,7 @@
   border-top: 1px solid rgba(244, 213, 154, 0.25);
   color: #d8efed;
   display: flex;
+  flex: 0 0 auto;
   gap: 20px;
   justify-content: space-between;
   padding-top: 10px;
@@ -414,10 +416,23 @@
   }
 
   .itemRow {
+    align-items: center;
     gap: 6px;
     min-height: 0;
     overflow: hidden;
     padding: 2px 4px;
+  }
+
+  .itemRow > div {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .itemRow strong {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .itemRow img {
