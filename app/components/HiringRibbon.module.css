@@ -1,15 +1,15 @@
-/* Ported from the Apps Script hiring ribbon.
-   Canvas is 3840×2160, so 148px / 60px scales to ~74px / ~30px at 1920×1080. */
+/* FYC boards are 1920×1080, so this is the scaled ribbon: ~74px tall, ~36px text. */
 .hiringRibbon {
-  --hiringH: 148px;
+  --hiringH: 74px;
   --hiringTextRed: #ff5260;
   --hiringRed: #d51028;
   flex: 0 0 var(--hiringH);
   min-height: 0;
   width: 100%;
   box-sizing: border-box;
-  border-radius: 20px;
-  padding: 0 34px;
+  border-radius: 12px;
+  padding: 0 18px;
+  height: var(--hiringH);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,12 +62,12 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 22px;
+  padding: 0 12px;
   box-sizing: border-box;
-  font-size: 60px;
+  font-size: 36px;
   line-height: 1.05;
   font-weight: 950;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -152,8 +152,8 @@
 .hiringStatic {
   display: none;
   color: var(--hiringTextRed);
-  font-size: 44px;
-  letter-spacing: 2px;
+  font-size: 34px;
+  letter-spacing: 1.5px;
   text-shadow: 0 3px 8px rgba(0, 0, 0, 0.88);
 }
 

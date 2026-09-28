@@ -23,7 +23,11 @@ test("FYC01 hiring config and policy line match the TV ribbon copy", () => {
 test("both TV boards render the hiring ribbon under the header and stay noindex", () => {
   const ribbon = read("app/components/HiringRibbon.tsx");
   assert.match(ribbon, /ROTATE_MS = 3000/);
+  assert.match(ribbon, /POLICY_FONT_PX = 36/);
   assert.match(ribbon, /TV_POLICY_MESSAGE/);
+  assert.match(read("app/components/HiringRibbon.module.css"), /--hiringH:\s*74px/);
+  assert.match(read("app/components/HiringRibbon.module.css"), /font-size:\s*36px/);
+  assert.match(read("app/tv2/page.tsx"), /<TvPromoTakeover promos=\{TAKEOVER_PROMOS\} \/>/);
 
   const tv = read("app/tv/page.tsx");
   const tv2 = read("app/tv2/page.tsx");

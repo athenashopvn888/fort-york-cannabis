@@ -7,9 +7,9 @@ import styles from "./HiringRibbon.module.css";
 
 const PHASE_CLASS = [styles.phaseHeadline, styles.phaseApply, styles.phaseUrl];
 const ROTATE_MS = 3000;
-const POLICY_FONT_PX = 60;
-const POLICY_TRACKING_PX = 3;
-const POLICY_MIN_FONT_PX = 32;
+const POLICY_FONT_PX = 36;
+const POLICY_TRACKING_PX = 2;
+const POLICY_MIN_FONT_PX = 34;
 
 function trimmed(value: string | null | undefined): string {
   return (value ?? "").trim();

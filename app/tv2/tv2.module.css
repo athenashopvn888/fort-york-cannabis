@@ -367,31 +367,34 @@
   }
 
   .feature {
-    gap: 6px;
-    grid-template-columns: 64px minmax(0, 1fr);
-    max-height: 78px;
+    align-items: center;
+    gap: 8px;
+    grid-template-columns: 84px minmax(0, 1fr);
+    height: auto;
+    max-height: none;
     min-height: 0;
-    overflow: hidden;
-    padding: 6px;
+    overflow: visible;
+    padding: 6px 8px;
   }
 
   .featureImage {
-    height: 64px;
+    height: 72px;
     min-height: 0;
   }
 
   .featureImage img {
-    height: 56px;
+    height: 64px;
   }
 
   .featureCopy {
-    gap: 2px;
+    align-content: center;
+    gap: 3px;
     min-height: 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .featureCopy h3 {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .featureCopy p {
@@ -401,7 +404,10 @@
   }
 
   .featureCopy strong {
-    font-size: 20px;
+    display: block;
+    font-size: 26px;
+    line-height: 1.2;
+    padding-bottom: 2px;
   }
 
   .metaChips {
@@ -418,9 +424,10 @@
   .itemRow {
     align-items: center;
     gap: 6px;
+    line-height: 1;
     min-height: 0;
     overflow: hidden;
-    padding: 2px 4px;
+    padding: 0 4px;
   }
 
   .itemRow > div {
