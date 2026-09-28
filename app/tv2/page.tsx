@@ -4,13 +4,13 @@ import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import TvPromoTakeover from "../components/TvPromoTakeover";
 import styles from "./tv2.module.css";
+import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "../tv/flashMessages";
 import HiringRibbon from "../components/HiringRibbon";
 import { tvHiring } from "../lib/tvHiring";
 import { isCigaretteDealSku, isCigaretteMixAndMatchSku } from "../lib/cigaretteDeals.mjs";
 import { getTv2DaytimePromo, isCigaretteOfferVisible, isTv2Daytime } from "./daytimePromos.mjs";
 import {
   STORE_INFO,
-  allItems,
   formatItemPrice,
   formatPercentLike,
   formatType,
@@ -257,11 +257,12 @@ function PromoBoard({
 }
 
 export default function FortYorkTv2Page() {
-  const [items, setItems] = useState<ItemProduct[]>(allItems);
+  const [items, setItems] = useState<ItemProduct[]>([]);
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
   const [daytime, setDaytime] = useState(false);
   const [cigaretteOfferVisible, setCigaretteOfferVisible] = useState(false);
+  const [showCigaretteFlash, setShowCigaretteFlash] = useState(() => isCigaretteFlashWindow());
 
   useEffect(() => {
     let active = true;
@@ -271,7 +272,7 @@ export default function FortYorkTv2Page() {
         const res = await fetch("/api/tv-data?type=items");
         const data = await res.json();
         if (!active) return;
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
           setItems(data);
         }
         setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
@@ -286,12 +287,14 @@ export default function FortYorkTv2Page() {
     const refresh = window.setInterval(load, 5 * 60 * 1000);
     const rotate = window.setInterval(() => setTick((value) => value + 1), 6000);
     const daytimeRefresh = window.setInterval(syncDaytime, 60 * 1000);
+    const flashRefresh = window.setInterval(() => setShowCigaretteFlash(isCigaretteFlashWindow()), 60 * 1000);
 
     return () => {
       active = false;
       window.clearInterval(refresh);
       window.clearInterval(rotate);
       window.clearInterval(daytimeRefresh);
+      window.clearInterval(flashRefresh);
     };
   }, []);
 
@@ -320,7 +323,10 @@ export default function FortYorkTv2Page() {
   const concentratesBoard = boardById.get("CONCENTRATES");
   const infusedPrerollBoard = boardById.get("PREROLLS");
   const cigarettesBoard = boardById.get("CIGARETTES");
-  const footerMessage = FOOTER_MESSAGES[tick % FOOTER_MESSAGES.length];
+  const footerMessages = showCigaretteFlash
+    ? [...FOOTER_MESSAGES, { label: "Cigarettes", text: CIGARETTE_FLASH_MESSAGE }]
+    : FOOTER_MESSAGES;
+  const footerMessage = footerMessages[tick % footerMessages.length];
 
   return (
     <main className={styles.screen}>
