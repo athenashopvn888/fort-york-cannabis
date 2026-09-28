@@ -19,6 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/delivery`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
     { url: `${BASE}/menu`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE}/weed-dispensary-fort-york`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/24-hour-fort-york-dispensary`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/native-cigarettes-fort-york`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE}/nicotine-vape-fort-york`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
   ];
 
   const tierPages: MetadataRoute.Sitemap = TIER_ROUTE_SLUGS.map((slug) => ({

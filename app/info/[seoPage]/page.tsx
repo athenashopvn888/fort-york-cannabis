@@ -177,6 +177,8 @@ export default async function SeoLandingPage({
             <div className={styles.visitBtns}>
               <Link href="/contact" className={styles.visitBtn}>Contact Page</Link>
               <Link href="/weed-dispensary-toronto/" className={styles.visitBtn}>Toronto Landing Page</Link>
+              <Link href="/native-cigarettes-fort-york" className={styles.visitBtn}>Native Cigarette Guide</Link>
+              <Link href="/nicotine-vape-fort-york" className={styles.visitBtn}>Nicotine Vape Guide</Link>
             </div>
           </div>
 

@@ -89,6 +89,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className={styles.authoritySection} aria-labelledby="local-guides-heading">
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.microLabel}>Fort York local guides</span>
+            <h2 id="local-guides-heading" className={styles.sectionTitle}>Plan the right downtown stop</h2>
+            <p className={styles.sectionSubtitle}>Use the store guides for Fort York, verified 24-hour access, delivery, adult cigarette and nicotine categories, or arrival details.</p>
+          </div>
+          <div className={styles.authorityGrid}>
+            {[
+              ["Weed dispensary on Fort York Boulevard", "/weed-dispensary-fort-york"],
+              ["Open 24 hours, seven days", "/24-hour-fort-york-dispensary"],
+              ["Weed delivery information", "/delivery"],
+              ["Native cigarettes near CityPlace", "/native-cigarettes-fort-york"],
+              ["Nicotine vapes near Fort York", "/nicotine-vape-fort-york"],
+              ["Transit, parking and arrival guide", "/visit"],
+            ].map(([label, href]) => <Link key={href} href={href} className={styles.authorityCard}>{label}<span>→</span></Link>)}
+          </div>
+        </div>
+      </section>
+
       <section className={styles.menuSection} id="menu" aria-labelledby="menu-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>

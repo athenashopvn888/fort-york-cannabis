@@ -755,3 +755,4 @@
     width: 100%;
   }
 }
+.authoritySection{padding:64px 0;background:#f7f5ef}.authorityGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.authorityCard{display:flex;justify-content:space-between;gap:18px;min-height:118px;padding:24px;border:1px solid rgba(7,18,34,.12);border-radius:16px;background:#fff;color:#07121f;font-weight:900;line-height:1.35;box-shadow:0 12px 30px rgba(7,18,34,.06)}.authorityCard span{color:#08736f}@media(max-width:760px){.authorityGrid{grid-template-columns:1fr}}
