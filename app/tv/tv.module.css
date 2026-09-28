@@ -463,6 +463,29 @@
   text-transform: uppercase;
 }
 
+.effectLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.effectLine span {
+  background: rgba(11, 117, 109, 0.1);
+  border: 1px solid rgba(11, 117, 109, 0.24);
+  border-radius: 999px;
+  padding: 3px 7px;
+}
+
+.oldPrice {
+  margin-right: 6px;
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+.salePrice {
+  font-weight: 1000;
+}
+
 .featurePrices {
   display: grid;
   gap: 6px;

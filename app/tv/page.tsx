@@ -3,17 +3,15 @@
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./tv.module.css";
+import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "./flashMessages";
 import HiringRibbon from "../components/HiringRibbon";
 import { tvHiring } from "../lib/tvHiring";
 import {
   FLOWER_TIER_ORDER,
   STORE_INFO,
-  allFlowers,
-  allItems,
   formatItemPrice,
   formatPricePoint,
   formatType,
-  getFlowerEffects,
   getFlowerPriceRows,
   hasPositivePrice,
   getItemCategoryLabel,
@@ -44,6 +42,27 @@ function rotateList<T>(items: T[], offset: number, limit: number) {
 
 function unitLabel(unitPrice: number) {
   return `$${unitPrice} / G`;
+}
+
+function getBoardFlowerEffects(type: string) {
+  return type === "sativa"
+    ? ["Energy", "Cerebral", "Uplift"]
+    : ["Couch Lock", "Relax", "Sleepy"];
+}
+
+function isDiscountPrice(price: { regular: number; sale: number | null } | null | undefined) {
+  return Boolean(price && price.sale !== null && price.sale < price.regular);
+}
+
+function hasDiscount(product: FlowerProduct) {
+  return [product.price3g, product.price5g, product.price14g, product.price28g].some(isDiscountPrice);
+}
+
+function BoardPrice({ price }: { price: { regular: number; sale: number | null } }) {
+  if (isDiscountPrice(price)) {
+    return <><del className={styles.oldPrice}>${price.regular}</del><strong className={styles.salePrice}>${price.sale}</strong></>;
+  }
+  return <strong>${price.regular}</strong>;
 }
 
 function formatPotency(value?: string) {
@@ -79,7 +98,7 @@ function PriceCell({ product, compact = false }: { product: FlowerProduct; compa
       {rows.map((row) => (
         <div key={row.field} className={row.promo ? styles.priceDeal : styles.priceLine}>
           <span>{row.shortLabel}</span>
-          <strong>{formatPricePoint(row.price)}</strong>
+          <BoardPrice price={row.price} />
           {row.promo && !compact ? <em>{row.promo}</em> : null}
         </div>
       ))}
@@ -104,11 +123,14 @@ function TierMenuCard({
   className?: string;
 }) {
   const detail = getTierDetail(tier);
-  const featured = products.length ? products[tick % products.length] : undefined;
-  const visible = rotateList(products, tick, MAX_ROWS);
   const isBundleTier = isTopBundleTier(tier);
+  const featuredPool = isBundleTier
+    ? products.filter((product) => hasPositivePrice(product.price3g) || hasPositivePrice(product.price5g))
+    : products;
+  const featured = featuredPool.length ? featuredPool[tick % featuredPool.length] : products[tick % Math.max(1, products.length)];
+  const visible = rotateList(products, tick, MAX_ROWS);
   const featuredRows = featured ? getFlowerPriceRows(featured, "tv") : [];
-  const effects = featured ? getFlowerEffects(featured) : [];
+  const effects = featured ? getBoardFlowerEffects(featured.type) : [];
 
   return (
     <article className={`${styles.tierCard} ${className}`} style={{ "--tier-color": detail.accent } as CSSProperties}>
@@ -126,9 +148,15 @@ function TierMenuCard({
       {isBundleTier ? (
         <section className={styles.dealStrip} aria-label={`${detail.name} bundle pricing`}>
           <div className={styles.dealCell}>
-            <span>{detail.deal3g || "Buy 2g Get 1g Free"}</span>
+            <span>2g=3g</span>
             <strong>
               {featured && hasPositivePrice(featured.price3g) ? `3g ${formatPricePoint(featured.price3g)}` : "3g"}
+            </strong>
+          </div>
+          <div className={styles.dealCell}>
+            <span>3g=6g</span>
+            <strong>
+              {featured && hasPositivePrice(featured.price5g) ? `5g ${formatPricePoint(featured.price5g)}` : "5g"}
             </strong>
           </div>
         </section>
@@ -152,20 +180,20 @@ function TierMenuCard({
           <section className={styles.featurePane}>
             <div className={styles.imageFrame}>
               <img src={getProductImage(featured)} alt={featured.name} />
-              {featured.isSale ? <span className={styles.saleBadge}>Sale</span> : null}
+              {hasDiscount(featured) ? <span className={styles.saleBadge}>Sale</span> : null}
               {featured.isHot ? <span className={styles.hotBadge}>Top Pick</span> : null}
               {featured.thc ? <span className={styles.thcBadge}>THC {featured.thc}</span> : null}
             </div>
             <div className={styles.featureCopy}>
               <TypeTag type={featured.type} />
               <h3>{featured.name}</h3>
-              <p className={styles.effectLine}>{effects.join(" / ")}</p>
+              <p className={styles.effectLine}>{effects.map((effect) => <span key={effect}>{effect}</span>)}</p>
               <small className={styles.skuLine}>SKU {featured.sku}</small>
               <div className={styles.featurePrices}>
                 {featuredRows.map((row) => (
                   <div key={row.field} className={styles.featurePrice}>
                     <span>{row.shortLabel}</span>
-                    <strong>{formatPricePoint(row.price)}</strong>
+                    <BoardPrice price={row.price} />
                     {row.promo ? <em>{row.promo}</em> : null}
                   </div>
                 ))}
@@ -186,7 +214,7 @@ function TierMenuCard({
                     <span className={styles.rowMeta}>
                       <TypeTag type={flower.type} />
                       {flower.thc ? <b>THC {flower.thc}</b> : null}
-                      {flower.isSale ? <em>Sale</em> : null}
+                      {hasDiscount(flower) ? <em>Sale</em> : null}
                     </span>
                   </div>
                   <PriceCell product={flower} compact />
@@ -205,7 +233,7 @@ function TierMenuCard({
 function OzMenuCard({ flowers, tick }: { flowers: FlowerProduct[]; tick: number }) {
   const featured = flowers.length ? flowers[tick % flowers.length] : undefined;
   const visible = rotateList(flowers, tick, 5);
-  const effects = featured ? getFlowerEffects(featured) : [];
+  const effects = featured ? getBoardFlowerEffects(featured.type) : [];
 
   return (
     <article className={`${styles.tierCard} ${styles.ozCard}`} style={{ "--tier-color": "#b01664" } as CSSProperties}>
@@ -321,10 +349,11 @@ function AddOnsCard({ items, tick }: { items: ItemProduct[]; tick: number }) {
 }
 
 export default function FortYorkTvPage() {
-  const [flowers, setFlowers] = useState<FlowerProduct[]>(allFlowers);
-  const [items, setItems] = useState<ItemProduct[]>(allItems);
+  const [flowers, setFlowers] = useState<FlowerProduct[]>([]);
+  const [items, setItems] = useState<ItemProduct[]>([]);
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
+  const [showCigaretteFlash, setShowCigaretteFlash] = useState(() => isCigaretteFlashWindow());
 
   useEffect(() => {
     let active = true;
@@ -337,10 +366,10 @@ export default function FortYorkTvPage() {
         ]);
         const [flowerData, itemData] = await Promise.all([flowerRes.json(), itemRes.json()]);
         if (!active) return;
-        if (Array.isArray(flowerData) && flowerData.length > 0) {
+        if (Array.isArray(flowerData)) {
           setFlowers(flowerData);
         }
-        if (Array.isArray(itemData) && itemData.length > 0) {
+        if (Array.isArray(itemData)) {
           setItems(itemData);
         }
         setLoadedAt(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
@@ -352,11 +381,13 @@ export default function FortYorkTvPage() {
     load();
     const refresh = window.setInterval(load, 5 * 60 * 1000);
     const rotate = window.setInterval(() => setTick((value) => value + 1), 5000);
+    const flashRefresh = window.setInterval(() => setShowCigaretteFlash(isCigaretteFlashWindow()), 60 * 1000);
 
     return () => {
       active = false;
       window.clearInterval(refresh);
       window.clearInterval(rotate);
+      window.clearInterval(flashRefresh);
     };
   }, []);
 
@@ -387,7 +418,7 @@ export default function FortYorkTvPage() {
           </div>
         </header>
 
-        <div className={styles.hoursAlert}>NEW! NOW OPEN 24 HOURS</div>
+        <div className={styles.hoursAlert}>NOW OPEN 24 HOURS</div>
 
         <nav className={styles.tierRibbon} aria-label="Flower tier pricing">
           {FLOWER_TIER_ORDER.map((tier) => {
@@ -416,7 +447,7 @@ export default function FortYorkTvPage() {
 
         <footer className={styles.footerRail}>
           <strong>Flower weights: 3g, 5g, 14g, and 28g</strong>
-          <span>Flower / OZ / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories</span>
+          <span>Flower / OZ / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories{showCigaretteFlash ? ` / ${CIGARETTE_FLASH_MESSAGE}` : ""}</span>
           <small>Updated {loadedAt || "--"}</small>
         </footer>
       </div>
