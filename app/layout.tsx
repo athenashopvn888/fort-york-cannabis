@@ -1,6 +1,5 @@
 ﻿import type { Metadata } from "next";
 import "./globals.css";
-import AgeGate from "./components/AgeGate";
 import { STORE_NAP, HOME_FAQS, storeJsonLd, faqPageJsonLd } from "./lib/storeNap";
 
 const siteUrl = STORE_NAP.origin;
@@ -102,9 +101,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
-        <AgeGate />
       </body>
     </html>
   );
 }
-
