@@ -1,4 +1,4 @@
-﻿/* Fort York Cannabis design system */
+/* Fort York Cannabis design system */
 :root {
   --bg-primary: #050605;
   --bg-secondary: #0b0d0a;
@@ -192,4 +192,18 @@ button { cursor: pointer; font-family: inherit; }
   #main-nav > div:nth-child(2) > div {
     padding: 9px 10px 10px;
   }
+}
+
+[data-belmont-mix-match-banner] {
+  display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box;
+  margin: 0; padding: 12px 16px; background: #111827; color: #fbbf24;
+  font-size: clamp(14px, 2.15vw, 24px); font-weight: 900; letter-spacing: .055em; line-height: 1.2;
+  text-align: center; text-decoration: none; text-transform: uppercase; text-wrap: balance; white-space: normal;
+}
+[data-belmont-mix-match-banner]:hover,
+[data-belmont-mix-match-banner]:focus-visible { background: #1f2937; color: #fde68a; text-decoration: underline; text-underline-offset: .12em; }
+[data-belmont-mix-match-banner]:focus-visible { outline: 3px solid #fbbf24; outline-offset: -3px; }
+@media (max-width: 720px) {
+  [data-belmont-mix-match-banner] { flex-direction: column; padding: 9px 12px; font-size: 13px; letter-spacing: .025em; line-height: 1.25; }
+  [data-belmont-offer-lead], [data-belmont-offer-tail] { display: block; max-width: 100%; text-wrap: balance; }
 }
