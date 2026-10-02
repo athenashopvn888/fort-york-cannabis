@@ -109,6 +109,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
       },
     ],
     commercialLinks: [
+      { label: "Name Guides", href: "/guides", description: "Browse every live Fort York name guide by shelf." },
       { label: "View the Fort York store page", href: SITE.storePage },
       { label: "Shop Nicotine Vapes", href: "/items/vapes" },
       { label: "Shop Vape Disposables", href: "/items/vape-disposables" },

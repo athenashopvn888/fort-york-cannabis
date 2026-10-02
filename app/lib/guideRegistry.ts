@@ -1,4 +1,5 @@
 export type GuideLane = "strain" | "native_cig" | "nic_vape" | "thc_vape";
+export const GUIDE_LANES: ReadonlyArray<{ lane: GuideLane; label: string }> = [{ lane: "strain", label: "Strains" }, { lane: "native_cig", label: "Native Cigarettes" }, { lane: "nic_vape", label: "Nicotine Vape" }, { lane: "thc_vape", label: "THC Vape" }];
 export type GuideEntry = { slug: string; lane: GuideLane; title: string; name: string; matchedSku: string; categoryPath: string; productPath: string; stockSource: string };
 export const GUIDE_STORE = {
   "code": "FYC01",
@@ -299,6 +300,7 @@ export const GUIDE_REGISTRY: GuideEntry[] = [
   }
 ];
 export const getGuide = (slug: string) => GUIDE_REGISTRY.find((guide) => guide.slug === slug);
+export const getGuidesByLane = () => GUIDE_LANES.map(({ lane, label }) => ({ lane, label, guides: GUIDE_REGISTRY.filter((guide) => guide.lane === lane) }));
 export const getMenuGuideLinks = () => GUIDE_REGISTRY.filter((guide) => guide.lane === "strain").slice(0, 6);
 export function getCategoryGuideGroups(categoryPath: string) {
   const exact = GUIDE_REGISTRY.filter((guide) => guide.categoryPath === categoryPath && guide.lane !== "strain");

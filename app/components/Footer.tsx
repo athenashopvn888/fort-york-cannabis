@@ -57,6 +57,8 @@ export default function Footer() {
               <Link href="/info/nicotine-vapes-fort-york">Nicotine Vapes Fort York</Link>
               <Link href="/contact">Contact</Link>
               <Link href="/faq">FAQ</Link>
+              <Link href="/resources">Resources</Link>
+              <Link href="/guides">Guides</Link>
               <Link href="/delivery">Pickup / Delivery Status</Link>
             </nav>
           </div>
@@ -71,4 +73,3 @@ export default function Footer() {
     </footer>
   );
 }
-

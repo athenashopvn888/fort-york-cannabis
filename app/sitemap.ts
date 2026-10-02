@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/24-hour-fort-york-dispensary`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/native-cigarettes-fort-york`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE}/nicotine-vape-fort-york`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
   ];
 
   const tierPages: MetadataRoute.Sitemap = TIER_ROUTE_SLUGS.map((slug) => ({
