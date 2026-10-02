@@ -18,6 +18,8 @@ import {
   loadLiveMenuCatalog,
 } from "../lib/liveMenuCatalog";
 import styles from "./menu.module.css";
+import GuideStrip from "../components/GuideStrip";
+import { getMenuGuideLinks } from "../lib/guideRegistry";
 
 export const metadata: Metadata = {
   title: "Menu | FORT YORK CANNABIS",
@@ -66,6 +68,8 @@ export default async function MenuPage() {
           </nav>
         </div>
       </section>
+
+      <GuideStrip groups={[{ label: "Popular strain guides", guides: getMenuGuideLinks() }]} />
 
       <section className={styles.categorySection}>
         <div className={styles.container}>

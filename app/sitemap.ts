@@ -3,6 +3,7 @@ import { SEO_PAGES } from "./lib/seoPages";
 import { MENU_CATEGORIES } from "./lib/products";
 import { RESOURCE_PAGES } from "./resources/resourceData";
 import { TIER_ROUTE_SLUGS } from "./lib/tierRoutes";
+import { GUIDE_REGISTRY } from "./lib/guideRegistry";
 
 const BASE = "https://fortyorkcannabis.com";
 
@@ -53,5 +54,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.path === "/resources" ? 0.75 : 0.65,
   }));
 
-  return [...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages];
+  const guidePages: MetadataRoute.Sitemap = GUIDE_REGISTRY.map((guide) => ({
+    url: `${BASE}/guides/${guide.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.65,
+  }));
+
+  return [...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages, ...guidePages];
 }
