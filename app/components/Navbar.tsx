@@ -19,6 +19,8 @@ const ALL_LINKS: { href: string; label: string; featured?: boolean }[] = [
   { href: "/contact", label: "Contact" },
   { href: "/careers/budtender", label: "Join Team", featured: true },
   { href: "/faq", label: "FAQ" },
+  { href: "/resources", label: "Resources" },
+  { href: "/guides", label: "Guides" },
 ];
 
 export default function Navbar() {
@@ -63,4 +65,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
