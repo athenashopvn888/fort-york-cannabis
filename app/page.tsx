@@ -40,6 +40,10 @@ export default function HomePage() {
   return (
     <main className={styles.main}>
       <Navbar />
+      <Link href="/items/cigarettes" data-belmont-mix-match-banner="" aria-label="BELMONT KING SIZE $10 - 2PACK BB $5 MIX & MATCH">
+        <span data-belmont-offer-lead="">BELMONT KING SIZE $10 -</span>
+        <span data-belmont-offer-tail=""> 2PACK BB $5 MIX &amp; MATCH</span>
+      </Link>
 
       <section className={styles.hero}>
         <div className={styles.heroBg} />
