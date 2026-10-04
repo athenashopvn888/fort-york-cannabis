@@ -12,7 +12,8 @@
     radial-gradient(circle at 82% 12%, rgba(242, 198, 121, 0.22), transparent 26%);
   color: #fff8ed;
   font-family: Inter, Arial, sans-serif;
-  padding: 12px;
+  padding: 12px clamp(118px, 10vw, 190px) 12px 12px;
+  box-sizing: border-box;
 }
 
 .header {
@@ -384,7 +385,7 @@
 @media (min-width: 1300px) and (max-height: 1100px) {
   .screen {
     gap: 6px;
-    padding: 8px;
+    padding: 8px clamp(118px, 10vw, 190px) 8px 8px;
   }
 
   .categoryGrid {
