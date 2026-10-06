@@ -1,4 +1,4 @@
-export const pendingLabel = "Coming soon";
+export const pendingLabel = "Pending owner input";
 export const storePhone = "437-783-2511";
 export const storePhoneIntl = "+14377832511";
 export const storeHours = "24 hours";
@@ -57,7 +57,7 @@ export const gbpLocation = {
   introVariant:
     "FORT YORK CANNABIS serves adults 19+ at 38 Fort York Blvd in downtown Toronto near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Open 24 hours. Phone is 437-783-2511.",
   complianceNote:
-    "Cannabis products are for adults 19+ only. Pickup and delivery details will be posted when available.",
+    "Cannabis products are for adults 19+ only. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.",
   localProofPoints: [
     "Located at 38 Fort York Blvd in downtown Toronto.",
     "Serves Fort York, CityPlace, the waterfront, King West, Rogers Centre, and the Entertainment District.",

@@ -21,7 +21,7 @@ export default function ContactPage() {
           <div className={styles.heroCopy}>
             <span className={styles.microLabel}>Contact and location</span>
             <h1>FORT YORK CANNABIS</h1>
-            <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Open 24 hours. Pickup and delivery details will be posted when available.</p>
+            <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Open 24 hours. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.</p>
           </div>
           <img src="/banners/fort_york_hero_banner.webp" alt="FORT YORK CANNABIS storefront banner" className={styles.heroImage} />
         </div>
@@ -59,7 +59,7 @@ export default function ContactPage() {
             <div className={styles.customerCopy}>
               <span className={styles.microLabel}>Store information</span>
               <h2 className={styles.infoTitle}>Call / Directions / Menu</h2>
-              <p className={styles.infoText}>Directions, phone, hours, and menu browsing are ready now. Pickup, delivery, and license-specific details will be added once ready.</p>
+              <p className={styles.infoText}>Directions, phone, hours, menu browsing, and same-day delivery ordering are ready now. License-specific details are not published.</p>
             </div>
           </div>
         </div>
