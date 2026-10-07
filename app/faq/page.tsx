@@ -26,8 +26,10 @@ const FAQ_CATEGORIES = [
     faqs: [
       { q: "What are the store hours?", a: "Open 24 hours, seven days a week." },
       { q: "What is the phone number?", a: "Phone is 437-783-2511." },
-      { q: "Is delivery or pickup available?", a: "Pickup and delivery details are coming soon." },
-      { q: "Is license information available?", a: "License information is coming soon and will be added once ready." },
+      { q: "Can I order online?", a: "Yes. Browse the delivery menu and use LIVE ORDER to start your order with the dispatcher." },
+      { q: "Do you offer delivery?", a: "Yes. Delivery ordering is available daily from 10:00 a.m. to 10:00 p.m. through the delivery menu. The dispatcher confirms order details and eligibility." },
+      { q: "Is there a minimum purchase?", a: "The delivery menu has a $60 product minimum and a $10 delivery fee." },
+      { q: "Is license information available?", a: "License information is not published." },
     ],
   },
   {

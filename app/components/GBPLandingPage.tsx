@@ -99,7 +99,7 @@ export function GBPLandingPage() {
         <div>
           <span className={styles.microLabel}>Store information</span>
           <h2 className={styles.h2}>Fort York Cannabis Store</h2>
-          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-783-2511. Open 24 hours at 38 Fort York Blvd. Pickup and delivery details will be posted when available.</p>
+          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-783-2511. Open 24 hours at 38 Fort York Blvd. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.</p>
         </div>
         <div className={styles.trustGrid}>
           {trustItems.map((item) => (
