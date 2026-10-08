@@ -90,7 +90,7 @@ export function storeJsonLd() {
     "@context": "https://schema.org",
     "@type": "Store",
     "@id": `${nap.origin}/#store`,
-    name: nap.brand,
+    name: "Fort York Cannabis Dispensary Weed Delivery",
     description:
       "Cannabis store at 38 Fort York Blvd in Toronto, ON. Phone is 437-783-2511 and the store is open 24 hours.",
     url: nap.origin,
