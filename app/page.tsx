@@ -50,7 +50,7 @@ export default function HomePage() {
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
           <span className={styles.heroKicker}>Fort York / CityPlace</span>
-          <h1 className={styles.brandTitle}>FORT YORK CANNABIS</h1>
+          <h1 className={styles.brandTitle}>Fort York Cannabis Dispensary Weed Delivery</h1>
           <p className={styles.brandSub}>Cannabis Store Near Fort York & CityPlace</p>
           <p className={styles.localLine}>38 Fort York Blvd, Toronto</p>
           <div className={styles.heroActions}>
