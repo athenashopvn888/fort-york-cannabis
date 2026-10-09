@@ -7,7 +7,7 @@ const siteUrl = STORE_NAP.origin;
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Fort York Cannabis Dispensary Weed Delivery",
+    default: "Fort York Cannabis Dispensary Weed Delivery | Fort York / CityPlace",
     template: "%s | FORT YORK CANNABIS",
   },
   description:
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: "en_CA",
     url: siteUrl,
     siteName: "FORT YORK CANNABIS",
-    title: "Fort York Cannabis Dispensary Weed Delivery",
+    title: "Fort York Cannabis Dispensary Weed Delivery | Fort York / CityPlace",
     description:
       "A Fort York / CityPlace cannabis store at 38 Fort York Blvd. Phone is 437-783-2511 and the store is open 24 hours.",
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fort York Cannabis Dispensary Weed Delivery",
+    title: "Fort York Cannabis Dispensary Weed Delivery | Fort York / CityPlace",
     description: "Fort York / CityPlace cannabis store at 38 Fort York Blvd.",
     images: [`${siteUrl}/brand/og-fort-york-cannabis.webp`],
   },
