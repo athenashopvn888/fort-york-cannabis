@@ -53,8 +53,9 @@ async function fetchJson<T>(url: string): Promise<T> {
 }
 
 async function fetchInputs() {
-  const endpoint = process.env.APPS_SCRIPT_URL;
-  if (!endpoint) throw new Error("FYC inventory endpoint is not configured (APPS_SCRIPT_URL).");
+  // Shared fleet menu feed (no Gmail on requests). Read ONLY from MENU_FEED_URL; legacy APPS_SCRIPT_URL is ignored.
+  const endpoint = (process.env.MENU_FEED_URL || "").trim() || "https://script.google.com/macros/s/AKfycbx09_sDal1eMVF1r-hUck4e7oq_XBHEWhGvA79JuhZNQ6P4CdhCas0xE3FfexWQ3hq4/exec";
+  if (!endpoint) throw new Error("FYC inventory endpoint is not configured (MENU_FEED_URL).");
   const separator = endpoint.includes("?") ? "&" : "?";
   const store = storeQueryCode();
   const base = `${endpoint}${separator}store=${encodeURIComponent(store)}`;

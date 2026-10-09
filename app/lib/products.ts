@@ -84,7 +84,8 @@ export const allFlowers: FlowerProduct[] = flowersJson as FlowerProduct[];
 export const allItems: ItemProduct[] = itemsJson as ItemProduct[];
 
 const liveMenuEnabled = process.env.FORT_YORK_ENABLE_LIVE_MENU === "true";
-const appsScriptConfigured = Boolean(process.env.APPS_SCRIPT_URL);
+// Feed URL now defaults to the shared fleet feed (MENU_FEED_URL overrides), so it is always configured.
+const appsScriptConfigured = Boolean((process.env.MENU_FEED_URL || "").trim() || "https://script.google.com/macros/s/AKfycbx09_sDal1eMVF1r-hUck4e7oq_XBHEWhGvA79JuhZNQ6P4CdhCas0xE3FfexWQ3hq4/exec");
 const defaultStoreCode = "FYC01";
 const storeCode =
   (process.env.MENU_STORE_CODE || process.env.NEXT_PUBLIC_MENU_STORE_CODE || STORE_INFO.code || defaultStoreCode).trim() ||

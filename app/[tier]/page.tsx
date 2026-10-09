@@ -5,13 +5,17 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { getProductImage, getProductPath, formatType, hasPositivePrice, type FlowerProduct } from "../lib/products";
 import {
-  getFlowersByTierKey,
   getTierRouteConfig,
   TIER_ROUTE_SLUGS,
 } from "../lib/tierRoutes";
 import { TIER_SEO } from "../lib/tierSeoContent";
 import { STORE_NAP } from "../lib/storeNap";
 import styles from "./tier.module.css";
+import { getLiveFlowers } from "../lib/products-live-helpers";
+import { normalizeTier } from "../lib/products";
+
+// Read the live menu feed on every request (never a build-time snapshot).
+export const dynamic = "force-dynamic";
 
 function chipWeightsForFlower(flower: FlowerProduct): string[] {
   const chips: string[] = [];
@@ -57,7 +61,7 @@ export default async function TierPage({
   const route = getTierRouteConfig(tierSlug);
   if (!route) notFound();
 
-  const flowers = getFlowersByTierKey(route.key);
+  const flowers = ((await getLiveFlowers()) as unknown as FlowerProduct[]).filter((flower) => normalizeTier(flower.tier) === normalizeTier(route.key));
   const seo = TIER_SEO[route.key];
   const accent = route.detail.accent;
   const siblings = TIER_ROUTE_SLUGS.filter((s) => s !== tierSlug);

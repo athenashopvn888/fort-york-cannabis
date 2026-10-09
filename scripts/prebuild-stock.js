@@ -5,7 +5,8 @@
  * or the build exits non-zero. Never silently keep stale JSON and claim success.
  */
 const ENABLE = String(process.env.FORT_YORK_ENABLE_LIVE_MENU || "").toLowerCase() === "true";
-const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || "";
+// Shared fleet menu feed. Read ONLY from MENU_FEED_URL (legacy APPS_SCRIPT_URL is ignored on purpose).
+const APPS_SCRIPT_URL = (process.env.MENU_FEED_URL || "").trim() || "https://script.google.com/macros/s/AKfycbx09_sDal1eMVF1r-hUck4e7oq_XBHEWhGvA79JuhZNQ6P4CdhCas0xE3FfexWQ3hq4/exec";
 const STORE =
   process.env.MENU_STORE_CODE ||
   process.env.NEXT_PUBLIC_MENU_STORE_CODE ||
@@ -105,7 +106,7 @@ async function main() {
     log("FORT_YORK_ENABLE_LIVE_MENU not true — keeping existing JSON (no fetch)");
     process.exit(0);
   }
-  if (!APPS_SCRIPT_URL) fail("APPS_SCRIPT_URL required when live menu enabled");
+  if (!APPS_SCRIPT_URL) fail("MENU_FEED_URL required when live menu enabled");
 
   let data;
   try {
