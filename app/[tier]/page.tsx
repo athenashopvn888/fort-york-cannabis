@@ -13,6 +13,7 @@ import { STORE_NAP } from "../lib/storeNap";
 import styles from "./tier.module.css";
 import { getLiveFlowers } from "../lib/products-live-helpers";
 import { normalizeTier } from "../lib/products";
+import { FreeGramCardLine, FreeGramTierHeader, isFreeGramTier } from "../components/FreeGramPromo";
 
 // Read the live menu feed on every request (never a build-time snapshot).
 export const dynamic = "force-dynamic";
@@ -20,7 +21,8 @@ export const dynamic = "force-dynamic";
 function chipWeightsForFlower(flower: FlowerProduct): string[] {
   const chips: string[] = [];
   if (hasPositivePrice(flower.price3g)) chips.push("3g");
-  if (hasPositivePrice(flower.price5g)) chips.push("5g");
+  // Top-3 tiers: the second pack is 6g (feed field price5g). AA stays a true 5g.
+  if (hasPositivePrice(flower.price5g)) chips.push(isFreeGramTier(normalizeTier(flower.tier)) ? "6g" : "5g");
   if (hasPositivePrice(flower.price14g)) chips.push("14g");
   if (hasPositivePrice(flower.price28g)) chips.push("28g");
   return chips;
@@ -117,6 +119,7 @@ export default async function TierPage({
           <p className={styles.stat}>
             <strong>{flowers.length}</strong> strains in this collection
           </p>
+          <FreeGramTierHeader tier={normalizeTier(route.key)} prices3g={flowers.map((f) => Number(f.price3g?.regular)).filter((v) => v > 0)} prices6g={flowers.map((f) => Number(f.price5g?.regular)).filter((v) => v > 0)} show6g />
           <div className={styles.siblingNav}>
             {siblings.map((slug) => (
               <Link key={slug} href={`/${slug}`}>
@@ -146,6 +149,7 @@ export default async function TierPage({
                     {formatType(flower.type)}
                     {flower.thc ? ` · ${flower.thc} THC` : ""}
                   </p>
+                  {(() => { const r3 = Number(flower.price3g?.regular); const s3 = Number(flower.price3g?.sale); const a3 = s3 > 0 && s3 < r3 ? s3 : r3; const r6 = Number(flower.price5g?.regular); const s6 = Number(flower.price5g?.sale); const a6 = s6 > 0 && s6 < r6 ? s6 : r6; return r3 > 0 ? <FreeGramCardLine name={flower.name} tier={normalizeTier(flower.tier)} price3g={{ amount: a3, regular: r3 }} price6g={r6 > 0 ? { amount: a6 } : null} show6g /> : null; })()}
                   {chips.length > 0 ? <p className={styles.chips}>{chips.join(" · ")}</p> : null}
                 </div>
               </Link>
