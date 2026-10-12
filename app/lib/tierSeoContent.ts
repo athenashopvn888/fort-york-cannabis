@@ -27,7 +27,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
       },
       {
         heading: "Weights shown on flower cards",
-        body: "Posted flower weights on this storefront follow the 3g, 6g, 14g, and 28g fields only. Bundle labels on the menu are owned by the Menu bot and are not rewritten on this SEO collection.",
+        body: "Every Exotic strain card shows its 3g, 6g, 14g, and 28g prices. Exotic is part of our free-gram deal: Buy 2g Get 1g FREE (Pay $40 = 3g) or Buy 3g Get 3g FREE (Pay $60 = 6g). Each card shows that strain's exact price, and staff can confirm the deal at the counter.",
       },
     ],
     faqs: [
