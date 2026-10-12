@@ -13,6 +13,7 @@ import { STORE_NAP } from "../lib/storeNap";
 import styles from "./tier.module.css";
 import { getLiveFlowers } from "../lib/products-live-helpers";
 import { normalizeTier } from "../lib/products";
+import { FreeGramCardLine, FreeGramTierHeader } from "../components/FreeGramPromo";
 
 // Read the live menu feed on every request (never a build-time snapshot).
 export const dynamic = "force-dynamic";
@@ -117,6 +118,7 @@ export default async function TierPage({
           <p className={styles.stat}>
             <strong>{flowers.length}</strong> strains in this collection
           </p>
+          <FreeGramTierHeader tier={normalizeTier(route.key)} prices3g={flowers.map((f) => Number(f.price3g?.regular)).filter((v) => v > 0)} prices6g={[]} show6g={false} />
           <div className={styles.siblingNav}>
             {siblings.map((slug) => (
               <Link key={slug} href={`/${slug}`}>
@@ -146,6 +148,7 @@ export default async function TierPage({
                     {formatType(flower.type)}
                     {flower.thc ? ` · ${flower.thc} THC` : ""}
                   </p>
+                  {(() => { const r3 = Number(flower.price3g?.regular); const s3 = Number(flower.price3g?.sale); const a3 = s3 > 0 && s3 < r3 ? s3 : r3; return r3 > 0 ? <FreeGramCardLine name={flower.name} tier={normalizeTier(flower.tier)} price3g={{ amount: a3, regular: r3 }} show6g={false} /> : null; })()}
                   {chips.length > 0 ? <p className={styles.chips}>{chips.join(" · ")}</p> : null}
                 </div>
               </Link>
