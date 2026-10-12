@@ -27,7 +27,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
       },
       {
         heading: "Weights shown on flower cards",
-        body: "Posted flower weights on this storefront follow the 3g, 5g, 14g, and 28g fields only. Bundle labels on the menu are owned by the Menu bot and are not rewritten on this SEO collection.",
+        body: "Posted flower weights on this storefront follow the 3g, 6g, 14g, and 28g fields only. Bundle labels on the menu are owned by the Menu bot and are not rewritten on this SEO collection.",
       },
     ],
     faqs: [
@@ -79,7 +79,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     faqs: [
       { q: "What is AAA+ Weed here?", a: "AAA+ Weed is one Cannabis Flower collection at Fort York Cannabis." },
       { q: "Where do product links go?", a: "Each list item opens the matching /items/flower detail path for that strain slug." },
-      { q: "Which weights appear on flower pricing?", a: "Public flower fields use 3g, 5g, 14g, and 28g only on this storefront." },
+      { q: "Which weights appear on flower pricing?", a: "Public flower fields use 3g, 6g, 14g, and 28g only on this storefront." },
     ],
   },
   AA: {

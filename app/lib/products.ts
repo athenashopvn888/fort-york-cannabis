@@ -143,7 +143,7 @@ export const TIER_DETAILS: Record<
   "AAA+": {
     name: "AAA+",
     slug: "aaa-plus",
-    description: "Heavy-hitting AAA+ strains with 3g, 5g, 14g, and 28g prices where the source price is positive.",
+    description: "Heavy-hitting AAA+ strains with 3g, 6g, 14g, and 28g prices where the source price is positive.",
     unitPrice: 10,
     accent: "#087e8b",
     deal3g: "Buy 2g Get 1g Free",
@@ -355,11 +355,12 @@ export function getFlowerPriceRows(product: FlowerProduct, channel: "web" | "tv"
     hasPositivePrice(product.price5g)
       ? {
           field: "price5g",
-          label: "5g",
-          shortLabel: "5G",
-          grams: 5,
+          // Top-3 tiers: this pack is 6g. AA stays a true 5g.
+          label: topBundle ? "6g" : "5g",
+          shortLabel: topBundle ? "6G" : "5G",
+          grams: topBundle ? 6 : 5,
           price: product.price5g,
-          promo: tier === "AA" ? "$20 / 5g AA" : undefined,
+          promo: topBundle ? "Buy 3g Get 3g FREE" : tier === "AA" ? "$20 / 5g AA" : undefined,
         }
       : null,
     hasPositivePrice(product.price14g)
