@@ -135,7 +135,7 @@ export const TIER_DETAILS: Record<
   PREMIUM: {
     name: "Premium",
     slug: "premium",
-    description: "Connoisseur-grade flower with strong potency and full bundle pricing.",
+    description: "Connoisseur-grade flower with strong potency, plus Buy 2g Get 1g FREE and Buy 3g Get 3g FREE deals.",
     unitPrice: 15,
     accent: "#7c5cbb",
     deal3g: "Buy 2g Get 1g Free",
@@ -558,7 +558,7 @@ export function getFlowerDescription(product: FlowerProduct) {
   const effects = getFlowerEffects(product).map((effect) => effect.toLowerCase()).join(", ");
   return `${product.name} is a ${tier.name} ${type} flower option on the Fort York menu${
     product.thc ? ` with THC listed at ${product.thc}` : ""
-  }. Effects are commonly merchandised as ${effects}. Review all available weights and bundle pricing, then call ${STORE_INFO.phone} with product questions.`;
+  }. Effects are commonly merchandised as ${effects}. Review all available weights and deal prices, then call ${STORE_INFO.phone} with product questions.`;
 }
 
 export function getItemDescription(item: ItemProduct) {
