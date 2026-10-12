@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
-import FleetAnnouncementBanner from "./components/FleetAnnouncementBanner";
 import Footer from "./components/Footer";
 import { MENU_CATALOG_CATEGORIES, MENU_CATALOG_NOTICE, MENU_SOURCE_STATE } from "./lib/menu-catalog";
 
@@ -41,7 +40,10 @@ export default function HomePage() {
   return (
     <main className={styles.main}>
       <Navbar />
-      <FleetAnnouncementBanner />
+      <Link href="/items/cigarettes" data-belmont-mix-match-banner="" aria-label="BELMONT KING SIZE $10 - 2PACK BB $5 MIX & MATCH">
+        <span data-belmont-offer-lead="">BELMONT KING SIZE $10 -</span>
+        <span data-belmont-offer-tail=""> 2PACK BB $5 MIX &amp; MATCH</span>
+      </Link>
 
       <section className={styles.hero}>
         <div className={styles.heroBg} />
