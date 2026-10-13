@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import GuideStrip from "../../components/GuideStrip";
 import { getCategoryGuideGroups } from "../../lib/guideRegistry";
 import Navbar from "../../components/Navbar";
-import { resolveItemBanner } from "../../lib/corePromotionBanners";
 import Footer from "../../components/Footer";
 import styles from "./items.module.css";
 import {
@@ -287,7 +286,6 @@ export default async function CategoryPage({
   const products = getMenuProductsByCategoryFrom(category, flowers, items);
   const count = getMenuProductsByCategoryFrom(category, flowers, items).length;
   const isFlower = category.key === "FLOWER";
-  const categoryBanner = resolveItemBanner(category.slug, category.banner);
   const guideGroups = getCategoryGuideGroups(`/items/${category.slug}`);
 
   return (
@@ -296,7 +294,7 @@ export default async function CategoryPage({
 
       <section
         className={styles.hero}
-        style={{ "--category-banner": `url(${categoryBanner})` } as CSSProperties}
+        style={{ "--category-banner": `url(${category.banner})` } as CSSProperties}
       >
         <div>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">
