@@ -41,6 +41,7 @@ export default function HomePage() {
   return (
     <main className={styles.main}>
       <Navbar />
+      <h1 data-home-store-title="" style={{ margin: 0, padding: "126px 16px 14px", background: "#111827", color: "#ffffff", textAlign: "center", fontSize: "clamp(1.1rem, 3vw, 2rem)", fontWeight: 900, lineHeight: 1.2, position: "relative", zIndex: 60 }}>Fort York Cannabis Dispensary Weed Delivery</h1>
       <FleetAnnouncementBanner />
 
       <section className={styles.hero}>
@@ -48,7 +49,6 @@ export default function HomePage() {
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
           <span className={styles.heroKicker}>Fort York / CityPlace</span>
-          <h1 className={styles.brandTitle}>Fort York Cannabis Dispensary Weed Delivery</h1>
           <p className={styles.brandSub}>Cannabis Store Near Fort York & CityPlace</p>
           <p className={styles.localLine}>38 Fort York Blvd, Toronto</p>
           <div className={styles.heroActions}>
