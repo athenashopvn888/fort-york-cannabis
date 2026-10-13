@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import GuideStrip from "../../components/GuideStrip";
 import { getCategoryGuideGroups } from "../../lib/guideRegistry";
 import Navbar from "../../components/Navbar";
+import { isReplacementCategory, resolveItemBanner } from "../../lib/corePromotionBanners";
 import Footer from "../../components/Footer";
 import styles from "./items.module.css";
 import {
@@ -286,15 +287,28 @@ export default async function CategoryPage({
   const products = getMenuProductsByCategoryFrom(category, flowers, items);
   const count = getMenuProductsByCategoryFrom(category, flowers, items).length;
   const isFlower = category.key === "FLOWER";
+  const categoryBanner = resolveItemBanner(category.slug, category.banner);
+  const hasReplacementBanner = isReplacementCategory(category.slug);
   const guideGroups = getCategoryGuideGroups(`/items/${category.slug}`);
 
   return (
     <main className={`${styles.page} ${isFlower ? styles.flowerPage : styles.categoryPage}`}>
       <Navbar />
 
+      {hasReplacementBanner ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={categoryBanner}
+          alt={`${category.name} category artwork`}
+          width={category.slug === "cigarettes" ? 2048 : 1672}
+          height={category.slug === "cigarettes" ? 768 : 941}
+          style={{ display: "block", width: "100%", height: "auto" }}
+        />
+      ) : null}
+
       <section
         className={styles.hero}
-        style={{ "--category-banner": `url(${category.banner})` } as CSSProperties}
+        style={{ "--category-banner": hasReplacementBanner ? "none" : `url(${categoryBanner})` } as CSSProperties}
       >
         <div>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">

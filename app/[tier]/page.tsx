@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "../components/Navbar";
+import { isReplacementCategory, resolveTierBanner } from "../lib/corePromotionBanners";
 import Footer from "../components/Footer";
 import { getProductImage, getProductPath, formatType, hasPositivePrice, type FlowerProduct } from "../lib/products";
 import {
@@ -66,6 +67,8 @@ export default async function TierPage({
   const flowers = ((await getLiveFlowers()) as unknown as FlowerProduct[]).filter((flower) => normalizeTier(flower.tier) === normalizeTier(route.key));
   const seo = TIER_SEO[route.key];
   const accent = route.detail.accent;
+  const categoryBanner = resolveTierBanner(tierSlug, "/brand/category-flower.webp");
+  const hasReplacementBanner = isReplacementCategory(tierSlug);
   const siblings = TIER_ROUTE_SLUGS.filter((s) => s !== tierSlug);
 
   const collectionJsonLd = {
@@ -109,7 +112,15 @@ export default async function TierPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
       <Navbar />
-      <section className={styles.hero} style={{ ["--tier-color" as string]: accent }}>
+      {hasReplacementBanner ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={categoryBanner} alt={`${seo.h1} category artwork`} width={1672} height={941} style={{ display: "block", width: "100%", height: "auto" }} />
+      ) : null}
+      <section
+        className={styles.hero}
+        data-category-banner-replacement={hasReplacementBanner ? "true" : undefined}
+        style={{ ["--tier-color" as string]: accent, backgroundImage: hasReplacementBanner ? "none" : `linear-gradient(rgba(3, 11, 22, 0.82), rgba(3, 11, 22, 0.82)), url("${categoryBanner}")` }}
+      >
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>
             {STORE_NAP.neighborhood} · Flower collection · {STORE_NAP.hoursShort}
