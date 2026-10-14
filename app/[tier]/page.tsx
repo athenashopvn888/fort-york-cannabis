@@ -15,6 +15,7 @@ import styles from "./tier.module.css";
 import { getLiveFlowers } from "../lib/products-live-helpers";
 import { normalizeTier } from "../lib/products";
 import { FreeGramCardLine, FreeGramTierHeader, isFreeGramTier } from "../components/FreeGramPromo";
+import nearMeFaq from "../lib/nearMeFaq.json";
 
 // Read the live menu feed on every request (never a build-time snapshot).
 export const dynamic = "force-dynamic";
@@ -127,6 +128,7 @@ export default async function TierPage({
           </p>
           <h1 className={styles.title}>{seo.h1}</h1>
           <p className={styles.intro}>{seo.intro}</p>
+            {/^(exotic|premium|aaa)(-weed)?$/.test(tierSlug) ? <p className={styles.intro} data-tier-near-line="">{nearMeFaq.tierLine}</p> : null}
           <p className={styles.stat}>
             <strong>{flowers.length}</strong> strains in this collection
           </p>
