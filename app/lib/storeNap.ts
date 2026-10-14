@@ -33,6 +33,10 @@ export const STORE_NAP = {
 
 export const HOME_FAQS = [
   {
+    q: "Looking for a weed dispensary near me in CityPlace or Fort York?",
+    a: "Fort York Cannabis is at 38 Fort York Blvd, Toronto, in the Fort York / CityPlace neighbourhood, and we're open 24 hours. Adults 19+ with valid photo ID.",
+  },
+  {
     q: "Where is Fort York Cannabis?",
     a: "Fort York Cannabis is at 38 Fort York Blvd, Toronto, ON M5V 3Z3, beside CityPlace condo traffic and the Fort York heritage grounds.",
   },
