@@ -1,4 +1,4 @@
-export const TV2_DAYTIME_START_HOUR = 10;
+export const TV2_DAYTIME_START_HOUR = 8;
 export const TV2_DAYTIME_END_HOUR = 17;
 
 export const CIGARETTE_OFFER_CYCLE_MS = 30_000;
@@ -11,13 +11,14 @@ export const TV2_DAYTIME_PROMOS = Object.freeze({
     alt: "Ultimate Cannabis Collection Promo",
   }),
   CIGARETTES: Object.freeze({
-    src: "/banners/cig-poster-1.png",
-    alt: "Cigarettes Promo",
+    src: "/banners/fort_york_edibles_banner.webp",
+    alt: "Fort York Cannabis edibles",
   }),
 });
 
 export function isTv2Daytime(now = new Date()) {
-  const hour = now.getHours();
+  // America/Toronto regardless of the TV device clock zone.
+  const hour = Number(new Intl.DateTimeFormat("en-CA", { timeZone: "America/Toronto", hour: "2-digit", hourCycle: "h23" }).formatToParts(now).find((part) => part.type === "hour")?.value);
   return hour >= TV2_DAYTIME_START_HOUR && hour < TV2_DAYTIME_END_HOUR;
 }
 

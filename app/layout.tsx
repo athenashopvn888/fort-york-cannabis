@@ -1,3 +1,4 @@
+import PinnedNavClearance from "./components/PinnedNavClearance";
 ﻿import type { Metadata } from "next";
 import "./globals.css";
 import { STORE_NAP, HOME_FAQS, storeJsonLd, faqPageJsonLd } from "./lib/storeNap";
@@ -101,6 +102,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <PinnedNavClearance />
       </body>
     </html>
   );

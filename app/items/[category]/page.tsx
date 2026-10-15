@@ -1,3 +1,4 @@
+import CigaretteSeasonalNotice from "../../components/CigaretteSeasonalNotice";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -86,7 +87,9 @@ function StickyMenuNavigator({ activeSlug, showTiers, flowers }: { activeSlug: s
   const groups = showTiers ? getFlowerTierGroupsFrom(flowers) : [];
 
   return (
-    <div className={styles.stickyMenuNav} data-has-tiers={showTiers ? true : false}>
+    <div className={styles.stickyMenuNav} data-has-tiers={showTiers ? true : false} data-cigarette-seasonal-wrap={activeSlug === "cigarettes" ? "sticky" : undefined}>
+      {/* Cigarette page: the seasonal notice rides inside this store's own sticky menu strip so neither covers the other. */}
+      {activeSlug === "cigarettes" && <CigaretteSeasonalNotice />}
       <CategoryNavigation activeSlug={activeSlug} />
       {showTiers ? (
         <nav className={styles.tierJump} aria-label="Jump to flower tier">

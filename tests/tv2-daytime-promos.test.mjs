@@ -18,14 +18,15 @@ import {
 } from "../app/lib/cigaretteDeals.mjs";
 
 function localTime(hour, minute = 0) {
-  return new Date(2026, 7, 25, hour, minute, 0, 0);
+  // Toronto wall-clock time (EDT, UTC-4 on 2026-08-25)
+  return new Date(Date.UTC(2026, 7, 25, hour + 4, minute, 0, 0));
 }
 
-test("TV2 daytime window is device-local 10:00 inclusive to 17:00 exclusive", () => {
-  assert.equal(TV2_DAYTIME_START_HOUR, 10);
+test("TV2 daytime window is America/Toronto 08:00 inclusive to 17:00 exclusive", () => {
+  assert.equal(TV2_DAYTIME_START_HOUR, 8);
   assert.equal(TV2_DAYTIME_END_HOUR, 17);
-  assert.equal(isTv2Daytime(localTime(9, 59)), false);
-  assert.equal(isTv2Daytime(localTime(10, 0)), true);
+  assert.equal(isTv2Daytime(localTime(7, 59)), false);
+  assert.equal(isTv2Daytime(localTime(8, 0)), true);
   assert.equal(isTv2Daytime(localTime(16, 59)), true);
   assert.equal(isTv2Daytime(localTime(17, 0)), false);
 });
@@ -53,8 +54,8 @@ test("daytime promo and evening overlay assets match the After Dark schedule", (
     "/banners/cannabis_banner_mashup_variation_01_600x600.webp",
   );
   assert.equal(TV2_DAYTIME_PROMOS.NICOTINE_VAPES.alt, "Ultimate Cannabis Collection Promo");
-  assert.equal(TV2_DAYTIME_PROMOS.CIGARETTES.src, "/banners/cig-poster-1.png");
-  assert.equal(TV2_DAYTIME_PROMOS.CIGARETTES.alt, "Cigarettes Promo");
+  assert.equal(TV2_DAYTIME_PROMOS.CIGARETTES.src, "/banners/fort_york_edibles_banner.webp");
+  assert.equal(TV2_DAYTIME_PROMOS.CIGARETTES.alt, "Fort York Cannabis edibles");
 
   for (const src of [
     TV2_DAYTIME_PROMOS.NICOTINE_VAPES.fallbackSrc,

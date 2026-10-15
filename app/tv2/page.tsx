@@ -323,9 +323,16 @@ export default function FortYorkTv2Page() {
   const concentratesBoard = boardById.get("CONCENTRATES");
   const infusedPrerollBoard = boardById.get("PREROLLS");
   const cigarettesBoard = boardById.get("CIGARETTES");
-  const footerMessages = showCigaretteFlash
-    ? [...FOOTER_MESSAGES, { label: "Cigarettes", text: CIGARETTE_FLASH_MESSAGE }]
+  // 08:00-16:59 Toronto: no cigarette or nicotine wording on screen.
+  const baseFooterMessages = daytime
+    ? FOOTER_MESSAGES.map((message) => ({
+        ...message,
+        text: message.text.replace(/ \/ Nicotine Vapes| \/ Cigarettes/g, ""),
+      }))
     : FOOTER_MESSAGES;
+  const footerMessages = showCigaretteFlash && !daytime
+    ? [...baseFooterMessages, { label: "Cigarettes", text: CIGARETTE_FLASH_MESSAGE }]
+    : baseFooterMessages;
   const footerMessage = footerMessages[tick % footerMessages.length];
 
   return (
