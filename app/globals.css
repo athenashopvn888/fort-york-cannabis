@@ -230,3 +230,11 @@ button { cursor: pointer; font-family: inherit; }
 .fg-card{color:#86efac}
 .fg-card .fg-scope{color:#94a3b8}
 .fg-card .fg-rates s{color:#94a3b8}
+
+/* Pinned nav: opaque (no content showing through) and above page content, in the store's own nav colour so nav text stays readable. */
+#main-nav {
+  z-index: 1000 !important;
+  background: rgb(7, 18, 31) !important;
+  background-color: rgb(7, 18, 31) !important;
+  backdrop-filter: none !important;
+}

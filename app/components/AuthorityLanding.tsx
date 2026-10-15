@@ -1,3 +1,4 @@
+import CigaretteSeasonalNotice from "./CigaretteSeasonalNotice";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -18,7 +19,7 @@ export default function AuthorityLanding({ page }: { page: AuthorityPage }) {
   return (
     <main className={styles.main}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
-      <Navbar />
+      <Navbar />{page.path.includes("native-cigarettes") && <CigaretteSeasonalNotice sticky />}
       <section className={styles.hero}>
         <div className={styles.wrap}>
           <span>{page.eyebrow}</span>
