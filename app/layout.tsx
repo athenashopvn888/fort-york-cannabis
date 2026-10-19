@@ -1,3 +1,4 @@
+import FullNameNap from "./components/FullNameNap";
 import PinnedNavClearance from "./components/PinnedNavClearance";
 ﻿import type { Metadata } from "next";
 import "./globals.css";
@@ -102,6 +103,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <FullNameNap />
         <PinnedNavClearance />
       </body>
     </html>
