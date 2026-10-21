@@ -1,3 +1,4 @@
+import { SHOW_CIGARETTES, cigaretteSafeContent, isCigarettePath } from "./siteConfig";
 import itemsJson from "./items.json";
 
 export type SeoPage = {
@@ -38,7 +39,7 @@ const NICOTINE_VAPE_PREVIEW = (itemsJson as Array<{ name: string; image: string;
   .slice(0, 5)
   .map((item) => ({ name: item.name, image: item.image }));
 
-export const SEO_PAGES: SeoPage[] = [
+const SEO_PAGES_RAW: SeoPage[] = [
   {
     slug: "fort-york-cannabis-store",
     title: "Fort York Cannabis Store | FORT YORK CANNABIS",
@@ -258,6 +259,12 @@ export const SEO_PAGES: SeoPage[] = [
     ],
   },
 ];
+
+export const SEO_PAGES = SHOW_CIGARETTES
+  ? SEO_PAGES_RAW
+  : SEO_PAGES_RAW
+      .filter((page) => !isCigarettePath(page.slug))
+      .map((page) => cigaretteSafeContent(page));
 
 export function getSeoPageBySlug(slug: string): SeoPage | undefined {
   return SEO_PAGES.find((page) => page.slug === slug);

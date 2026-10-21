@@ -1,3 +1,4 @@
+import { cigaretteSafeContent } from "./lib/siteConfig";
 import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
@@ -18,7 +19,7 @@ const LOCAL_FEATURES = [
   { label: "Downtown Toronto", body: "Simple directions, clean local context, and quick access to the Fort York menu." },
 ];
 
-const LOCAL_FAQS = [
+const LOCAL_FAQS = cigaretteSafeContent([
   {
     q: "Where is FORT YORK CANNABIS located?",
     a: "FORT YORK CANNABIS is at 38 Fort York Blvd, Toronto, ON M5V 3Z3, Canada.",
@@ -35,7 +36,7 @@ const LOCAL_FAQS = [
     q: "Which neighbourhoods does the store serve?",
     a: "The local focus is Fort York, CityPlace, Downtown Toronto, the waterfront, King West, and the Entertainment District.",
   },
-];
+]);
 
 export default function HomePage() {
   return (

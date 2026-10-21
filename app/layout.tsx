@@ -1,3 +1,4 @@
+import { cigaretteSafeContent } from "./lib/siteConfig";
 import FullNameNap from "./components/FullNameNap";
 import PinnedNavClearance from "./components/PinnedNavClearance";
 ﻿import type { Metadata } from "next";
@@ -98,7 +99,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(graphJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(cigaretteSafeContent(graphJsonLd)) }}
         />
       </head>
       <body>

@@ -1,12 +1,13 @@
 import type { FlowerProduct, ItemProduct, MenuCategory, MenuProduct } from "./products";
 import { FLOWER_TIER_ORDER, MENU_CATEGORIES, getMenuCategoryBySlug, getProductCategorySlug, normalizeTier, TIER_DETAILS } from "./products";
 import { getFycInventory } from "./fycInventoryService";
+import { filterCigaretteItems } from "./siteConfig";
 
 export async function loadLiveMenuCatalog() {
   const result = await getFycInventory();
   return {
     flowers: result.snapshot.flowers as unknown as FlowerProduct[],
-    items: result.snapshot.items as unknown as ItemProduct[],
+    items: filterCigaretteItems(result.snapshot.items as unknown as ItemProduct[]),
     servedFrom: result.servedFrom,
     fallbackReason: result.fallbackReason,
     sourceTimestamp: result.snapshot.sourceTimestamp,

@@ -1,3 +1,4 @@
+import { SHOW_CIGARETTES, cigaretteSafeContent, isCigarettePath } from "../lib/siteConfig";
 export type ResourceAuthorKey = "team" | "menu" | "local";
 
 export interface ResourceAuthor {
@@ -65,7 +66,7 @@ const hero = {
   alt: "FORT YORK CANNABIS resource guide",
 };
 
-export const RESOURCE_PAGES: ResourcePage[] = [
+const RESOURCE_PAGES_RAW: ResourcePage[] = [
   {
     path: "/resources",
     kind: "root",
@@ -576,6 +577,12 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     related: ["/resources/local-guides", "/resources/menu-guide"],
   },
 ];
+
+export const RESOURCE_PAGES = SHOW_CIGARETTES
+  ? RESOURCE_PAGES_RAW
+  : RESOURCE_PAGES_RAW
+      .filter((page) => !isCigarettePath((page as { slug?: string; path?: string }).slug ?? (page as { path?: string }).path))
+      .map((page) => cigaretteSafeContent(page));
 
 export const RESOURCE_HOME = RESOURCE_PAGES[0];
 

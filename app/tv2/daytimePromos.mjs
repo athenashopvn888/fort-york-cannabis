@@ -23,11 +23,12 @@ export function isTv2Daytime(now = new Date()) {
 }
 
 export function getTv2DaytimePromo(cardId, daytime) {
-  if (!daytime) return undefined;
+  if (!daytime || (!SHOW_CIGARETTES && cardId === "CIGARETTES")) return undefined;
   return TV2_DAYTIME_PROMOS[cardId];
 }
 
 export function isCigaretteOfferVisible(daytime, elapsedMs) {
-  if (daytime || !Number.isFinite(elapsedMs) || elapsedMs < 0) return false;
+  if (!SHOW_CIGARETTES || daytime || !Number.isFinite(elapsedMs) || elapsedMs < 0) return false;
   return elapsedMs % CIGARETTE_OFFER_CYCLE_MS >= CIGARETTE_OFFER_VISIBLE_FROM_MS;
 }
+const SHOW_CIGARETTES = process.env.NEXT_PUBLIC_SHOW_CIGARETTES?.trim().toLowerCase() === "true";

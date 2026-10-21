@@ -1,3 +1,4 @@
+import { SHOW_CIGARETTES, filterCigaretteItems, isCigaretteCategory } from "./siteConfig";
 import flowersJson from "./flowers.json";
 import itemsJson from "./items.json";
 import { CIGARETTE_CARTON_LABEL, isCigaretteDealSku } from "./cigaretteDeals.mjs";
@@ -81,7 +82,9 @@ export const STORE_INFO = {
 } as const;
 
 export const allFlowers: FlowerProduct[] = flowersJson as FlowerProduct[];
-export const allItems: ItemProduct[] = itemsJson as ItemProduct[];
+export const allItems: ItemProduct[] = SHOW_CIGARETTES
+  ? itemsJson as ItemProduct[]
+  : (itemsJson as ItemProduct[]).filter((item) => !isCigaretteCategory(item.category));
 
 const liveMenuEnabled = process.env.FORT_YORK_ENABLE_LIVE_MENU === "true";
 // Feed URL now defaults to the shared fleet feed (MENU_FEED_URL overrides), so it is always configured.
@@ -165,7 +168,7 @@ export const TIER_DETAILS: Record<
   },
 };
 
-export const MENU_CATEGORIES: MenuCategory[] = [
+const MENU_CATEGORIES_RAW: MenuCategory[] = [
   {
     key: "FLOWER",
     name: "Flower",
@@ -277,6 +280,10 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       "Browse Fort York accessories, add-ons, and specialty items with prices where available.",
   },
 ];
+
+export const MENU_CATEGORIES: MenuCategory[] = SHOW_CIGARETTES
+  ? MENU_CATEGORIES_RAW
+  : MENU_CATEGORIES_RAW.filter((category) => category.slug !== "cigarettes");
 
 export function getMenuCategoryBySlug(slug: string) {
   return MENU_CATEGORIES.find((category) => category.slug === slug);
