@@ -1,4 +1,4 @@
-import { SHOW_CIGARETTES, filterCigaretteItems, isCigaretteCategory } from "./siteConfig";
+import { SHOW_CIGARETTES, cigaretteSafeContent, filterCigaretteItems, isPreservedSmokeItem } from "./siteConfig";
 import flowersJson from "./flowers.json";
 import itemsJson from "./items.json";
 import { CIGARETTE_CARTON_LABEL, isCigaretteDealSku } from "./cigaretteDeals.mjs";
@@ -82,9 +82,7 @@ export const STORE_INFO = {
 } as const;
 
 export const allFlowers: FlowerProduct[] = flowersJson as FlowerProduct[];
-export const allItems: ItemProduct[] = SHOW_CIGARETTES
-  ? itemsJson as ItemProduct[]
-  : (itemsJson as ItemProduct[]).filter((item) => !isCigaretteCategory(item.category));
+export const allItems: ItemProduct[] = filterCigaretteItems(itemsJson as ItemProduct[]);
 
 const liveMenuEnabled = process.env.FORT_YORK_ENABLE_LIVE_MENU === "true";
 // Feed URL now defaults to the shared fleet feed (MENU_FEED_URL overrides), so it is always configured.
@@ -110,8 +108,9 @@ export const MENU_SOURCE_STATE = {
   ],
 };
 
-export const MENU_STATUS_NOTICE =
-  "Browse Fort York flower, pre-rolls, vape pens, disposable vapes, edibles, concentrates, cigarettes, and accessories. Call 437-783-2511 for product questions.";
+export const MENU_STATUS_NOTICE = cigaretteSafeContent(
+  "Browse Fort York flower, pre-rolls, vape pens, disposable vapes, edibles, concentrates, cigarettes, and accessories. Call 437-783-2511 for product questions.",
+);
 
 export const FLOWER_TIER_ORDER = ["EXOTIC", "PREMIUM", "AAA+", "AA", "BUDGET"] as const;
 export const TOP_BUNDLE_TIERS = ["EXOTIC", "PREMIUM", "AAA+"] as const;
@@ -429,7 +428,11 @@ export function getMenuProductsByCategory(category: MenuCategory): MenuProduct[]
   }
 
   const keys = new Set(category.itemKeys.map((key) => key.toUpperCase()));
-  return allItems.filter((item) => keys.has(item.category.toUpperCase()));
+  const matched = allItems.filter((item) => keys.has(item.category.toUpperCase()));
+  if (SHOW_CIGARETTES || category.slug !== "accessories") return matched;
+  const seen = new Set(matched.map((item) => item.slug));
+  const preserved = allItems.filter((item) => isPreservedSmokeItem(item) && !seen.has(item.slug));
+  return [...matched, ...preserved];
 }
 
 export function getMenuItemCount(category: MenuCategory) {
@@ -442,6 +445,7 @@ export function getProductImage(product: MenuProduct) {
 
 export function getProductCategorySlug(product: MenuProduct) {
   if ("tier" in product) return "flower";
+  if (!SHOW_CIGARETTES && isPreservedSmokeItem(product)) return "accessories";
   const category = product.category.toUpperCase();
   if (["PREROLLS", "PRE-ROLLS", "PRE ROLLS"].includes(category)) return "pre-rolls";
   if (category === "VAPE PENS") return "vapes";
@@ -514,7 +518,7 @@ export function getItemCategoryLabel(category?: string) {
   if (value === "VAPE DISPOSABLE") return "Disposable Vapes";
   if (value === "ADD ONS") return "Add-Ons";
   if (value === "MAGIC & OTHERS") return "Magic Stuff";
-  if (value === "CIGARETTES") return "Cigarettes";
+  if (value === "CIGARETTES") return SHOW_CIGARETTES ? "Cigarettes" : "Accessories";
   if (value === "EDIBLES") return "Edibles";
   if (value === "CONCENTRATES") return "Concentrates";
   return category || "Menu Item";

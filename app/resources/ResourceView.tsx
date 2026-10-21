@@ -1,3 +1,4 @@
+import { SHOW_CIGARETTES } from "../lib/siteConfig";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -107,7 +108,7 @@ export default function ResourceView({ page }: ResourceViewProps) {
             <span>Gas Gang</span>
             <span>Drizzle Switch</span>
             <span>Happy Dad, ZYN, Velo, Pablo, Killa</span>
-            <span>Backwoods and grabba</span>
+            {SHOW_CIGARETTES ? <span>Backwoods and grabba</span> : <span>Backwoods</span>}
           </div>
         </aside>
       </section>

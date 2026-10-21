@@ -1,3 +1,5 @@
+import { SHOW_CIGARETTES, isPreservedSmokeItem } from "../../lib/siteConfig";
+import { getProductPath } from "../../lib/products";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -47,9 +49,14 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const guide = getGuide(slug);
   if (!guide) notFound();
   const product = resolveGuideProduct(guide);
-  const productHref = product ? `${guide.lane === "strain" ? "/flower" : "/item"}/${product.slug}` : undefined;
-  const canonical = `${BASE}/guides/${guide.slug}`;
   const lane = laneCopy[guide.lane];
+  const preserved = !SHOW_CIGARETTES && isPreservedSmokeItem({ name: guide.name, slug: guide.slug });
+  const laneLabel = preserved ? "Backwoods" : lane.label;
+  const categoryLabel = preserved ? "Accessories" : lane.category;
+  const boardPath = preserved ? "/items/accessories" : guide.preferredCategoryPath;
+  const productHref = product ? (preserved ? getProductPath(product) : `${guide.lane === "strain" ? "/flower" : "/item"}/${product.slug}`) : undefined;
+  const related = relatedEntries(guide);
+  const canonical = `${BASE}/guides/${guide.slug}`;
   const graph: Record<string, unknown>[] = [{
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -68,7 +75,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
     name: guide.name,
     brand: { "@type": "Brand", name: guide.name },
     description: stripMarkdown(guide.description),
-    category: lane.category,
+    category: categoryLabel,
     url: canonical,
   });
   const jsonLd = { "@context": "https://schema.org", "@graph": graph };
@@ -80,24 +87,24 @@ export default async function GuidePage({ params }: GuidePageProps) {
       <article className={styles.article}>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/guides">Guides</Link><span>/</span><span>{guide.name}</span></nav>
         <header className={styles.hero}>
-          <span className={styles.lane}>{lane.label}</span>
+          <span className={styles.lane}>{laneLabel}</span>
           <h1>{guide.title}</h1>
           <p className={styles.lede}>{stripMarkdown(guide.description)}</p>
           <div className={styles.actions}>
-            <Link className={styles.primary} href={productHref ?? guide.preferredCategoryPath}>{productHref ? `Open the ${guide.name} menu listing` : "Check today’s board"}</Link>
-            <Link className={styles.secondary} href={guide.preferredCategoryPath}>Browse {lane.category}</Link>
+            <Link className={styles.primary} href={productHref ?? boardPath}>{productHref ? `Open the ${guide.name} menu listing` : "Check today’s board"}</Link>
+            <Link className={styles.secondary} href={boardPath}>Browse {categoryLabel}</Link>
           </div>
         </header>
         <section className={styles.section} aria-label={`${guide.name} guide`}><GuideBody markdown={guide.bodyMd} /></section>
-        <section className={styles.section} aria-labelledby="related-guides-heading">
-          <h2 id="related-guides-heading">Related {lane.label} guides</h2>
-          <div className={styles.related}>{relatedEntries(guide).map((entry) => <Link key={entry.slug} href={`/guides/${entry.slug}`}>{entry.name}<span>{laneCopy[entry.lane].label}</span></Link>)}</div>
-        </section>
+        {related.length > 0 ? <section className={styles.section} aria-labelledby="related-guides-heading">
+          <h2 id="related-guides-heading">Related {laneLabel} guides</h2>
+          <div className={styles.related}>{related.map((entry) => <Link key={entry.slug} href={`/guides/${entry.slug}`}>{entry.name}<span>{!SHOW_CIGARETTES && isPreservedSmokeItem(entry) ? "Backwoods" : laneCopy[entry.lane].label}</span></Link>)}</div>
+        </section> : null}
         <aside className={styles.finalCta}>
           <h2>Check today&apos;s board</h2>
           <p>Use the current menu path for the latest posted listing and format details.</p>
           <div className={styles.actions}>
-            <Link className={styles.primary} href={productHref ?? guide.preferredCategoryPath}>Open today&apos;s menu path</Link>
+            <Link className={styles.primary} href={productHref ?? boardPath}>Open today&apos;s menu path</Link>
             <Link className={styles.secondary} href="/visit">Visit {GUIDE_STORE.brand}</Link>
           </div>
         </aside>

@@ -1,3 +1,4 @@
+import { SHOW_CIGARETTES } from "../../lib/siteConfig";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -157,7 +158,7 @@ export default async function SeoLandingPage({
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Menu Categories</h2>
             <p className={styles.sectionBody}>
-              Browse flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates, Cigarettes, and accessories. The Cigarettes category includes $25 cartons plus 2 Pack $5 Mix &amp; Match on selected SKUs.
+              Browse flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates{SHOW_CIGARETTES ? ", Cigarettes, and accessories. The Cigarettes category includes $25 cartons plus 2 Pack $5 Mix & Match on selected SKUs." : ", and accessories."}
             </p>
             <div className={styles.categoryGrid}>
               {MENU_CATEGORIES.map((category) => (
@@ -177,7 +178,7 @@ export default async function SeoLandingPage({
             <div className={styles.visitBtns}>
               <Link href="/contact" className={styles.visitBtn}>Contact Page</Link>
               <Link href="/weed-dispensary-toronto/" className={styles.visitBtn}>Toronto Landing Page</Link>
-              <Link href="/native-cigarettes-fort-york" className={styles.visitBtn}>Native Cigarette Guide</Link>
+              {SHOW_CIGARETTES ? <Link href="/native-cigarettes-fort-york" className={styles.visitBtn}>Native Cigarette Guide</Link> : null}
               <Link href="/nicotine-vape-fort-york" className={styles.visitBtn}>Nicotine Vape Guide</Link>
             </div>
           </div>

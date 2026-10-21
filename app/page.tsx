@@ -1,4 +1,4 @@
-import { cigaretteSafeContent } from "./lib/siteConfig";
+import { SHOW_CIGARETTES, cigaretteSafeContent } from "./lib/siteConfig";
 import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
@@ -97,14 +97,14 @@ export default function HomePage() {
           <div className={styles.sectionHeader}>
             <span className={styles.microLabel}>Fort York local guides</span>
             <h2 id="local-guides-heading" className={styles.sectionTitle}>Plan the right downtown stop</h2>
-            <p className={styles.sectionSubtitle}>Use the store guides for Fort York, verified 24-hour access, delivery, adult cigarette and nicotine categories, or arrival details.</p>
+            <p className={styles.sectionSubtitle}>Use the store guides for Fort York, verified 24-hour access, delivery, {SHOW_CIGARETTES ? "adult cigarette and nicotine categories" : "nicotine categories"}, or arrival details.</p>
           </div>
           <div className={styles.authorityGrid}>
             {[
               ["Weed dispensary on Fort York Boulevard", "/weed-dispensary-fort-york"],
               ["Open 24 hours, seven days", "/24-hour-fort-york-dispensary"],
               ["Weed delivery information", "/delivery"],
-              ["Native cigarettes near CityPlace", "/native-cigarettes-fort-york"],
+              ...(SHOW_CIGARETTES ? [["Native cigarettes near CityPlace", "/native-cigarettes-fort-york"]] : []),
               ["Nicotine vapes near Fort York", "/nicotine-vape-fort-york"],
               ["Transit, parking and arrival guide", "/visit"],
             ].map(([label, href]) => <Link key={href} href={href} className={styles.authorityCard}>{label}<span>→</span></Link>)}

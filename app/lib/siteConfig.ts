@@ -5,12 +5,17 @@ export const isCigarettePath = (value: string | null | undefined) => { const pat
     path === "tobacco" ||
     path.startsWith("tobacco/") ||
     path.includes("/tobacco") || path.includes("native-cigarette") || path.includes("grabba") || path.includes("native-smokes/native-cigarettes-guide"); };
+const PRESERVED_SMOKE_ACCESSORY = /(?:backwoods|cigarillos?|rolling[- ]?papers?)/i;
 const isPreservedSmokeAccessory = (values: Array<string | null | undefined>) =>
-  values.some((value) => /(?:backwoods|cigarillos?|rolling[- ]?papers?)/i.test(value ?? ""));
-const isPreservedSmokeAccessoryEntry = (value: Record<string, unknown>) =>
-  isPreservedSmokeAccessory(Object.values(value).filter((entry): entry is string => typeof entry === "string"));
+  values.some((value) => PRESERVED_SMOKE_ACCESSORY.test(value ?? ""));
+export const isPreservedSmokeItem = (item: { name?: string | null; slug?: string | null }) =>
+  isPreservedSmokeAccessory([item.name, item.slug]);
+export const isGrabbaItem = (item: { name?: string | null; slug?: string | null }) =>
+  /grabba/i.test(`${item.name ?? ""} ${item.slug ?? ""}`);
+const mentionsGrabba = (value: string | null | undefined) => (value ?? "").toLowerCase().includes("grabba");
 export const isCigaretteGuide = (value: { lane?: string; slug?: string; preferredCategoryPath?: string }) => {
   const candidates = [value.slug, value.preferredCategoryPath];
+  if (candidates.some(mentionsGrabba)) return true;
   if (isPreservedSmokeAccessory(candidates)) return false;
   return value.lane === "native_cig" || candidates.some(isCigarettePath);
 };
@@ -19,15 +24,31 @@ export const isCigaretteEntry = (value: Record<string, unknown>) => {
   const lane = typeof value.lane === "string" ? value.lane : undefined;
   const candidates = [value.slug, value.href, value.path, value.url, value.key, value.name, value.label, value.q, value.question, value.heading, value.eyebrow]
     .filter((entry): entry is string => typeof entry === "string");
+  const pathCandidates = [value.slug, value.href, value.path, value.url].filter((entry): entry is string => typeof entry === "string");
+  if (pathCandidates.some(mentionsGrabba)) return true;
   if (isPreservedSmokeAccessory(candidates)) return false;
   return lane === "native_cig" || isCigaretteCategory(category) || candidates.some(isCigarettePath);
 };
 
-export const filterCigaretteItems = <T extends { category?: string }>(items: readonly T[]): T[] =>
-  SHOW_CIGARETTES ? [...items] : items.filter((item) => !isCigaretteCategory(item.category));
+export const filterCigaretteItems = <T extends { category?: string; name?: string | null; slug?: string | null }>(items: readonly T[]): T[] =>
+  SHOW_CIGARETTES ? [...items] : items.filter((item) => !isGrabbaItem(item) && (isPreservedSmokeItem(item) || !isCigaretteCategory(item.category)));
 
 export const filterCigaretteEntries = <T extends Record<string, unknown>>(entries: readonly T[]): T[] =>
   SHOW_CIGARETTES ? [...entries] : entries.filter((entry) => !isCigaretteEntry(entry));
+
+export function stripGrabbaMentions(value: string) {
+  return value
+    .replace(/\[[^\]]*grabba[^\]]*\]\([^)]*\)/gi, "")
+    .replace(/\/[A-Za-z0-9/_-]*grabba[A-Za-z0-9/_-]*/gi, "")
+    .replace(/^.*grabba.*$/gim, "")
+    .replace(/grabba(?:\s+shaker)?/gi, "")
+    .replace(/\*\*\s*\*\*/g, "")
+    .replace(/[^\S\n]{2,}/g, " ")
+    .replace(/[ \t]+([,.;:!?])/g, "$1")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function stripCigaretteMentions(value: string) {
   return value
     .replace(/(?:(?:native\s+)?(?:cigarettes?|tobacco)|grabba(?:\s+shaker)?)\s*,\s*/gi, "")
@@ -46,11 +67,7 @@ export function cigaretteSafeContent<T>(value: T): T {
     const visibleEntries = value.filter((entry) =>
       !(entry && typeof entry === "object" && isCigaretteEntry(entry as Record<string, unknown>)),
     );
-    return visibleEntries.map((entry) =>
-      entry && typeof entry === "object" && isPreservedSmokeAccessoryEntry(entry as Record<string, unknown>)
-        ? entry
-        : cigaretteSafeContent(entry),
-    ) as T;
+    return visibleEntries.map((entry) => cigaretteSafeContent(entry)) as T;
   }
   if (value && typeof value === "object") {
     const prototype = Object.getPrototypeOf(value);

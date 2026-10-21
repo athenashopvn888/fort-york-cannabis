@@ -1,7 +1,7 @@
 import type { FlowerProduct, ItemProduct, MenuCategory, MenuProduct } from "./products";
 import { FLOWER_TIER_ORDER, MENU_CATEGORIES, getMenuCategoryBySlug, getProductCategorySlug, normalizeTier, TIER_DETAILS } from "./products";
 import { getFycInventory } from "./fycInventoryService";
-import { filterCigaretteItems } from "./siteConfig";
+import { SHOW_CIGARETTES, filterCigaretteItems, isPreservedSmokeItem } from "./siteConfig";
 
 export async function loadLiveMenuCatalog() {
   const result = await getFycInventory();
@@ -23,7 +23,11 @@ export function getMenuProductsByCategoryFrom(
 ): MenuProduct[] {
   if (category.key === "FLOWER") return flowers;
   const keys = new Set(category.itemKeys.map((key) => key.toUpperCase()));
-  return items.filter((item) => keys.has(item.category.toUpperCase()));
+  const matched = items.filter((item) => keys.has(item.category.toUpperCase()));
+  if (SHOW_CIGARETTES || category.slug !== "accessories") return matched;
+  const seen = new Set(matched.map((item) => item.slug));
+  const preserved = items.filter((item) => isPreservedSmokeItem(item) && !seen.has(item.slug));
+  return [...matched, ...preserved];
 }
 
 export function getFlowerTierGroupsFrom(flowers: FlowerProduct[]) {

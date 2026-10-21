@@ -1,3 +1,4 @@
+import { cigaretteSafeContent } from "../lib/siteConfig";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
@@ -24,7 +25,7 @@ import { getMenuGuideLinks } from "../lib/guideRegistry";
 export const metadata: Metadata = {
   title: "Menu | FORT YORK CANNABIS",
   description:
-    "Browse the FORT YORK CANNABIS menu for flower, pre-rolls, vape pens, disposable vapes, edibles, concentrates, cigarettes, and accessories at 38 Fort York Blvd in Toronto.",
+    cigaretteSafeContent("Browse the FORT YORK CANNABIS menu for flower, pre-rolls, vape pens, disposable vapes, edibles, concentrates, cigarettes, and accessories at 38 Fort York Blvd in Toronto."),
   alternates: {
     canonical: "https://fortyorkcannabis.com/menu",
   },
