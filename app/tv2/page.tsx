@@ -9,7 +9,7 @@ import HiringRibbon from "../components/HiringRibbon";
 import { tvHiring } from "../lib/tvHiring";
 import { isCigaretteDealSku, isCigaretteMixAndMatchSku } from "../lib/cigaretteDeals.mjs";
 import { getTv2DaytimePromo, isCigaretteOfferVisible, isTv2Daytime } from "./daytimePromos.mjs";
-import { SHOW_CIGARETTES, cigaretteSafeContent } from "../lib/siteConfig";
+import { SHOW_CIGARETTES, cigaretteSafeContent, isPreservedSmokeItem } from "../lib/siteConfig";
 import {
   STORE_INFO,
   formatItemPrice,
@@ -316,7 +316,13 @@ export default function FortYorkTv2Page() {
   const grouped = useMemo(() => {
     return BOARDS.map((board, index) => ({
       ...board,
-      products: getBoardItems(items, board),
+      products: (() => {
+        const boardItems = getBoardItems(items, board);
+        if (SHOW_CIGARETTES || board.id !== "PREROLL_SINGLES") return boardItems;
+        const seen = new Set(boardItems.map(getItemKey));
+        const preserved = items.filter((item) => isPreservedSmokeItem(item) && !seen.has(getItemKey(item)));
+        return [...boardItems, ...preserved];
+      })(),
       offset: tick + index,
     }));
   }, [items, tick]);

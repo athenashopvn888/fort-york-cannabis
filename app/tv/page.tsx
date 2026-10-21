@@ -3,6 +3,7 @@
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./tv.module.css";
+import { SHOW_CIGARETTES, isPreservedSmokeItem } from "../lib/siteConfig";
 import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "./flashMessages";
 import HiringRibbon from "../components/HiringRibbon";
 import { tvHiring } from "../lib/tvHiring";
@@ -87,7 +88,9 @@ function getOzFlowers(flowers: FlowerProduct[]) {
 
 function getAddOnItems(items: ItemProduct[]) {
   const addOns = items.filter((item) => ADD_ON_CATEGORIES.has(item.category.toUpperCase()));
-  return addOns.length ? addOns : items;
+  const preserved = SHOW_CIGARETTES ? [] : items.filter((item) => isPreservedSmokeItem(item) && !addOns.some((addOn) => addOn.slug === item.slug));
+  const visible = [...addOns, ...preserved];
+  return visible.length ? visible : items;
 }
 
 function PriceCell({ product, compact = false }: { product: FlowerProduct; compact?: boolean }) {

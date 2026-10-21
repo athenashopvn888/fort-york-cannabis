@@ -1,4 +1,6 @@
+import { filterCigaretteItems } from "../../lib/siteConfig";
 import { NextResponse } from "next/server";
+import type { ItemProduct } from "../../lib/products";
 import { FYC_REFRESH_SECONDS } from "../../lib/fycInventoryCore";
 import { getFycInventory } from "../../lib/fycInventoryService";
 
@@ -10,7 +12,9 @@ export async function GET(request: Request) {
   const type = searchParams.get("type") || "flowers";
   const inventory = await getFycInventory();
   const selectedType = type === "items" ? "items" : "flowers";
-  const data = selectedType === "items" ? inventory.snapshot.items : inventory.snapshot.flowers;
+  const data = selectedType === "items"
+    ? filterCigaretteItems(inventory.snapshot.items as ItemProduct[])
+    : inventory.snapshot.flowers;
   const headers = {
     "cache-control": `public, s-maxage=${FYC_REFRESH_SECONDS}, stale-while-revalidate=60`,
     "x-tv-data-cache-seconds": String(FYC_REFRESH_SECONDS),
