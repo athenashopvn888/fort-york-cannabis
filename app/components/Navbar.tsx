@@ -1,8 +1,9 @@
-﻿"use client";
+"use client";
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
+import { filterCigaretteEntries } from "../lib/siteConfig";
 
 const ALL_LINKS: { href: string; label: string; featured?: boolean }[] = [
   { href: "/", label: "Home" },
@@ -48,7 +49,7 @@ export default function Navbar() {
 
       <div className={styles.scrollBar}>
         <div className={styles.scrollInner}>
-          {ALL_LINKS.map((link) => {
+          {filterCigaretteEntries(ALL_LINKS).map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link

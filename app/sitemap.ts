@@ -1,4 +1,8 @@
-﻿import type { MetadataRoute } from "next";
+import { SHOW_CIGARETTES, isCigarettePath } from "./lib/siteConfig";
+const withoutCigaretteUrls = (entries: MetadataRoute.Sitemap): MetadataRoute.Sitemap =>
+  SHOW_CIGARETTES ? entries : entries.filter((entry) => !isCigarettePath(new URL(entry.url).pathname));
+
+import type { MetadataRoute } from "next";
 import { DELIVERY_GUIDE_REGISTRY } from "./lib/deliveryGuideRegistry";
 import { SEO_PAGES } from "./lib/seoPages";
 import { MENU_CATEGORIES } from "./lib/products";
@@ -63,5 +67,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages, ...guidePages];
+  return withoutCigaretteUrls([...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages, ...guidePages]);
 }

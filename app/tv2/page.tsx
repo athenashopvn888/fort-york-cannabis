@@ -9,6 +9,7 @@ import HiringRibbon from "../components/HiringRibbon";
 import { tvHiring } from "../lib/tvHiring";
 import { isCigaretteDealSku, isCigaretteMixAndMatchSku } from "../lib/cigaretteDeals.mjs";
 import { getTv2DaytimePromo, isCigaretteOfferVisible, isTv2Daytime } from "./daytimePromos.mjs";
+import { SHOW_CIGARETTES, cigaretteSafeContent } from "../lib/siteConfig";
 import {
   STORE_INFO,
   formatItemPrice,
@@ -30,7 +31,7 @@ type CategoryBoard = {
   compactLabel?: boolean;
 };
 
-const BOARDS: CategoryBoard[] = [
+const BOARDS_RAW: CategoryBoard[] = [
   { id: "PREROLLS", label: "Vape Disposable\nInfused Prerolls", subtitle: "Disposable vapes and infused pre-rolls", accent: "#b5452f", categories: ["VAPE DISPOSABLE", "PREROLLS"], compactLabel: true },
   { id: "NICOTINE_VAPES", label: "Nicotine Vapes", subtitle: "Vape pens", accent: "#087e8b", categories: ["VAPE PENS"] },
   { id: "EDIBLES", label: "Edibles", subtitle: "Gummies, chocolates, drinks", accent: "#7c5cbb", categories: ["EDIBLES"] },
@@ -38,6 +39,9 @@ const BOARDS: CategoryBoard[] = [
   { id: "PREROLL_SINGLES", label: "Pre Rolls", subtitle: "Single rolls and add-ons", accent: "#288b5b", categories: ["ADD ONS", "ACCESSORIES"] },
   { id: "CIGARETTES", label: "Cigarettes", subtitle: "Current cigarette selection", accent: "#8a5b2a", categories: ["CIGARETTES"] },
 ];
+const BOARDS = SHOW_CIGARETTES
+  ? BOARDS_RAW
+  : BOARDS_RAW.filter((board) => board.id !== "CIGARETTES");
 
 const TAKEOVER_PROMOS = [
   {
@@ -46,7 +50,7 @@ const TAKEOVER_PROMOS = [
   },
 ] as const;
 
-const FOOTER_MESSAGES = [
+const FOOTER_MESSAGES = cigaretteSafeContent([
   {
     label: "Browse Menu",
     text: "Pre Rolls / Infused Preroll / Vape Disposables / Nicotine Vapes / Cigarettes / Edibles / Concentrates",
@@ -55,7 +59,7 @@ const FOOTER_MESSAGES = [
     label: "Store Policy",
     text: "ALL SALES ARE FINAL - NO REFUND, NO EXCHANGE",
   },
-];
+]);
 
 function rotateList<T>(items: T[], offset: number, limit: number) {
   if (!items.length) return [];
