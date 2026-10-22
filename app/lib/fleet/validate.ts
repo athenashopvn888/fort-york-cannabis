@@ -1,5 +1,5 @@
 import {
-  FLEET_DOMAIN,
+  FLEET_DOMAINS,
   FLEET_MAX_BUNDLE_BYTES,
   FLEET_SCHEMA_VERSION,
   FLEET_STORE_CODE,
@@ -30,7 +30,7 @@ function hasIdentity(record: Record<string, unknown>, keys: readonly string[]): 
 
 function domainMatches(domain: string): boolean {
   const host = domain.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/\/.*$/, "");
-  return host === FLEET_DOMAIN || host === `www.${FLEET_DOMAIN}`;
+  return (FLEET_DOMAINS as readonly string[]).includes(host);
 }
 
 /** Root-relative paths and https URLs are safe. Empty means "use the coded image". */
@@ -52,8 +52,11 @@ function slotImages(value: unknown): unknown[] {
   if (!Array.isArray(value)) return [];
   return value.flatMap((slot) => {
     const record = objectRecord(slot);
-    if (!record || !("image" in record)) return [];
-    return [record.image];
+    if (!record) return [];
+    const images: unknown[] = [];
+    if ("image" in record) images.push(record.image);
+    if ("offImage" in record) images.push(record.offImage);
+    return images;
   });
 }
 

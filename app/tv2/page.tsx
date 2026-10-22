@@ -3,6 +3,9 @@
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import TvPromoTakeover from "../components/TvPromoTakeover";
+import FleetTvTakeover from "../components/fleet/FleetTvTakeover";
+import { useFleetTvManifest } from "../components/fleet/useFleetTvManifest";
+import { pickTv2Sheet } from "../lib/fleet/tv";
 import styles from "./tv2.module.css";
 import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "../tv/flashMessages";
 import HiringRibbon from "../components/HiringRibbon";
@@ -43,6 +46,15 @@ const BOARDS_RAW: CategoryBoard[] = [
 const BOARDS = SHOW_CIGARETTES
   ? BOARDS_RAW
   : BOARDS_RAW.filter((board) => board.id !== "CIGARETTES");
+
+/** Sheet spot for each coded board. The infused-preroll board has no sheet spot. */
+const TV2_SHEET_SPOT: Record<string, string> = {
+  PREROLL_SINGLES: "PREROLLS_ADDONS",
+  NICOTINE_VAPES: "VAPES",
+  EDIBLES: "EDIBLES",
+  CONCENTRATES: "CONCENTRATES",
+  CIGARETTES: "CIGARETTES",
+};
 
 const TAKEOVER_PROMOS = [
   {
@@ -223,6 +235,45 @@ function Board({
   );
 }
 
+function SheetPromoCard({
+  spot,
+  sheet,
+  accent,
+  onBroken,
+}: {
+  spot: string;
+  sheet: { kind: "promo" | "off"; image: string; alt: string };
+  accent: string;
+  onBroken: (kind: "promo" | "off") => void;
+}) {
+  const markBroken = () => onBroken(sheet.kind);
+  return (
+    <article
+      className={styles.promoBoard}
+      aria-label={sheet.alt}
+      data-fleet-tv-card={spot}
+      data-fleet-tv-kind={sheet.kind}
+      style={{ "--accent": accent } as CSSProperties}
+    >
+      <div className={styles.boardHeader}>
+        <h2>{sheet.kind === "promo" ? "PROMO" : sheet.alt}</h2>
+      </div>
+      <div className={styles.promoViewport}>
+        <img
+          className={styles.promoImg}
+          src={sheet.image}
+          alt={sheet.alt}
+          referrerPolicy="no-referrer"
+          ref={(node) => {
+            if (node?.complete && node.naturalWidth === 0) markBroken();
+          }}
+          onError={markBroken}
+        />
+      </div>
+    </article>
+  );
+}
+
 function PromoBoard({
   cardId,
   promo,
@@ -270,6 +321,8 @@ export default function FortYorkTv2Page() {
   const [daytime, setDaytime] = useState(false);
   const [cigaretteOfferVisible, setCigaretteOfferVisible] = useState(false);
   const [showCigaretteFlash, setShowCigaretteFlash] = useState(() => isCigaretteFlashWindow());
+  const [sheetBroken, setSheetBroken] = useState<Record<string, { promo?: boolean; off?: boolean }>>({});
+  const fleetTv = useFleetTvManifest();
 
   useEffect(() => {
     let active = true;
@@ -349,6 +402,23 @@ export default function FortYorkTv2Page() {
     : baseFooterMessages;
   const footerMessage = footerMessages[tick % footerMessages.length];
 
+  const sheetFor = (boardId: string, categoryOff: boolean, noItems: boolean) => {
+    const spot = TV2_SHEET_SPOT[boardId];
+    if (!spot) return null;
+    const broken = sheetBroken[spot] || {};
+    const sheet = pickTv2Sheet(fleetTv.cards[spot], {
+      categoryOff,
+      noItems,
+      promoBroken: Boolean(broken.promo),
+      offBroken: Boolean(broken.off),
+    });
+    return sheet ? { spot, sheet } : null;
+  };
+
+  const markSheetBroken = (spot: string, kind: "promo" | "off") => {
+    setSheetBroken((prev) => ({ ...prev, [spot]: { ...prev[spot], [kind]: true } }));
+  };
+
   return (
     <main className={styles.screen}>
       <header className={styles.header}>
@@ -366,6 +436,18 @@ export default function FortYorkTv2Page() {
 
       <section className={styles.categoryGrid}>
         {topBoards.map((board) => {
+          const sheetCard = sheetFor(board.id, false, board.products.length === 0);
+          if (sheetCard) {
+            return (
+              <SheetPromoCard
+                key={board.id}
+                spot={sheetCard.spot}
+                sheet={sheetCard.sheet}
+                accent={board.accent}
+                onBroken={(kind) => markSheetBroken(sheetCard.spot, kind)}
+              />
+            );
+          }
           const promo = getTv2DaytimePromo(board.id, daytime);
           return promo ? (
             <PromoBoard key={board.id} cardId={board.id} promo={promo} accent={board.accent} />
@@ -373,10 +455,36 @@ export default function FortYorkTv2Page() {
             <Board key={board.id} board={board} items={board.products} tick={board.offset} />
           );
         })}
-        {concentratesBoard ? (
-          <Board key={concentratesBoard.id} board={concentratesBoard} items={concentratesBoard.products} tick={concentratesBoard.offset} />
-        ) : null}
+        {concentratesBoard ? (() => {
+          const sheetCard = sheetFor(concentratesBoard.id, false, concentratesBoard.products.length === 0);
+          if (sheetCard) {
+            return (
+              <SheetPromoCard
+                key={concentratesBoard.id}
+                spot={sheetCard.spot}
+                sheet={sheetCard.sheet}
+                accent={concentratesBoard.accent}
+                onBroken={(kind) => markSheetBroken(sheetCard.spot, kind)}
+              />
+            );
+          }
+          return (
+            <Board key={concentratesBoard.id} board={concentratesBoard} items={concentratesBoard.products} tick={concentratesBoard.offset} />
+          );
+        })() : null}
         {cigarettesBoard ? (() => {
+          const sheetCard = sheetFor(cigarettesBoard.id, !showCigs, cigarettesBoard.products.length === 0);
+          if (sheetCard) {
+            return (
+              <SheetPromoCard
+                key={cigarettesBoard.id}
+                spot={sheetCard.spot}
+                sheet={sheetCard.sheet}
+                accent={cigarettesBoard.accent}
+                onBroken={(kind) => markSheetBroken(sheetCard.spot, kind)}
+              />
+            );
+          }
           const promo = getTv2DaytimePromo(cigarettesBoard.id, daytime);
           return promo ? (
             <PromoBoard
@@ -394,7 +502,19 @@ export default function FortYorkTv2Page() {
               offerOverlay={cigaretteOfferVisible}
             />
           );
-        })() : null}
+        })() : (() => {
+          const sheetCard = sheetFor("CIGARETTES", true, true);
+          if (!sheetCard) return null;
+          return (
+            <SheetPromoCard
+              key="CIGARETTES"
+              spot={sheetCard.spot}
+              sheet={sheetCard.sheet}
+              accent="#8a5b2a"
+              onBroken={(kind) => markSheetBroken(sheetCard.spot, kind)}
+            />
+          );
+        })()}
         {infusedPrerollBoard ? (
           <Board key={infusedPrerollBoard.id} board={infusedPrerollBoard} items={infusedPrerollBoard.products} tick={infusedPrerollBoard.offset} />
         ) : null}
@@ -406,6 +526,7 @@ export default function FortYorkTv2Page() {
         <small>Updated {loadedAt || "--"}</small>
       </footer>
       <TvPromoTakeover promos={TAKEOVER_PROMOS} />
+      <FleetTvTakeover promos={fleetTv.fullscreenPromos} />
     </main>
   );
 }
