@@ -1,5 +1,11 @@
 const cigaretteSwitch = process.env.NEXT_PUBLIC_SHOW_CIGARETTES?.trim().toLowerCase();
 export const SHOW_CIGARETTES = cigaretteSwitch === "true";
+
+/** An explicit false / 0 / no / off forces cigarettes off. An empty value is not that override. */
+export function cigaretteEnvHardOff(raw: string | undefined = process.env.SHOW_CIGARETTES ?? process.env.NEXT_PUBLIC_SHOW_CIGARETTES): boolean {
+  if (raw == null) return false;
+  return /^(0|false|no|off)$/i.test(raw.trim());
+}
 export const isCigaretteCategory = (value: string | null | undefined) => ["cigarettes", "tobacco"].includes(value?.trim().toLowerCase() ?? "");
 export const isCigarettePath = (value: string | null | undefined) => { const path = value?.trim().toLowerCase() ?? ""; return path === "cigarettes" || path.startsWith("cigarettes/") || path.includes("/cigarettes") ||
     path === "tobacco" ||

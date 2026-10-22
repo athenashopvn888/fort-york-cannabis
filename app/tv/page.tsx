@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./tv.module.css";
 import { SHOW_CIGARETTES, isPreservedSmokeItem } from "../lib/siteConfig";
+import { useCigaretteState } from "../components/CigaretteStateProvider";
 import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "./flashMessages";
 import HiringRibbon from "../components/HiringRibbon";
 import { tvHiring } from "../lib/tvHiring";
@@ -86,9 +87,9 @@ function getOzFlowers(flowers: FlowerProduct[]) {
   });
 }
 
-function getAddOnItems(items: ItemProduct[]) {
+function getAddOnItems(items: ItemProduct[], showCigs = SHOW_CIGARETTES) {
   const addOns = items.filter((item) => ADD_ON_CATEGORIES.has(item.category.toUpperCase()));
-  const preserved = SHOW_CIGARETTES ? [] : items.filter((item) => isPreservedSmokeItem(item) && !addOns.some((addOn) => addOn.slug === item.slug));
+  const preserved = showCigs ? [] : items.filter((item) => isPreservedSmokeItem(item) && !addOns.some((addOn) => addOn.slug === item.slug));
   const visible = [...addOns, ...preserved];
   return visible.length ? visible : items;
 }
@@ -352,6 +353,8 @@ function AddOnsCard({ items, tick }: { items: ItemProduct[]; tick: number }) {
 }
 
 export default function FortYorkTvPage() {
+  const tvOn = useCigaretteState().tv;
+  const showCigs = SHOW_CIGARETTES && tvOn;
   const [flowers, setFlowers] = useState<FlowerProduct[]>([]);
   const [items, setItems] = useState<ItemProduct[]>([]);
   const [tick, setTick] = useState(0);
@@ -396,7 +399,7 @@ export default function FortYorkTvPage() {
 
   const grouped = useMemo(() => groupByTier(flowers), [flowers]);
   const ozFlowers = useMemo(() => getOzFlowers(flowers), [flowers]);
-  const addOnItems = useMemo(() => getAddOnItems(items), [items]);
+  const addOnItems = useMemo(() => getAddOnItems(items, showCigs), [items, showCigs]);
 
   return (
     <main className={styles.screen}>
@@ -450,7 +453,7 @@ export default function FortYorkTvPage() {
 
         <footer className={styles.footerRail}>
           <strong>Flower weights: 3g, 5g, 14g, and 28g</strong>
-          <span>Flower / OZ / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories{showCigaretteFlash ? ` / ${CIGARETTE_FLASH_MESSAGE}` : ""}</span>
+          <span>Flower / OZ / Pre-Rolls / Vapes / Edibles / Concentrates / Accessories{showCigaretteFlash && showCigs ? ` / ${CIGARETTE_FLASH_MESSAGE}` : ""}</span>
           <small>Updated {loadedAt || "--"}</small>
         </footer>
       </div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
+import CigaretteUnavailable from "../../../components/CigaretteUnavailable";
 import styles from "../items.module.css";
 import {
   STORE_INFO,
@@ -33,6 +34,8 @@ import {
   loadLiveMenuCatalog,
 } from "../../../lib/liveMenuCatalog";
 import { CIGARETTE_MIX_MATCH_LABEL, isCigaretteDealSku } from "../../../lib/cigaretteDeals.mjs";
+import { isRealCigaretteItem } from "../../../lib/cigMarkers";
+import { getCigaretteSnapshot } from "../../../lib/cigaretteFeed";
 
 export const dynamic = "force-dynamic";
 
@@ -82,6 +85,15 @@ export default async function ProductDetailPage({
   }
 
   const isFlower = "tier" in item;
+  if (!isFlower && isRealCigaretteItem(item) && !(await getCigaretteSnapshot()).web.show) {
+    return (
+      <main className={styles.detailPage}>
+        <Navbar />
+        <CigaretteUnavailable />
+        <Footer />
+      </main>
+    );
+  }
   const related = getRelatedProductsFrom(item, flowers, items, 8);
   const tierDetail = isFlower ? getTierDetail(item.tier) : null;
   const detailReturnHref = isFlower

@@ -1,4 +1,6 @@
-import { SHOW_CIGARETTES, isPreservedSmokeItem } from "../../lib/siteConfig";
+import { SHOW_CIGARETTES, isCigaretteGuide, isPreservedSmokeItem } from "../../lib/siteConfig";
+import CigaretteUnavailable from "../../components/CigaretteUnavailable";
+import { getCigaretteSnapshot } from "../../lib/cigaretteFeed";
 import { getProductPath } from "../../lib/products";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -45,8 +47,14 @@ const relatedEntries = (guide: GuideEntry) => guide.relatedSlugs.map(getGuide).f
 export default async function GuidePage({ params }: GuidePageProps) {
   const slug = (await params).slug;
   const deliveryGuide = getDeliveryGuide(slug);
+  const guide = deliveryGuide ? null : getGuide(slug);
+  const cigaretteGuide = deliveryGuide
+    ? deliveryGuide.lane === "native_cig" && !isPreservedSmokeItem({ name: deliveryGuide.name, slug: deliveryGuide.slug })
+    : Boolean(guide && isCigaretteGuide(guide) && !isPreservedSmokeItem({ name: guide.name, slug: guide.slug }));
+  if (cigaretteGuide && !(await getCigaretteSnapshot()).web.show) {
+    return <main className={styles.main}><Navbar /><CigaretteUnavailable /><Footer /></main>;
+  }
   if (deliveryGuide) return <DeliveryGuidePage guide={deliveryGuide} />;
-  const guide = getGuide(slug);
   if (!guide) notFound();
   const product = resolveGuideProduct(guide);
   const lane = laneCopy[guide.lane];

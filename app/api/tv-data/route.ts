@@ -1,4 +1,5 @@
 import { filterCigaretteItems } from "../../lib/siteConfig";
+import { getCigaretteSnapshot, snapshotHeaders } from "../../lib/cigaretteFeed";
 import { NextResponse } from "next/server";
 import type { ItemProduct } from "../../lib/products";
 import { FYC_REFRESH_SECONDS } from "../../lib/fycInventoryCore";
@@ -10,7 +11,7 @@ export const dynamic = "force-dynamic";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const type = searchParams.get("type") || "flowers";
-  const inventory = await getFycInventory();
+  const [inventory, cig] = await Promise.all([getFycInventory(), getCigaretteSnapshot()]);
   const selectedType = type === "items" ? "items" : "flowers";
   const data = selectedType === "items"
     ? filterCigaretteItems(inventory.snapshot.items as ItemProduct[])
@@ -27,6 +28,7 @@ export async function GET(request: Request) {
     "x-tv-data-store": inventory.snapshot.storeCode,
     "x-tv-data-flower-count": String(inventory.snapshot.flowers.length),
     "x-tv-data-item-count": String(inventory.snapshot.items.length),
+    ...snapshotHeaders(cig),
   };
 
   return NextResponse.json(data, { headers });

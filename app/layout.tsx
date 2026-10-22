@@ -1,13 +1,21 @@
 import { cigaretteSafeContent } from "./lib/siteConfig";
+import CigaretteStateProvider from "./components/CigaretteStateProvider";
+import FleetContentProvider from "./components/FleetContentProvider";
 import FullNameNap from "./components/FullNameNap";
 import PinnedNavClearance from "./components/PinnedNavClearance";
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import "./globals.css";
+import { getCigaretteSnapshot, toPublicCigaretteState } from "./lib/cigaretteFeed";
+import { CODED_NAP, CODED_PAGES } from "./lib/fleet/coded";
+import { getFleetContent } from "./lib/fleetContent";
+import type { Nap } from "./lib/fleet/types";
 import { STORE_NAP, HOME_FAQS, storeJsonLd, faqPageJsonLd } from "./lib/storeNap";
 
 const siteUrl = STORE_NAP.origin;
 
-export const metadata: Metadata = {
+export const revalidate = 300;
+
+const ROOT_METADATA: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: "Fort York Cannabis Dispensary Weed Delivery | Fort York / CityPlace",
@@ -69,6 +77,23 @@ export const metadata: Metadata = {
   },
 };
 
+export async function generateMetadata(): Promise<Metadata> {
+  const fleet = await getFleetContent();
+  const description = fleet.active ? fleet.pages.Home?.metaDescription || "" : "";
+  const base = description && description !== CODED_PAGES.Home.metaDescription
+    ? {
+        ...ROOT_METADATA,
+        description,
+        openGraph: { ...ROOT_METADATA.openGraph, description },
+        twitter: { ...ROOT_METADATA.twitter, description },
+      }
+    : ROOT_METADATA;
+  return {
+    ...base,
+    other: { "fleet-content-version": fleet.version },
+  };
+}
+
 const graphJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -85,6 +110,76 @@ const graphJsonLd = {
   ],
 };
 
+function napDiffers(nap: Nap) {
+  return nap.name !== CODED_NAP.name
+    || nap.street !== CODED_NAP.street
+    || nap.city !== CODED_NAP.city
+    || nap.province !== CODED_NAP.province
+    || nap.postalCode !== CODED_NAP.postalCode
+    || nap.phoneDisplay !== CODED_NAP.phoneDisplay
+    || nap.hours !== CODED_NAP.hours
+    || nap.lat !== CODED_NAP.lat
+    || nap.lng !== CODED_NAP.lng
+    || nap.schemaName !== CODED_NAP.schemaName
+    || nap.website !== CODED_NAP.website
+    || nap.mapsSearchUrl !== CODED_NAP.mapsSearchUrl;
+}
+
+function graphFor(nap: Nap) {
+  if (!napDiffers(nap)) return graphJsonLd;
+  const store = storeJsonLd() as Record<string, unknown>;
+  delete store["@context"];
+  return {
+    ...graphJsonLd,
+    "@graph": [
+      {
+        ...store,
+        name: nap.schemaName,
+        url: nap.website,
+        telephone: nap.phoneDisplay,
+        hasMap: nap.mapsSearchUrl,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: nap.street,
+          addressLocality: nap.city,
+          addressRegion: nap.province,
+          postalCode: nap.postalCode,
+          addressCountry: "CA",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: Number(nap.lat),
+          longitude: Number(nap.lng),
+        },
+      },
+      graphJsonLd["@graph"][1],
+    ],
+  };
+}
+
+async function FleetJsonLd() {
+  const fleet = await getFleetContent();
+  const graph = fleet.active && napDiffers(fleet.nap) ? graphFor(fleet.nap) : graphJsonLd;
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(cigaretteSafeContent(graph)) }}
+    />
+  );
+}
+
+async function FleetShell({ children }: Readonly<{ children: React.ReactNode }>) {
+  const [cigaretteSnapshot, fleet] = await Promise.all([getCigaretteSnapshot(), getFleetContent()]);
+  const cigarettes = toPublicCigaretteState(cigaretteSnapshot);
+  return (
+    <FleetContentProvider value={{ active: fleet.active, version: fleet.version, nap: fleet.nap, banners: fleet.banners }}>
+      <CigaretteStateProvider value={cigarettes}>
+        {children}
+      </CigaretteStateProvider>
+    </FleetContentProvider>
+  );
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -97,15 +192,14 @@ export default function RootLayout({
         <meta name="geo.placename" content="Toronto" />
         <link rel="icon" href="/brand/fort-york-icon.png" type="image/png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(cigaretteSafeContent(graphJsonLd)) }}
-        />
+        <FleetJsonLd />
       </head>
       <body>
-        {children}
-        <FullNameNap />
-        <PinnedNavClearance />
+        <FleetShell>
+          {children}
+          <FullNameNap />
+          <PinnedNavClearance />
+        </FleetShell>
       </body>
     </html>
   );

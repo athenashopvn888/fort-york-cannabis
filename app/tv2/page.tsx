@@ -10,6 +10,7 @@ import { tvHiring } from "../lib/tvHiring";
 import { isCigaretteDealSku, isCigaretteMixAndMatchSku } from "../lib/cigaretteDeals.mjs";
 import { getTv2DaytimePromo, isCigaretteOfferVisible, isTv2Daytime } from "./daytimePromos.mjs";
 import { SHOW_CIGARETTES, cigaretteSafeContent, isPreservedSmokeItem } from "../lib/siteConfig";
+import { useCigaretteState } from "../components/CigaretteStateProvider";
 import {
   STORE_INFO,
   formatItemPrice,
@@ -261,6 +262,8 @@ function PromoBoard({
 }
 
 export default function FortYorkTv2Page() {
+  const tvOn = useCigaretteState().tv;
+  const showCigs = SHOW_CIGARETTES && tvOn;
   const [items, setItems] = useState<ItemProduct[]>([]);
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
@@ -313,19 +316,20 @@ export default function FortYorkTv2Page() {
     return () => window.clearInterval(offerTimer);
   }, []);
 
+  const boards = showCigs ? BOARDS : BOARDS.filter((board) => board.id !== "CIGARETTES");
   const grouped = useMemo(() => {
-    return BOARDS.map((board, index) => ({
+    return boards.map((board, index) => ({
       ...board,
       products: (() => {
         const boardItems = getBoardItems(items, board);
-        if (SHOW_CIGARETTES || board.id !== "PREROLL_SINGLES") return boardItems;
+        if (showCigs || board.id !== "PREROLL_SINGLES") return boardItems;
         const seen = new Set(boardItems.map(getItemKey));
         const preserved = items.filter((item) => isPreservedSmokeItem(item) && !seen.has(getItemKey(item)));
         return [...boardItems, ...preserved];
       })(),
       offset: tick + index,
     }));
-  }, [items, tick]);
+  }, [boards, items, showCigs, tick]);
   const boardById = new Map(grouped.map((board) => [board.id, board]));
   const topBoards = ["PREROLL_SINGLES", "NICOTINE_VAPES", "EDIBLES"]
     .map((id) => boardById.get(id))
@@ -340,7 +344,7 @@ export default function FortYorkTv2Page() {
         text: message.text.replace(/ \/ Nicotine Vapes| \/ Cigarettes/g, ""),
       }))
     : FOOTER_MESSAGES;
-  const footerMessages = showCigaretteFlash && !daytime
+  const footerMessages = showCigaretteFlash && showCigs && !daytime
     ? [...baseFooterMessages, { label: "Cigarettes", text: CIGARETTE_FLASH_MESSAGE }]
     : baseFooterMessages;
   const footerMessage = footerMessages[tick % footerMessages.length];
