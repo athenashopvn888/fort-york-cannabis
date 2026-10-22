@@ -9,10 +9,12 @@ import { MENU_CATEGORIES } from "./lib/products";
 import { RESOURCE_PAGES } from "./resources/resourceData";
 import { TIER_ROUTE_SLUGS } from "./lib/tierRoutes";
 import { GUIDE_REGISTRY } from "./lib/guideRegistry";
+import { loadFleetArticles } from "./lib/fleet/articles";
+import { codedSlugBlocksFleet } from "./lib/fleet/codedArticles";
 
 const BASE = "https://fortyorkcannabis.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date().toISOString();
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -67,5 +69,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return withoutCigaretteUrls([...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages, ...guidePages]);
+  let fleetArticlePages: MetadataRoute.Sitemap = [];
+  try {
+    const loaded = await loadFleetArticles();
+    if (loaded.ok) {
+      fleetArticlePages = loaded.articles.filter((article) => !codedSlugBlocksFleet(article.slug)).map((article) => ({
+        url: `${BASE}/articles/${article.slug}`,
+        lastModified: article.publishedAt,
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+      }));
+    }
+  } catch {
+    fleetArticlePages = [];
+  }
+
+  return withoutCigaretteUrls([...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages, ...guidePages, ...fleetArticlePages]);
 }

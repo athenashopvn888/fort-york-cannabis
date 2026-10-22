@@ -7,6 +7,8 @@ import { SHOW_CIGARETTES, isPreservedSmokeItem } from "../lib/siteConfig";
 import { useCigaretteState } from "../components/CigaretteStateProvider";
 import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "./flashMessages";
 import HiringRibbon from "../components/HiringRibbon";
+import FleetTvTakeover from "../components/fleet/FleetTvTakeover";
+import { useFleetTvManifest } from "../components/fleet/useFleetTvManifest";
 import { tvHiring } from "../lib/tvHiring";
 import {
   FLOWER_TIER_ORDER,
@@ -355,6 +357,7 @@ function AddOnsCard({ items, tick }: { items: ItemProduct[]; tick: number }) {
 export default function FortYorkTvPage() {
   const tvOn = useCigaretteState().tv;
   const showCigs = SHOW_CIGARETTES && tvOn;
+  const fleetTv = useFleetTvManifest();
   const [flowers, setFlowers] = useState<FlowerProduct[]>([]);
   const [items, setItems] = useState<ItemProduct[]>([]);
   const [tick, setTick] = useState(0);
@@ -457,6 +460,7 @@ export default function FortYorkTvPage() {
           <small>Updated {loadedAt || "--"}</small>
         </footer>
       </div>
+      <FleetTvTakeover promos={fleetTv.fullscreenPromos} />
     </main>
   );
 }
