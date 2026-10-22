@@ -1,4 +1,6 @@
 import CigaretteSeasonalNotice from "../../components/CigaretteSeasonalNotice";
+import CigaretteUnavailable from "../../components/CigaretteUnavailable";
+import FleetBannerImage from "../../components/FleetBannerImage";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,6 +38,8 @@ import {
   loadLiveMenuCatalog,
 } from "../../lib/liveMenuCatalog";
 import { CIGARETTE_MIX_MATCH_LABEL, isCigaretteDealSku } from "../../lib/cigaretteDeals.mjs";
+import { getCigaretteSnapshot } from "../../lib/cigaretteFeed";
+import { getFleetContent } from "../../lib/fleetContent";
 
 export const dynamic = "force-dynamic";
 
@@ -287,11 +291,29 @@ export default async function CategoryPage({
     notFound();
   }
 
+  if (category.slug === "cigarettes" && !(await getCigaretteSnapshot()).web.show) {
+    return (
+      <main className={`${styles.page} ${styles.categoryPage}`}>
+        <Navbar />
+        <CigaretteUnavailable />
+        <Footer />
+      </main>
+    );
+  }
+
   const products = getMenuProductsByCategoryFrom(category, flowers, items);
   const count = getMenuProductsByCategoryFrom(category, flowers, items).length;
   const isFlower = category.key === "FLOWER";
-  const categoryBanner = resolveItemBanner(category.slug, category.banner);
-  const hasReplacementBanner = isReplacementCategory(category.slug);
+  const codedBanner = resolveItemBanner(category.slug, category.banner);
+  const fleet = await getFleetContent();
+  const sheet = fleet.active ? fleet.banners.find((banner) => {
+    if (category.slug === "cigarettes") return banner.id === "cigarettes";
+    if (category.slug === "vapes" || category.slug === "vape-disposables") return banner.id === "vapes";
+    return false;
+  }) : undefined;
+  const categoryBanner = sheet && !sheet.hidden && sheet.render === "image" && sheet.image ? sheet.image : codedBanner;
+  const sheetVisual = Boolean(sheet && (sheet.hidden || sheet.render === "text" || categoryBanner !== codedBanner));
+  const hasReplacementBanner = isReplacementCategory(category.slug) && !(sheet && sheet.hidden);
   const guideGroups = getCategoryGuideGroups(`/items/${category.slug}`);
 
   return (
@@ -299,14 +321,25 @@ export default async function CategoryPage({
       <Navbar />
 
       {hasReplacementBanner ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={categoryBanner}
-          alt={`${category.name} category artwork`}
-          width={category.slug === "cigarettes" ? 2048 : 1672}
-          height={category.slug === "cigarettes" ? 768 : 941}
-          style={{ display: "block", width: "100%", height: "auto" }}
-        />
+        sheetVisual && sheet ? (
+          <FleetBannerImage
+            banner={{ ...sheet, image: categoryBanner }}
+            alt={`${category.name} category artwork`}
+            title={sheet.title}
+            width={category.slug === "cigarettes" ? 2048 : 1672}
+            height={category.slug === "cigarettes" ? 768 : 941}
+            style={{ display: "block", width: "100%", height: "auto" }}
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={categoryBanner}
+            alt={`${category.name} category artwork`}
+            width={category.slug === "cigarettes" ? 2048 : 1672}
+            height={category.slug === "cigarettes" ? 768 : 941}
+            style={{ display: "block", width: "100%", height: "auto" }}
+          />
+        )
       ) : null}
 
       <section

@@ -4,6 +4,8 @@ import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
 import FleetAnnouncementBanner from "./components/FleetAnnouncementBanner";
 import Footer from "./components/Footer";
+import { getCigaretteSnapshot } from "./lib/cigaretteFeed";
+import { getFleetContent } from "./lib/fleetContent";
 import { MENU_CATALOG_CATEGORIES, MENU_CATALOG_NOTICE, MENU_SOURCE_STATE } from "./lib/menu-catalog";
 
 const ACTIONS = [
@@ -38,12 +40,13 @@ const LOCAL_FAQS = cigaretteSafeContent([
   },
 ]);
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [fleet, cigarettes] = await Promise.all([getFleetContent(), getCigaretteSnapshot()]);
   return (
     <main className={styles.main}>
       <Navbar />
       <h1 data-home-store-title="" style={{ margin: 0, padding: "126px 16px 14px", background: "#111827", color: "#ffffff", textAlign: "center", fontSize: "clamp(1.1rem, 3vw, 2rem)", fontWeight: 900, lineHeight: 1.2, position: "relative", zIndex: 60 }}>Fort York Cannabis Dispensary Weed Delivery</h1>
-      <FleetAnnouncementBanner />
+      <FleetAnnouncementBanner fleet={fleet} showCigs={cigarettes.web.show} />
 
       <section className={styles.hero}>
         <div className={styles.heroBg} />

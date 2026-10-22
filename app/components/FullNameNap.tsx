@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useFleetContent } from "./FleetContentProvider";
 import { FULL_NAME_NAP, FULL_NAME_NAP_ADDRESS } from "../lib/fullNameNap";
 
 /**
@@ -18,9 +19,28 @@ const linkStyle = { color: "inherit", textDecoration: "underline", textUnderline
 
 export default function FullNameNap() {
   const pathname = usePathname() || "/";
+  const fleet = useFleetContent();
   if (HIDE_ON.test(pathname)) return null;
   const expanded = CONTACT_PAGES.test(pathname);
-  const n = FULL_NAME_NAP;
+  const n = fleet.active ? {
+    code: FULL_NAME_NAP.code,
+    fullName: fleet.nap.name,
+    street: fleet.nap.street,
+    city: fleet.nap.city,
+    region: fleet.nap.province,
+    postal: fleet.nap.postalCode,
+    phoneDisplay: fleet.nap.phoneDisplay,
+    phoneTel: fleet.nap.phoneTel.startsWith("tel:") ? fleet.nap.phoneTel : `tel:${fleet.nap.phoneTel}`,
+    hours: fleet.nap.hours,
+    mapsUrl: fleet.nap.mapsSearchUrl,
+    neighbourhood: fleet.nap.area,
+    intersection: fleet.nap.intersection,
+    transit: FULL_NAME_NAP.transit,
+    visitPath: FULL_NAME_NAP.visitPath,
+  } : FULL_NAME_NAP;
+  const address = fleet.active
+    ? `${fleet.nap.street}, ${fleet.nap.city}, ${fleet.nap.province} ${fleet.nap.postalCode}`
+    : FULL_NAME_NAP_ADDRESS;
   return (
     <section
       aria-label={`${n.fullName} name, address and phone`}
@@ -42,7 +62,7 @@ export default function FullNameNap() {
         <div style={{ maxWidth: 560, margin: "0 auto", textAlign: "left", border: "1px solid rgba(255,255,255,0.18)", borderRadius: 12, padding: "16px 18px", background: "rgba(255,255,255,0.04)" }}>
           <h2 style={{ margin: "0 0 8px", fontSize: "16px", fontWeight: 800, color: "#ffffff", lineHeight: 1.3 }}>{n.fullName}</h2>
           <p style={{ margin: "0 0 4px" }}>
-            <a href={n.mapsUrl} target="_blank" rel="noopener noreferrer" style={linkStyle}>{FULL_NAME_NAP_ADDRESS}</a>
+            <a href={n.mapsUrl} target="_blank" rel="noopener noreferrer" style={linkStyle}>{address}</a>
           </p>
           <p style={{ margin: "0 0 4px" }}>
             Phone: <a href={n.phoneTel} style={linkStyle}>{n.phoneDisplay}</a>
@@ -60,7 +80,7 @@ export default function FullNameNap() {
         <p style={{ margin: 0 }}>
           <strong style={{ color: "#ffffff" }}>{n.fullName}</strong>
           {" · "}
-          <a href={n.mapsUrl} target="_blank" rel="noopener noreferrer" style={linkStyle}>{FULL_NAME_NAP_ADDRESS}</a>
+          <a href={n.mapsUrl} target="_blank" rel="noopener noreferrer" style={linkStyle}>{address}</a>
           {" · "}
           <a href={n.phoneTel} style={linkStyle}>{n.phoneDisplay}</a>
           {" · "}

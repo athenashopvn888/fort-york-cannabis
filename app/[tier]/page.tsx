@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "../components/Navbar";
 import { isReplacementCategory, resolveTierBanner } from "../lib/corePromotionBanners";
+import FleetBannerImage from "../components/FleetBannerImage";
+import { getFleetContent } from "../lib/fleetContent";
 import Footer from "../components/Footer";
 import { getProductImage, getProductPath, formatType, hasPositivePrice, type FlowerProduct } from "../lib/products";
 import {
@@ -68,8 +70,12 @@ export default async function TierPage({
   const flowers = ((await getLiveFlowers()) as unknown as FlowerProduct[]).filter((flower) => normalizeTier(flower.tier) === normalizeTier(route.key));
   const seo = TIER_SEO[route.key];
   const accent = route.detail.accent;
-  const categoryBanner = resolveTierBanner(tierSlug, "/brand/category-flower.webp");
-  const hasReplacementBanner = isReplacementCategory(tierSlug);
+  const codedBanner = resolveTierBanner(tierSlug, "/brand/category-flower.webp");
+  const fleet = await getFleetContent();
+  const sheet = fleet.active && isReplacementCategory(tierSlug) ? fleet.banners.find((banner) => banner.id === "weed") : undefined;
+  const categoryBanner = sheet && !sheet.hidden && sheet.render === "image" && sheet.image ? sheet.image : codedBanner;
+  const sheetVisual = Boolean(sheet && (sheet.hidden || sheet.render === "text" || categoryBanner !== codedBanner));
+  const hasReplacementBanner = isReplacementCategory(tierSlug) && !(sheet && sheet.hidden);
   const siblings = TIER_ROUTE_SLUGS.filter((s) => s !== tierSlug);
 
   const collectionJsonLd = {
@@ -114,8 +120,12 @@ export default async function TierPage({
       />
       <Navbar />
       {hasReplacementBanner ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={categoryBanner} alt={`${seo.h1} category artwork`} width={1672} height={941} style={{ display: "block", width: "100%", height: "auto" }} />
+        sheetVisual && sheet ? (
+          <FleetBannerImage banner={{ ...sheet, image: categoryBanner }} alt={`${seo.h1} category artwork`} title={sheet.title} width={1672} height={941} style={{ display: "block", width: "100%", height: "auto" }} />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={categoryBanner} alt={`${seo.h1} category artwork`} width={1672} height={941} style={{ display: "block", width: "100%", height: "auto" }} />
+        )
       ) : null}
       <section
         className={styles.hero}
