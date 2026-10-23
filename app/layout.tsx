@@ -1,4 +1,4 @@
-import { cigaretteSafeContent } from "./lib/siteConfig";
+import { SHOW_CIGARETTES, cigaretteSafeContent } from "./lib/siteConfig";
 import CigaretteStateProvider from "./components/CigaretteStateProvider";
 import FleetContentProvider from "./components/FleetContentProvider";
 import FullNameNap from "./components/FullNameNap";
@@ -173,7 +173,7 @@ async function FleetShell({ children }: Readonly<{ children: React.ReactNode }>)
   const cigarettes = toPublicCigaretteState(cigaretteSnapshot);
   return (
     <FleetContentProvider value={{ active: fleet.active, version: fleet.version, nap: fleet.nap, banners: fleet.banners }}>
-      <CigaretteStateProvider value={cigarettes}>
+      <CigaretteStateProvider value={{ ...cigarettes, web: SHOW_CIGARETTES ? cigarettes.web : false }}>
         {children}
       </CigaretteStateProvider>
     </FleetContentProvider>

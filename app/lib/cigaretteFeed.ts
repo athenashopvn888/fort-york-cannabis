@@ -4,12 +4,13 @@ import {
   decideCigaretteGuide,
   decideCigaretteSurface,
   foldCodedGate,
+  publicWebsiteCigaretteFlag,
   reconcileSurfaceItems,
   type CigaretteSurfaceDecision,
   type CigaretteWording,
 } from "./cigDecision";
 import { allItems, type ItemProduct } from "./products";
-import { cigaretteEnvHardOff } from "./siteConfig";
+import { cigaretteEnvHardOff, SHOW_CIGARETTES } from "./siteConfig";
 
 export type CigaretteSnapshot = {
   web: CigaretteSurfaceDecision;
@@ -52,12 +53,14 @@ async function loadCigaretteFeed(): Promise<CigaretteSnapshot> {
     const items = Array.isArray(data?.items) && data.items.length ? data.items : allItems;
     return snapshotFrom(cig, items, true, false);
   } catch {
+    // Outside the 60s window a feed error fails closed. TV hides, and the website flag stays off.
     return snapshotFrom(null, allItems, false, true);
   }
 }
 
 export async function readCigaretteFeed(): Promise<CigaretteSnapshot> {
   const now = Date.now();
+  // A last-good snapshot inside this window still follows its saved tvOn.
   if (cached && now - cached.at < 60_000) return cached.snap;
   if (!inflight) {
     inflight = loadCigaretteFeed().finally(() => {
@@ -77,11 +80,20 @@ export function resetCigaretteFeedCache(): void {
 export const getCigaretteSnapshot = cache(readCigaretteFeed);
 
 export function toPublicCigaretteState(snap: CigaretteSnapshot): PublicCigaretteState {
-  return { web: snap.web.show, tv: snap.tv.show, wording: snap.wording };
+  return {
+    web: publicWebsiteCigaretteFlag(snap.web, SHOW_CIGARETTES),
+    tv: snap.tv.show,
+    wording: snap.wording,
+  };
 }
 
 export function snapshotHeaders(snap: CigaretteSnapshot): Record<string, string> {
-  return cigarettePublicHeaders({ web: snap.web.show, tv: snap.tv.show, wording: snap.wording });
+  const state = toPublicCigaretteState(snap);
+  return cigarettePublicHeaders({
+    web: SHOW_CIGARETTES ? state.web : false,
+    tv: state.tv,
+    wording: state.wording,
+  });
 }
 
 export { reconcileSurfaceItems };
