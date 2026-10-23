@@ -12,8 +12,9 @@ import HiringRibbon from "../components/HiringRibbon";
 import { tvHiring } from "../lib/tvHiring";
 import { isCigaretteDealSku, isCigaretteMixAndMatchSku } from "../lib/cigaretteDeals.mjs";
 import { getTv2DaytimePromo, isCigaretteOfferVisible, isTv2Daytime } from "./daytimePromos.mjs";
-import { SHOW_CIGARETTES, cigaretteSafeContent, isPreservedSmokeItem } from "../lib/siteConfig";
+import { cigaretteSafeContent, isPreservedSmokeItem } from "../lib/siteConfig";
 import { useCigaretteState } from "../components/CigaretteStateProvider";
+import { readCigaretteTvHeader, visibleCategoryBoards } from "../lib/cigDecision";
 import {
   STORE_INFO,
   formatItemPrice,
@@ -43,9 +44,6 @@ const BOARDS_RAW: CategoryBoard[] = [
   { id: "PREROLL_SINGLES", label: "Pre Rolls", subtitle: "Single rolls and add-ons", accent: "#288b5b", categories: ["ADD ONS", "ACCESSORIES"] },
   { id: "CIGARETTES", label: "Cigarettes", subtitle: "Current cigarette selection", accent: "#8a5b2a", categories: ["CIGARETTES"] },
 ];
-const BOARDS = SHOW_CIGARETTES
-  ? BOARDS_RAW
-  : BOARDS_RAW.filter((board) => board.id !== "CIGARETTES");
 
 /** Sheet spot for each coded board. The infused-preroll board has no sheet spot. */
 const TV2_SHEET_SPOT: Record<string, string> = {
@@ -159,7 +157,7 @@ function ItemMeta({ item }: { item: ItemProduct }) {
   );
 }
 
-function FeaturedItem({ item, accent, showCigaretteDeal }: { item?: ItemProduct; accent: string; showCigaretteDeal: boolean }) {
+function FeaturedItem({ item, accent, showCigaretteDeal, categoryLabel }: { item?: ItemProduct; accent: string; showCigaretteDeal: boolean; categoryLabel?: string }) {
   if (!item) {
     return <div className={styles.emptyFeature}>Call for current menu</div>;
   }
@@ -171,7 +169,7 @@ function FeaturedItem({ item, accent, showCigaretteDeal }: { item?: ItemProduct;
         {item.promoImage || item.isSale ? <span>Feature</span> : null}
       </div>
       <div className={styles.featureCopy}>
-        <small>{getItemCategoryLabel(item.category)}</small>
+        <small>{categoryLabel || getItemCategoryLabel(item.category)}</small>
         <h3>{item.name}</h3>
         <ItemMeta item={item} />
         <p>{getItemEffects(item).join(" / ")}</p>
@@ -207,7 +205,7 @@ function Board({
         </div>
         <strong>{items.length} items</strong>
       </div>
-      <FeaturedItem item={featured} accent={board.accent} showCigaretteDeal={showCigaretteDeal} />
+      <FeaturedItem item={featured} accent={board.accent} showCigaretteDeal={showCigaretteDeal} categoryLabel={board.id === "CIGARETTES" ? "Cigarettes" : undefined} />
       <div className={styles.itemRows}>
         {rows.map((item) => (
           <div className={styles.itemRow} key={getItemKey(item)}>
@@ -313,8 +311,8 @@ function PromoBoard({
 }
 
 export default function FortYorkTv2Page() {
-  const tvOn = useCigaretteState().tv;
-  const showCigs = SHOW_CIGARETTES && tvOn;
+  const seeded = useCigaretteState();
+  const [showCigs, setShowCigs] = useState(seeded.tv);
   const [items, setItems] = useState<ItemProduct[]>([]);
   const [tick, setTick] = useState(0);
   const [loadedAt, setLoadedAt] = useState("");
@@ -330,6 +328,8 @@ export default function FortYorkTv2Page() {
     async function load() {
       try {
         const res = await fetch("/api/tv-data?type=items");
+        if (!active) return;
+        setShowCigs(res.ok ? readCigaretteTvHeader(res.headers).show : false);
         const data = await res.json();
         if (!active) return;
         if (Array.isArray(data)) {
@@ -369,7 +369,7 @@ export default function FortYorkTv2Page() {
     return () => window.clearInterval(offerTimer);
   }, []);
 
-  const boards = showCigs ? BOARDS : BOARDS.filter((board) => board.id !== "CIGARETTES");
+  const boards = visibleCategoryBoards(BOARDS_RAW, showCigs);
   const grouped = useMemo(() => {
     return boards.map((board, index) => ({
       ...board,
@@ -485,15 +485,7 @@ export default function FortYorkTv2Page() {
               />
             );
           }
-          const promo = getTv2DaytimePromo(cigarettesBoard.id, daytime);
-          return promo ? (
-            <PromoBoard
-              key={cigarettesBoard.id}
-              cardId={cigarettesBoard.id}
-              promo={promo}
-              accent={cigarettesBoard.accent}
-            />
-          ) : (
+          return (
             <Board
               key={cigarettesBoard.id}
               board={cigarettesBoard}

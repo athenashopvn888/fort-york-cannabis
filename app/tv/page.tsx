@@ -3,8 +3,9 @@
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./tv.module.css";
-import { SHOW_CIGARETTES, isPreservedSmokeItem } from "../lib/siteConfig";
+import { isPreservedSmokeItem } from "../lib/siteConfig";
 import { useCigaretteState } from "../components/CigaretteStateProvider";
+import { readCigaretteTvHeader } from "../lib/cigDecision";
 import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "./flashMessages";
 import HiringRibbon from "../components/HiringRibbon";
 import FleetTvTakeover from "../components/fleet/FleetTvTakeover";
@@ -89,7 +90,7 @@ function getOzFlowers(flowers: FlowerProduct[]) {
   });
 }
 
-function getAddOnItems(items: ItemProduct[], showCigs = SHOW_CIGARETTES) {
+function getAddOnItems(items: ItemProduct[], showCigs: boolean) {
   const addOns = items.filter((item) => ADD_ON_CATEGORIES.has(item.category.toUpperCase()));
   const preserved = showCigs ? [] : items.filter((item) => isPreservedSmokeItem(item) && !addOns.some((addOn) => addOn.slug === item.slug));
   const visible = [...addOns, ...preserved];
@@ -355,8 +356,8 @@ function AddOnsCard({ items, tick }: { items: ItemProduct[]; tick: number }) {
 }
 
 export default function FortYorkTvPage() {
-  const tvOn = useCigaretteState().tv;
-  const showCigs = SHOW_CIGARETTES && tvOn;
+  const seeded = useCigaretteState();
+  const [showCigs, setShowCigs] = useState(seeded.tv);
   const fleetTv = useFleetTvManifest();
   const [flowers, setFlowers] = useState<FlowerProduct[]>([]);
   const [items, setItems] = useState<ItemProduct[]>([]);
@@ -373,6 +374,8 @@ export default function FortYorkTvPage() {
           fetch("/api/tv-data?type=flowers"),
           fetch("/api/tv-data?type=items"),
         ]);
+        if (!active) return;
+        setShowCigs(itemRes.ok ? readCigaretteTvHeader(itemRes.headers).show : false);
         const [flowerData, itemData] = await Promise.all([flowerRes.json(), itemRes.json()]);
         if (!active) return;
         if (Array.isArray(flowerData)) {

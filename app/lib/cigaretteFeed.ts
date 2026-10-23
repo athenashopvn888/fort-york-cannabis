@@ -27,10 +27,12 @@ export type PublicCigaretteState = {
 };
 
 function snapshotFrom(cig: unknown, items: ItemProduct[], live: boolean, errored: boolean): CigaretteSnapshot {
-  const web = foldCodedGate(decideCigaretteSurface({ cig, items, surface: "web", errored }));
-  const tv = foldCodedGate(decideCigaretteSurface({ cig, items, surface: "tv", errored }));
-  const guides = foldCodedGate(decideCigaretteGuide({ cig, items, errored }));
-  return { web, tv, guides, wording: decideCigaretteSurface({ cig, items, surface: "web", errored }).wording, live, items };
+  const webDecision = decideCigaretteSurface({ cig, items, surface: "web", errored });
+  const tvDecision = decideCigaretteSurface({ cig, items, surface: "tv", errored });
+  const web = foldCodedGate(webDecision, "web");
+  const tv = foldCodedGate(tvDecision, "tv");
+  const guides = foldCodedGate(decideCigaretteGuide({ cig, items, errored }), "guides");
+  return { web, tv, guides, wording: webDecision.wording, live, items };
 }
 
 const MENU_FEED = () => (process.env.MENU_FEED_URL || "").trim()

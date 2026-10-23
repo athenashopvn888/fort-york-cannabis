@@ -1,5 +1,4 @@
-import { filterCigaretteItems } from "../../lib/siteConfig";
-import { getCigaretteSnapshot, snapshotHeaders } from "../../lib/cigaretteFeed";
+import { getCigaretteSnapshot, reconcileSurfaceItems, snapshotHeaders } from "../../lib/cigaretteFeed";
 import { NextResponse } from "next/server";
 import type { ItemProduct } from "../../lib/products";
 import { FYC_REFRESH_SECONDS } from "../../lib/fycInventoryCore";
@@ -14,7 +13,7 @@ export async function GET(request: Request) {
   const [inventory, cig] = await Promise.all([getFycInventory(), getCigaretteSnapshot()]);
   const selectedType = type === "items" ? "items" : "flowers";
   const data = selectedType === "items"
-    ? filterCigaretteItems(inventory.snapshot.items as ItemProduct[])
+    ? reconcileSurfaceItems(inventory.snapshot.items as ItemProduct[], cig.items, cig.tv.show)
     : inventory.snapshot.flowers;
   const headers = {
     "cache-control": `public, s-maxage=${FYC_REFRESH_SECONDS}, stale-while-revalidate=60`,
