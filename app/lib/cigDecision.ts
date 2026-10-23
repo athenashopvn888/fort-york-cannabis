@@ -123,14 +123,24 @@ export function decideCigaretteGuide(input: {
 }
 
 /**
- * Fold a feed decision into the existing SHOW_CIGARETTES gate.
- * A feed error or a missing block keeps the coded behaviour.
- * An explicit off hides the surface. An explicit on cannot open the gate when coded visibility is off.
+ * Web and guide surfaces stay behind the coded SHOW_CIGARETTES switch.
+ * TV follows the feed decision only (tvOn, falling back inside decideCigaretteSurface).
+ * An env hard-off still forces every surface off.
  */
-export function foldCodedGate(decision: CigaretteSurfaceDecision): CigaretteSurfaceDecision {
+export function foldCodedGate(
+  decision: CigaretteSurfaceDecision,
+  surface: "web" | "tv" | "guides" = "web",
+): CigaretteSurfaceDecision {
   if (decision.reason === "env") return { ...decision, show: false };
+  if (surface === "tv") return { show: decision.show, reason: decision.reason };
   if (decision.reason === "error" || decision.reason === "missing") return { ...decision, show: SHOW_CIGARETTES };
   return { ...decision, show: decision.show && SHOW_CIGARETTES };
+}
+
+/** The TV card list follows the live TV flag. A false flag drops the cigarettes card. */
+export function visibleCategoryBoards<T extends { id: string }>(boards: readonly T[], showCigarettes: boolean): T[] {
+  if (showCigarettes) return [...boards];
+  return boards.filter((board) => board.id !== "CIGARETTES");
 }
 
 /** Drop real cigarettes when this surface is off. Always keep wraps and pouches. */
