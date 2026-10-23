@@ -89,10 +89,10 @@ export function decideCigaretteSurface(input: {
       : undefined,
   );
   if (cigaretteEnvHardOff(input.envRaw)) return { show: false, reason: "env", wording };
-  // A missing feed or a feed error shows cigarettes. Only an explicit false flag hides them.
-  if (input.errored) return { show: true, reason: "error", wording };
+  // A feed error or a missing cig block hides this surface. A saved block still follows its flag.
+  if (input.errored) return { show: false, reason: "error", wording };
   if (!input.cig || typeof input.cig !== "object" || Array.isArray(input.cig)) {
-    return { show: true, reason: "missing", wording };
+    return { show: false, reason: "missing", wording };
   }
   if (!resolveSurfaceFlag(input.cig, input.surface)) return { show: false, reason: "off", wording };
   const items = Array.isArray(input.items) ? input.items : [];
@@ -123,8 +123,20 @@ export function decideCigaretteGuide(input: {
 }
 
 /**
+ * Website flag. The coded switch stays in front of the feed.
+ * A feed error or a missing block stays off, even when that switch is on.
+ * TV does not use this.
+ */
+export function publicWebsiteCigaretteFlag(decision: CigaretteSurfaceDecision, codedOn: boolean): boolean {
+  if (!codedOn) return false;
+  if (decision.reason === "error" || decision.reason === "missing") return false;
+  return decision.show;
+}
+
+/**
  * Web and guide surfaces stay behind the coded SHOW_CIGARETTES switch.
- * TV follows the feed decision only (tvOn, falling back inside decideCigaretteSurface).
+ * Web is SHOW_CIGARETTES ? feed.web : false, and false on a feed error or a missing block.
+ * TV follows the feed decision only. A feed error or a missing block hides TV.
  * An env hard-off still forces every surface off.
  */
 export function foldCodedGate(
@@ -133,6 +145,7 @@ export function foldCodedGate(
 ): CigaretteSurfaceDecision {
   if (decision.reason === "env") return { ...decision, show: false };
   if (surface === "tv") return { show: decision.show, reason: decision.reason };
+  if (surface === "web") return { ...decision, show: publicWebsiteCigaretteFlag(decision, SHOW_CIGARETTES) };
   if (decision.reason === "error" || decision.reason === "missing") return { ...decision, show: SHOW_CIGARETTES };
   return { ...decision, show: decision.show && SHOW_CIGARETTES };
 }

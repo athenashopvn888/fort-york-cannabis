@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getCigaretteSnapshot } from "../../lib/cigaretteFeed";
 import { fleetManifestHealth, getFleetContent } from "../../lib/fleetContent";
 import { FLEET_STORE_CODE } from "../../lib/fleet/types";
+import { SHOW_CIGARETTES } from "../../lib/siteConfig";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -16,6 +17,6 @@ export async function GET() {
     manifest: fleetManifestHealth(),
     mode: fleet.active ? "sheet" : "coded",
     renderedAt: fleet.renderedAt,
-    cig: { web: cig.web.show, tv: cig.tv.show, guides: cig.guides.show },
+    cig: { web: SHOW_CIGARETTES ? cig.web.show : false, tv: cig.tv.show, guides: cig.guides.show },
   }, { headers: { "Cache-Control": "no-store" } });
 }
