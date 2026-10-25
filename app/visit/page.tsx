@@ -1,5 +1,4 @@
-﻿import { SHOW_CIGARETTES } from "../lib/siteConfig";
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -94,9 +93,9 @@ export default function VisitPage() {
           <h2>Continue</h2>
           <nav>
             <Link href="/hours">Hours</Link>
-            {SHOW_CIGARETTES ? <Link href="/info/native-cigarettes-fort-york">Native cigarettes</Link> : null}
-            <Link href="/info/nicotine-vapes-fort-york">Nicotine vapes</Link>
             <Link href="/menu">Menu</Link>
+            <Link href="/exotic">Exotic</Link>
+            <Link href="/faq">FAQ</Link>
           </nav>
         </aside>
       </div>

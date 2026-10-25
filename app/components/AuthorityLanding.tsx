@@ -41,7 +41,7 @@ export default function AuthorityLanding({ page }: { page: AuthorityPage }) {
             <h2>Plan your visit</h2>
             <p><strong>{STORE_NAP.brand}</strong><br />{STORE_NAP.addressLine}<br /><a href={STORE_NAP.telHref}>{STORE_NAP.phoneDisplay}</a><br />Open 24 hours, seven days a week</p>
             <p>Adults 19+ with government-issued photo ID.</p>
-            <Link href="/visit">Transit, parking and arrival details</Link>
+            <Link href="/visit">Map and first visit</Link>
           </aside>
           <section className={styles.faq}>
             <h2>Frequently asked questions</h2>

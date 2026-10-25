@@ -123,7 +123,7 @@ export default function Catalog() {
         </div>
       </header>
 
-      <section className="fyc-terms-ribbon" aria-labelledby="fyc-terms"><div><p>FORT YORK CANNABIS DELIVERY DETAILS</p><h2 id="fyc-terms"><span>$60 PRODUCT MINIMUM</span><span>$10 DELIVERY FEE</span><span>DELIVERY HOURS 10:00 a.m.–10:00 p.m.</span></h2></div><a href="#how-to-order">Read the ordering steps</a></section>
+      <section className="fyc-terms-ribbon" aria-labelledby="fyc-terms"><div><p>FORT YORK CANNABIS DELIVERY DETAILS</p><h2 id="fyc-terms"><span>$60 PRODUCT MINIMUM</span><span>DELIVERY HOURS 10:00 a.m.–10:00 p.m.</span></h2></div><a href="#how-to-order">Read the ordering steps</a></section>
 
       <main className="delivery-page" id="top">
         <section className="delivery-seo-intro" aria-labelledby="delivery-seo-title">

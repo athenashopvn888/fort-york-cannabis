@@ -10,7 +10,7 @@ export default function Footer() {
           <div className={styles.col}>
             <div className={styles.brand}>FORT YORK CANNABIS</div>
             <p className={styles.desc}>
-              Cannabis store at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Open 24 hours. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.
+              Cannabis store at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Open 24 hours.
             </p>
             <div className={styles.buttons}>
               <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.btnPrimary}>

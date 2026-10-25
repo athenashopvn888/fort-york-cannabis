@@ -12,15 +12,16 @@ export type AuthorityPage = {
 export const AUTHORITY_PAGES: Record<string, AuthorityPage> = {
   geo: {
     path: "/weed-dispensary-fort-york",
-    eyebrow: "Fort York Boulevard · CityPlace · Downtown Toronto",
-    title: "Weed Dispensary on Fort York Boulevard near CityPlace",
-    summary: "A practical guide to Fort York Cannabis, its five flower tiers, and the walk-in counter at 38 Fort York Blvd.",
-    body: "Fort York Cannabis is a walk-in store at 38 Fort York Blvd, between the CityPlace condo towers and the Bathurst Quay edge of the waterfront. The counter carries five flower tiers, pre-rolls, edibles, concentrates and vapes. Most people arrive on foot from the surrounding towers, or come up from the 509 Harbourfront and 511 Bathurst streetcar stops. Check the live menu first, then bring government photo ID.",
+    eyebrow: "Fort York · Walk-in · Adults 19+",
+    title: "Weed Dispensary in Fort York",
+    summary: "Looking for a weed dispensary in Fort York? Fort York Cannabis at 38 Fort York Blvd has five flower tiers, vapes, pre-rolls and edibles for adults 19+. Open 24 hours.",
+    body: "Five tiers run from Exotic to Budget, graded on look, nose and cure. The vape wall covers disposables, carts and pods. Staff explain labels, sizes and formats. The top three tiers (Exotic, Premium, AAA+) come in a 6g pack, and the in-store free-gram offer applies to those three only. AA is the only true 5g. The menu shows what's listed today. Going big? Start at Exotic. Buyers must be 19+; ID checked for anyone who looks under 25. The counter is open 24 hours.",
     menuHref: "/exotic",
-    menuLabel: "Browse flower tiers",
+    menuLabel: "See Exotic",
     faqs: [
-      { q: "Where is Fort York Cannabis?", a: "At 38 Fort York Blvd in Toronto, near CityPlace and the downtown waterfront." },
-      { q: "Can I compare flower tiers before visiting?", a: "Yes. The site has dedicated Exotic, Premium, AAA+, AA and Budget Weed collection pages." },
+      { q: "Where is Fort York Cannabis?", a: "At 38 Fort York Blvd, Toronto. The visit page map shows the door. Open 24 hours." },
+      { q: "Is it walkable from nearby condos?", a: "The visit page map will tell you exactly how far." },
+      { q: "Can I ask for a strain by name?", a: "Yes. If it is not listed today, staff will suggest something similar by aroma." },
     ],
   },
   hours: {

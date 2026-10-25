@@ -34,12 +34,12 @@ export const gbpLocation = {
     "https://www.google.com/maps/dir/?api=1&destination=38%20Fort%20York%20Blvd%2C%20Toronto%2C%20ON%20M5V%203Z3%2C%20Canada",
   province: "ON",
   country: "CA",
-  sectionTitle: "Cannabis Store Near Fort York",
+  sectionTitle: "Graded, not guessed",
   neighborhoodDescription:
-    "FORT YORK CANNABIS is positioned for Fort York, CityPlace, waterfront Toronto, King West, and downtown Toronto customers.",
+    "We sort flower into five tiers so you can shop by quality. Exotic is the showpiece shelf. Premium is top-shelf and everyday-ready. AAA+ is the reliable favourite. AA is daily flower and the only true 5g. Budget is the value shelf. Exotic, Premium and AAA+ come in a 6g pack; the in-store free-gram offer covers those three only.",
   transitNote:
-    " The store is close to condo, transit, stadium, and waterfront traffic around 38 Fort York Blvd.",
-  nearbyAreas: ["Fort York", "CityPlace", "Waterfront", "King West", "Rogers Centre", "Entertainment District"],
+    " The menu lists what is on hand today. A listing is not an always-in-stock promise.",
+  nearbyAreas: ["Exotic", "Premium", "AAA+", "AA", "Budget"],
   license: pendingLabel,
   openingDate: pendingLabel,
   menuStatus: "Menu active for local browsing.",
@@ -50,14 +50,14 @@ export const gbpLocation = {
     "dispensary near Rogers Centre",
     "Toronto waterfront cannabis store",
   ],
-  metaTitle: "Fort York Cannabis Store | FORT YORK CANNABIS Toronto",
-  seoTitle: "Fort York Cannabis Store | FORT YORK CANNABIS Toronto",
+  metaTitle: "Weed Dispensary Toronto | Fort York Cannabis, Downtown West",
+  seoTitle: "Weed Dispensary Toronto | Fort York Cannabis, Downtown West",
   metaDescription:
-    "FORT YORK CANNABIS is a cannabis store at 38 Fort York Blvd in Toronto, serving Fort York, CityPlace, the waterfront, King West, and nearby downtown Toronto customers.",
+    "Fort York Cannabis is a walk-in weed dispensary at 38 Fort York Blvd in Toronto for adults 19+: five flower tiers, vapes, pre-rolls and edibles, with staff who explain the shelf. Open 24 hours.",
   introVariant:
-    "FORT YORK CANNABIS serves adults 19+ at 38 Fort York Blvd in downtown Toronto near Fort York, CityPlace, the waterfront, King West, and the Entertainment District. Open 24 hours. Phone is 437-783-2511.",
+    "Fort York Cannabis is a walk-in weed dispensary for adults 19+ at 38 Fort York Blvd in Toronto. Five flower tiers, vapes, pre-rolls and edibles, with staff who explain the shelf. Open 24 hours. Phone is 437-783-2511.",
   complianceNote:
-    "Cannabis products are for adults 19+ only. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.",
+    "Cannabis products are for adults 19+ only. Open 24 hours.",
   localProofPoints: [
     "Located at 38 Fort York Blvd in downtown Toronto.",
     "Serves Fort York, CityPlace, the waterfront, King West, Rogers Centre, and the Entertainment District.",

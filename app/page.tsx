@@ -16,9 +16,9 @@ const ACTIONS = [
 ];
 
 const LOCAL_FEATURES = [
-  { label: "Fort York", body: "A local cannabis store page centered on Fort York Boulevard and nearby downtown routes." },
-  { label: "CityPlace", body: "Helpful store information for adults 19+ around CityPlace, the waterfront, and condo-area foot traffic." },
-  { label: "Downtown Toronto", body: "Simple directions, clean local context, and quick access to the Fort York menu." },
+  { label: "Five tiers", body: "Flower runs Exotic, Premium, AAA+, AA and Budget. Exotic, Premium and AAA+ come in a 6g pack. AA is the only tier with a true 5g." },
+  { label: "In-store offer", body: "The in-store free-gram offer applies to Exotic, Premium and AAA+ only: Buy 2g Get 1g FREE · Buy 3g Get 3g FREE (6g)." },
+  { label: "The counter", body: "Aroma, lineage, cure and format are fair questions. Effects and health claims are not. Adults 19+." },
 ];
 
 const LOCAL_FAQS = cigaretteSafeContent([
@@ -32,11 +32,15 @@ const LOCAL_FAQS = cigaretteSafeContent([
   },
   {
     q: "Is the menu live?",
-    a: "Yes. Browse flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates, Cigarettes, and accessories from the menu.",
+    a: "It shows what's listed today. Jars rotate, so a listing isn't a promise.",
   },
   {
-    q: "Which neighbourhoods does the store serve?",
-    a: "The local focus is Fort York, CityPlace, Downtown Toronto, the waterfront, King West, and the Entertainment District.",
+    q: "Do you have strain guides?",
+    a: "Yes. Strain guides are on the guides page.",
+  },
+  {
+    q: "Is there a free-gram offer?",
+    a: "Yes, in store, on Exotic, Premium and AAA+ only. Staff confirm details at the counter.",
   },
 ]);
 
@@ -53,7 +57,7 @@ export default async function HomePage() {
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
           <span className={styles.heroKicker}>Fort York / CityPlace</span>
-          <p className={styles.brandSub}>Cannabis Store Near Fort York & CityPlace</p>
+          <p className={styles.brandSub}>Five flower tiers, vapes, pre-rolls and edibles. Adults 19+.</p>
           <p className={styles.localLine}>38 Fort York Blvd, Toronto</p>
           <div className={styles.heroActions}>
             <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.heroActionPrimary}>Get Directions</a>
@@ -100,16 +104,17 @@ export default async function HomePage() {
           <div className={styles.sectionHeader}>
             <span className={styles.microLabel}>Fort York local guides</span>
             <h2 id="local-guides-heading" className={styles.sectionTitle}>Plan the right downtown stop</h2>
-            <p className={styles.sectionSubtitle}>Use the store guides for Fort York, verified 24-hour access, delivery, {SHOW_CIGARETTES ? "adult cigarette and nicotine categories" : "nicotine categories"}, or arrival details.</p>
+            <p className={styles.sectionSubtitle}>Use the store guides for Fort York, verified 24-hour access, or arrival details.</p>
           </div>
           <div className={styles.authorityGrid}>
             {[
               ["Weed dispensary on Fort York Boulevard", "/weed-dispensary-fort-york"],
               ["Open 24 hours, seven days", "/24-hour-fort-york-dispensary"],
               ["Weed delivery information", "/delivery"],
-              ...(SHOW_CIGARETTES ? [["Native cigarettes near CityPlace", "/native-cigarettes-fort-york"]] : []),
-              ["Nicotine vapes near Fort York", "/nicotine-vape-fort-york"],
-              ["Transit, parking and arrival guide", "/visit"],
+              ...(SHOW_CIGARETTES ? [["Native cigarettes near CityPlace", "/native-cigarettes-fort-york"] as const] : []),
+              ["Open the menu", "/menu"],
+              ["See Exotic", "/exotic"],
+              ["Map and a first visit", "/visit"],
             ].map(([label, href]) => <Link key={href} href={href} className={styles.authorityCard}>{label}<span>→</span></Link>)}
           </div>
         </div>
@@ -149,7 +154,7 @@ export default async function HomePage() {
             <span className={styles.microLabel}>Downtown Toronto cannabis store</span>
             <h2 className={styles.sectionTitle}>Fort York Cannabis Store</h2>
             <p className={styles.sectionSubtitle}>
-              A premium local cannabis store experience for Fort York, CityPlace, the waterfront, King West, and nearby downtown Toronto residents.
+              A walk-in counter for adults 19+. Five flower tiers, a vape wall, pre-rolls and edibles, and staff who will tell you the difference.
             </p>
           </div>
           <div className={styles.storeGrid}>
@@ -159,11 +164,11 @@ export default async function HomePage() {
             </div>
             <div className={styles.storeCard}>
               <h3 className={styles.storeCardTitle}>Cannabis Store Near CityPlace</h3>
-              <p className={styles.storeCardText}>Serving Fort York, CityPlace, waterfront Toronto, King West, and downtown Toronto.</p>
+              <p className={styles.storeCardText}>Exotic, Premium and AAA+ come in a 6g pack. The in-store free-gram offer applies to those three tiers only. AA is the only tier with a true 5g.</p>
             </div>
             <div className={styles.storeCard}>
               <h3 className={styles.storeCardTitle}>Store Details</h3>
-              <p className={styles.storeCardText}>Phone 437-783-2511. Open 24 hours at 38 Fort York Blvd. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.</p>
+              <p className={styles.storeCardText}>Phone 437-783-2511. Open 24 hours at 38 Fort York Blvd.</p>
             </div>
           </div>
         </div>
@@ -177,7 +182,7 @@ export default async function HomePage() {
               <span className={styles.microLabel}>Fort York / CityPlace / Waterfront</span>
               <h2 className={styles.sectionTitle}>Built Around Downtown Toronto Movement</h2>
               <p className={styles.sectionSubtitle}>
-                Fort York Boulevard connects CityPlace residents, waterfront routes, King West traffic, and downtown Toronto visitors. The site keeps that local context front and center.
+                Flower runs Exotic, Premium, AAA+, AA and Budget. Ask about aroma, lineage, cure and format. The menu is what is listed today.
               </p>
               <div className={styles.localList}>
                 {LOCAL_FEATURES.map((feature) => (
@@ -199,7 +204,7 @@ export default async function HomePage() {
               <span className={styles.microLabel}>Plan your visit</span>
               <h2 className={styles.sectionTitle}>Directions Ready. Menu Ready.</h2>
               <p className={styles.sectionSubtitle}>
-                Use the map link for directions to 38 Fort York Blvd. Phone is 437-783-2511. Open 24 hours. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.
+                Use the map link for directions to 38 Fort York Blvd. Phone is 437-783-2511. Open 24 hours.
               </p>
             </div>
             <div className={styles.visitActions}>
@@ -216,7 +221,7 @@ export default async function HomePage() {
             <span className={styles.microLabel}>Local search focus</span>
             <h2 className={styles.seoPanelTitle}>Cannabis Store Near Fort York and CityPlace</h2>
             <p className={styles.seoPanelText}>
-              FORT YORK CANNABIS supports local search themes including weed dispensary in Toronto, cannabis store near Fort York, cannabis dispensary near CityPlace, downtown Toronto weed store, and Fort York cannabis store.
+              Aroma, lineage, cure, format and how to store it: ask away. Effects and health claims are not from us. Buyers must be 19+. Staff ask for government photo ID from anyone who looks under 25. Open 24 hours.
             </p>
           </div>
         </div>

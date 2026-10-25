@@ -57,15 +57,15 @@ export const HOME_FAQS = [
 export const VISIT_FAQS = [
   {
     q: "What is the exact address for Fort York Cannabis?",
-    a: "38 Fort York Blvd, Toronto, ON M5V 3Z3. Look for the Fort York Boulevard storefront facing CityPlace and the heritage fort corridor.",
+    a: "38 Fort York Blvd, Toronto, ON M5V 3Z3.",
   },
   {
-    q: "Which streetcar or transit approaches work best?",
-    a: "The 509 Harbourfront and 511 Bathurst streetcars serve the waterfront / Bathurst Quay edge. From those stops, continue north toward Fort York Boulevard rather than drifting east into the Financial District. Always check current TTC service before you travel.",
+    q: "What should I do before I head out?",
+    a: "Scan the menu for what's listed today, check the hours page, and bring government photo ID. Buyers must be 19+; staff ask for ID from anyone who looks under 25. The store is open 24 hours.",
   },
   {
-    q: "Where can visitors park near 38 Fort York Blvd?",
-    a: "Paid curb space along Fort York Boulevard fills quickly around condo towers and stadium nights. When the boulevard is crowded, use CityPlace garage options and walk the short block instead of circling the same curb.",
+    q: "What happens on a first visit?",
+    a: "Tell staff how you plan to use it and what smells you like. They will pull a couple of jars to compare. Ask for Exotic if you want the top shelf.",
   },
   {
     q: "What should adults bring?",

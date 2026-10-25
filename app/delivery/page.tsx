@@ -6,7 +6,7 @@ import nearMeFaq from "../lib/nearMeFaq.json";
 
 export const metadata: Metadata = {
   title: { absolute: "Weed Delivery Toronto | Fort York Cannabis" },
-  description: "Browse the Fort York Cannabis live delivery menu and use LIVE ORDER to connect with the dispatcher. $60 product minimum and $10 delivery fee.",
+  description: "Browse the Fort York Cannabis live delivery menu and use LIVE ORDER to connect with the dispatcher. $60 product minimum.",
   alternates: {
     canonical: "https://fortyorkcannabis.com/delivery",
   },
