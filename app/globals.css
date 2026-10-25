@@ -238,3 +238,24 @@ button { cursor: pointer; font-family: inherit; }
   background-color: rgb(7, 18, 31) !important;
   backdrop-filter: none !important;
 }
+
+/* Mobile sticky action bar clearance. Desktop stays 0. /tv and /tv2 omit the bar, so they get no padding. */
+:root {
+  --mobile-action-bar-height: 0px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --mobile-action-bar-height: calc(68px + env(safe-area-inset-bottom, 0px));
+  }
+
+  body:has([data-mobile-bottom-bar]) {
+    padding-bottom: var(--mobile-action-bar-height);
+  }
+}
+
+@media print {
+  body {
+    padding-bottom: 0;
+  }
+}

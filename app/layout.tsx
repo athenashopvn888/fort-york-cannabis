@@ -2,6 +2,7 @@ import { SHOW_CIGARETTES, cigaretteSafeContent } from "./lib/siteConfig";
 import CigaretteStateProvider from "./components/CigaretteStateProvider";
 import FleetContentProvider from "./components/FleetContentProvider";
 import FullNameNap from "./components/FullNameNap";
+import MobileBottomBar from "./components/MobileBottomBar";
 import PinnedNavClearance from "./components/PinnedNavClearance";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -199,6 +200,7 @@ export default function RootLayout({
           {children}
           <FullNameNap />
           <PinnedNavClearance />
+          <MobileBottomBar />
         </FleetShell>
       </body>
     </html>
