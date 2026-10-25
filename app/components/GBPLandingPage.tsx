@@ -99,7 +99,7 @@ export function GBPLandingPage() {
         <div>
           <span className={styles.microLabel}>Store information</span>
           <h2 className={styles.h2}>Fort York Cannabis Store</h2>
-          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-783-2511. Open 24 hours at 38 Fort York Blvd. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.</p>
+          <p className={styles.infoText}>Find FORT YORK CANNABIS at 38 Fort York Blvd in downtown Toronto. Phone 437-783-2511. Open 24 hours at 38 Fort York Blvd.</p>
         </div>
         <div className={styles.trustGrid}>
           {trustItems.map((item) => (
@@ -197,7 +197,19 @@ export function GBPLandingPage() {
           </div>
           <div className={styles.faqItem}>
             <h3 className={styles.faqQuestion}>Can I browse the menu?</h3>
-            <p className={styles.faqAnswer}>Yes. Browse flower, pre-rolls, vapes, edibles, concentrates, and accessories from the menu.</p>
+            <p className={styles.faqAnswer}>Yes. The menu shows what is listed today. We do not hold products.</p>
+          </div>
+          <div className={styles.faqItem}>
+            <h3 className={styles.faqQuestion}>Where should I start for the top shelf?</h3>
+            <p className={styles.faqAnswer}>Exotic is the showpiece shelf. Premium, AAA+, AA and Budget sit beside it. The store is open 24 hours.</p>
+          </div>
+          <div className={styles.faqItem}>
+            <h3 className={styles.faqQuestion}>How do I get there?</h3>
+            <p className={styles.faqAnswer}>The map is on the visit page.</p>
+          </div>
+          <div className={styles.faqItem}>
+            <h3 className={styles.faqQuestion}>Do you deliver?</h3>
+            <p className={styles.faqAnswer}>Yes. Delivery has its own menu and prices, and flower starts at 7g. The minimum order is shown on the delivery page.</p>
           </div>
         </div>
       </section>

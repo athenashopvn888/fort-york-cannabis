@@ -18,7 +18,7 @@ const FAQ_CATEGORIES_RAW = [
     title: "Location",
     faqs: [
       { q: "Where is FORT YORK CANNABIS located?", a: "The confirmed address is 38 Fort York Blvd, Toronto, ON M5V 3Z3, Canada." },
-      { q: "Which area does the store serve?", a: "The local focus is Fort York, CityPlace, Downtown Toronto, the waterfront, King West, and nearby entertainment-district traffic." },
+      { q: "Which area does the store serve?", a: "See the visit page for the map. The store is open 24 hours." },
       { q: "Is there a Google Maps link?", a: "Yes. Use the map link on the contact page for directions." },
     ],
   },
@@ -27,9 +27,6 @@ const FAQ_CATEGORIES_RAW = [
     faqs: [
       { q: "What are the store hours?", a: "Open 24 hours, seven days a week." },
       { q: "What is the phone number?", a: "Phone is 437-783-2511." },
-      { q: "Can I order online?", a: "Yes. Browse the delivery menu and use LIVE ORDER to start your order with the dispatcher." },
-      { q: "Do you offer delivery?", a: "Yes. Delivery ordering is available daily from 10:00 a.m. to 10:00 p.m. through the delivery menu. The dispatcher confirms order details and eligibility." },
-      { q: "Is there a minimum purchase?", a: "The delivery menu has a $60 product minimum and a $10 delivery fee." },
       { q: "Is license information available?", a: "License information is not published." },
     ],
   },
@@ -37,7 +34,25 @@ const FAQ_CATEGORIES_RAW = [
     title: "Menu",
     faqs: [
       { q: "Can shoppers browse the menu?", a: "Yes. Browse menu categories for flower, pre-rolls, edibles, vapes, concentrates, accessories, cigarettes, and specialty items." },
-      { q: "How should shoppers check product details?", a: "Use the current menu experience or contact the store before visiting if a specific item question matters." },
+      { q: "How should shoppers check product details?", a: "The menu shows what's listed today. Things sell through, so we never promise a specific strain." },
+    ],
+  },
+  {
+    title: "Delivery",
+    faqs: [
+      { q: "Do you deliver?", a: "Yes. Delivery has its own menu and prices, and flower starts at 7g. The minimum order is shown on the delivery page. Adults 19+. Photo ID is checked at handoff." },
+    ],
+  },
+  {
+    title: "Flower and the counter",
+    faqs: [
+      { q: "How old do I need to be?", a: "19+. Staff ask for government photo ID from anyone who looks under 25." },
+      { q: "What flower tiers do you carry?", a: "Exotic, Premium, AAA+, AA and Budget. See today's listings on the menu." },
+      { q: "What sizes?", a: "Exotic, Premium and AAA+ come in a 6g pack. AA is the only tier with a true 5g." },
+      { q: "Is there a free-gram offer?", a: "Yes, in store, on the top three tiers only: Exotic, Premium and AAA+. Staff confirm details at the counter." },
+      { q: "Will a strain I saw online be there?", a: "The menu shows what's listed today. Things sell through, so we never promise a specific strain." },
+      { q: "Can staff tell me what a strain does?", a: "They'll talk aroma, lineage and format. No effect or health claims." },
+      { q: "Where do I start if I want the good stuff?", a: "Exotic is the top shelf." },
     ],
   },
 ];

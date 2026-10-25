@@ -31,7 +31,7 @@ export default function HoursPage() {
       <Navbar />
       <section className={styles.hero}>
         <div className={styles.inner}>
-          <p className={styles.eyebrow}>HOURS HONESTY · GBP VERIFIED</p>
+          <p className={styles.eyebrow}>STORE HOURS</p>
           <h1 className={styles.title}>{HOURS_COPY.h1}</h1>
           <p className={styles.lead}>{HOURS_COPY.intro}</p>
           <p className={styles.badge}>{nap.hoursLabel} · every day</p>

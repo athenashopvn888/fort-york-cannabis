@@ -1,4 +1,3 @@
-import { SHOW_CIGARETTES } from "../lib/siteConfig";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -105,10 +104,10 @@ export default function ResourceView({ page }: ResourceViewProps) {
           </div>
           <div className={styles.keywordCard}>
             <p className={styles.railLabel}>Shopping Sections</p>
-            <span>Gas Gang</span>
-            <span>Drizzle Switch</span>
-            <span>Happy Dad, ZYN, Velo, Pablo, Killa</span>
-            {SHOW_CIGARETTES ? <span>Backwoods and grabba</span> : <span>Backwoods</span>}
+            <span>Flower tiers</span>
+            <span>Vape formats</span>
+            <span>Edible labels</span>
+            <span>First visit</span>
           </div>
         </aside>
       </section>

@@ -10,7 +10,7 @@ export const isCigaretteCategory = (value: string | null | undefined) => ["cigar
 export const isCigarettePath = (value: string | null | undefined) => { const path = value?.trim().toLowerCase() ?? ""; return path === "cigarettes" || path.startsWith("cigarettes/") || path.includes("/cigarettes") ||
     path === "tobacco" ||
     path.startsWith("tobacco/") ||
-    path.includes("/tobacco") || path.includes("native-cigarette") || path.includes("grabba") || path.includes("native-smokes/native-cigarettes-guide"); };
+    path.includes("/tobacco") || path.includes("native-cigarette") || path.includes("grabba") || path.includes("native-smokes") || path.includes("nicotine-pouches"); };
 const PRESERVED_SMOKE_ACCESSORY = /(?:backwoods|cigarillos?|rolling[- ]?papers?)/i;
 const isPreservedSmokeAccessory = (values: Array<string | null | undefined>) =>
   values.some((value) => PRESERVED_SMOKE_ACCESSORY.test(value ?? ""));

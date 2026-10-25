@@ -60,7 +60,7 @@ function CodedContactPage() {
           <div className={styles.heroCopy}>
             <span className={styles.microLabel}>Contact and location</span>
             <h1>FORT YORK CANNABIS</h1>
-            <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Open 24 hours. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.</p>
+            <p>Visit us at 38 Fort York Blvd in Toronto. Phone is 437-783-2511. Open 24 hours.</p>
           </div>
           <img src="/banners/fort_york_hero_banner.webp" alt="FORT YORK CANNABIS storefront banner" className={styles.heroImage} />
         </div>
@@ -117,7 +117,7 @@ function ContactBody({ street, cityLine, area, hoursLine, phone, maps }: { stree
           <div className={styles.heroCopy}>
             <span className={styles.microLabel}>Contact and location</span>
             <h1>FORT YORK CANNABIS</h1>
-            <p>Visit us at {street} in Toronto. Phone is {phone}. Open 24 hours. Same-day delivery across Fort York, usually within one to two hours. $60 minimum.</p>
+            <p>Visit us at {street} in Toronto. Phone is {phone}. Open 24 hours.</p>
           </div>
           <img src="/banners/fort_york_hero_banner.webp" alt="FORT YORK CANNABIS storefront banner" className={styles.heroImage} />
         </div>
