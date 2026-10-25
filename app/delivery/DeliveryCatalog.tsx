@@ -123,13 +123,16 @@ export default function Catalog() {
         </div>
       </header>
 
-      <section className="fyc-terms-ribbon" aria-labelledby="fyc-terms"><div><p>FORT YORK CANNABIS DELIVERY DETAILS</p><h2 id="fyc-terms"><span>$60 PRODUCT MINIMUM</span><span>DELIVERY HOURS 10:00 a.m.–10:00 p.m.</span></h2></div><a href="#how-to-order">Read the ordering steps</a></section>
+      <section className="fyc-terms-ribbon" aria-labelledby="fyc-terms"><div><p>FORT YORK CANNABIS DELIVERY DETAILS</p><h2 id="fyc-terms"><span>$60 PRODUCT MINIMUM</span><span>$10 DELIVERY FEE</span><span>DELIVERY HOURS 10:00 a.m.–10:00 p.m.</span></h2></div><a href="#how-to-order">Read the ordering steps</a></section>
 
       <main className="delivery-page" id="top">
         <section className="delivery-seo-intro" aria-labelledby="delivery-seo-title">
           <p className="eyebrow">FORT YORK CANNABIS</p>
-          <h1 id="delivery-seo-title">Weed Delivery in Toronto</h1>
-          <p>Browse Fort York Cannabis weed delivery in Toronto, review the live delivery menu, and use LIVE ORDER to connect with the dispatcher. Same-day delivery is usually completed within one to two hours. The dispatcher confirms availability, delivery details, and next steps.</p>
+          <h1 id="delivery-seo-title">Weed Delivery from Fort York Cannabis</h1>
+          <p>Don&apos;t feel like leaving the condo? Fair. Weed delivery from Fort York Cannabis brings the shelf to you.</p>
+          <p>The delivery menu below is separate from the in-store menu, with its own prices. Flower on delivery starts at 7g. Orders have a minimum order, shown on this page. Start the order chat and the dispatcher confirms availability, your address, and the total.</p>
+          <p>You must be 19+. Photo ID is checked at handoff, and the order goes to the person named on the ID.</p>
+          <p>The in-store free-gram offer (Exotic, Premium and AAA+ only) and the smaller sizes are at the counter, open 24 hours at 38 Fort York Blvd.</p>
           <Link href="/guides">Explore Fort York delivery guides</Link>
           {" · "}
           <Link href="/weed-dispensary-fort-york">Weed dispensary Fort York</Link>

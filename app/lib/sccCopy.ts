@@ -26,24 +26,16 @@
 } as const;
 
 export const HOURS_COPY = {
-  title: "Store Hours on Fort York Boulevard | Fort York Cannabis",
-  h1: "Store hours for Fort York Cannabis on Fort York Boulevard",
+  title: "Hours | Fort York Cannabis, Toronto",
+  h1: "Fort York Cannabis Hours",
   description:
-    "Verified 24-hour schedule for Fort York Cannabis at 38 Fort York Blvd, Toronto. Open every day. Check the hours table, then the menu, before you head over. Adults 19+. Call 437-783-2511 for same-day confirmation.",
+    "Fort York Cannabis at 38 Fort York Blvd, Toronto is open 24 hours, 7 days a week. Check the menu before you head over. Adults 19+.",
   intro:
-    "Fort York Cannabis publishes a true 24-hour schedule. The live Google Business Profile regular hours list midnight-to-midnight for Sunday through Saturday, and this page mirrors that verified pattern.",
+    "Open 24 hours, 7 days a week. Night shift just ended? Concert let out late? The counter doesn't close, so neither does the menu.",
   sections: [
     {
       heading: "Weekly grid",
       body: "Sunday–Saturday: open 24 hours. The counter does not close overnight on the regular schedule.",
-    },
-    {
-      heading: "How we verified hours",
-      body: "Hours were read from the Tech Google Business Profile Business Information API for location 2340516687807323434 on 2026-09-24. This page does not invent a shorter template.",
-    },
-    {
-      heading: "Special dates",
-      body: "Google may attach special-hour overrides for individual calendar dates. If you are coming across downtown for one SKU, call 437-783-2511 before you leave.",
     },
     {
       heading: "Plan the stop",
@@ -51,7 +43,7 @@ export const HOURS_COPY = {
     },
     {
       heading: "Holidays",
-      body: "If holiday hours change, this table changes first. The regular schedule on this page is open 24 hours. Directions are on the visit page.",
+      body: "If holiday hours change, this table changes first. The regular schedule on this page is open 24 hours. Directions are on the visit page. Call 437-783-2511.",
     },
   ],
 } as const;

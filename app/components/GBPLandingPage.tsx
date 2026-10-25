@@ -203,6 +203,14 @@ export function GBPLandingPage() {
             <h3 className={styles.faqQuestion}>Where should I start for the top shelf?</h3>
             <p className={styles.faqAnswer}>Exotic is the showpiece shelf. Premium, AAA+, AA and Budget sit beside it. The store is open 24 hours.</p>
           </div>
+          <div className={styles.faqItem}>
+            <h3 className={styles.faqQuestion}>How do I get there?</h3>
+            <p className={styles.faqAnswer}>The map is on the visit page.</p>
+          </div>
+          <div className={styles.faqItem}>
+            <h3 className={styles.faqQuestion}>Do you deliver?</h3>
+            <p className={styles.faqAnswer}>Yes. Delivery has its own menu and prices, and flower starts at 7g. The minimum order is shown on the delivery page.</p>
+          </div>
         </div>
       </section>
     </div>

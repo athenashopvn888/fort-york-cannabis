@@ -42,6 +42,10 @@ const LOCAL_FAQS = cigaretteSafeContent([
     q: "Is there a free-gram offer?",
     a: "Yes, in store, on Exotic, Premium and AAA+ only. Staff confirm details at the counter.",
   },
+  {
+    q: "Do you deliver?",
+    a: "Yes. Delivery has its own menu and prices and starts at 7g. See the delivery page.",
+  },
 ]);
 
 export default async function HomePage() {
@@ -58,7 +62,7 @@ export default async function HomePage() {
         <div className={styles.heroContent}>
           <span className={styles.heroKicker}>Fort York / CityPlace</span>
           <p className={styles.brandSub}>Five flower tiers, vapes, pre-rolls and edibles. Adults 19+.</p>
-          <p className={styles.localLine}>38 Fort York Blvd, Toronto</p>
+          <p className={styles.localLine}>38 Fort York Blvd, Toronto. Open 24 hours.</p>
           <div className={styles.heroActions}>
             <a href="https://maps.app.goo.gl/XRcfsdmCFQrE3UkT9" target="_blank" rel="noopener noreferrer" className={styles.heroActionPrimary}>Get Directions</a>
             <Link href="/menu" className={styles.heroActionSecondary}>Browse Menu</Link>
@@ -104,7 +108,7 @@ export default async function HomePage() {
           <div className={styles.sectionHeader}>
             <span className={styles.microLabel}>Fort York local guides</span>
             <h2 id="local-guides-heading" className={styles.sectionTitle}>Plan the right downtown stop</h2>
-            <p className={styles.sectionSubtitle}>Use the store guides for Fort York, verified 24-hour access, or arrival details.</p>
+            <p className={styles.sectionSubtitle}>Open 24 hours. Use the menu, the top shelf, and the visit map.</p>
           </div>
           <div className={styles.authorityGrid}>
             {[

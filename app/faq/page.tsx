@@ -38,6 +38,12 @@ const FAQ_CATEGORIES_RAW = [
     ],
   },
   {
+    title: "Delivery",
+    faqs: [
+      { q: "Do you deliver?", a: "Yes. Delivery has its own menu and prices, and flower starts at 7g. The minimum order is shown on the delivery page. Adults 19+. Photo ID is checked at handoff." },
+    ],
+  },
+  {
     title: "Flower and the counter",
     faqs: [
       { q: "How old do I need to be?", a: "19+. Staff ask for government photo ID from anyone who looks under 25." },

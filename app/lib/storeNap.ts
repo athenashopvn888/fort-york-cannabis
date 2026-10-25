@@ -76,15 +76,15 @@ export const VISIT_FAQS = [
 export const HOURS_FAQS = [
   {
     q: "Is Fort York Cannabis really open 24 hours?",
-    a: "Yes. The live Google Business Profile regular hours show open midnight-to-midnight for every day of the week. This website mirrors that verified 24-hour schedule.",
+    a: "Yes, every day. Open 24 hours, 7 days a week. Holiday changes show on this page.",
   },
   {
     q: "Do holidays change the schedule?",
-    a: "Special-hour overrides can appear on Google for specific dates. When in doubt, call 437-783-2511 before a long trip across downtown.",
+    a: "If holiday hours change, this table changes first. Call 437-783-2511 before a long trip across downtown.",
   },
   {
     q: "Where else can I confirm timing?",
-    a: "Use the Visit page for the pin and map, then rely on the phone line for same-day confirmation.",
+    a: "Use the visit page for the pin and map. The regular schedule is open 24 hours.",
   },
 ] as const;
 
