@@ -7,6 +7,7 @@ import shelfStyles from "../../components/PublicShelf.module.css";
 import { BOGO_BUY_2_GET_1, BOGO_BUY_3_GET_3, FreeGramCardLine, isFreeGramTier } from "../../components/FreeGramPromo";
 import { loadLiveMenuCatalog } from "../../lib/liveMenuCatalog";
 import {
+  allFlowers,
   formatType,
   getFlowerPriceRows,
   getProductImage,
@@ -15,7 +16,7 @@ import {
   normalizeTier,
   type FlowerProduct,
 } from "../../lib/products";
-import { formatCad } from "../../lib/publicCatalog";
+import { formatCad, listedRows } from "../../lib/publicCatalog";
 import { getRouteSlugForTier } from "../../lib/tierRoutes";
 import { STORE_NAP } from "../../lib/storeNap";
 import styles from "./flower.module.css";
@@ -27,23 +28,29 @@ function jsonScript(data: unknown) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
-async function loadFlowers() {
-  const { flowers } = await loadLiveMenuCatalog();
-  return flowers as FlowerProduct[];
+async function loadFlowerLists() {
+  const live = await loadLiveMenuCatalog();
+  return {
+    liveFlowers: live.flowers as FlowerProduct[],
+    freshMenu: live.servedFrom === "fresh",
+  };
 }
 
 export async function generateStaticParams() {
+  const slugs = new Set(allFlowers.map((flower) => flower.slug));
   try {
-    const flowers = await loadFlowers();
-    return flowers.map((flower) => ({ slug: flower.slug }));
+    const { liveFlowers } = await loadFlowerLists();
+    for (const flower of liveFlowers) slugs.add(flower.slug);
   } catch {
-    return [];
+    // The saved catalog still publishes the previously listed strains.
   }
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const flower = (await loadFlowers()).find((row) => row.slug === slug);
+  const { liveFlowers, freshMenu } = await loadFlowerLists();
+  const flower = listedRows(slug, liveFlowers, allFlowers, freshMenu).rows[0];
   if (!flower) return {};
   const tierName = getTierDetail(flower.tier).name;
   const title = `${flower.name} | ${tierName} Flower | Fort York Cannabis`;
@@ -58,9 +65,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function FlowerPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const flowers = await loadFlowers();
-  const flower = flowers.find((row) => row.slug === slug);
+  const { liveFlowers, freshMenu } = await loadFlowerLists();
+  const { rows: matches, unavailable } = listedRows(slug, liveFlowers, allFlowers, freshMenu);
+  const flower = matches[0];
   if (!flower) notFound();
+  const flowers = liveFlowers;
 
   const tier = getTierDetail(flower.tier);
   const tierSlug = getRouteSlugForTier(flower.tier);
@@ -76,7 +85,9 @@ export default async function FlowerPage({ params }: { params: Promise<{ slug: s
   const regular6 = Number(flower.price5g?.regular);
   const sale6 = Number(flower.price5g?.sale);
   const pay6 = sale6 > 0 && sale6 < regular6 ? sale6 : regular6;
-  const description = `${flower.name} is listed as ${tier.name}${typeName ? ` ${typeName}` : ""} flower at Fort York Cannabis.${flower.thc ? ` THC on the menu is ${flower.thc}.` : ""} Prices below are the ones on today's menu.`;
+  const description = unavailable
+    ? `${flower.name} is currently unavailable at Fort York Cannabis. It is not on today's menu.`
+    : `${flower.name} is listed as ${tier.name}${typeName ? ` ${typeName}` : ""} flower at Fort York Cannabis.${flower.thc ? ` THC on the menu is ${flower.thc}.` : ""} Prices below are the ones on today's menu.`;
   const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -88,7 +99,13 @@ export default async function FlowerPage({ params }: { params: Promise<{ slug: s
     image: flower.image ? [flower.image] : undefined,
   };
   if (lowest) {
-    jsonLd.offers = { "@type": "Offer", priceCurrency: "CAD", price: lowest, url: canonical };
+    jsonLd.offers = {
+      "@type": "Offer",
+      priceCurrency: "CAD",
+      price: lowest,
+      url: canonical,
+      ...(unavailable ? { availability: "https://schema.org/OutOfStock" } : {}),
+    };
   }
 
   return (
@@ -117,8 +134,12 @@ export default async function FlowerPage({ params }: { params: Promise<{ slug: s
                 {flower.thc ? `THC ${flower.thc}` : "THC not listed"}
                 {flower.sku ? ` · SKU ${flower.sku}` : ""}
               </p>
-              <p className={styles.copy}>{description} The menu can change, so call {STORE_NAP.phoneDisplay} if this name is the reason for the trip.</p>
-              {isFreeGramTier(tierKey) && pay3 > 0 ? (
+              {unavailable ? (
+                <p className={styles.note}>Currently unavailable. This strain is not on today&apos;s menu. <Link href={`/${tierSlug}`}>See {tier.name}</Link>.</p>
+              ) : (
+                <p className={styles.copy}>{description} The menu can change, so call {STORE_NAP.phoneDisplay} if this name is the reason for the trip.</p>
+              )}
+              {!unavailable && isFreeGramTier(tierKey) && pay3 > 0 ? (
                 <FreeGramCardLine
                   name={flower.name}
                   tier={tierKey}
@@ -127,10 +148,11 @@ export default async function FlowerPage({ params }: { params: Promise<{ slug: s
                   show6g
                 />
               ) : null}
+              {unavailable && rows.length ? <p className={styles.note}>Last listed prices.</p> : null}
               {rows.length ? (
                 <div className={styles.table} aria-label="Listed weights and prices">
                   {rows.map((row) => {
-                    const promo = !isFreeGramTier(tierKey) ? "" : row.label === "3g" ? BOGO_BUY_2_GET_1 : row.label === "6g" ? BOGO_BUY_3_GET_3 : "";
+                    const promo = unavailable || !isFreeGramTier(tierKey) ? "" : row.label === "3g" ? BOGO_BUY_2_GET_1 : row.label === "6g" ? BOGO_BUY_3_GET_3 : "";
                     return (
                       <div key={row.field} className={styles.row}>
                         <span>{row.label}{promo ? <span className={styles.promo}> · {promo}</span> : null}</span>

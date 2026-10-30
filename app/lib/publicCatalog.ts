@@ -152,6 +152,14 @@ export function describeTierShelf(flowers: FlowerProduct[]): string {
   return [tierPriceSentence(flowers), thcRangeSentence(flowers.map((flower) => flower.thc))].filter(Boolean).join(" ");
 }
 
+/** Live row wins. A saved catalog row stays up when a fresh menu no longer lists it. */
+export function listedRows<T extends { slug: string }>(slug: string, liveRows: T[], savedRows: T[], freshMenu: boolean) {
+  const live = liveRows.filter((row) => row.slug === slug);
+  const saved = savedRows.filter((row) => row.slug === slug);
+  const rows = live.length ? live : saved;
+  return { rows, unavailable: Boolean(freshMenu && rows.length > 0 && live.length === 0) };
+}
+
 export function singleListedDollar(value: string | null | undefined): number | null {
   const raw = String(value || "").trim();
   if (!raw || raw.includes("-") || raw.includes("/")) return null;

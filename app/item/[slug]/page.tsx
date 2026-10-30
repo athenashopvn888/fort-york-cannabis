@@ -5,8 +5,8 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import shelfStyles from "../../components/PublicShelf.module.css";
 import { loadLiveMenuCatalog } from "../../lib/liveMenuCatalog";
-import { formatItemPrice, formatPercentLike, getItemCategoryLabel, getProductCategorySlug, getProductImage, type ItemProduct } from "../../lib/products";
-import { groupBySlug, isPublicCatalogItem, singleListedDollar } from "../../lib/publicCatalog";
+import { allItems, formatItemPrice, formatPercentLike, getItemCategoryLabel, getProductCategorySlug, getProductImage, type ItemProduct } from "../../lib/products";
+import { groupBySlug, isPublicCatalogItem, listedRows, singleListedDollar } from "../../lib/publicCatalog";
 import { STORE_NAP } from "../../lib/storeNap";
 import styles from "../../flower/[slug]/flower.module.css";
 
@@ -17,24 +17,31 @@ function jsonScript(data: unknown) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
-async function loadPublicItems() {
-  const { items } = await loadLiveMenuCatalog();
-  return (items as ItemProduct[]).filter(isPublicCatalogItem);
+async function loadItemLists() {
+  const live = await loadLiveMenuCatalog();
+  return {
+    liveItems: (live.items as ItemProduct[]).filter(isPublicCatalogItem),
+    freshMenu: live.servedFrom === "fresh",
+  };
 }
 
+const savedPublicItems = allItems.filter(isPublicCatalogItem);
+
 export async function generateStaticParams() {
+  const slugs = new Set(savedPublicItems.map((item) => item.slug));
   try {
-    const groups = groupBySlug(await loadPublicItems());
-    return groups.map((group) => ({ slug: group[0].slug }));
+    const { liveItems } = await loadItemLists();
+    for (const item of liveItems) slugs.add(item.slug);
   } catch {
-    return [];
+    // The saved catalog still publishes the previously listed items.
   }
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const group = groupBySlug(await loadPublicItems()).find((rows) => rows[0]?.slug === slug);
-  const item = group?.[0];
+  const { liveItems, freshMenu } = await loadItemLists();
+  const item = listedRows(slug, liveItems, savedPublicItems, freshMenu).rows[0];
   if (!item) return {};
   const category = getItemCategoryLabel(item.category);
   const title = `${item.name} | ${category} | Fort York Cannabis`;
@@ -49,17 +56,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ItemPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const items = await loadPublicItems();
-  const group = items.filter((item) => item.slug === slug);
+  const { liveItems, freshMenu } = await loadItemLists();
+  const { rows: group, unavailable } = listedRows(slug, liveItems, savedPublicItems, freshMenu);
   const item = group[0];
   if (!item) notFound();
+  const items = liveItems;
 
   const category = getItemCategoryLabel(item.category);
   const categorySlug = getProductCategorySlug(item);
   const canonical = `${STORE_NAP.origin}/item/${item.slug}`;
   const listedPrice = singleListedDollar(item.price);
   const related = groupBySlug(items.filter((row) => row.category === item.category && row.slug !== item.slug)).slice(0, 8);
-  const description = `${item.name} is on the ${category} list at Fort York Cannabis.${item.thc ? ` THC on the menu is ${formatPercentLike(item.thc)}.` : ""}${item.mg ? ` Potency listed as ${item.mg}.` : ""} The price shown is the live menu price.`;
+  const description = unavailable
+    ? `${item.name} is currently unavailable at Fort York Cannabis. It is not on today's menu.`
+    : `${item.name} is on the ${category} list at Fort York Cannabis.${item.thc ? ` THC on the menu is ${formatPercentLike(item.thc)}.` : ""}${item.mg ? ` Potency listed as ${item.mg}.` : ""} The price shown is the live menu price.`;
   const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -71,7 +81,13 @@ export default async function ItemPage({ params }: { params: Promise<{ slug: str
     image: item.image ? [item.image] : undefined,
   };
   if (listedPrice) {
-    jsonLd.offers = { "@type": "Offer", priceCurrency: "CAD", price: listedPrice, url: canonical };
+    jsonLd.offers = {
+      "@type": "Offer",
+      priceCurrency: "CAD",
+      price: listedPrice,
+      url: canonical,
+      ...(unavailable ? { availability: "https://schema.org/OutOfStock" } : {}),
+    };
   }
 
   return (
@@ -99,7 +115,12 @@ export default async function ItemPage({ params }: { params: Promise<{ slug: str
               <p className={styles.meta}>
                 {[item.type, item.thc ? `THC ${formatPercentLike(item.thc)}` : "", item.mg, item.sku ? `SKU ${item.sku}` : ""].filter(Boolean).join(" · ") || "Menu listing"}
               </p>
-              <p className={styles.copy}>{description} Call {STORE_NAP.phoneDisplay} if you want this item confirmed before you come in.</p>
+              {unavailable ? (
+                <p className={styles.note}>Currently unavailable. This item is not on today&apos;s menu. <Link href={`/items/${categorySlug}`}>See {category}</Link>.</p>
+              ) : (
+                <p className={styles.copy}>{description} Call {STORE_NAP.phoneDisplay} if you want this item confirmed before you come in.</p>
+              )}
+              {unavailable ? <p className={styles.note}>Last listed price.</p> : null}
               <div className={styles.table} aria-label="Listed price">
                 {group.map((row) => {
                   const price = formatItemPrice(row.price);

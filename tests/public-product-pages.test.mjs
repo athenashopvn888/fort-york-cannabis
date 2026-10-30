@@ -41,10 +41,24 @@ test("public item pages drop cigarette and grabba rows and read the live menu", 
 
 test("sitemap lists flower, item, and the new category landings", () => {
   const sitemap = read("app/sitemap.ts");
-  assert.match(sitemap, /\/flower\/\$\{flower\.slug\}/);
-  assert.match(sitemap, /\/item\/\$\{group\[0\]\.slug\}/);
+  assert.match(sitemap, /\/flower\/\$\{slug\}/);
+  assert.match(sitemap, /\/item\/\$\{slug\}/);
+  assert.match(sitemap, /allFlowers/);
   assert.match(sitemap, /CATEGORY_LANDINGS/);
   assert.match(sitemap, /isPublicCatalogItem/);
+});
+
+test("a strain or item missing from today's menu stays up as currently unavailable", () => {
+  const flower = read("app/flower/[slug]/page.tsx");
+  const item = read("app/item/[slug]/page.tsx");
+  const catalog = read("app/lib/publicCatalog.ts");
+  assert.match(catalog, /freshMenu && rows.length > 0 && live.length === 0/);
+  assert.match(flower, /allFlowers/);
+  assert.match(flower, /Currently unavailable/);
+  assert.match(flower, /See \{tier\.name\}/);
+  assert.match(item, /savedPublicItems/);
+  assert.match(item, /Currently unavailable/);
+  assert.match(item, /See \{category\}/);
 });
 
 test("product grids stay two columns on small screens", () => {

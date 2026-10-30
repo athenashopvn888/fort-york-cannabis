@@ -5,15 +5,14 @@ const withoutCigaretteUrls = (entries: MetadataRoute.Sitemap): MetadataRoute.Sit
 import type { MetadataRoute } from "next";
 import { DELIVERY_GUIDE_REGISTRY } from "./lib/deliveryGuideRegistry";
 import { SEO_PAGES } from "./lib/seoPages";
-import { MENU_CATEGORIES } from "./lib/products";
+import { MENU_CATEGORIES, allFlowers, allItems, type ItemProduct } from "./lib/products";
 import { RESOURCE_PAGES } from "./resources/resourceData";
 import { TIER_ROUTE_SLUGS } from "./lib/tierRoutes";
 import { GUIDE_REGISTRY } from "./lib/guideRegistry";
 import { loadFleetArticles } from "./lib/fleet/articles";
 import { codedSlugBlocksFleet } from "./lib/fleet/codedArticles";
 import { loadLiveMenuCatalog } from "./lib/liveMenuCatalog";
-import { CATEGORY_LANDINGS, groupBySlug, isPublicCatalogItem } from "./lib/publicCatalog";
-import type { ItemProduct } from "./lib/products";
+import { CATEGORY_LANDINGS, isPublicCatalogItem } from "./lib/publicCatalog";
 
 const BASE = "https://fortyorkcannabis.com";
 
@@ -84,14 +83,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let itemDetailPages: MetadataRoute.Sitemap = [];
   try {
     const live = await loadLiveMenuCatalog();
-    flowerPages = live.flowers.map((flower) => ({
-      url: `${BASE}/flower/${flower.slug}`,
+    const flowerBySlug = new Map<string, string>();
+    for (const flower of allFlowers) flowerBySlug.set(flower.slug, flower.slug);
+    for (const flower of live.flowers) flowerBySlug.set(flower.slug, flower.slug);
+    flowerPages = [...flowerBySlug.keys()].map((slug) => ({
+      url: `${BASE}/flower/${slug}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
-    itemDetailPages = groupBySlug(live.items.filter((item) => isPublicCatalogItem(item as ItemProduct))).map((group) => ({
-      url: `${BASE}/item/${group[0].slug}`,
+    const itemBySlug = new Map<string, string>();
+    for (const item of [...allItems, ...(live.items as ItemProduct[])].filter((item) => isPublicCatalogItem(item))) {
+      itemBySlug.set(item.slug, item.slug);
+    }
+    itemDetailPages = [...itemBySlug.keys()].map((slug) => ({
+      url: `${BASE}/item/${slug}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.7,
