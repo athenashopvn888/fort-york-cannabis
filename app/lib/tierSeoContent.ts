@@ -78,7 +78,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     ],
     faqs: [
       { q: "What is AAA+ Weed here?", a: "AAA+ Weed is one Cannabis Flower collection at Fort York Cannabis." },
-      { q: "Where do product links go?", a: "Each list item opens the matching /items/flower detail path for that strain slug." },
+      { q: "Where do product links go?", a: "Each list item opens the flower page for that strain." },
       { q: "Which weights appear on flower pricing?", a: "Public flower fields use 3g, 6g, 14g, and 28g only on this storefront." },
     ],
   },

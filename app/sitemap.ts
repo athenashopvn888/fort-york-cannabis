@@ -5,12 +5,14 @@ const withoutCigaretteUrls = (entries: MetadataRoute.Sitemap): MetadataRoute.Sit
 import type { MetadataRoute } from "next";
 import { DELIVERY_GUIDE_REGISTRY } from "./lib/deliveryGuideRegistry";
 import { SEO_PAGES } from "./lib/seoPages";
-import { MENU_CATEGORIES } from "./lib/products";
+import { MENU_CATEGORIES, allFlowers, allItems, type ItemProduct } from "./lib/products";
 import { RESOURCE_PAGES } from "./resources/resourceData";
 import { TIER_ROUTE_SLUGS } from "./lib/tierRoutes";
 import { GUIDE_REGISTRY } from "./lib/guideRegistry";
 import { loadFleetArticles } from "./lib/fleet/articles";
 import { codedSlugBlocksFleet } from "./lib/fleet/codedArticles";
+import { loadLiveMenuCatalog } from "./lib/liveMenuCatalog";
+import { CATEGORY_LANDINGS, isPublicCatalogItem } from "./lib/publicCatalog";
 
 const BASE = "https://fortyorkcannabis.com";
 
@@ -70,6 +72,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
+  const categoryLandings: MetadataRoute.Sitemap = Object.values(CATEGORY_LANDINGS).map((landing) => ({
+    url: `${BASE}${landing.path}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  let flowerPages: MetadataRoute.Sitemap = [];
+  let itemDetailPages: MetadataRoute.Sitemap = [];
+  try {
+    const live = await loadLiveMenuCatalog();
+    const flowerBySlug = new Map<string, string>();
+    for (const flower of allFlowers) flowerBySlug.set(flower.slug, flower.slug);
+    for (const flower of live.flowers) flowerBySlug.set(flower.slug, flower.slug);
+    flowerPages = [...flowerBySlug.keys()].map((slug) => ({
+      url: `${BASE}/flower/${slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+    const itemBySlug = new Map<string, string>();
+    for (const item of [...allItems, ...(live.items as ItemProduct[])].filter((item) => isPublicCatalogItem(item))) {
+      itemBySlug.set(item.slug, item.slug);
+    }
+    itemDetailPages = [...itemBySlug.keys()].map((slug) => ({
+      url: `${BASE}/item/${slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+  } catch {
+    flowerPages = [];
+    itemDetailPages = [];
+  }
+
   let fleetArticlePages: MetadataRoute.Sitemap = [];
   try {
     const loaded = await loadFleetArticles();
@@ -85,5 +122,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     fleetArticlePages = [];
   }
 
-  return withoutCigaretteUrls([...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages, ...guidePages, ...fleetArticlePages]);
+  return withoutCigaretteUrls([...staticPages, ...tierPages, ...seoPages, ...menuPages, ...categoryLandings, ...flowerPages, ...itemDetailPages, ...resourcePages, ...guidePages, ...fleetArticlePages]);
 }
