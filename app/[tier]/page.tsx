@@ -17,6 +17,7 @@ import styles from "./tier.module.css";
 import { getLiveFlowers } from "../lib/products-live-helpers";
 import { normalizeTier } from "../lib/products";
 import { FreeGramCardLine, FreeGramTierHeader, isFreeGramTier } from "../components/FreeGramPromo";
+import { describeTierShelf } from "../lib/publicCatalog";
 import nearMeFaq from "../lib/nearMeFaq.json";
 
 // Read the live menu feed on every request (never a build-time snapshot).
@@ -142,6 +143,7 @@ export default async function TierPage({
           <p className={styles.stat}>
             <strong>{flowers.length}</strong> strains in this collection
           </p>
+          {describeTierShelf(flowers) ? <p className={styles.stat}>{describeTierShelf(flowers)}</p> : null}
           <FreeGramTierHeader tier={normalizeTier(route.key)} prices3g={flowers.map((f) => Number(f.price3g?.regular)).filter((v) => v > 0)} prices6g={flowers.map((f) => Number(f.price5g?.regular)).filter((v) => v > 0)} show6g />
           <div className={styles.siblingNav}>
             {siblings.map((slug) => (

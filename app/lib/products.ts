@@ -1,3 +1,4 @@
+import { isRealCigaretteItem } from "./cigMarkers";
 import { SHOW_CIGARETTES, cigaretteSafeContent, filterCigaretteItems, isPreservedSmokeItem } from "./siteConfig";
 import flowersJson from "./flowers.json";
 import itemsJson from "./items.json";
@@ -457,7 +458,9 @@ export function getProductCategorySlug(product: MenuProduct) {
 }
 
 export function getProductPath(product: MenuProduct) {
-  return `/items/${getProductCategorySlug(product)}/${product.slug}`;
+  if ("tier" in product) return `/flower/${product.slug}`;
+  if (isRealCigaretteItem(product)) return `/items/${getProductCategorySlug(product)}/${product.slug}`;
+  return `/item/${product.slug}`;
 }
 
 export function getProductDisplayPrice(product: MenuProduct) {

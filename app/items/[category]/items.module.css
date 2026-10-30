@@ -377,9 +377,12 @@
   }
 
   .hero,
-  .grid,
   .detailShell {
     grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hero {
@@ -852,9 +855,12 @@
 @media (max-width: 760px) {
   .weightGrid,
   .tableHeader,
-  .tableCells,
-  .relatedGrid {
+  .tableCells {
     grid-template-columns: 1fr;
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .detailBreadcrumb {

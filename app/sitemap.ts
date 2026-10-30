@@ -11,6 +11,9 @@ import { TIER_ROUTE_SLUGS } from "./lib/tierRoutes";
 import { GUIDE_REGISTRY } from "./lib/guideRegistry";
 import { loadFleetArticles } from "./lib/fleet/articles";
 import { codedSlugBlocksFleet } from "./lib/fleet/codedArticles";
+import { loadLiveMenuCatalog } from "./lib/liveMenuCatalog";
+import { CATEGORY_LANDINGS, groupBySlug, isPublicCatalogItem } from "./lib/publicCatalog";
+import type { ItemProduct } from "./lib/products";
 
 const BASE = "https://fortyorkcannabis.com";
 
@@ -70,6 +73,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
+  const categoryLandings: MetadataRoute.Sitemap = Object.values(CATEGORY_LANDINGS).map((landing) => ({
+    url: `${BASE}${landing.path}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  let flowerPages: MetadataRoute.Sitemap = [];
+  let itemDetailPages: MetadataRoute.Sitemap = [];
+  try {
+    const live = await loadLiveMenuCatalog();
+    flowerPages = live.flowers.map((flower) => ({
+      url: `${BASE}/flower/${flower.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+    itemDetailPages = groupBySlug(live.items.filter((item) => isPublicCatalogItem(item as ItemProduct))).map((group) => ({
+      url: `${BASE}/item/${group[0].slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+  } catch {
+    flowerPages = [];
+    itemDetailPages = [];
+  }
+
   let fleetArticlePages: MetadataRoute.Sitemap = [];
   try {
     const loaded = await loadFleetArticles();
@@ -85,5 +116,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     fleetArticlePages = [];
   }
 
-  return withoutCigaretteUrls([...staticPages, ...tierPages, ...seoPages, ...menuPages, ...resourcePages, ...guidePages, ...fleetArticlePages]);
+  return withoutCigaretteUrls([...staticPages, ...tierPages, ...seoPages, ...menuPages, ...categoryLandings, ...flowerPages, ...itemDetailPages, ...resourcePages, ...guidePages, ...fleetArticlePages]);
 }
