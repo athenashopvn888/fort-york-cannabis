@@ -1,4 +1,5 @@
 import { SHOW_CIGARETTES, cigaretteSafeContent } from "./lib/siteConfig";
+import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
@@ -7,6 +8,15 @@ import Footer from "./components/Footer";
 import { getCigaretteSnapshot } from "./lib/cigaretteFeed";
 import { getFleetContent } from "./lib/fleetContent";
 import { MENU_CATALOG_CATEGORIES, MENU_CATALOG_NOTICE, MENU_SOURCE_STATE } from "./lib/menu-catalog";
+import { ROOT_METADATA } from "./layout";
+
+const HOME_TITLE = "Fort York Cannabis Dispensary near me | Weed Delivery | Fort York / CityPlace";
+
+export const metadata: Metadata = {
+  title: { absolute: HOME_TITLE },
+  openGraph: { ...ROOT_METADATA.openGraph, title: HOME_TITLE },
+  twitter: { ...ROOT_METADATA.twitter, title: HOME_TITLE },
+};
 
 const ACTIONS = [
   { label: "Address", note: "38 Fort York Blvd", href: "/contact" },

@@ -16,7 +16,7 @@ const siteUrl = STORE_NAP.origin;
 
 export const revalidate = 300;
 
-const ROOT_METADATA: Metadata = {
+export const ROOT_METADATA: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: "Fort York Cannabis Dispensary Weed Delivery | Fort York / CityPlace",
