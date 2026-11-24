@@ -36,6 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/resources/clones-vs-seeds-cannabis`, lastModified: "2026-10-29", changeFrequency: "weekly", priority: 0.65 },
     { url: `${BASE}/resources/what-is-a-hemp-wick`, lastModified: "2026-11-06", changeFrequency: "weekly", priority: 0.65 },
+    { url: `${BASE}/resources/weed-ash-colour`, lastModified: "2026-11-24", changeFrequency: "weekly", priority: 0.65 },
   ];
 
   const tierPages: MetadataRoute.Sitemap = TIER_ROUTE_SLUGS.map((slug) => ({
