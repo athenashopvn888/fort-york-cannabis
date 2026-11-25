@@ -1,4 +1,6 @@
 import { cigaretteSafeContent } from "../lib/siteConfig";
+import { getCigaretteSnapshot } from "../lib/cigaretteFeed";
+import { isRealCigaretteItem } from "../lib/cigMarkers";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
@@ -34,7 +36,9 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function MenuPage() {
-  const { flowers, items } = await loadLiveMenuCatalog();
+  const [{ flowers, items: menuItems }, { web }] = await Promise.all([loadLiveMenuCatalog(), getCigaretteSnapshot()]);
+  const categories = MENU_CATEGORIES.filter((category) => web.show || category.slug !== "cigarettes");
+  const items = web.show ? menuItems : menuItems.filter((item) => !isRealCigaretteItem(item));
   const featured = getFeaturedMenuProductsFrom(flowers, items);
 
   return (
@@ -61,7 +65,7 @@ export default async function MenuPage() {
             </div>
           </div>
           <nav className={styles.heroNav} aria-label="Menu categories">
-            {MENU_CATEGORIES.map((category) => (
+            {categories.map((category) => (
               <Link key={category.slug} href={`/items/${category.slug}`}>
                 {category.name}
               </Link>
@@ -83,7 +87,7 @@ export default async function MenuPage() {
           </div>
 
           <div className={styles.categoryGrid}>
-            {MENU_CATEGORIES.map((category) => {
+            {categories.map((category) => {
               const count = getMenuProductsByCategoryFrom(category, flowers, items).length;
               return (
                 <Link key={category.slug} href={`/items/${category.slug}`} className={styles.categoryCard}>

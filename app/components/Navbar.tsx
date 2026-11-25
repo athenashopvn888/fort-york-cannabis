@@ -3,7 +3,8 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-import { filterCigaretteEntries } from "../lib/siteConfig";
+import { useCigaretteState } from "./CigaretteStateProvider";
+import { filterCigaretteEntries, isCigaretteEntry } from "../lib/siteConfig";
 
 const ALL_LINKS: { href: string; label: string; featured?: boolean }[] = [
   { href: "/", label: "Home" },
@@ -26,6 +27,7 @@ const ALL_LINKS: { href: string; label: string; featured?: boolean }[] = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const showCigarettes = useCigaretteState().web;
 
   return (
     <nav className={styles.navbar} id="main-nav">
@@ -49,7 +51,7 @@ export default function Navbar() {
 
       <div className={styles.scrollBar}>
         <div className={styles.scrollInner}>
-          {filterCigaretteEntries(ALL_LINKS).map((link) => {
+          {filterCigaretteEntries(ALL_LINKS).filter((link) => showCigarettes || !isCigaretteEntry(link)).map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
