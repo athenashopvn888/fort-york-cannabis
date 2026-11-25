@@ -25,8 +25,8 @@ export const gbpLocation = {
   hours: [schemaOpeningHours],
   displayHours: storeHours,
   priceRange: "$$",
-  latitude: 43.63936,
-  longitude: -79.39523,
+  latitude: 43.6403021,
+  longitude: -79.3952522,
   mapEmbedQuery: "38 Fort York Blvd Toronto ON M5V 3Z3 Canada",
   mapDirectionsUrl:
     "https://www.google.com/maps/dir/?api=1&destination=38%20Fort%20York%20Blvd%2C%20Toronto%2C%20ON%20M5V%203Z3%2C%20Canada",

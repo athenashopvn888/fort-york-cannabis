@@ -1,4 +1,4 @@
-import { SHOW_CIGARETTES, cigaretteSafeContent } from "./lib/siteConfig";
+import { cigaretteSafeContent } from "./lib/siteConfig";
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -57,6 +57,8 @@ const LOCAL_FAQS = cigaretteSafeContent([
     a: "Yes. Delivery has its own menu and prices and starts at 7g. See the delivery page.",
   },
 ]);
+
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const [fleet, cigarettes] = await Promise.all([getFleetContent(), getCigaretteSnapshot()]);
@@ -125,7 +127,7 @@ export default async function HomePage() {
               ["Weed dispensary on Fort York Boulevard", "/weed-dispensary-fort-york"],
               ["Open 24 hours, seven days", "/24-hour-fort-york-dispensary"],
               ["Weed delivery information", "/delivery"],
-              ...(SHOW_CIGARETTES ? [["Native cigarettes near CityPlace", "/native-cigarettes-fort-york"] as const] : []),
+              ...(cigarettes.web.show ? [["Native cigarettes near CityPlace", "/native-cigarettes-fort-york"] as const] : []),
               ["Open the menu", "/menu"],
               ["See Exotic", "/exotic"],
               ["Map and a first visit", "/visit"],
@@ -143,12 +145,12 @@ export default async function HomePage() {
             <p className={styles.menuSourcePill}>Open 24 hours - {MENU_SOURCE_STATE.productCount} menu items</p>
           </div>
           <nav className={styles.menuToolbar} aria-label="Menu categories">
-            {MENU_CATALOG_CATEGORIES.map((category) => (
+            {MENU_CATALOG_CATEGORIES.filter((category) => cigarettes.web.show || category.href !== "/items/cigarettes").map((category) => (
               <Link key={category.name} href={category.href}>{category.name}</Link>
             ))}
           </nav>
           <div className={styles.menuCategoryGrid}>
-            {MENU_CATALOG_CATEGORIES.map((category) => (
+            {MENU_CATALOG_CATEGORIES.filter((category) => cigarettes.web.show || category.href !== "/items/cigarettes").map((category) => (
               <Link key={category.name} href={category.href} className={styles.menuCategoryCard}>
                 <img src={category.banner} alt={`${category.name} category at Fort York Cannabis`} className={styles.menuCategoryImage} />
                 <div className={styles.menuCategoryCopy}>

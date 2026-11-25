@@ -1,4 +1,5 @@
-import { SHOW_CIGARETTES } from "../../lib/siteConfig";
+import { getCigaretteSnapshot } from "../../lib/cigaretteFeed";
+import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -19,6 +20,8 @@ export async function generateMetadata({
   params: Promise<{ seoPage: string }>;
 }): Promise<Metadata> {
   const { seoPage: slug } = await params;
+  const { web } = await getCigaretteSnapshot();
+  if (slug.startsWith("native-cigarettes") && !web.show) redirect("/items/vapes");
   const page = getSeoPageBySlug(slug);
   if (!page) return {};
 
@@ -31,12 +34,16 @@ export async function generateMetadata({
   };
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function SeoLandingPage({
   params,
 }: {
   params: Promise<{ seoPage: string }>;
 }) {
   const { seoPage: slug } = await params;
+  const { web } = await getCigaretteSnapshot();
+  if (slug.startsWith("native-cigarettes") && !web.show) redirect("/items/vapes");
   const page = getSeoPageBySlug(slug);
   if (!page) notFound();
   const heroPreview = page.heroPreview;
@@ -158,7 +165,7 @@ export default async function SeoLandingPage({
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Menu Categories</h2>
             <p className={styles.sectionBody}>
-              Browse flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates{SHOW_CIGARETTES ? ", Cigarettes, and accessories. The Cigarettes category includes $25 cartons plus 2 Pack $5 Mix & Match on selected SKUs." : ", and accessories."}
+              Browse flower, pre-rolls, Nicotine Vapes, Vape Disposables, edibles, concentrates{web.show ? ", Cigarettes, and accessories. The Cigarettes category includes $25 cartons plus 2 Pack $5 Mix & Match on selected SKUs." : ", and accessories."}
             </p>
             <div className={styles.categoryGrid}>
               {MENU_CATEGORIES.map((category) => (
@@ -178,7 +185,7 @@ export default async function SeoLandingPage({
             <div className={styles.visitBtns}>
               <Link href="/contact" className={styles.visitBtn}>Contact Page</Link>
               <Link href="/weed-dispensary-toronto/" className={styles.visitBtn}>Toronto Landing Page</Link>
-              {SHOW_CIGARETTES ? <Link href="/native-cigarettes-fort-york" className={styles.visitBtn}>Native Cigarette Guide</Link> : null}
+              {web.show ? <Link href="/native-cigarettes-fort-york" className={styles.visitBtn}>Native Cigarette Guide</Link> : null}
               <Link href="/nicotine-vape-fort-york" className={styles.visitBtn}>Nicotine Vape Guide</Link>
             </div>
           </div>
